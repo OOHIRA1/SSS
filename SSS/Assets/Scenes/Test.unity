@@ -91,60 +91,18 @@ NavMeshSettings:
     cellSize: 0.16666667
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &954134734
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4463651746149098, guid: 0d2c936724a7e594cb6bb079d84d901d, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4463651746149098, guid: 0d2c936724a7e594cb6bb079d84d901d, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4463651746149098, guid: 0d2c936724a7e594cb6bb079d84d901d, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4463651746149098, guid: 0d2c936724a7e594cb6bb079d84d901d, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4463651746149098, guid: 0d2c936724a7e594cb6bb079d84d901d, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4463651746149098, guid: 0d2c936724a7e594cb6bb079d84d901d, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4463651746149098, guid: 0d2c936724a7e594cb6bb079d84d901d, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4463651746149098, guid: 0d2c936724a7e594cb6bb079d84d901d, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 0d2c936724a7e594cb6bb079d84d901d, type: 2}
-  m_IsPrefabParent: 0
---- !u!1 &1162135989
+--- !u!1 &55229758
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 1162135994}
-  - component: {fileID: 1162135993}
-  - component: {fileID: 1162135992}
-  - component: {fileID: 1162135991}
-  - component: {fileID: 1162135990}
+  - component: {fileID: 55229763}
+  - component: {fileID: 55229762}
+  - component: {fileID: 55229761}
+  - component: {fileID: 55229760}
+  - component: {fileID: 55229759}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -152,33 +110,33 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1162135990
+--- !u!81 &55229759
 AudioListener:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1162135989}
+  m_GameObject: {fileID: 55229758}
   m_Enabled: 1
---- !u!124 &1162135991
+--- !u!124 &55229760
 Behaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1162135989}
+  m_GameObject: {fileID: 55229758}
   m_Enabled: 1
---- !u!92 &1162135992
+--- !u!92 &55229761
 Behaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1162135989}
+  m_GameObject: {fileID: 55229758}
   m_Enabled: 1
---- !u!20 &1162135993
+--- !u!20 &55229762
 Camera:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1162135989}
+  m_GameObject: {fileID: 55229758}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
@@ -193,7 +151,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7.65
+  orthographic size: 11.358869
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -202,20 +160,20 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 1
+  m_HDR: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
---- !u!4 &1162135994
+--- !u!4 &55229763
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1162135989}
+  m_GameObject: {fileID: 55229758}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.3, z: -1}
-  m_LocalScale: {x: 2, y: 1500, z: 1}
+  m_LocalPosition: {x: 0, y: -1.3, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
