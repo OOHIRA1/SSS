@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4453894274895044}
   - component: {fileID: 212937766000826926}
   m_Layer: 0
-  m_Name: stage_curtain_front_re
+  m_Name: StageCurtainFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,9 +37,8 @@ GameObject:
   - component: {fileID: 4498554920596164}
   - component: {fileID: 212638439268064112}
   - component: {fileID: 95870100067941218}
-  - component: {fileID: 114714765533622360}
   m_Layer: 0
-  m_Name: "Curtain_opens1_2048\xD72048_4_0"
+  m_Name: StageCurtainBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,6 +52,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4047033234048248}
+  - component: {fileID: 114330743844686066}
   m_Layer: 0
   m_Name: Curtain
   m_TagString: Untagged
@@ -110,7 +110,7 @@ Animator:
   m_GameObject: {fileID: 1244808791885104}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c3af7b9c01e88d84b8eb4f9941f5e82a, type: 2}
+  m_Controller: {fileID: 9100000, guid: 14c3a575125d41c4fb0769bc71cb533f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -118,15 +118,15 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114714765533622360
+--- !u!114 &114330743844686066
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1244808791885104}
+  m_GameObject: {fileID: 1822347251133536}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ddc041137f84fa4f9cbc2fed2d18049, type: 3}
+  m_Script: {fileID: 11500000, guid: 862ad918d6a34b9408f8bc727de6e4d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &212638439268064112
@@ -159,11 +159,17 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: -10
-  m_Sprite: {fileID: 21300000, guid: 273f61734cf58ee4f8f8fdc344b9d04e, type: 3}
+  m_Sprite: {fileID: 21300006, guid: 001ca5aca6d9ced41b5b3489ad8b58fa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!212 &212937766000826926
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -194,8 +200,14 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: c52537f85973d6d49a4867441a1fa451, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
