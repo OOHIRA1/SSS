@@ -14,9 +14,12 @@ public class stage_select_cutain_scripts : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if ( Input.GetKeyDown(KeyCode.A)) {
-        _animator.SetTrigger( "stage_select_T" );
+			_animator.SetBool( "Bool_X",true );
     }
-			
+
+		if (Input.GetKeyDown (KeyCode.S)) {
+			_animator.SetBool( "Bool_X",false);
+		}
 
 	}
 }
