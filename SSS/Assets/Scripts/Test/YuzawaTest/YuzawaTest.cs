@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class YuzawaTest : MonoBehaviour {
 	//[SerializeField]GameObject _crimeSceneTransitionButton;
@@ -39,4 +41,12 @@ public class YuzawaTest : MonoBehaviour {
 		}
 		_animator.SetBool ("scrollFlag", value);
 	}
+
+	public void CrimeSceneBedRoom () {
+		SceneManager.LoadScene( "Bedroom" );
+		}
+
+	public void CrimeSceneKitchen () {
+		SceneManager.LoadScene( "Kitchen" );
+		}
 }

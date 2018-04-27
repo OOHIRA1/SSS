@@ -19,9 +19,13 @@ public class Anim : MonoBehaviour
     void Update( ) {
     }
 
-    public void StopAnim( ) { animator.speed = 0; }
-
-    public void PlayAnim( ) { animator.speed = 1; }
+	public void StopAndPlayAnim( ) {
+		if ( animator.speed != 0 ) {
+			animator.speed = 0;
+		} else {
+			animator.speed = 1;
+		}
+	}
 
     public void FastForwardAnim( ) {
         time += 0.3f;

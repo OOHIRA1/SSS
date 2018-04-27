@@ -23,4 +23,5 @@ public class MamiyaTest : MonoBehaviour {
 			_animator.SetTrigger ( "CloseFlag" );
 
 	}
+
 }

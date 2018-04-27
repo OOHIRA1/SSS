@@ -4,16 +4,18 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class StartButton : MonoBehaviour {
-    Image buttonImge;
+	Image _buttonImage;
 
-    public Sprite ON_sprite;
-    public Sprite OFF_sprite;
+    public Sprite _stopSprite;
+    public Sprite _startSprite;
 
-    bool start_button;
+	bool _playing;
+
+
     // Use this for initialization
     void Start( ) {
-        buttonImge = GetComponent< Image >( );
-        start_button = false;
+        _buttonImage = GetComponent< Image >( );
+        _playing = true;
     }
     // Update is called once per frame
     void Update( ) {
@@ -21,21 +23,21 @@ public class StartButton : MonoBehaviour {
 
     public void Click( ) {
 
-        if ( !start_button ) {
-            buttonImge.sprite = ON_sprite;
-            start_button = true;
+        if ( !_playing ) {
+			_playing = true;
+			_buttonImage.sprite = _stopSprite;
         }
         else {
-            buttonImge.sprite = OFF_sprite;
-            start_button = false;
+			_playing = false;
+			_buttonImage.sprite = _startSprite;
         }
 
     }
 
     public void Other_Click( ) {
-        if ( start_button ) {
-            buttonImge.sprite = OFF_sprite;
-            start_button = false;
+        if ( !_playing ) {
+			_playing = true;
+			_buttonImage.sprite = _stopSprite;
         }
     }
 }
