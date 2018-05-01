@@ -5,42 +5,33 @@ using UnityEngine;
 public class Anim : MonoBehaviour
 {
 
-    Animator animator;
-    AnimatorStateInfo info;
-    float time;
+	Animator _animator;
+    AnimatorStateInfo _info;
+	float _time;
+	[SerializeField] GameObject _bar = null;
+
     // Use thisfor initialization
     void Start( ) {
-        animator = gameObject.GetComponent< Animator >( );
-        info = animator.GetCurrentAnimatorStateInfo( 0 );
-        time = 0.0f;
+        _animator = gameObject.GetComponent< Animator >( );
+        _info = _animator.GetCurrentAnimatorStateInfo( 0 );
+        _time = 0.0f;
     }
 
     // Update is called once per frame
     void Update( ) {
+		
+			_time = _bar.transform.localScale.x;
+			if ( _time > 1.0f ) _time = 0.9f;
+			if ( _time < 0.0f ) _time = 0.0f;
+		//Playは毎フレーム呼ぶ必要はない。TimeManagerを作った時にPlayを呼びたいタイミングで呼べるように修正する
+			_animator.Play ( _info.shortNameHash, -1, _time );
     }
 
 	public void StopAndPlayAnim( ) {
-		if ( animator.speed != 0 ) {
-			animator.speed = 0;
+		if ( _animator.speed != 0 ) {
+			_animator.speed = 0;
 		} else {
-			animator.speed = 1;
+			_animator.speed = 1;
 		}
 	}
-
-    public void FastForwardAnim( ) {
-        time += 0.3f;
-        if ( time > 1.0f ) time = 0.9f;
-
-        animator.Play( info.shortNameHash, -1, time );
-        animator.speed = 1;
-    }
-
-    public void FastBackwardAnim( ) {
-        time -= 0.3f;
-        if ( time < 0.0f ) time = 0.0f;
-
-        animator.Play( info.shortNameHash, -1, time );
-        animator.speed = 1;
-    }
-
 }
