@@ -39,6 +39,11 @@ public class Curtain : MonoBehaviour {
 		SceneManager.LoadScene( "StageSelect" );
 
 	}
+	public void Main () {
+
+		SceneManager.LoadScene ( "MainStory1" );
+
+	}
 
 	//----------------------------------------------
 	//----------------------------------------------

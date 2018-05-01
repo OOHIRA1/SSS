@@ -8,6 +8,7 @@ public class YuzawaTest : MonoBehaviour {
 	//[SerializeField]GameObject _crimeSceneTransitionButton;
 	[SerializeField]Animator _animator = null;
 	[SerializeField]GameObject[] _crimeSceneButton = new GameObject[4];
+	[SerializeField]Animator _animation = null;
 
 
 	// Use this for initialization
@@ -40,6 +41,16 @@ public class YuzawaTest : MonoBehaviour {
 			value = false;
 		}
 		_animator.SetBool ("scrollFlag", value);
+	}
+
+	public void speech() {
+		bool value = true;
+		if (!_animation.GetBool( "SpeechBalloonFlag" )) {
+			value = true;
+		}else {
+			value = false;
+		}
+		_animation.SetBool ("SpeechBalloonFlag", value);
 	}
 
 	public void CrimeSceneBedRoom () {

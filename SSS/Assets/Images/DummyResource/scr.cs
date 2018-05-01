@@ -17,13 +17,13 @@ public class scr : MonoBehaviour {
 
 		int x = scr_02.num;
 
-		if( x >= 1 ){
-			_animator.SetBool( "Bool1",true );
-		}
-
-		/*if( Input.GetKey ( KeyCode.A )){
+		/*if( x >= 1 ){
 			_animator.SetBool( "Bool1",true );
 		}*/
+
+		if( Input.GetKey ( KeyCode.A )){
+			_animator.SetBool( "Bool1",true );
+		}
 
 		if( Input.GetKey ( KeyCode.S) ){
 			_animator.SetBool ("Bool1", false);
