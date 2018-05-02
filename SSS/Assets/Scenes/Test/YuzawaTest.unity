@@ -183,7 +183,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &698996596
+--- !u!1001 &253520833
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -192,11 +192,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4253766330247904, guid: 883e77256b259bf4ea0ab9de24cf660c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -320.5
+      value: -457.87
       objectReference: {fileID: 0}
     - target: {fileID: 4253766330247904, guid: 883e77256b259bf4ea0ab9de24cf660c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -53
+      value: -51.92
       objectReference: {fileID: 0}
     - target: {fileID: 4253766330247904, guid: 883e77256b259bf4ea0ab9de24cf660c, type: 2}
       propertyPath: m_LocalPosition.z
@@ -223,8 +223,12 @@ Prefab:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1858829041080716, guid: 883e77256b259bf4ea0ab9de24cf660c, type: 2}
+      propertyPath: m_Name
+      value: SpeechBallon
+      objectReference: {fileID: 0}
+    - target: {fileID: 1858829041080716, guid: 883e77256b259bf4ea0ab9de24cf660c, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 883e77256b259bf4ea0ab9de24cf660c, type: 2}
@@ -236,6 +240,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114323316399909542, guid: 5e151ce82b0d1084884d3ae02b2254f6,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 224495522706256538, guid: 5e151ce82b0d1084884d3ae02b2254f6,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -335,38 +344,35 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 991670845}
+      objectReference: {fileID: 0}
+    - target: {fileID: 114323316399909542, guid: 5e151ce82b0d1084884d3ae02b2254f6,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114323316399909542, guid: 5e151ce82b0d1084884d3ae02b2254f6,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114323316399909542, guid: 5e151ce82b0d1084884d3ae02b2254f6,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114323316399909542, guid: 5e151ce82b0d1084884d3ae02b2254f6,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: speech
+      objectReference: {fileID: 0}
+    - target: {fileID: 114323316399909542, guid: 5e151ce82b0d1084884d3ae02b2254f6,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e151ce82b0d1084884d3ae02b2254f6, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &991670841 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1858829041080716, guid: 883e77256b259bf4ea0ab9de24cf660c,
-    type: 2}
-  m_PrefabInternal: {fileID: 698996596}
---- !u!95 &991670842 stripped
-Animator:
-  m_PrefabParentObject: {fileID: 95208431095700044, guid: 883e77256b259bf4ea0ab9de24cf660c,
-    type: 2}
-  m_PrefabInternal: {fileID: 698996596}
---- !u!114 &991670845
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 991670841}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc045ea69bd97824998df28491ba5c40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: 0}
-  _crimeSceneButton:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  _animation: {fileID: 991670842}
 --- !u!1 &1208897239
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,48 +478,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eec7993fc634aef4f932284dd79a024c, type: 2}
-  m_IsPrefabParent: 0
---- !u!1001 &1915989149
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4818572213202366, guid: 88e6b3ad22f4c6043a93024cfa5675b9, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4818572213202366, guid: 88e6b3ad22f4c6043a93024cfa5675b9, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4818572213202366, guid: 88e6b3ad22f4c6043a93024cfa5675b9, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4818572213202366, guid: 88e6b3ad22f4c6043a93024cfa5675b9, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4818572213202366, guid: 88e6b3ad22f4c6043a93024cfa5675b9, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4818572213202366, guid: 88e6b3ad22f4c6043a93024cfa5675b9, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4818572213202366, guid: 88e6b3ad22f4c6043a93024cfa5675b9, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4818572213202366, guid: 88e6b3ad22f4c6043a93024cfa5675b9, type: 2}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 88e6b3ad22f4c6043a93024cfa5675b9, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1965724436
 GameObject:

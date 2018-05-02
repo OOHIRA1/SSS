@@ -604,6 +604,7 @@ GameObject:
   - component: {fileID: 768799483}
   - component: {fileID: 768799482}
   - component: {fileID: 768799484}
+  - component: {fileID: 768799485}
   m_Layer: 0
   m_Name: playingUI_viewing
   m_TagString: Untagged
@@ -642,7 +643,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: aa81f5de95da70f4abd26ebe7c4947c8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -671,13 +672,24 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 768799481}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 011579b911632eb4f88c1a1ed1a7967e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _maxTime: 39
   _time: 0
+--- !u!114 &768799485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 768799481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 980d45f26d2a9444f8dd53fa805e6599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &832803471
 GameObject:
   m_ObjectHideFlags: 0
@@ -687,6 +699,7 @@ GameObject:
   m_Component:
   - component: {fileID: 832803473}
   - component: {fileID: 832803472}
+  - component: {fileID: 832803474}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -719,6 +732,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &832803474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 832803471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 980d45f26d2a9444f8dd53fa805e6599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &899909047
 GameObject:
   m_ObjectHideFlags: 0
@@ -897,6 +921,7 @@ GameObject:
   - component: {fileID: 1167150052}
   - component: {fileID: 1167150051}
   - component: {fileID: 1167150050}
+  - component: {fileID: 1167150053}
   m_Layer: 0
   m_Name: playingUI_redline
   m_TagString: Untagged
@@ -910,7 +935,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1167150049}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ca3e82217e72914a921cbe90b8f1dc2, type: 3}
   m_Name: 
@@ -949,7 +974,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 1af0b2261add77e4486b194d6c4dee39, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -971,6 +996,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1167150053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1167150049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69f8950690bcc044186c2f843668251c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1203003190
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1203003192}
+  - component: {fileID: 1203003191}
+  m_Layer: 0
+  m_Name: MoviePlaySystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1203003191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1203003190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c739fb4fbdf4a6d4c93e0a72fb112795, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _point: {fileID: 768799485}
+  _bar: {fileID: 1167150053}
+  _maxTime: 60
+  _time: 60
+  _leftPos: -10.2
+  _rightPos: 10.2
+--- !u!4 &1203003192
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1203003190}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1338904128 stripped
 GameObject:
