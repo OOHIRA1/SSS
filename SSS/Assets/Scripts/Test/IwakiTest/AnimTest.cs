@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Anim : MonoBehaviour
+public class AnimTest : MonoBehaviour
 {
 	Animator _animator;
     AnimatorStateInfo _info;

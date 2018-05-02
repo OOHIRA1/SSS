@@ -6,65 +6,65 @@ using UnityEngine;
 //
 //使用方法：常にアクティブなゲームオブジェクトにアタッチ
 public class MoviePlaySystem : MonoBehaviour {
-	[SerializeField] Point _point = null;
-	[SerializeField] Bar _bar = null;
-	Anim _anim;
+	[SerializeField]Point _point = null;
+	[SerializeField]Bar   _bar   = null;
+	[SerializeField]Movie _movie = null;
+								
+	[SerializeField] float _maxTime  = 60.0f;		//最大再生時間
 
-	//Vector3 _mousePos;
-	Vector3 _pos;
-	[SerializeField] float _maxTime = 60.0f;
-	[SerializeField] float _time = 60.0f;
-	[SerializeField] float _leftPos = 0;
-	[SerializeField] float _rightPos = 0;
-	float _maxPos;
-	float _posParSecond;
-	bool _stop;
+	float _posParSecond;							//pointの1秒当たりに進む座標
+	bool _stop;										//再生されているか
 
 	// Use this for initialization
-	/*void Awake( ) {
-		//_mousePos = new Vector3( 0, 0, 0 );
-		_pos = new Vector3( 0, 0, 0 );
-		_time = _maxTime;
-		_maxPos = _rightPos - _leftPos;
-		_posParSecond = _maxPos / _maxTime;
-		_stop = false;
-
-		_point.SetPos( _leftPos, _rightPos );
-	}*/
-
 	void Start( ) {
-		_pos = new Vector3( 0, 0, 0 );
-		_time = _maxTime;
-		_maxPos = _rightPos - _leftPos;
-		_posParSecond = _maxPos / _maxTime;
+		_posParSecond = _point.GetMaxRange( ) / _maxTime;
 		_stop = false;
-
-		_point.SetMoveRange( _leftPos, _rightPos );
 	}
 	
 	// Update is called once per frame
 	void Update( ) {
-		if ( Input.GetMouseButtonDown( 0 ) ) {	//マウス押したかどうか
-			Vector3 mousePos;
-			mousePos = GetMouse( );
-			mousePos.y = 0;
-			mousePos.z = 0;
-			if ( ( int )mousePos.y == 0 ) {
-				_point.MovePosition( mousePos );
-				Vector3 nowBarSize = Vector3.one;
-				nowBarSize.x = ( _point.transform.position.x - _bar.transform.position.x ) / _maxPos;
-				_bar.MoveBarSize( nowBarSize );
-			}
-		}
+		
+		PointUpdate( );
 
+		BarUpdate( );
 
+		MovieUpdate( );
 
 	}
 
+	//--ポイントの座標を更新する関数
+	void PointUpdate( ) {
+		Vector3 pointPos = _point.GetTransform( ).position; 
+		if ( !_stop ) pointPos.x = _point.GetTransform ().position.x + ( _posParSecond * Time.deltaTime );
+
+		if ( Input.GetMouseButtonDown( 0 ) ) {	//マウスを押したかどうか
+			Vector3 mousePos = Vector3.zero;
+			mousePos = GetMouse( );
+			if ( ( int )mousePos.y == ( int )_bar.GetTransform( ).position.y ) {
+				pointPos.x = mousePos.x;
+			}
+		}
+		_point.MovePosition( pointPos );
+	}
+
+	//--バーのスケールを更新する関数
+	void BarUpdate( ) {
+		Vector3 nowBarSize = Vector3.one;
+		nowBarSize.x = ( _point.GetTransform( ).position.x - _bar.GetTransform( ).position.x ) / _point.GetMaxRange( );
+		_bar.MoveScale( nowBarSize );
+	}
+
+	//--ムービーの再生位置を更新する関数
+	void MovieUpdate( ) {
+		float movieStartTime = _bar.GetTransform ( ).localScale.x;
+		_movie.ChangeMovieStartTime ( movieStartTime );
+	}
 
 	Vector3 GetMouse( ) {	return Camera.main.ScreenToWorldPoint( Input.mousePosition ); }
 
-
+	//=======================================================================
+	//public関数
+	//--再生・一時停止を処理する関数
 	public void StopAndPlayTime( ) {
 		if ( !_stop ) {
 			_stop = true;
@@ -73,18 +73,19 @@ public class MoviePlaySystem : MonoBehaviour {
 		}
 	}
 
-
-	public void FB_Time( ) {
-		_time += 5;
-		if ( _time >= _maxTime ) _time = _maxTime + 0.5f;	//0.5fは戻した直後にシークバーがすぐに動くのを防ぐため
-		//_pos.x -= _posParSeconds * 5;
+	//--5秒巻き戻し(FastBackword)をする関数
+	public void FastBackword( ) {
+		Vector3 pointPos = _point.GetTransform( ).position;
+		pointPos.x -= _posParSecond * 5;
+		_point.MovePosition ( pointPos );  //0.5fは戻した直後にシークバーがすぐに動くのを防ぐため
 	}
 
-
-	public void FF_Time( ) {
-		_time -= 5;
-		if ( _time <= 0 ) _time = 0;
-		//_pos.x += _posParSeconds * 5;
+	//--5秒早送り(FastForward)をする関数
+	public void FastForward( ) {
+		Vector3 pointPos = _point.GetTransform( ).position;
+		pointPos.x += _posParSecond * 5;
+		_point.MovePosition ( pointPos );
 	}
-	
+	//=======================================================================
+	//=======================================================================
 }
