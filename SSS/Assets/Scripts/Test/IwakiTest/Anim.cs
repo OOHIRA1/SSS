@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Anim : MonoBehaviour
 {
-
 	Animator _animator;
     AnimatorStateInfo _info;
 	float _time;
