@@ -8,11 +8,11 @@ public class YuzawaTest : MonoBehaviour {
 	//[SerializeField]GameObject _crimeSceneTransitionButton;
 	[SerializeField]Animator _animator = null;
 	[SerializeField]GameObject[] _crimeSceneButton = new GameObject[4];
-	[SerializeField]Animator _animation = null;
+    [SerializeField]GameObject[] _speechBalloon = new GameObject[4];
 
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -21,15 +21,16 @@ public class YuzawaTest : MonoBehaviour {
 		
 	}
 
-	public void OnClicked() {
+	public void OnClicked( ) {
 		bool value = true;
-		if ( !_crimeSceneButton[0].activeInHierarchy ) {
+		if ( !_crimeSceneButton[ 0 ].activeInHierarchy ) {
 			value = true;
 		} else {
 			value = false;
 		}
-		for (int i = 0; i < _crimeSceneButton.Length; i++) {
-			_crimeSceneButton [i].SetActive (value);
+
+		for ( int i = 0; i < _crimeSceneButton.Length; i++ ) {
+			_crimeSceneButton [ i ].SetActive( value );
 		}
 	}
 
@@ -43,21 +44,40 @@ public class YuzawaTest : MonoBehaviour {
 		_animator.SetBool ("scrollFlag", value);
 	}
 
-	public void speech() {
-		bool value = true;
-		if (!_animation.GetBool( "SpeechBalloonFlag" )) {
-			value = true;
-		}else {
-			value = false;
-		}
-		_animation.SetBool ("SpeechBalloonFlag", value);
-	}
+    public void SpeechBalloon( ) {
+        bool value = true;
+        if ( !_speechBalloon[ 0 ].activeInHierarchy ) {
+            value = true;
+         } else {
+            value = false;
+        }
+        for ( int i = 0; i < 1; i++ ) {
+        _speechBalloon [ i ].SetActive( value );
+        }
+    }
 
-	public void CrimeSceneBedRoom () {
-		SceneManager.LoadScene( "Bedroom" );
-		}
+    public void OnClickedSpeech() {
+        bool value = false;
+        for( int i = 0; i < _speechBalloon.Length; i++ ) {
+            _speechBalloon[ i ].SetActive( value );
+    }
+    }
 
-	public void CrimeSceneKitchen () {
-		SceneManager.LoadScene( "Kitchen" );
-		}
+    //public void speech() {
+    //	bool value = true;
+    //	if (!_animation.GetBool( "SpeechBalloonFlag" )) {
+    //		value = true;
+    //	}else {
+    //		value = false;
+    //	}
+    //	_animation.SetBool ("SpeechBalloonFlag", value);
+    //}
+
+    //	public void CrimeSceneBedRoom () {
+    //		SceneManager.LoadScene( "Bedroom" );
+    //		}
+
+    //	public void CrimeSceneKitchen () {
+    //		SceneManager.LoadScene( "Kitchen" );
+    //		}
 }

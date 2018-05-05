@@ -16,8 +16,7 @@ public class Curtain : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+    }
 
 
 	//----------------------------------------------
@@ -39,13 +38,11 @@ public class Curtain : MonoBehaviour {
 		SceneManager.LoadScene( "StageSelect" );
 
 	}
-	public void Main () {
+    public void aaaaa( ) {
+            SceneManager.LoadScene("StageSelect");
+    }
 
-		SceneManager.LoadScene ( "MainStory1" );
-
-	}
-
-	//----------------------------------------------
-	//----------------------------------------------
+    //----------------------------------------------
+    //----------------------------------------------
 
 }

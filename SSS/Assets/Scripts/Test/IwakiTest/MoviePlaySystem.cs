@@ -8,7 +8,7 @@ using UnityEngine;
 public class MoviePlaySystem : MonoBehaviour {
 	[SerializeField]Point _point = null;
 	[SerializeField]Bar   _bar   = null;
-	[SerializeField]Movie _movie = null;
+	[SerializeField]Movie[ ] _movie = new Movie[ 1 ] ;
 								
 	[SerializeField] float _maxTime  = 60.0f;		//最大再生時間
 
@@ -56,8 +56,12 @@ public class MoviePlaySystem : MonoBehaviour {
 
 	//--ムービーの再生位置を更新する関数
 	void MovieUpdate( ) {
-		float movieStartTime = _bar.GetTransform ( ).localScale.x;
-		_movie.ChangeMovieStartTime ( movieStartTime );
+		float movieStartTime = _bar.GetTransform( ).localScale.x;
+
+        for (int i = 0; i < _movie.Length; i++) {
+            _movie[ i ].ChangeMovieStartTime( movieStartTime );
+        }
+
 	}
 
 	Vector3 GetMouse( ) {	return Camera.main.ScreenToWorldPoint( Input.mousePosition ); }
@@ -78,6 +82,7 @@ public class MoviePlaySystem : MonoBehaviour {
 		Vector3 pointPos = _point.GetTransform( ).position;
 		pointPos.x -= _posParSecond * 5;
 		_point.MovePosition ( pointPos );  //0.5fは戻した直後にシークバーがすぐに動くのを防ぐため
+        _stop = false;
 	}
 
 	//--5秒早送り(FastForward)をする関数
@@ -85,6 +90,7 @@ public class MoviePlaySystem : MonoBehaviour {
 		Vector3 pointPos = _point.GetTransform( ).position;
 		pointPos.x += _posParSecond * 5;
 		_point.MovePosition ( pointPos );
+        _stop = false;
 	}
 	//=======================================================================
 	//=======================================================================
