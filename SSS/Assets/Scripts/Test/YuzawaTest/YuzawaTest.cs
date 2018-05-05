@@ -44,15 +44,25 @@ public class YuzawaTest : MonoBehaviour {
 		_animator.SetBool ("scrollFlag", value);
 	}
 
-    public void SpeechBalloon( ) {
-        bool value = true;
-        if ( !_speechBalloon[ 0 ].activeInHierarchy ) {
-            value = true;
-         } else {
-            value = false;
-        }
-        for ( int i = 0; i < 1; i++ ) {
-        _speechBalloon [ i ].SetActive( value );
+    public void SpeechBalloon( int arrayNumber ) {
+        //bool value = true;
+        //if ( !_speechBalloon[ arrayNumber ].activeInHierarchy ) {
+        //    value = true;
+        // } else {
+        //    value = false;
+        //}
+        //_speechBalloon [ arrayNumber ].SetActive( value );
+        //if ( value ) {
+        //    for ( int i = 0; i < _speechBalloon.Length; i++ ) {
+        //        if ( i != arrayNumber ) _speechBalloon[ i ].SetActive( false );
+        //    }
+        //}
+        for ( int i = 0; i < _speechBalloon.Length; i++ ) {
+            if ( i == arrayNumber ) {
+                _speechBalloon[i].SetActive(true);
+            } else {
+                _speechBalloon[i].SetActive(false);
+            }
         }
     }
 
