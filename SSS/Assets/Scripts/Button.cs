@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Button : MonoBehaviour {
 
+
 	// Use this for initialization
 	void Start () {
 		
@@ -12,7 +13,8 @@ public class Button : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+
+
 	}
 	public void OnClick() {
 

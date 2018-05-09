@@ -4,16 +4,24 @@ using UnityEngine;
 
 public class SiteMove : MonoBehaviour {
     const float DOWN_ROOM_POS = -30f;
-    [ SerializeField ] GameObject[ ] _site    = new GameObject[ 4 ];        //現場四つ
+    [ SerializeField ] GameObject[ ] _site    = new GameObject[ 4 ];        //現場四つ	1:Bedroom 2:Graden 3:Kitchen 4:ServingRoom の順番で入れること 
     [ SerializeField ] float _leftRoomPos = -21f;
     [ SerializeField ] float _rightRoomPos = 21f;
     [ SerializeField ] float _moveSpeed = 1f; 
     bool _leftSiteMove;                                                     //左に移動する場合
     bool _rightSiteMove;                                                    //右に移動する場合
     bool _oneTimeOnly;                                                      //移動するときの一回だけの処理
-    public static int _nowSiteNum = 1;                                      //現在のシーン(別シーンから現場シーンに移動するときはこれを変えてから遷移すること)
-
+    public static int _nowSiteNum = 0;                                      //現在のシーン(別シーンから現場シーンに移動するときはこれを変えてから遷移すること)
     int[ ] _nextNextSiteNum;                                                //現在のシーンから1つ先と2つ先と3つ先のシーン
+
+	public enum _siteNum {
+		BEDROOM,
+		GARDEN,
+		KITCHEN,
+		SERVING_ROOM
+	}
+
+
 	// Use this for initialization
 	void Start( ) {
         _leftSiteMove = false;

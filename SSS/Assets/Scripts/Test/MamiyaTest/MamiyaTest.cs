@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class MamiyaTest : MonoBehaviour {
 	Animator _animator;
-
+	ScenesManager SceneTest;
 	// Use this for initialization
-	void Start () {
+	void Start () { 
 		_animator = GetComponent<Animator> ();
+		SceneTest = GetComponent<ScenesManager>();
 	}
 	
 	// Update is called once per frame
@@ -15,7 +16,11 @@ public class MamiyaTest : MonoBehaviour {
 		//if( Input.GetKeyDown (KeyCode.C) ) {
 			//_animator.SetTrigger ( "CloseFlag" );
 		//}
+		if ( Input.GetKeyDown (KeyCode.T) ) {
 
+			SceneTest.ScenesTransition ( "Title" );
+			
+		}
 
 	}
 	public void curatin_close () {
