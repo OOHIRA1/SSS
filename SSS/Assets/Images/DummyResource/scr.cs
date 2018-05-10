@@ -21,11 +21,11 @@ public class scr : MonoBehaviour {
 			_animator.SetBool( "Bool1",true );
 		}*/
 
-		if( Input.GetKey ( KeyCode.A )){
+		if( Input.GetKey ( KeyCode.P )){
 			_animator.SetBool( "Bool1",true );
 		}
 
-		if( Input.GetKey ( KeyCode.S) ){
+		if( Input.GetKey ( KeyCode.O) ){
 			_animator.SetBool ("Bool1", false);
 		}
 
