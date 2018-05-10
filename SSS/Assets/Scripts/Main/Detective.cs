@@ -5,7 +5,7 @@ using UnityEngine;
 public class Detective : MonoBehaviour {
     Animator _anim;
 
-    [ SerializeField ] float _posY = -3.88f;
+    //[ SerializeField ] float _posY = -3.88f;
 
     bool _isAnimWalk;
     bool _isFlip;
@@ -25,7 +25,7 @@ public class Detective : MonoBehaviour {
 
         Motion( );
 
-        if ( _isFlip ) Flip( );
+        Flip( );
 	}
 
     
@@ -37,12 +37,19 @@ public class Detective : MonoBehaviour {
             _move.x = mouse.x;
         }
 
-        if ( transform.position.x != _move.x ) {
-            if ( transform.position.x < _move.x ) transform.position += new Vector3( 0.1f, 0, 0 );
-            if ( transform.position.x > _move.x ) transform.position += new Vector3( -0.1f, 0, 0 );
-            _isAnimWalk = true;
-        } else {
+        if ( transform.position.x < ( _move.x + 0.1f ) && transform.position.x > ( _move.x - 0.1f ) ) {
             _isAnimWalk = false;
+            _isFlip = true;
+        } else {
+
+            if ( transform.position.x < _move.x ) transform.position += new Vector3( 0.1f, 0, 0 );
+
+            if ( transform.position.x > _move.x ) {
+                transform.position += new Vector3( -0.1f, 0, 0 );
+                _isFlip = false;
+            }
+
+            _isAnimWalk = true;
         }
         
 
@@ -58,7 +65,11 @@ public class Detective : MonoBehaviour {
     }
 
     void Flip( ) {
-        transform.localScale = new Vector3( -1, 1, 1 );
+        if ( _isFlip ) { 
+            transform.localScale = new Vector3( -1, 1, 1 );
+        } else {
+            transform.localScale = new Vector3( 1, 1, 1 );
+        }
     }
 
 }
