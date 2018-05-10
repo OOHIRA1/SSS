@@ -42,14 +42,20 @@ public class Detective_Office_Script : MonoBehaviour {
 			_animator.SetBool( "Bool04", true );
 		}
 		if( Input.GetKey ( KeyCode.A )){
-			rb.AddForce ( Vector3.left * 1.0f );
+			rb.AddForce ( Vector3.left * 0.5f );
 			_animator.SetBool( "bool01", true );
+			this.transform.localScale = new Vector3 ( 1, 1, 1 );
 		}	
 		if( Input.GetKey ( KeyCode.D )){
-			rb.AddForce (Vector3.right * 1.0f);
+			rb.AddForce (Vector3.right * 0.5f);
 			_animator.SetBool( "bool01", true );
+			this.transform.localScale = new Vector3 ( -1, 1, 1 );
 		}
-		//_animator.SetBool( "bool01", false );
+		if( Input.GetKey ( KeyCode.S )){
+			_animator.SetBool( "bool01", false );
+			rb.AddForce (Vector3.right * 0.0f);
+		}
+
 		/*if( num_1 == 1 ){
 			_animator.SetBool( "boolGameOver", true );
 		} 
