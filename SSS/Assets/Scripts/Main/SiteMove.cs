@@ -8,8 +8,8 @@ public class SiteMove : MonoBehaviour {
     [ SerializeField ] float _leftRoomPos = -21f;
     [ SerializeField ] float _rightRoomPos = 21f;
     [ SerializeField ] float _moveSpeed = 1f; 
-    bool _leftSiteMove;                                                     //左に移動する場合
-    bool _rightSiteMove;                                                    //右に移動する場合
+    bool _leftSitemove;                                                     //左に移動する場合
+    bool _rightSitemove;                                                    //右に移動する場合
     bool _oneTimeOnly;                                                      //移動するときの一回だけの処理
     public static int _nowSiteNum = 0;                                      //現在のシーン(別シーンから現場シーンに移動するときはこれを変えてから遷移すること)
     int[ ] _nextNextSiteNum;                                                //現在のシーンから1つ先と2つ先と3つ先のシーン
@@ -24,8 +24,8 @@ public class SiteMove : MonoBehaviour {
 
 	// Use this for initialization
 	void Start( ) {
-        _leftSiteMove = false;
-        _rightSiteMove = false;
+        _leftSitemove = false;
+        _rightSitemove = false;
         _oneTimeOnly = false;
         _nextNextSiteNum = new int [ 3 ];
 
@@ -38,7 +38,7 @@ public class SiteMove : MonoBehaviour {
         
 
         //左移動が選択されたとき一回だけの処理--------------------------------
-        if ( _oneTimeOnly && _leftSiteMove ) {
+        if ( _oneTimeOnly && _leftSitemove ) {
            LeftSiftSiteNum( );
            _oneTimeOnly = false;
         }
@@ -46,7 +46,7 @@ public class SiteMove : MonoBehaviour {
 
 
          //右移動が選択されたとき一回だけの処理--------------------------------
-        if ( _oneTimeOnly && _rightSiteMove ) {
+        if ( _oneTimeOnly && _rightSitemove ) {
             RightSiftSiteNum( );
             _oneTimeOnly = false;
         }
@@ -54,8 +54,8 @@ public class SiteMove : MonoBehaviour {
 
 
         //選択されたときの移動処理---------------
-        if ( _leftSiteMove )  LeftSiteMove( );
-        if ( _rightSiteMove ) RightSiteMove( );
+        if ( _leftSitemove )  LeftSitemove( );
+        if ( _rightSitemove ) RightSitemove( );
         //--------------------------------------
 
 	}
@@ -119,7 +119,7 @@ public class SiteMove : MonoBehaviour {
 
 
     //左に移動する処理--------------------------------------------------------------------
-    void LeftSiteMove( ) {
+    void LeftSitemove( ) {
         
         if ( _site[ _nextNextSiteNum[ 0 ] ].transform.position.x != 0 ) {
 
@@ -132,7 +132,7 @@ public class SiteMove : MonoBehaviour {
             _site[ _nextNextSiteNum[ 2 ] ].transform.position = new Vector3( 0, DOWN_ROOM_POS, 0 );
 
         } else {
-            _leftSiteMove = false;
+            _leftSitemove = false;
             _nowSiteNum++;
             if ( _nowSiteNum > 3 ) _nowSiteNum = 0;    
         }
@@ -142,7 +142,7 @@ public class SiteMove : MonoBehaviour {
 
 
     //右に移動する処理------------------------------------------------------------------
-    void RightSiteMove( ) {
+    void RightSitemove( ) {
 
         if ( _site[ _nextNextSiteNum[ 0 ] ].transform.position.x != 0 ) {
 
@@ -155,7 +155,7 @@ public class SiteMove : MonoBehaviour {
             _site[ _nextNextSiteNum[ 2 ] ].transform.position = new Vector3( 0, DOWN_ROOM_POS, 0 );
 
         } else {
-            _rightSiteMove = false;
+            _rightSitemove = false;
             _nowSiteNum--;
              if ( _nowSiteNum < 0 ) _nowSiteNum = 3;    
         }
@@ -167,8 +167,8 @@ public class SiteMove : MonoBehaviour {
     public void LeftButton( ) {
 
         //左移動が選択されたとき----------------------------------------------------
-        if ( !_rightSiteMove && !_leftSiteMove ) {
-            _leftSiteMove = true;
+        if ( !_rightSitemove && !_leftSitemove ) {
+            _leftSitemove = true;
             _oneTimeOnly = true;
         }
         //-------------------------------------------------------------------------
@@ -179,8 +179,8 @@ public class SiteMove : MonoBehaviour {
     public void RightButton( ) {
 
         //右移動が選択されたとき----------------------------------------------------
-        if ( !_rightSiteMove && !_leftSiteMove ) {
-            _rightSiteMove = true;
+        if ( !_rightSitemove && !_leftSitemove ) {
+            _rightSitemove = true;
             _oneTimeOnly = true;
         }
         //-------------------------------------------------------------------------

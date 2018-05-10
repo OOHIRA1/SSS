@@ -9,6 +9,8 @@ public class YuzawaTest : MonoBehaviour {
 	[SerializeField]Animator _animator = null;
 	[SerializeField]GameObject[] _crimeSceneButton = new GameObject[4];
     [SerializeField]GameObject[] _speechBalloon = new GameObject[4];
+	[SerializeField]GameObject _kaaa = null;
+	[SerializeField]GameObject _haaa = null;
 
 
     // Use this for initialization
@@ -90,4 +92,12 @@ public class YuzawaTest : MonoBehaviour {
     //	public void CrimeSceneKitchen () {
     //		SceneManager.LoadScene( "Kitchen" );
     //		}
+
+	public void baaakaaaa() {
+		_kaaa.SetActive(true);
+	}
+
+	public void haaakaaaa() {
+		_haaa.SetActive(false);
+	}
 }

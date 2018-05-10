@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 
 //==カーテンの機能を管理するクラス
 //
@@ -33,14 +33,6 @@ public class Curtain : MonoBehaviour {
 	public void Close( ) {
 		_animator.SetTrigger ( "CloseFlag" );
 	}
-	public void Title() {
-
-		SceneManager.LoadScene( "StageSelect" );
-
-	}
-    public void aaaaa( ) {
-            SceneManager.LoadScene("StageSelect");
-    }
 
     //----------------------------------------------
     //----------------------------------------------
