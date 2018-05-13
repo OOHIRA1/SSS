@@ -28,35 +28,35 @@ public class DetectiveOfficeScript : MonoBehaviour {
 	}
 	
 
-	public void pp () {
+	public void Pipe () {
 		_animator.SetBool( "pipe", true );
 	}
-	public void koziki () {
+	public void Voldemort () {
 		_animator.SetBool( "koziki", true );
 	}
-	public void mg () {
+	public void Grass () {
 		_animator.SetBool( "grass", true );
 	}
-	public void Walk () {
+	public void WalkLft () {
 		//rb.AddForce ( Vector3.left * 0.5f );
            rb.velocity = new Vector2(-2f, 0);
-           _animator.SetBool( "bool05", true );
+           _animator.SetBool( "fin", true );
            _animator.SetBool( "pipe", false );
            _animator.SetBool( "koziki", false );
            _animator.SetBool( "grass", false );
 		_animator.SetBool( "wslk", true );
 		this.transform.localScale = new Vector3 ( 1, 1, 1 );
 	}
-      public void Walk0 () {
+      public void WalkLft0 () {
            rb.velocity = new Vector2(0, 0);
-           _animator.SetBool( "bool05", false );
+           _animator.SetBool( "fin", false );
            _animator.SetBool( "wslk", false );
        }
 
 	public void walk () {
            //rb.AddForce (Vector3.right * 0.5f);
            rb.velocity = new Vector2(2f, 0);
-           _animator.SetBool( "Bool05", true );
+           _animator.SetBool( "fin", true );
            
            _animator.SetBool( "pipe", false );
            _animator.SetBool( "koziki", false );
@@ -67,6 +67,6 @@ public class DetectiveOfficeScript : MonoBehaviour {
        public void walk0 () {
            rb.velocity = new Vector2(0, 0);
            _animator.SetBool( "wslk", false );
-           _animator.SetBool( "bool05", false );
+           _animator.SetBool( "fin", false );
         }
 }
