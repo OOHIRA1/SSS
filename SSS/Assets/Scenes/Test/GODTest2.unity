@@ -570,7 +570,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &420253978
 GameObject:
@@ -640,7 +640,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &463871463
 GameObject:
@@ -898,6 +898,10 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1954502212106668, guid: aaaa84373d9f6034e80b42957f13a023, type: 2}
+      propertyPath: m_TagString
+      value: Npc
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aaaa84373d9f6034e80b42957f13a023, type: 2}
   m_IsPrefabParent: 0
@@ -1148,7 +1152,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!114 &651229165
 MonoBehaviour:
@@ -1163,6 +1167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveRange: 0.5
   _moveSpeed: 1
+  _rayShooter: {fileID: 1521443490}
 --- !u!1 &654918007
 GameObject:
   m_ObjectHideFlags: 0
@@ -1482,7 +1487,7 @@ GameObject:
   - component: {fileID: 775563506}
   m_Layer: 0
   m_Name: Sweet teeth
-  m_TagString: Untagged
+  m_TagString: Npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1808,7 +1813,7 @@ Transform:
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &898502074
 GameObject:
@@ -2573,7 +2578,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4766615997562802, guid: 2f844eae803620f41bccb2b434e746e5, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 212329929885851130, guid: 2f844eae803620f41bccb2b434e746e5,
         type: 2}
@@ -2963,6 +2968,7 @@ GameObject:
   - component: {fileID: 1521443487}
   - component: {fileID: 1521443486}
   - component: {fileID: 1521443485}
+  - component: {fileID: 1521443490}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3038,8 +3044,20 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1521443490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1521443484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f90ea99a83abc1744957d01e873f6432, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _drawRayDistance: 100
 --- !u!1 &1566830665
 GameObject:
   m_ObjectHideFlags: 0
@@ -3995,6 +4013,10 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1061690681151764, guid: 58399a294a8f76747855fcd60e6c39a7, type: 2}
+      propertyPath: m_TagString
+      value: Npc
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 58399a294a8f76747855fcd60e6c39a7, type: 2}
   m_IsPrefabParent: 0
@@ -4557,6 +4579,10 @@ Prefab:
       propertyPath: m_LocalScale.x
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1869908423460292, guid: 58d70a7c1303b6b46bc95e1887d781fa, type: 2}
+      propertyPath: m_TagString
+      value: Npc
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 58d70a7c1303b6b46bc95e1887d781fa, type: 2}
   m_IsPrefabParent: 0
@@ -4602,7 +4628,7 @@ GameObject:
   - component: {fileID: 2049553682}
   m_Layer: 0
   m_Name: widow
-  m_TagString: Untagged
+  m_TagString: Npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4937,5 +4963,5 @@ Transform:
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

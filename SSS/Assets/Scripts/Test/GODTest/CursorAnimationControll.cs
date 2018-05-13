@@ -10,6 +10,7 @@ public class CursorAnimationControll : MonoBehaviour {
 	[SerializeField] float _moveRange = 0;	//アニメーションで動く範囲
 	[SerializeField] float _moveSpeed = 0;	//アニメーションの速さ(unit/second)
 	bool _downFlag;							//アニメーションで下に動いているかのフラグ
+	[SerializeField] RayShooter _rayShooter = null;			//Rayを発射するものを格納する変数
 
 	// Use this for initialization
 	void Start () {
@@ -29,6 +30,16 @@ public class CursorAnimationControll : MonoBehaviour {
 			transform.Translate (0, _moveSpeed * Time.deltaTime, 0, Space.World);
 			if (posY > _firstPosition.y + _moveRange / 2) {
 				_downFlag = true;
+			}
+		}
+
+		if (Input.GetMouseButtonDown (0)) {
+			RaycastHit2D hit = _rayShooter.Shoot (Input.mousePosition);
+			if (hit) {
+				if (hit.collider.tag == "Npc") {
+					Vector3 pos = hit.transform.position;
+					transform.position = new Vector3 (pos.x, _firstPosition.y, pos.z);
+				}
 			}
 		}
 	}
