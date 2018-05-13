@@ -1417,9 +1417,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _filePaths:
-  - talk1
-  - talk2
-  - talk3
+  - text1-1
+  - text1-2
+  - text1-3
+  - text1-4
+  - text1-5
+  - text1-6
+  - text1-7
+  - text1-8
+  - text1-9
   _characterPerRow: 17
   _speed: 0.05
   _statementNumber: 0
