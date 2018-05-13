@@ -13,13 +13,13 @@ public class Point : MonoBehaviour {
 
 	// Use this for initialization
 	void Start( ) {
-		_transform = GetComponent<Transform>( );
+		_transform = GetComponent< Transform >( );
 		_maxRange = _rightPos - _leftPos;
 	}
 
 	//==================================================
 	//ゲッター
-	public Transform GetTransform( ) { return _transform; } 
+	public Vector3 GetTransform( ) { return _transform.localPosition; } 
 	public float GetMaxRange( ) { return _maxRange; }
 	//==================================================
 	//===================================================

@@ -34,13 +34,13 @@ public class MoviePlaySystem : MonoBehaviour {
 
 	//--ポイントの座標を更新する関数
 	void PointUpdate( ) {
-		Vector3 pointPos = _point.GetTransform( ).position; 
-		if ( !_stop ) pointPos.x = _point.GetTransform ().position.x + ( _posParSecond * Time.deltaTime );
+		Vector3 pointPos = _point.GetTransform( ); 
+		if ( !_stop ) pointPos.x = _point.GetTransform ().x + ( _posParSecond * Time.deltaTime );
 
 		if ( Input.GetMouseButtonDown( 0 ) ) {	//マウスを押したかどうか
 			Vector3 mousePos = Vector3.zero;
 			mousePos = GetMouse( );
-			if ( ( int )mousePos.y == ( int )_bar.GetTransform( ).position.y ) {
+			if ( ( int )mousePos.y == ( int )_bar.GetTransform( ).y ) {
 				pointPos.x = mousePos.x;
 			}
 		}
@@ -50,17 +50,17 @@ public class MoviePlaySystem : MonoBehaviour {
 	//--バーのスケールを更新する関数
 	void BarUpdate( ) {
 		Vector3 nowBarSize = Vector3.one;
-		nowBarSize.x = ( _point.GetTransform( ).position.x - _bar.GetTransform( ).position.x ) / _point.GetMaxRange( );
+		nowBarSize.x = ( _point.GetTransform( ).x - _bar.GetTransform( ).x ) / _point.GetMaxRange( );
 		_bar.MoveScale( nowBarSize );
 	}
 
 	//--ムービーの再生位置を更新する関数
 	void MovieUpdate( ) {
-		float movieStartTime = _bar.GetTransform( ).localScale.x;
+		//float movieStartTime = _bar.GetTransform( ).localScale.x;
 
-        for (int i = 0; i < _movie.Length; i++) {
-            _movie[ i ].ChangeMovieStartTime( movieStartTime );
-        }
+  //      for (int i = 0; i < _movie.Length; i++) {
+  //          _movie[ i ].ChangeMovieStartTime( movieStartTime );
+  //      }
 
 	}
 
@@ -79,7 +79,7 @@ public class MoviePlaySystem : MonoBehaviour {
 
 	//--5秒巻き戻し(FastBackword)をする関数
 	public void FastBackword( ) {
-		Vector3 pointPos = _point.GetTransform( ).position;
+		Vector3 pointPos = _point.GetTransform( );
 		pointPos.x -= _posParSecond * 5;
 		_point.MovePosition ( pointPos );  //0.5fは戻した直後にシークバーがすぐに動くのを防ぐため
         _stop = false;
@@ -87,7 +87,7 @@ public class MoviePlaySystem : MonoBehaviour {
 
 	//--5秒早送り(FastForward)をする関数
 	public void FastForward( ) {
-		Vector3 pointPos = _point.GetTransform( ).position;
+		Vector3 pointPos = _point.GetTransform( );
 		pointPos.x += _posParSecond * 5;
 		_point.MovePosition ( pointPos );
         _stop = false;

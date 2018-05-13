@@ -15,7 +15,7 @@ public class Bar : MonoBehaviour {
 
 	//=================================================
 	//ゲッター
-	public Transform GetTransform( ) { return _transform; }
+	public Vector3 GetTransform( ) { return _transform.localPosition; }
 	//=================================================
 	//=================================================
 
