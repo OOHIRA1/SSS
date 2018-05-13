@@ -7,6 +7,8 @@ using UnityEngine.UI;
 //
 //使用方法：テキストを表示する全てのImageの親オブジェクトにアタッチ
 public class DetectiveTalk : MonoBehaviour {
+	const int STOP_SPRITE_INDEX = 40;					//_stopSpriteを表示する_imagesの配列番号
+
 	[SerializeField] string[] _filePaths = null;		//取得するファイルのパス
 	Sprite[][] _sprites;								//取得するスプライトを格納する変数
 	Image[] _images;									//テキストを表示するImage
@@ -102,10 +104,12 @@ public class DetectiveTalk : MonoBehaviour {
 				_index++;
 				yield return new WaitForSeconds (_speed);
 			} while(_index != _sprites [_statementNumber].Length && !_moreFast);
-			_images [_sprites [_statementNumber].Length].sprite = _stopSprite;
-			_images [_sprites [_statementNumber].Length].gameObject.AddComponent<Animator> ();
-			_images [_sprites [_statementNumber].Length].GetComponent<Animator> ().runtimeAnimatorController = _runtimeAnimatorController;
-			_images [_sprites [_statementNumber].Length].color = new Color (1f, 1f, 1f, 1f);	//透明をリセット
+			//文章終わりのマーク表示処理-----------------------------------------------------------------------------------------------------
+			_images [STOP_SPRITE_INDEX].sprite = _stopSprite;
+			_images [STOP_SPRITE_INDEX].gameObject.AddComponent<Animator> ();
+			_images [STOP_SPRITE_INDEX].GetComponent<Animator> ().runtimeAnimatorController = _runtimeAnimatorController;
+			_images [STOP_SPRITE_INDEX].color = new Color (1f, 1f, 1f, 1f);	//透明をリセット
+			//-------------------------------------------------------------------------------------------------------------------------------
 			_index = 0;
 			_moreFast = false;
 			_statementNumber = ++_statementNumber % _sprites.Length;
