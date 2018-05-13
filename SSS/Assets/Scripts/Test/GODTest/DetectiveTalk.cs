@@ -7,7 +7,7 @@ using UnityEngine.UI;
 //
 //使用方法：テキストを表示する全てのImageの親オブジェクトにアタッチ
 public class DetectiveTalk : MonoBehaviour {
-	const int STOP_SPRITE_INDEX = 40;					//_stopSpriteを表示する_imagesの配列番号
+	const int STOP_SPRITE_INDEX = 33;					//_stopSpriteを表示する_imagesの配列番号
 
 	[SerializeField] string[] _filePaths = null;		//取得するファイルのパス
 	Sprite[][] _sprites;								//取得するスプライトを格納する変数
