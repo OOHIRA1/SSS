@@ -39,10 +39,12 @@ public class Detective : MonoBehaviour {
 
         if ( transform.position.x < ( _move.x + 0.1f ) && transform.position.x > ( _move.x - 0.1f ) ) {
             _isAnimWalk = false;
-            _isFlip = true;
         } else {
 
-            if ( transform.position.x < _move.x ) transform.position += new Vector3( 0.1f, 0, 0 );
+            if ( transform.position.x < _move.x ) {
+				transform.position += new Vector3( 0.1f, 0, 0 );
+				_isFlip = true;
+			}
 
             if ( transform.position.x > _move.x ) {
                 transform.position += new Vector3( -0.1f, 0, 0 );

@@ -44,13 +44,13 @@ public class DetectiveOfficeScript : MonoBehaviour {
            _animator.SetBool( "pipe", false );
            _animator.SetBool( "koziki", false );
            _animator.SetBool( "grass", false );
-		_animator.SetBool( "wslk", true );
+		_animator.SetBool( "walk", true );
 		this.transform.localScale = new Vector3 ( 1, 1, 1 );
 	}
       public void WalkLft0 () {
            rb.velocity = new Vector2(0, 0);
            _animator.SetBool( "fin", false );
-           _animator.SetBool( "wslk", false );
+           _animator.SetBool( "walk", false );
        }
 
 	public void walk () {
@@ -61,12 +61,19 @@ public class DetectiveOfficeScript : MonoBehaviour {
            _animator.SetBool( "pipe", false );
            _animator.SetBool( "koziki", false );
            _animator.SetBool( "grass", false );
-           _animator.SetBool( "wslk", true );
+           _animator.SetBool( "walk", true );
 		this.transform.localScale = new Vector3 ( -1, 1, 1 );
 	}
        public void walk0 () {
            rb.velocity = new Vector2(0, 0);
-           _animator.SetBool( "wslk", false );
+           _animator.SetBool( "walk", false );
            _animator.SetBool( "fin", false );
         }
+
+    public void Disappear () {
+        _animator.SetBool( "Disappear", true );
+    }
+    public void appear () {
+        _animator.SetBool( "Disappear", false );
+    }
 }

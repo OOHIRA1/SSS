@@ -6,16 +6,16 @@ using UnityEngine;
 //
 //使用方法：シークバーにアタッチ
 public class Bar : MonoBehaviour {
-	Transform _transform;
+	RectTransform _rectTransform;
 
 	// Use this for initialization
 	void Start( ) {
-		_transform = GetComponent<Transform>( );
+		_rectTransform = GetComponent<RectTransform>( );
 	}
 
 	//=================================================
 	//ゲッター
-	public Vector3 GetTransform( ) { return _transform.localPosition; }
+	public Vector2 GetTransform( ) { return _rectTransform.position; }
 	//=================================================
 	//=================================================
 
@@ -28,9 +28,15 @@ public class Bar : MonoBehaviour {
 	//===================================================
 	//public関数
 	//--シークバーのスケールを変更する関数
-	public void MoveScale( Vector3 rate ) {
-		_transform.localScale = rate;
+	public void MoveScale( Vector2 rate ) {
+		_rectTransform.localScale = rate;
 	}
+
 	//====================================================
 	//====================================================
+
+	public Vector2 GetBarScale( ) {
+		return _rectTransform.localScale;
+    }
+
 }

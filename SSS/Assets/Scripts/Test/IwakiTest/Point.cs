@@ -6,20 +6,20 @@ using UnityEngine;
 //
 //使用方法：シークバーのポイントにアタッチ
 public class Point : MonoBehaviour {
-	Transform _transform;
+	RectTransform _transform;
 	[SerializeField] float _leftPos  = 0;			//pointのｘ座標の最小値
 	[SerializeField] float _rightPos = 0;			//pointのｘ座標の最大値
 	float _maxRange;									//pointの最大移動範囲
 
 	// Use this for initialization
 	void Start( ) {
-		_transform = GetComponent< Transform >( );
-		_maxRange = _rightPos - _leftPos;
+		_transform = GetComponent< RectTransform >( );
+		_maxRange = _rightPos;
 	}
 
 	//==================================================
 	//ゲッター
-	public Vector3 GetTransform( ) { return _transform.localPosition; } 
+	public Vector2 GetTransform( ) { return _transform.position; } 
 	public float GetMaxRange( ) { return _maxRange; }
 	//==================================================
 	//===================================================
@@ -33,9 +33,9 @@ public class Point : MonoBehaviour {
 	//public関数
 	//=============================================================
 	//--シークバーの位置を動かす関数
-	public void MovePosition( Vector3 vector ) {
+	public void MovePosition( Vector2 vector ) {
 		
-		Vector3 pos = vector;
+		Vector2 pos = vector;
 		if ( vector.x < _leftPos ) {
 			pos.x = _leftPos;
 		}
