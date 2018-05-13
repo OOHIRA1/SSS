@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//==カーソルのアニメーションを管理するクラス
+//==カーソルを管理するクラス
 //
 //使用方法：カーソルにアタッチ
-public class CursorAnimationControll : MonoBehaviour {
+public class Cursor : MonoBehaviour {
 	Vector3 _firstPosition;					//カーソルの初期位置
 	[SerializeField] float _moveRange = 0;	//アニメーションで動く範囲
 	[SerializeField] float _moveSpeed = 0;	//アニメーションの速さ(unit/second)
@@ -36,10 +36,20 @@ public class CursorAnimationControll : MonoBehaviour {
 		if (Input.GetMouseButtonDown (0)) {
 			RaycastHit2D hit = _rayShooter.Shoot (Input.mousePosition);
 			if (hit) {
+				//犯人指摘での処理-----------------------------------------------------
 				if (hit.collider.tag == "Npc") {
 					Vector3 pos = hit.transform.position;
 					transform.position = new Vector3 (pos.x, _firstPosition.y, pos.z);
 				}
+				//--------------------------------------------------------------------
+
+				//凶器カーソルでの処理-------------------------------------------------
+				if (hit.collider.tag == "DangerousWepon") {
+					Vector3 pos = hit.transform.position;
+					transform.position = new Vector3 (pos.x, pos.y + 2, pos.z);
+					_firstPosition.y = pos.y + 2;
+				}
+				//--------------------------------------------------------------------
 			}
 		}
 	}
