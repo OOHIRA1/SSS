@@ -11,6 +11,8 @@ public class Detective : MonoBehaviour {
     bool _isFlip;
 
     Vector3 _move;
+	[SerializeField] float _moveTouchUp = -4.0f;
+	[SerializeField] float _moveTouchDown = -6.0f;
 	// Use this for initialization
 	void Start( ) {
 		_anim = GetComponent< Animator >( );
@@ -34,7 +36,10 @@ public class Detective : MonoBehaviour {
         Vector3 mouse = Vector3.zero;
         if ( Input.GetMouseButtonDown( 0 ) ) {
             mouse = Camera.main.ScreenToWorldPoint( Input.mousePosition );
-            _move.x = mouse.x;
+			Debug.Log( mouse );
+			if ( mouse.y < _moveTouchUp && mouse.y > _moveTouchDown ) {
+				_move.x = mouse.x;
+			}
         }
 
         if ( transform.position.x < ( _move.x + 0.1f ) && transform.position.x > ( _move.x - 0.1f ) ) {
