@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Npc
   - DangerousWepon
+  - Night
+  - Evening
   layers:
   - Default
   - TransparentFX
