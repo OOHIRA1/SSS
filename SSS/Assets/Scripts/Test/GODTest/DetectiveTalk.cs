@@ -7,13 +7,14 @@ using UnityEngine.UI;
 //
 //使用方法：テキストを表示する全てのImageの親オブジェクトにアタッチ
 public class DetectiveTalk : MonoBehaviour {
-	const int STOP_SPRITE_INDEX = 33;					//_stopSpriteを表示する_imagesの配列番号
+	const int STOP_SPRITE_INDEX = 34;					//_stopSpriteを表示する_imagesの配列番号
 
 	[SerializeField] string[] _filePaths = null;		//取得するファイルのパス
 	Sprite[][] _sprites;								//取得するスプライトを格納する変数
 	Image[] _images;									//テキストを表示するImage
 	[SerializeField] int _characterPerRow = 10;			//1行当たりの文字数
 	int _index = 0;										//表示している_imagesの配列番号
+	[SerializeField] Vector2 _padding = new Vector2(0, 0);
 //	float _time = 0;									//経過時間(_sprites[]の要素毎に更新)
 	[SerializeField] float _speed = 0.3f;				//テキストを表示する時間(second/char)
 	[SerializeField] int _statementNumber = 0;			//表示中の文章の番号(0,1,2, ... ,_filePaths.Length - 1 )
@@ -45,7 +46,10 @@ public class DetectiveTalk : MonoBehaviour {
 		for ( int i = 0; i < _images.Length; i++ ) {
 			RectTransform rectTransform = _images [i].GetComponent<RectTransform> ();
 			Vector2 size = rectTransform.rect.size;				//Imageのサイズ
-			rectTransform.anchoredPosition = new Vector2 ( size.x * ( 1 + i % _characterPerRow ), -size.y * ( 1 + i / _characterPerRow ) );
+			rectTransform.anchoredPosition = new Vector2 ( size.x * ( 1 + i % _characterPerRow ), -size.y * ( 1 + i / _characterPerRow ) ) + _padding;
+			if (i == STOP_SPRITE_INDEX) {
+				rectTransform.anchoredPosition = new Vector2 ( size.x * ( 1 + _characterPerRow ), -size.y * ( 1 + ( i - 1 ) / _characterPerRow ) ) + _padding;
+			}
 			_images [i].color = new Color ( 1f, 1f, 1f, 0 );	//一度透明にする
 		}
 		//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
