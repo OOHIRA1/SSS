@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4932240818610078}
   - component: {fileID: 212827761526509826}
   m_Layer: 0
-  m_Name: SpeechBallon
+  m_Name: Testimony
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
