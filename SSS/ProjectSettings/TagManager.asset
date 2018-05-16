@@ -8,6 +8,7 @@ TagManager:
   - DangerousWepon
   - Night
   - Evening
+  - EvidenceManager
   layers:
   - Default
   - TransparentFX

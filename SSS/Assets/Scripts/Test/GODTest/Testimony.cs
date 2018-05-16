@@ -4,9 +4,13 @@ using UnityEngine;
 
 //==証言UIを表示するクラス
 //
-//使用方法：テキストを表示する全てのSpriteの親オブジェクトにアタッチ
+//使用方法：証言を表示させるオブジェクトにアタッチ
 
 public class Testimony : MonoBehaviour {
+	enum Npc {
+		GARDENER,
+
+	}
 	[SerializeField] Transform[] _npcTransform;
 
 	// Use this for initialization
