@@ -56,7 +56,7 @@ public class MoviePlaySystem : MonoBehaviour {
 
 	//--バーのスケールを更新する関数
 	void BarUpdate( ) {
-		Vector2 nowBarSize = new Vector2( 0, 2 );
+		Vector2 nowBarSize = new Vector2( 0, 1 );
 		nowBarSize.x = ( _point.GetTransform( ).x - _bar.GetTransform( ).x ) / _point.GetMaxRange( );
 		_bar.MoveScale( nowBarSize );
 	}

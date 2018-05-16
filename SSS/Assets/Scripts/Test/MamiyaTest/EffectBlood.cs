@@ -19,9 +19,17 @@ public class EffectBlood : MonoBehaviour {
 
     public void Effectblood( ) {
 
-        bool value = false;
+        bool value = true;
 
+        if ( !_effectBlood.activeInHierarchy ) {
 
+            value = true;
+
+        } else {
+
+            value = false;
+
+        }
         _effectBlood.SetActive( value );
 
 

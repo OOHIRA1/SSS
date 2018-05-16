@@ -14,6 +14,8 @@ public class YuzawaTest : MonoBehaviour {
 	[SerializeField]float _animTime = 500;
 
 	int _num;
+    bool Disapper = true;
+    bool ClockDisapper = true;
 
 
 	// Use this for initialization
@@ -66,27 +68,65 @@ public class YuzawaTest : MonoBehaviour {
 		_animator.SetBool ("scrollFlag", value);
 	}
 
-    public void SpeechBalloon( int arrayNumber ) {
-        //bool value = true;
-        //if ( !_speechBalloon[ arrayNumber ].activeInHierarchy ) {
-        //    value = true;
-        // } else {
-        //    value = false;
-        //}
-        //_speechBalloon [ arrayNumber ].SetActive( value );
-        //if ( value ) {
-        //    for ( int i = 0; i < _speechBalloon.Length; i++ ) {
-        //        if ( i != arrayNumber ) _speechBalloon[ i ].SetActive( false );
-        //    }
-        //}
-        for ( int i = 0; i < _speechBalloon.Length; i++ ) {
-            if ( i == arrayNumber ) {
-                _speechBalloon[i].SetActive(true);
-            } else {
-                _speechBalloon[i].SetActive(false);
+    public void SpeechBalloon( int arrayNumber ) {              //吹き出しの表示　　他のボタン押したとき表示されてるものを非表示
+		for (int i = 0; i < _speechBalloon.Length; i++){        
+			if (i == arrayNumber){                              //iとArrayNumberの変数が同じ時
+				_speechBalloon[i].SetActive(true);              //
+			} else {
+				_speechBalloon[i].SetActive(false);
+				_time[i] = 0;
+			}
+		}
+	}
+
+
+
+	 void OnClickedClock( int ArrayNumber ) {   //時計ＵＩの表示　　　他のボタン押したとき表示されてるものを非表示
+		bool value = true;
+		for ( int i = 0; i < 4; i++ ) {
+			if ( i == ArrayNumber ) {
+				if( _time[ i ] > _animTime ) {
+					_clockApper[ i ].SetActive( true );
+					}
+				} else {
+					_clockApper[ i ].SetActive( false );
+					}
+			}
+		}
+
+
+    public void OnClickedAgainBalloon( ) {           //もう一度押されたとき吹き出しを非表示
+        bool value = false;
+        if ( Disapper == true ) {
+            Disapper = false;
+        } else {
+            Disapper = true;
+        }
+        if ( Disapper ) {
+            for ( int i = 0; i < _speechBalloon.Length; i++ ) {
+                _speechBalloon [ i ].SetActive( value );
             }
         }
     }
+
+    public void OnClickedAgainCLock( ) {             //もう一度押されたとき時計ＵＩを非表示
+        bool value = false;
+        if ( ClockDisapper == true ) {
+            ClockDisapper = false;
+        } else {
+            ClockDisapper = true;
+        }
+        if ( ClockDisapper ) {
+            for ( int i = 0; i < _clockApper.Length; i++ ) {
+                _clockApper [ i ].SetActive( value );
+                _time [ i ] = 0;
+                _num = -1;
+            }
+        }
+    }
+    public void OnClickedButtonNum( int ArrayNumber ) {
+		_num = ArrayNumber;
+	}
 
     public void OnClickedSpeech() {
         bool value = false;
@@ -94,7 +134,14 @@ public class YuzawaTest : MonoBehaviour {
             _speechBalloon[ i ].SetActive( value );
     	}
     }
-
+    public void OnClickedClockDisappare() {                 
+        bool value = false;
+        for( int i = 0; i < _clockApper.Length; i++ ) {
+            _clockApper[ i ].SetActive( value );
+            _time[i] = 0;
+            _num = -1;
+    	}
+    }
 	//public void speech() {
 	//	bool value = true;
 	//	if (!_animation.GetBool( "SpeechBalloonFlag" )) {
@@ -105,27 +152,5 @@ public class YuzawaTest : MonoBehaviour {
 	//	_animation.SetBool ("SpeechBalloonFlag", value);
 	//}
 
-	//	public void CrimeSceneBedRoom () {
-	//		SceneManager.LoadScene( "Bedroom" );
-	//		}
-
-	//	public void CrimeSceneKitchen () {
-	//		SceneManager.LoadScene( "Kitchen" );
-	//		}
-
-	public void OnClickedClock( int ArrayNumber ) {
-		bool value = true;
-		for ( int i = 0; i < 4; i++ ) {
-			if ( i == ArrayNumber ) {
-				if( _time[ i ] > _animTime ) {
-					_clockApper[ i ].SetActive( value );
-				}
-			}
-		}
-	}
-
-	public void OnClickedButtonNum( int ArrayNumber ) {
-		_num = ArrayNumber;
-	}
 
 }
