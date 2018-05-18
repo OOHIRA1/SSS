@@ -43,43 +43,7 @@ public class EvidenceManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown (KeyCode.Alpha0)) {
-			UpdateEvidence (Evidence.STORY1_EVIDENCE1);
-		}
-		if (Input.GetKeyDown (KeyCode.Alpha1)) {
-			UpdateEvidence (Evidence.STORY1_EVIDENCE2);
-		}
-		if (Input.GetKeyDown (KeyCode.Alpha2)) {
-			UpdateEvidence (Evidence.STORY1_EVIDENCE3);
-		}
-		if (Input.GetKeyDown (KeyCode.Alpha3)) {
-			UpdateEvidence (Evidence.STORY1_EVIDENCE4);
-		}
-		if (Input.GetKeyDown (KeyCode.Alpha4)) {
-			UpdateEvidence (Evidence.STORY1_EVIDENCE5);
-		}
-		if (Input.GetKeyDown (KeyCode.Alpha5)) {
-			UpdateEvidence (Evidence.STORY1_EVIDENCE6);
-		}
-
-		if (Input.GetKeyDown (KeyCode.A)) {
-			Debug.Log(CheckEvidence (Evidence.STORY1_EVIDENCE1));
-		}
-		if (Input.GetKeyDown (KeyCode.B)) {
-			Debug.Log(CheckEvidence (Evidence.STORY1_EVIDENCE2));
-		}
-		if (Input.GetKeyDown (KeyCode.C)) {
-			Debug.Log(CheckEvidence (Evidence.STORY1_EVIDENCE3));
-		}
-		if (Input.GetKeyDown (KeyCode.D)) {
-			Debug.Log(CheckEvidence (Evidence.STORY1_EVIDENCE4));
-		}
-		if (Input.GetKeyDown (KeyCode.E)) {
-			Debug.Log(CheckEvidence (Evidence.STORY1_EVIDENCE5));
-		}
-		if (Input.GetKeyDown (KeyCode.F)) {
-			Debug.Log(CheckEvidence (Evidence.STORY1_EVIDENCE6));
-		}
+		
 	}
 
 

@@ -14,9 +14,9 @@ public class DetectiveOfficeManager : MonoBehaviour {
 	}
 
 	[SerializeField] State _state;								//現在の探偵ラボのStateを格納する変数
-	[SerializeField] GameObject _dangerousWeaponPoster = null;	//凶器UI
-	[SerializeField] GameObject _cursor = null;					//カーソル
-	[SerializeField] GameObject _spotlightType2 = null;			//スポットライトタイプ２
+	[SerializeField] GameObject _detectiveTalkingUI = null;			//探偵によるテキストで使用するUI
+	[SerializeField] GameObject _criminalChoiseUI = null;			//犯人指摘で使用するUI
+	[SerializeField] GameObject _dangerousWeaponChoiseUI = null;	//凶器選択で使用するUI
 
 
 	//===================================================================================
@@ -32,9 +32,21 @@ public class DetectiveOfficeManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.A)) {
+		//デバッグ用------------------------------------
+		if (Input.GetKeyDown(KeyCode.Q)) {
+			_state = State.INVESTIGATE;
+		}
+		if (Input.GetKeyDown(KeyCode.W)) {
+			_state = State.DETECTIVE_TALKING;
+		}
+		if (Input.GetKeyDown(KeyCode.E)) {
+			_state = State.CRIMINAL_CHOISE;
+		}
+		if (Input.GetKeyDown(KeyCode.R)) {
 			_state = State.DANGEROUS_WEAPON_CHOISE;
 		}
+		//-----------------------------------------------
+
 		switch( _state ) {
 		case State.INVESTIGATE:
 			break;
@@ -43,13 +55,27 @@ public class DetectiveOfficeManager : MonoBehaviour {
 		case State.CRIMINAL_CHOISE:
 			break;
 		case State.DANGEROUS_WEAPON_CHOISE:
-			_dangerousWeaponPoster.SetActive (true);
-			_cursor.SetActive (true);
-			_spotlightType2.SetActive (true);
 			break;
 		default :
 			break;
 		}
+		ChangeActive (_detectiveTalkingUI, State.DETECTIVE_TALKING);
+		ChangeActive (_criminalChoiseUI, State.CRIMINAL_CHOISE);
+		ChangeActive (_dangerousWeaponChoiseUI, State.DANGEROUS_WEAPON_CHOISE);
 		Debug.Log (_state);
+	}
+
+
+	//--uiのアクティブ・非アクティブを現在のステートがstateかどうかで変える関数
+	void ChangeActive( GameObject ui, State state ) {
+		if (ui.activeInHierarchy) {
+			if (_state != state) {
+				ui.SetActive (false);
+			}
+		} else {
+			if (_state == state) {
+				ui.SetActive (true);
+			}
+		}
 	}
 }
