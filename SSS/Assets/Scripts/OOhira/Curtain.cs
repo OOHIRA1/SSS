@@ -34,6 +34,29 @@ public class Curtain : MonoBehaviour {
 		_animator.SetTrigger ( "CloseFlag" );
 	}
 
+
+	//--カーテンのStateが開いている状態かどうかを返す関数
+	public bool IsStateOpen( ) {
+		int layer = _animator.GetLayerIndex ("Base Layer");
+		AnimatorStateInfo animatorStateInfo = _animator.GetCurrentAnimatorStateInfo (layer);
+		return animatorStateInfo.IsName ("curtain_open");
+	}
+
+
+	//--カーテンのStateが閉じている状態かどうかを返す関数
+	public bool IsStateClose( ) {
+		int layer = _animator.GetLayerIndex ("Base Layer");
+		AnimatorStateInfo animatorStateInfo = _animator.GetCurrentAnimatorStateInfo (layer);
+		return animatorStateInfo.IsName ("curtain_close");
+	}
+
+
+	//--現在のStateの再生時間を返す関数( 返り値：0~1(開始時：0, 終了時：1) )
+	public float ResearchStatePlayTime() {
+		int layer = _animator.GetLayerIndex ("Base Layer");
+		AnimatorStateInfo animatorStateInfo = _animator.GetCurrentAnimatorStateInfo (layer);
+		return animatorStateInfo.normalizedTime;
+	}
     //----------------------------------------------
     //----------------------------------------------
 

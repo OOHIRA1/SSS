@@ -24,6 +24,8 @@ public class DetectiveOfficeManager : MonoBehaviour {
 	[SerializeField] Cursor _cursorForCriminalChoise = null;
 	[SerializeField] Cursor _cursorForDangerousWeaponChoise = null;
 	[SerializeField] LaboUIManager _laboUIManager = null;
+	[SerializeField] Curtain _curtain = null;
+	[SerializeField] Detective _detective = null;
 
 	//===================================================================================
 	//ゲッター
@@ -53,6 +55,9 @@ public class DetectiveOfficeManager : MonoBehaviour {
 		}
 		if (Input.GetKeyDown(KeyCode.R)) {
 			_state = State.DANGEROUS_WEAPON_CHOISE;
+		}
+		if (Input.GetKeyDown (KeyCode.U)) {
+			_curtain.Close ();
 		}
 		//-----------------------------------------------
 
@@ -100,9 +105,13 @@ public class DetectiveOfficeManager : MonoBehaviour {
 		Debug.Log (_state);
 
 		if (!_gameDataManager.CheckAdvancedData (GameDataManager.CheckPoint.FIRST_COME_TO_DETECTIVE_OFFICE)) {	//初めて探偵ラボに来た時
-			_detectiveTalkIndex = 0;
-			_state = State.DETECTIVE_TALKING;
-			_gameDataManager.UpdateAdvancedData (GameDataManager.CheckPoint.FIRST_COME_TO_DETECTIVE_OFFICE);
+			//カーテンが開ききったら行う処理---------------------------------------------------------------------------
+			if (_curtain.IsStateOpen () && _curtain.ResearchStatePlayTime() >= 1) {
+				_detectiveTalkIndex = 0;
+				_state = State.DETECTIVE_TALKING;
+				_gameDataManager.UpdateAdvancedData (GameDataManager.CheckPoint.FIRST_COME_TO_DETECTIVE_OFFICE);
+			}
+			//-------------------------------------------------------------------------------------------------------
 		}
 		if (_evidenceManager.CheckEvidence(EvidenceManager.Evidence.STORY1_EVIDENCE3) && !_gameDataManager.CheckAdvancedData(GameDataManager.CheckPoint.GET_EVIDENCE3)) {	//証拠品3を入手した時
 			_detectiveTalkIndex = 1;
@@ -110,11 +119,19 @@ public class DetectiveOfficeManager : MonoBehaviour {
 			_gameDataManager.UpdateAdvancedData (GameDataManager.CheckPoint.GET_EVIDENCE3);
 		}
 		if (_evidenceManager.CheckEvidence(EvidenceManager.Evidence.STORY1_EVIDENCE6) && !_gameDataManager.CheckAdvancedData(GameDataManager.CheckPoint.GET_EVIDENCE6)) {	//証拠品を全て揃えて探偵ラボに来た時
-			_detectiveTalkIndex = 2;
-			_state = State.DETECTIVE_TALKING;
-			_gameDataManager.UpdateAdvancedData (GameDataManager.CheckPoint.GET_EVIDENCE6);
+			//カーテンが開ききったら行う処理---------------------------------------------------------------------------
+			if (_curtain.IsStateOpen () && _curtain.ResearchStatePlayTime () >= 1) {
+				_detectiveTalkIndex = 2;
+				_state = State.DETECTIVE_TALKING;
+				_gameDataManager.UpdateAdvancedData (GameDataManager.CheckPoint.GET_EVIDENCE6);
+			}
+			//------------------------------------------------------------------------------------------------------
 		}
-
+		if (_state != State.INVESTIGATE) {
+			_detective.enabled = false;
+		} else {
+			_detective.enabled = true;
+		}
 	}
 
 

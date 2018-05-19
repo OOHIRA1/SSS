@@ -7,8 +7,6 @@ public class ClockUI : MonoBehaviour {
 	const float MINUTES_HAND_STOP_LEFT = 1f;				//長針を止める範囲(左側)
 	const float MINUTES_HAND_STOP_RIGHT = 0;				//長針を止める範囲(右側)
 
-	[ SerializeField ] ScenesManager _scenesManager = null;	//シーンマネージャー
-	[ SerializeField ] Animator _cutain = null;
 	[ SerializeField ] RayShooter _rayShooter = null;		//レイ飛ばし
 
 	[ SerializeField ] GameObject _minutesHand = null;		//長針
@@ -19,29 +17,36 @@ public class ClockUI : MonoBehaviour {
 	float _RotaParSecondHour;								//1秒あたりに進む短針の角度
 
 	bool _stop;
-	// Use this for initialization
-	void Start( ) {
+    [ SerializeField ] MoviePlaySystem _moviPlaySystem = null;    //ムービープレイマネージャー
+    string _pushed;                                         //クリックされたもの
+    // Use this for initialization
+    void Start( ) {
 		_RotaParSecondMinutes = 360f / _time;
 		_RotaParSecondHour = _RotaParSecondMinutes / 12f;
 		_stop = false;
+        _pushed = "none";
 
 	}
 
 	// Update is called once per frame
 	void Update( ) {
-		if ( Input.GetMouseButtonDown( 0 ) ) SceneTransition( );
+		if ( Input.GetMouseButtonDown( 0 ) ) CutainClose( );
 
 		ClockNeedleMove( );
 	}
 
 	//レイが当たったtagに応じてシーン遷移-----------------------------------------------------
-	void SceneTransition( ) {
+	void CutainClose( ) {
 		RaycastHit2D hit;
 		hit = _rayShooter.Shoot( Input.mousePosition );
 		if ( hit ) {
-			if ( hit.collider.tag == "Night" ) _cutain.SetTrigger( "CloseFlag" );//_scenesManager.SiteNightScenesTransition( );
-		
-			if ( hit.collider.tag == "Evening" ) _scenesManager.SiteEveningScenesTransition( );	
+            if ( hit.collider.tag == "Night" ) {
+                _pushed = "Night";
+            }
+
+            if ( hit.collider.tag == "Evening" ) {
+                _pushed = "Evening";
+            }	
 		}
 	}
 	//-----------------------------------------------------------------------------------------
@@ -92,6 +97,10 @@ public class ClockUI : MonoBehaviour {
 
 		rota = _RotaParSecondMinutes * 5f;
 		_minutesHand.transform.Rotate( 0, 0, -rota );
+        if ( _moviPlaySystem.MoviTime( ) >= 55f ) {
+            _minutesHand.transform.localEulerAngles = new Vector3( 0, 0, 0.1f );
+        }
+
 
 		rota = _RotaParSecondHour * 5f;
 		_hourHand.transform.Rotate( 0, 0, -rota );
@@ -106,6 +115,9 @@ public class ClockUI : MonoBehaviour {
 
 		rota = _RotaParSecondMinutes * 5f;
 		_minutesHand.transform.Rotate( 0, 0, rota );
+        if ( _moviPlaySystem.MoviTime( ) <= 5 ) {
+            _minutesHand.transform.localEulerAngles = new Vector3( 0, 0, 0 );
+        }
 
 		rota = _RotaParSecondHour * 5f;
 		_hourHand.transform.Rotate( 0, 0, rota );
@@ -113,5 +125,11 @@ public class ClockUI : MonoBehaviour {
 			_hourHand.transform.localEulerAngles = new Vector3( 0, 0, _hourHandInitialRota );
 		}
 	}
+
+    //public void SceneTransition( ) {
+    //    _scenesManager.SiteScenesTransition( _pushed );
+    //}
+
+     public string GetPushed( ) { return _pushed; } 
 
 }

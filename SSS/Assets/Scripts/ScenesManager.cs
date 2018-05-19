@@ -93,70 +93,68 @@ public class ScenesManager : MonoBehaviour {
 	}
 
 
-	public void SiteNoonScenesTransition( ) {
-		int siteNum = SiteMove._nowSiteNum;
-		switch ( siteNum ) {
-		case ( int )SiteMove._siteNum.BEDROOM:
-			ScenesTransition("SiteNoon_Bedroom");
-			break;
+    public void SiteScenesTransition( string scene ) {
+        int siteNum = SiteMove._nowSiteNum;
 
-		case ( int )SiteMove._siteNum.GARDEN:
-			ScenesTransition("SiteNoon_Garden");
-			break;
+        if ( scene == "SiteNoon" ) {
+            switch ( siteNum ) {
+                case ( int )SiteMove._siteNum.BEDROOM:
+                ScenesTransition( "SiteNoon_Bedroom" );
+                break;
 
-		case ( int )SiteMove._siteNum.KITCHEN:
-			ScenesTransition("SiteNoon_Kitchen");
-			break;
+                case ( int )SiteMove._siteNum.GARDEN:
+                ScenesTransition( "SiteNoon_Garden" );
+                break;
 
-		case ( int )SiteMove._siteNum.SERVING_ROOM:
-			ScenesTransition("SiteNoon_ServingRoom");
-			break;
-		}
-	}
+                case ( int )SiteMove._siteNum.KITCHEN:
+                ScenesTransition( "SiteNoon_Kitchen" );
+                break;
 
+                case ( int )SiteMove._siteNum.SERVING_ROOM:
+                ScenesTransition( "SiteNoon_ServingRoom" );
+                break;
+            }
+        }
 
-	public void SiteEveningScenesTransition( ) {
-		int siteNum = SiteMove._nowSiteNum;
-		switch ( siteNum ) {
-		case ( int )SiteMove._siteNum.BEDROOM:
-			ScenesTransition("SiteEvening_Bedroom");
-			break;
+        if ( scene == "SiteEvening" ) {
+            switch ( siteNum ) {
+                case ( int )SiteMove._siteNum.BEDROOM:
+                ScenesTransition( "SiteEvening_Bedroom" );
+                break;
 
-		case ( int )SiteMove._siteNum.GARDEN:
-			ScenesTransition("SiteEvening_Garden");
-			break;
+                case ( int )SiteMove._siteNum.GARDEN:
+                ScenesTransition( "SiteEvening_Garden" );
+                break;
 
-		case ( int )SiteMove._siteNum.KITCHEN:
-			ScenesTransition("SiteEvening_Kitchen");
-			break;
+                case ( int )SiteMove._siteNum.KITCHEN:
+                ScenesTransition( "SiteEvening_Kitchen" );
+                break;
 
-		case ( int )SiteMove._siteNum.SERVING_ROOM:
-			ScenesTransition("SiteEvening_ServingRoom");
-			break;
-		}
-	}
+                case ( int )SiteMove._siteNum.SERVING_ROOM:
+                ScenesTransition( "SiteEvening_ServingRoom" );
+                break;
+            }
+        }
 
+        if ( scene == "SiteNight" ) {
+            switch ( siteNum ) {
+                case ( int )SiteMove._siteNum.BEDROOM:
+                ScenesTransition( "SiteNight_Bedroom" );
+                break;
 
-	public void SiteNightScenesTransition( ) {
-		int siteNum = SiteMove._nowSiteNum;
-		switch ( siteNum ) {
-		case ( int )SiteMove._siteNum.BEDROOM:
-			ScenesTransition("SiteNight_Bedroom");
-			break;
+                case ( int )SiteMove._siteNum.GARDEN:
+                ScenesTransition( "SiteNight_Garden" );
+                break;
 
-		case ( int )SiteMove._siteNum.GARDEN:
-			ScenesTransition("SiteNight_Garden");
-			break;
+                case ( int )SiteMove._siteNum.KITCHEN:
+                ScenesTransition( "SiteNight_Kitchen" );
+                break;
 
-		case ( int )SiteMove._siteNum.KITCHEN:
-			ScenesTransition("SiteNight_Kitchen");
-			break;
-
-		case ( int )SiteMove._siteNum.SERVING_ROOM:
-			ScenesTransition("SiteNight_ServingRoom");
-			break;
-		}
-	}
-
+                case ( int )SiteMove._siteNum.SERVING_ROOM:
+                ScenesTransition( "SiteNight_ServingRoom" );
+                break;
+            }
+        }
+    }
 
 }

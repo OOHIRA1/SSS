@@ -15,7 +15,6 @@ public class MoviePlaySystem : MonoBehaviour {
 	float _posParSecond;							//pointの1秒当たりに進む座標
 	bool _stop;										//再生されているか
 
-	float time;//デバッグ
 	[SerializeField] int _barTouchDown = 180;
 	[SerializeField] int _barTouchUp = 240;
 
@@ -23,14 +22,11 @@ public class MoviePlaySystem : MonoBehaviour {
 	void Start( ) {
 		_posParSecond = _point.GetMaxRange( ) / _maxTime;
 		_stop = false;
-		time = _maxTime;
 	}
 	
 	// Update is called once per frame
 	void Update( ) {
-		time -= Time.deltaTime;
 			 
-		//Debug.Log( time );
 		PointUpdate( );
 
 		BarUpdate( );
@@ -99,6 +95,9 @@ public class MoviePlaySystem : MonoBehaviour {
 		_point.MovePosition ( pointPos );
         _stop = false;
 	}
+
+    //時間を取得する(バーの大きさを時間に変換)
+    public float MoviTime( ) { return _bar.GetBarScale( ).x * _maxTime; }
 	//=======================================================================
 	//=======================================================================
 }
