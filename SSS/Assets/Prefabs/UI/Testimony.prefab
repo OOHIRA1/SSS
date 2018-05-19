@@ -20,13 +20,15 @@ GameObject:
   m_Component:
   - component: {fileID: 4932240818610078}
   - component: {fileID: 212827761526509826}
+  - component: {fileID: 95884155724915168}
+  - component: {fileID: 114592143004013072}
   m_Layer: 0
   m_Name: Testimony
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1620716219158584
 GameObject:
   m_ObjectHideFlags: 0
@@ -37,7 +39,7 @@ GameObject:
   - component: {fileID: 4587736062766136}
   - component: {fileID: 212024215932762162}
   m_Layer: 0
-  m_Name: testimony_butler
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,7 +55,7 @@ GameObject:
   - component: {fileID: 4004764702782986}
   - component: {fileID: 212648003502589816}
   m_Layer: 0
-  m_Name: butler_title
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -91,7 +93,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1021456757742270}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.44, y: 1.8, z: 0}
   m_LocalScale: {x: 2.37, y: 0.97, z: 1}
   m_Children:
@@ -100,6 +102,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &95884155724915168
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1021456757742270}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7f988b92ba33dd544bbeb51efc80ceb1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114592143004013072
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1021456757742270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc1c16f3c2a75ed42bd64dc87dd7f05d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _text:
+  - {fileID: 1620716219158584}
+  - {fileID: 1772717046934722}
 --- !u!212 &212024215932762162
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -214,7 +247,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: b5e754e457361334e936628adc325616, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d802e77106f930746a5727fc9455d1e2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
