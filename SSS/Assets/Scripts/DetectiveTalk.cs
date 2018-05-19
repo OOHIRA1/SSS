@@ -56,6 +56,8 @@ public class DetectiveTalk : MonoBehaviour {
 
 		_moreFast = false;
 		_talkFinishedFlag = false;
+
+		Talk ();
 	}
 	
 	// Update is called once per frame
@@ -81,9 +83,9 @@ public class DetectiveTalk : MonoBehaviour {
 		//-----------------------------------------------------------------------------
 
 		//デバッグ用---------------------------
-		if (Input.GetKeyDown (KeyCode.A)) {
-			Talk ();
-		}
+//		if (Input.GetKeyDown (KeyCode.A)) {
+//			Talk ();
+//		}
 		//-------------------------------------
 	}
 

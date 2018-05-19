@@ -17,7 +17,10 @@ public class DetectiveOfficeManager : MonoBehaviour {
 	[SerializeField] GameObject _detectiveTalkingUI = null;			//探偵によるテキストで使用するUI
 	[SerializeField] GameObject _criminalChoiseUI = null;			//犯人指摘で使用するUI
 	[SerializeField] GameObject _dangerousWeaponChoiseUI = null;	//凶器選択で使用するUI
-
+	[SerializeField] DetectiveTalk[] _detectiveTalk = new DetectiveTalk[3];			//探偵によるテキスト
+	int _detectiveTalkIndex;														//探偵によるテキストの配列番号
+	GameDataManager _gameDataManager = null;
+	EvidenceManager _evidenceManager = null;
 
 	//===================================================================================
 	//ゲッター
@@ -28,6 +31,9 @@ public class DetectiveOfficeManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		_state = State.INVESTIGATE;
+		_detectiveTalkIndex = 0;
+		_gameDataManager = GameObject.FindWithTag ("GameDataManager").GetComponent<GameDataManager>();
+		_evidenceManager = GameObject.FindWithTag ("EvidenceManager").GetComponent<EvidenceManager> ();
 	}
 	
 	// Update is called once per frame
@@ -51,6 +57,18 @@ public class DetectiveOfficeManager : MonoBehaviour {
 		case State.INVESTIGATE:
 			break;
 		case State.DETECTIVE_TALKING:
+			if (!_detectiveTalk [_detectiveTalkIndex].gameObject.activeInHierarchy) {
+				_detectiveTalk [_detectiveTalkIndex].gameObject.SetActive (true);
+			}
+			if (Input.GetMouseButtonDown (0)) {
+				if (_detectiveTalk[_detectiveTalkIndex].GetTalkFinishedFlag ()) {
+					_detectiveTalk [_detectiveTalkIndex].gameObject.SetActive (false);
+					_state = State.INVESTIGATE;
+				} else {
+					_detectiveTalk[_detectiveTalkIndex].Talk ();
+				}
+					
+			}
 			break;
 		case State.CRIMINAL_CHOISE:
 			break;
@@ -63,6 +81,23 @@ public class DetectiveOfficeManager : MonoBehaviour {
 		ChangeActive (_criminalChoiseUI, State.CRIMINAL_CHOISE);
 		ChangeActive (_dangerousWeaponChoiseUI, State.DANGEROUS_WEAPON_CHOISE);
 		Debug.Log (_state);
+
+		if (!_gameDataManager.CheckAdvancedData (GameDataManager.CheckPoint.FIRST_COME_TO_DETECTIVE_OFFICE)) {	//初めて探偵ラボに来た時
+			_detectiveTalkIndex = 0;
+			_state = State.DETECTIVE_TALKING;
+			_gameDataManager.UpdateAdvancedData (GameDataManager.CheckPoint.FIRST_COME_TO_DETECTIVE_OFFICE);
+		}
+		if (_evidenceManager.CheckEvidence(EvidenceManager.Evidence.STORY1_EVIDENCE3) && !_gameDataManager.CheckAdvancedData(GameDataManager.CheckPoint.GET_EVIDENCE3)) {	//証拠品3を入手した時
+			_detectiveTalkIndex = 1;
+			_state = State.DETECTIVE_TALKING;
+			_gameDataManager.UpdateAdvancedData (GameDataManager.CheckPoint.GET_EVIDENCE3);
+		}
+		if (_evidenceManager.CheckEvidence(EvidenceManager.Evidence.STORY1_EVIDENCE6) && !_gameDataManager.CheckAdvancedData(GameDataManager.CheckPoint.GET_EVIDENCE6)) {	//証拠品を全て揃えて探偵ラボに来た時
+			_detectiveTalkIndex = 2;
+			_state = State.DETECTIVE_TALKING;
+			_gameDataManager.UpdateAdvancedData (GameDataManager.CheckPoint.GET_EVIDENCE6);
+		}
+
 	}
 
 

@@ -9,6 +9,7 @@ TagManager:
   - Night
   - Evening
   - EvidenceManager
+  - GameDataManager
   layers:
   - Default
   - TransparentFX
