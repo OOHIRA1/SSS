@@ -294,7 +294,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 78379337}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfeac8bd403679d41b4ddd253f091fb5, type: 3}
+  m_Script: {fileID: 11500000, guid: fc5ec702e2999c845879304d1c55e02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _testimonyBalloon: {fileID: 473430822}
@@ -514,7 +514,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 426573508}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfeac8bd403679d41b4ddd253f091fb5, type: 3}
+  m_Script: {fileID: 11500000, guid: fc5ec702e2999c845879304d1c55e02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _testimonyBalloon: {fileID: 1298709473}
@@ -818,7 +818,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 567277017}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfeac8bd403679d41b4ddd253f091fb5, type: 3}
+  m_Script: {fileID: 11500000, guid: fc5ec702e2999c845879304d1c55e02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _testimonyBalloon: {fileID: 1754515963}
@@ -846,7 +846,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 619218010}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfeac8bd403679d41b4ddd253f091fb5, type: 3}
+  m_Script: {fileID: 11500000, guid: fc5ec702e2999c845879304d1c55e02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _testimonyBalloon: {fileID: 1947256249}
@@ -2422,6 +2422,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 61548548963642874, guid: 58d70a7c1303b6b46bc95e1887d781fa,
+        type: 2}
+      propertyPath: m_Offset.x
+      value: 0.01324296
+      objectReference: {fileID: 0}
+    - target: {fileID: 61548548963642874, guid: 58d70a7c1303b6b46bc95e1887d781fa,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 1.2803245
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 58d70a7c1303b6b46bc95e1887d781fa, type: 2}
   m_IsPrefabParent: 0
@@ -3457,7 +3467,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2041290072}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfeac8bd403679d41b4ddd253f091fb5, type: 3}
+  m_Script: {fileID: 11500000, guid: fc5ec702e2999c845879304d1c55e02d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _testimonyBalloon: {fileID: 177905800}
