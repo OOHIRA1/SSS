@@ -8,15 +8,35 @@ using UnityEngine.UI;
 //使用方法：LaboUIにアタッチ
 public class LaboUIManager : MonoBehaviour {
 	[SerializeField] GameObject _evidenceFile = null;
+	[SerializeField] GameObject _judgePanel = null;
+	[SerializeField] bool _judgeFlag = false;			//ジャッジをするかどうかのフラグ
+
+
+	//=================================================
+	//ゲッター
+	public bool GetJudgeFlag() { return _judgeFlag; }
+	//=================================================
+	//=================================================
+
+	//=================================================
+	//セッター
+	public void SetJudgeFlag(bool x) { _judgeFlag = x; }
+	//=================================================
+	//=================================================
+
 
 	// Use this for initialization
 	void Start () {
-		
+		_judgeFlag = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (_judgeFlag) {
+			_judgePanel.SetActive (true);
+		} else {
+			_judgePanel.SetActive (false);
+		}
 	}
 
 	//===========================================
@@ -31,6 +51,9 @@ public class LaboUIManager : MonoBehaviour {
 	public void DisappearEvidenceFile() {
 		_evidenceFile.SetActive (false);
 	}
+
+	//--ジャッジパネルを表示する関数
+	//public void 
 	//===========================================
 	//===========================================
 }

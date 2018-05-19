@@ -11,11 +11,22 @@ public class Cursor : MonoBehaviour {
 	[SerializeField] float _moveSpeed = 0;	//アニメーションの速さ(unit/second)
 	bool _downFlag;							//アニメーションで下に動いているかのフラグ
 	[SerializeField] RayShooter _rayShooter = null;			//Rayを発射するものを格納する変数
+	[SerializeField] GameObject _selectedGameObject =null;	//選んだGameObject
+	[SerializeField] bool _selectedFlag = false;			//選び終わったかどうかのフラグ
+
+
+	//===================================================
+	//ゲッター
+	public bool GetSelectedFlag() { return _selectedFlag; }
+	//===================================================
+	//===================================================
+
 
 	// Use this for initialization
 	void Start () {
 		_firstPosition = transform.position;
 		_downFlag = true;
+		_selectedFlag = false;
 	}
 	
 	// Update is called once per frame
@@ -36,10 +47,15 @@ public class Cursor : MonoBehaviour {
 		if (Input.GetMouseButtonDown (0)) {
 			RaycastHit2D hit = _rayShooter.Shoot (Input.mousePosition);
 			if (hit) {
+				if (_selectedGameObject == hit.collider.gameObject) {
+					_selectedFlag = true;
+				}
+
 				//犯人指摘での処理-----------------------------------------------------
 				if (hit.collider.tag == "Npc") {
 					Vector3 pos = hit.transform.position;
 					transform.position = new Vector3 (pos.x, _firstPosition.y, pos.z);
+					_selectedGameObject = hit.collider.gameObject;
 				}
 				//--------------------------------------------------------------------
 
@@ -48,6 +64,8 @@ public class Cursor : MonoBehaviour {
 					Vector3 pos = hit.transform.position;
 					transform.position = new Vector3 (pos.x, pos.y + 2, pos.z);
 					_firstPosition.y = pos.y + 2;
+					_selectedGameObject = hit.collider.gameObject;
+
 				}
 				//--------------------------------------------------------------------
 			}

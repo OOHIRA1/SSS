@@ -21,6 +21,9 @@ public class DetectiveOfficeManager : MonoBehaviour {
 	int _detectiveTalkIndex;														//探偵によるテキストの配列番号
 	GameDataManager _gameDataManager = null;
 	EvidenceManager _evidenceManager = null;
+	[SerializeField] Cursor _cursorForCriminalChoise = null;
+	[SerializeField] Cursor _cursorForDangerousWeaponChoise = null;
+	[SerializeField] LaboUIManager _laboUIManager = null;
 
 	//===================================================================================
 	//ゲッター
@@ -63,7 +66,13 @@ public class DetectiveOfficeManager : MonoBehaviour {
 			if (Input.GetMouseButtonDown (0)) {
 				if (_detectiveTalk[_detectiveTalkIndex].GetTalkFinishedFlag ()) {
 					_detectiveTalk [_detectiveTalkIndex].gameObject.SetActive (false);
-					_state = State.INVESTIGATE;
+					if (_detectiveTalkIndex == 2) {
+						_state = State.CRIMINAL_CHOISE;
+					} else if (_detectiveTalkIndex == 3) {
+						_state = State.DANGEROUS_WEAPON_CHOISE;
+					} else {
+						_state = State.INVESTIGATE;
+					}
 				} else {
 					_detectiveTalk[_detectiveTalkIndex].Talk ();
 				}
@@ -71,8 +80,16 @@ public class DetectiveOfficeManager : MonoBehaviour {
 			}
 			break;
 		case State.CRIMINAL_CHOISE:
+			if (_cursorForCriminalChoise.GetSelectedFlag ()) {
+				_detectiveTalkIndex = 3;
+				_state = State.DETECTIVE_TALKING;
+			}
 			break;
 		case State.DANGEROUS_WEAPON_CHOISE:
+			if (_cursorForDangerousWeaponChoise.GetSelectedFlag ()) {
+				_detectiveTalkIndex = 4;
+				_state = State.DETECTIVE_TALKING;
+			}
 			break;
 		default :
 			break;
