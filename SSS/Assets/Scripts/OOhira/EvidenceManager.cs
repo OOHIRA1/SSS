@@ -29,14 +29,14 @@ public class EvidenceManager : MonoBehaviour {
 	void Start () {
 		//2つ以上存在しないようにする処理-------------------------------------------------------------
 		GameObject[] evidenceManager = GameObject.FindGameObjectsWithTag ("EvidenceManager");
-		for (int i = 0; i < evidenceManager.Length; i++) {
-			if (this.gameObject != evidenceManager [i]) {
-				Destroy (evidenceManager [i]);
-			} else {
-				if (this.gameObject.scene.name != "DontDestroyOnLoad") {
-					GameObject.DontDestroyOnLoad (this);	//DontDestroy処理
+		if (evidenceManager.Length >= 2) {
+			for (int i = 0; i < evidenceManager.Length; i++) {
+				if (evidenceManager [i].scene.name != "DontDestroyOnLoad") {
+					GameObject.Destroy (evidenceManager [i]);
 				}
 			}
+		} else {
+			GameObject.DontDestroyOnLoad (this.gameObject);
 		}
 		//-------------------------------------------------------------------------------------------
 	}

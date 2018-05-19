@@ -40,14 +40,14 @@ public class GameDataManager : MonoBehaviour {
 	void Start () {
 		//2つ以上存在しないようにする処理-------------------------------------------------------------
 		GameObject[] gameDataManager = GameObject.FindGameObjectsWithTag ("GameDataManager");
-		for (int i = 0; i < gameDataManager.Length; i++) {
-			if (this.gameObject != gameDataManager [i]) {
-				Destroy (gameDataManager [i]);
-			} else {
-				if (this.gameObject.scene.name != "DontDestroyOnLoad") {
-					GameObject.DontDestroyOnLoad (this);	//DontDestroy処理
+		if (gameDataManager.Length >= 2) {
+			for (int i = 0; i < gameDataManager.Length; i++) {
+				if (gameDataManager [i].scene.name != "DontDestroyOnLoad") {
+					GameObject.Destroy (gameDataManager [i]);
 				}
 			}
+		} else {
+			GameObject.DontDestroyOnLoad (this.gameObject);
 		}
 		//-------------------------------------------------------------------------------------------
 	}
