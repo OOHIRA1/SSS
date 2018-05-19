@@ -13,7 +13,7 @@ public class ScenesManager : MonoBehaviour {
 	void Update( ) {
 	}
 
-
+    //シーン遷移------------------------------------------------------------
 	public void ScenesTransition( string scene ) {
 		switch ( scene ) {
 		case "Title":
@@ -91,8 +91,10 @@ public class ScenesManager : MonoBehaviour {
 		}
 			
 	}
+    //---------------------------------------------------------------------------
 
 
+    //別の時間帯の同じ事件現場に遷移するための関数---------------------
     public void SiteScenesTransition( string scene ) {
         int siteNum = SiteMove._nowSiteNum;
 
@@ -156,5 +158,6 @@ public class ScenesManager : MonoBehaviour {
             }
         }
     }
+    //-------------------------------------------------------------
 
 }

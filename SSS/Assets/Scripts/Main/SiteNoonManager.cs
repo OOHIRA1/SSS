@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SiteNoonManager : MonoBehaviour {
-    [ SerializeField ] ScenesManager _scenesManager = null;	//シーンマネージャー
+    [ SerializeField ] Detective _detective = null;
+    [ SerializeField ] MoviePlaySystem _movePlaySystem = null;
+    [ SerializeField ] ScenesManager _scenesManager = null;
 	[ SerializeField ] Curtain _cutain = null;
     [ SerializeField ] ClockUI _clockUI = null;
 	// Use this for initialization
@@ -13,8 +15,15 @@ public class SiteNoonManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update( ) {
         ScenesTransitionWithAnim( );
+
+        if ( !_movePlaySystem.GetStop( ) ) {
+            Regulation( );
+        } else {
+            _detective.SetIsMove( true );
+        }
 	}
 
+    //押されたものが時計ＵＩの夜か夕方だったら、カーテンを閉めてその時間に遷移する--------------------------------------------------------------
     void ScenesTransitionWithAnim( ) {
         if ( _clockUI.GetPushed( ) == "Night" ) {
 
@@ -30,4 +39,13 @@ public class SiteNoonManager : MonoBehaviour {
 
         }
     }
+    //-------------------------------------------------------------------------------------------------------------------------------------------
+
+    void Regulation( ) {
+        _detective.SetIsMove( false );
+        _detective.ResetPos( );
+
+    }
+
+
 }

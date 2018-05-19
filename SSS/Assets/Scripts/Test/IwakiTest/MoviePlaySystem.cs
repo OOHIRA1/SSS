@@ -21,7 +21,7 @@ public class MoviePlaySystem : MonoBehaviour {
 	// Use this for initialization
 	void Start( ) {
 		_posParSecond = _point.GetMaxRange( ) / _maxTime;
-		_stop = false;
+		_stop = true;
 	}
 	
 	// Update is called once per frame
@@ -98,6 +98,8 @@ public class MoviePlaySystem : MonoBehaviour {
 
     //時間を取得する(バーの大きさを時間に変換)
     public float MoviTime( ) { return _bar.GetBarScale( ).x * _maxTime; }
+
+    public bool GetStop( ) { return _stop; }
 	//=======================================================================
 	//=======================================================================
 }
