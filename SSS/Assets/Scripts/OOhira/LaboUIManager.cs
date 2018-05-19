@@ -7,36 +7,39 @@ using UnityEngine.UI;
 //
 //使用方法：LaboUIにアタッチ
 public class LaboUIManager : MonoBehaviour {
+	public enum Judge {
+		YES,
+		NO,
+		OTHERWISE
+	}
+
 	[SerializeField] GameObject _evidenceFile = null;
-	[SerializeField] GameObject _judgePanel = null;
-	[SerializeField] bool _judgeFlag = false;			//ジャッジをするかどうかのフラグ
+	[SerializeField] GameObject _controllUI = null;
+	[SerializeField] GameObject _judgeUI = null;
+	[SerializeField] Judge _judged;
 
 
 	//=================================================
 	//ゲッター
-	public bool GetJudgeFlag() { return _judgeFlag; }
+	public Judge GetJudge() { return _judged; }
 	//=================================================
 	//=================================================
 
 	//=================================================
 	//セッター
-	public void SetJudgeFlag(bool x) { _judgeFlag = x; }
+	public void SetJudgeFlag(Judge x) { _judged = x; }
 	//=================================================
 	//=================================================
 
 
 	// Use this for initialization
 	void Start () {
-		_judgeFlag = false;
+		_judged = Judge.OTHERWISE;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (_judgeFlag) {
-			_judgePanel.SetActive (true);
-		} else {
-			_judgePanel.SetActive (false);
-		}
+		
 	}
 
 	//===========================================
@@ -53,7 +56,17 @@ public class LaboUIManager : MonoBehaviour {
 	}
 
 	//--ジャッジパネルを表示する関数
-	//public void 
+	public void DisplayJudgeUI( ) {
+		_judgeUI.SetActive (true);
+		_controllUI.SetActive (false);
+	}
+
+	//--ジャッジパネルを非表示にする関数
+	public void DisappearJudgeUI( ) {
+		_judgeUI.SetActive (false);
+		_controllUI.SetActive (true);
+	}
+
 	//===========================================
 	//===========================================
 }
