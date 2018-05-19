@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Button : MonoBehaviour {
-
+	[SerializeField] GameObject _title = null;
 
 	// Use this for initialization
 	void Start () {
@@ -21,6 +21,7 @@ public class Button : MonoBehaviour {
 		Debug.Log( "Button Click" );
 		//非表示
 		gameObject.SetActive(false);
+		_title.SetActive (false);
 	}
 	//public void Title() {
 	//
