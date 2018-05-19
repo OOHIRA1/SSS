@@ -12,8 +12,7 @@ public class LaboUIManager : MonoBehaviour {
 		NO,
 		OTHERWISE
 	}
-
-	[SerializeField] GameObject _evidenceFile = null;
+		
 	[SerializeField] GameObject _controllUI = null;
 	[SerializeField] GameObject _judgeUI = null;
 	[SerializeField] Judge _judged;
@@ -44,16 +43,6 @@ public class LaboUIManager : MonoBehaviour {
 
 	//===========================================
 	//public関数
-
-	//--証拠品ファイルを表示する関数
-	public void DisplayEvidenceFile() {
-		_evidenceFile.SetActive (true);
-	}
-
-	//--証拠品ファイルを非表示にする関数
-	public void DisappearEvidenceFile() {
-		_evidenceFile.SetActive (false);
-	}
 
 	//--ジャッジパネルを表示する関数
 	public void DisplayJudgeUI( ) {
