@@ -137,11 +137,11 @@ public class DetectiveOfficeManager : MonoBehaviour {
 			break;
 		}
 
-		//各UIのオンオフを処理------------------------------------------------------
+		//各UIのオンオフを処理---------------------------------------------------------------------------------------------------------------
 		ChangeActive (_detectiveTalkingUI, State.DETECTIVE_TALKING);
 		ChangeActive (_criminalChoiseUI, State.CRIMINAL_CHOISE, _curtainClosedStateCriminalChose);
 		ChangeActive (_dangerousWeaponChoiseUI, State.DANGEROUS_WEAPON_CHOISE, false, _cursorForDangerousWeaponChoise.GetSelectedFlag());
-		//-------------------------------------------------------------------------
+		//----------------------------------------------------------------------------------------------------------------------------------
 		Debug.Log (_state);
 
 
@@ -177,13 +177,13 @@ public class DetectiveOfficeManager : MonoBehaviour {
 		}
 		//---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-		//調査Stateでない時探偵の操作を受け付けない処理-------
-		if (_state != State.INVESTIGATE && !_curtain.IsStateOpen()) {
-			_detective.enabled = false;
-		} else {
+		//調査Stateでカーテンが開ききっている時のみ探偵の操作を受け付ける処理----------------------------------------
+		if (_state == State.INVESTIGATE && _curtain.IsStateOpen() && _curtain.ResearchStatePlayTime() >= 1f) {
 			_detective.enabled = true;
+		} else {
+			_detective.enabled = false;
 		}
-		//--------------------------------------------------
+		//--------------------------------------------------------------------------------------------------------
 	}
 
 

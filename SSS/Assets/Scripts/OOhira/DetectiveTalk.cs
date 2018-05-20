@@ -29,6 +29,10 @@ public class DetectiveTalk : MonoBehaviour {
 	public bool GetTalkFinishedFlag() {
 		return _talkFinishedFlag;
 	}
+
+	public int GetStateMentNumber() {
+		return _statementNumber;
+	}
 	//===========================================================
 	//===========================================================
 
