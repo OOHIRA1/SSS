@@ -51,6 +51,14 @@ public class Curtain : MonoBehaviour {
 	}
 
 
+	//--カーテンのStateがwait状態かどうかを返す関数
+	public bool IsStateWait( ) {
+		int layer = _animator.GetLayerIndex ("Base Layer");
+		AnimatorStateInfo animatorStateInfo = _animator.GetCurrentAnimatorStateInfo (layer);
+		return animatorStateInfo.IsName ("wait");
+	}
+
+
 	//--現在のStateの再生時間を返す関数( 返り値：0~1(開始時：0, 終了時：1) )
 	public float ResearchStatePlayTime() {
 		int layer = _animator.GetLayerIndex ("Base Layer");

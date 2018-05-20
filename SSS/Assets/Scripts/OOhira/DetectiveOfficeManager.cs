@@ -13,19 +13,23 @@ public class DetectiveOfficeManager : MonoBehaviour {
 		DANGEROUS_WEAPON_CHOISE,	//凶器選択
 	}
 
-	[SerializeField] State _state;								//現在の探偵ラボのStateを格納する変数
+	[SerializeField] State _state;									//現在の探偵ラボのStateを格納する変数
 	[SerializeField] GameObject _detectiveTalkingUI = null;			//探偵によるテキストで使用するUI
 	[SerializeField] GameObject _criminalChoiseUI = null;			//犯人指摘で使用するUI
 	[SerializeField] GameObject _dangerousWeaponChoiseUI = null;	//凶器選択で使用するUI
 	[SerializeField] DetectiveTalk[] _detectiveTalk = new DetectiveTalk[3];			//探偵によるテキスト
 	int _detectiveTalkIndex;														//探偵によるテキストの配列番号
-	GameDataManager _gameDataManager = null;
-	EvidenceManager _evidenceManager = null;
-	[SerializeField] Cursor _cursorForCriminalChoise = null;
-	[SerializeField] Cursor _cursorForDangerousWeaponChoise = null;
+	GameDataManager _gameDataManager;
+	EvidenceManager _evidenceManager;
+	[SerializeField] Cursor _cursorForCriminalChoise = null;						//犯人指摘用のカーソル
+	[SerializeField] Cursor _cursorForDangerousWeaponChoise = null;					//凶器選択用のカーソル
 	[SerializeField] LaboUIManager _laboUIManager = null;
-	[SerializeField] Curtain _curtain = null;
-	[SerializeField] Detective _detective = null;
+	[SerializeField] Curtain _curtain = null;										//カーテン
+	[SerializeField] Detective _detective = null;									//探偵
+	[SerializeField] GameObject[] _npcCharacters = null;							//Npcキャラクター
+	bool _curtainClosedStateCriminalChose;											//犯人指摘ステート中にカーテンを閉じたかどうかのフラグ
+	bool _curtainOpenedStateCriminalChose;											//犯人指摘ステート中にカーテンを開いたかどうかのフラグ
+
 
 	//===================================================================================
 	//ゲッター
@@ -39,6 +43,8 @@ public class DetectiveOfficeManager : MonoBehaviour {
 		_detectiveTalkIndex = 0;
 		_gameDataManager = GameObject.FindWithTag ("GameDataManager").GetComponent<GameDataManager>();
 		_evidenceManager = GameObject.FindWithTag ("EvidenceManager").GetComponent<EvidenceManager> ();
+		_curtainClosedStateCriminalChose = false;
+		_curtainOpenedStateCriminalChose = false;
 	}
 	
 	// Update is called once per frame
@@ -69,42 +75,71 @@ public class DetectiveOfficeManager : MonoBehaviour {
 				_detectiveTalk [_detectiveTalkIndex].gameObject.SetActive (true);
 			}
 			if (Input.GetMouseButtonDown (0)) {
+				//次の文を表示するか次のStateに移動する処理-------------------------------
 				if (_detectiveTalk[_detectiveTalkIndex].GetTalkFinishedFlag ()) {
 					_detectiveTalk [_detectiveTalkIndex].gameObject.SetActive (false);
-					if (_detectiveTalkIndex == 2) {
+					switch (_detectiveTalkIndex) {
+					case 2:
 						_state = State.CRIMINAL_CHOISE;
-					} else if (_detectiveTalkIndex == 3) {
+						break;
+					case 3:
 						_state = State.DANGEROUS_WEAPON_CHOISE;
-					} else {
+						break;
+					default :
 						_state = State.INVESTIGATE;
+						break;
 					}
 				} else {
 					_detectiveTalk[_detectiveTalkIndex].Talk ();
 				}
-					
+				//-----------------------------------------------------------------------	
 			}
 			break;
 		case State.CRIMINAL_CHOISE:
 			if (_cursorForCriminalChoise.GetSelectedFlag ()) {
-				_detectiveTalkIndex = 3;
-				_state = State.DETECTIVE_TALKING;
+				if (!_curtain.IsStateClose () && !_curtainClosedStateCriminalChose) {
+					_curtain.Close ();
+					_curtainClosedStateCriminalChose = true;
+				}
+				if (_curtain.IsStateClose () && _curtain.ResearchStatePlayTime () >= 1f) {
+					for (int i = 0; i < _npcCharacters.Length; i++) {
+						if (_npcCharacters [i] != _cursorForCriminalChoise.GetSelectedGameObject ()) {
+							_npcCharacters [i].SetActive (false);
+						}
+					}
+					_curtain.Open ();
+					_curtainOpenedStateCriminalChose = true;
+				}
+				if (_curtain.IsStateOpen () && _curtain.ResearchStatePlayTime () >= 1f && _curtainOpenedStateCriminalChose) {
+					_detectiveTalkIndex = 3;
+					_state = State.DETECTIVE_TALKING;
+					_curtainClosedStateCriminalChose = false;
+					_curtainOpenedStateCriminalChose = false;
+					_cursorForCriminalChoise.SetSelectedFlag (false);
+				}
 			}
 			break;
 		case State.DANGEROUS_WEAPON_CHOISE:
 			if (_cursorForDangerousWeaponChoise.GetSelectedFlag ()) {
 				_detectiveTalkIndex = 4;
 				_state = State.DETECTIVE_TALKING;
+				_cursorForDangerousWeaponChoise.gameObject.SetActive (false);	//「これでいいんだな？」で「いいえ」を選んだらカーソルをアクティブに戻す！
 			}
 			break;
 		default :
 			break;
 		}
+
+		//各UIのオンオフを処理------------------------------------------------------
 		ChangeActive (_detectiveTalkingUI, State.DETECTIVE_TALKING);
-		ChangeActive (_criminalChoiseUI, State.CRIMINAL_CHOISE);
-		ChangeActive (_dangerousWeaponChoiseUI, State.DANGEROUS_WEAPON_CHOISE);
+		ChangeActive (_criminalChoiseUI, State.CRIMINAL_CHOISE, _curtainClosedStateCriminalChose);
+		ChangeActive (_dangerousWeaponChoiseUI, State.DANGEROUS_WEAPON_CHOISE, false, _cursorForDangerousWeaponChoise.GetSelectedFlag());
+		//-------------------------------------------------------------------------
 		Debug.Log (_state);
 
-		if (!_gameDataManager.CheckAdvancedData (GameDataManager.CheckPoint.FIRST_COME_TO_DETECTIVE_OFFICE)) {	//初めて探偵ラボに来た時
+
+		//初めて探偵ラボに来た時--------------------------------------------------------------------------------------------------
+		if (!_gameDataManager.CheckAdvancedData (GameDataManager.CheckPoint.FIRST_COME_TO_DETECTIVE_OFFICE)) {
 			//カーテンが開ききったら行う処理---------------------------------------------------------------------------
 			if (_curtain.IsStateOpen () && _curtain.ResearchStatePlayTime() >= 1) {
 				_detectiveTalkIndex = 0;
@@ -113,12 +148,18 @@ public class DetectiveOfficeManager : MonoBehaviour {
 			}
 			//-------------------------------------------------------------------------------------------------------
 		}
-		if (_evidenceManager.CheckEvidence(EvidenceManager.Evidence.STORY1_EVIDENCE3) && !_gameDataManager.CheckAdvancedData(GameDataManager.CheckPoint.GET_EVIDENCE3)) {	//証拠品3を入手した時
+		//------------------------------------------------------------------------------------------------------------------------
+
+		//証拠品3を入手した時---------------------------------------------------------------------------------------------------------------------------------------------------
+		if (_evidenceManager.CheckEvidence(EvidenceManager.Evidence.STORY1_EVIDENCE3) && !_gameDataManager.CheckAdvancedData(GameDataManager.CheckPoint.GET_EVIDENCE3)) {
 			_detectiveTalkIndex = 1;
 			_state = State.DETECTIVE_TALKING;
 			_gameDataManager.UpdateAdvancedData (GameDataManager.CheckPoint.GET_EVIDENCE3);
 		}
-		if (_evidenceManager.CheckEvidence(EvidenceManager.Evidence.STORY1_EVIDENCE6) && !_gameDataManager.CheckAdvancedData(GameDataManager.CheckPoint.GET_EVIDENCE6)) {	//証拠品を全て揃えて探偵ラボに来た時
+		//---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+		//証拠品を全て揃えて探偵ラボに来た時-------------------------------------------------------------------------------------------------------------------------------------
+		if (_evidenceManager.CheckEvidence(EvidenceManager.Evidence.STORY1_EVIDENCE6) && !_gameDataManager.CheckAdvancedData(GameDataManager.CheckPoint.GET_EVIDENCE6)) {
 			//カーテンが開ききったら行う処理---------------------------------------------------------------------------
 			if (_curtain.IsStateOpen () && _curtain.ResearchStatePlayTime () >= 1) {
 				_detectiveTalkIndex = 2;
@@ -127,16 +168,28 @@ public class DetectiveOfficeManager : MonoBehaviour {
 			}
 			//------------------------------------------------------------------------------------------------------
 		}
+		//---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+		//調査Stateでない時探偵の操作を受け付けない処理-------
 		if (_state != State.INVESTIGATE) {
 			_detective.enabled = false;
 		} else {
 			_detective.enabled = true;
 		}
+		//--------------------------------------------------
 	}
 
 
 	//--uiのアクティブ・非アクティブを現在のステートがstateかどうかで変える関数
-	void ChangeActive( GameObject ui, State state ) {
+	void ChangeActive( GameObject ui, State state, bool forcedNonActiveFlag = false, bool forcedActieFlag = false ) {
+		if (forcedNonActiveFlag) {	//stateによらずforcedNonActiveFlagがtrueなら強制的に非アクティブにする
+			ui.SetActive (false);
+			return;
+		}
+		if (forcedActieFlag) {		//stateによらずforcedActiveFlagがtrueなら強制的にアクティブにする
+			ui.SetActive (true);
+			return;
+		}
 		if (ui.activeInHierarchy) {
 			if (_state != state) {
 				ui.SetActive (false);

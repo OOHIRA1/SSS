@@ -15,11 +15,20 @@ public class Cursor : MonoBehaviour {
 	[SerializeField] bool _selectedFlag = false;			//選び終わったかどうかのフラグ
 
 
-	//===================================================
+	//=========================================================================
 	//ゲッター
 	public bool GetSelectedFlag() { return _selectedFlag; }
-	//===================================================
-	//===================================================
+
+	public GameObject GetSelectedGameObject() { return _selectedGameObject;	}
+	//=========================================================================
+	//=========================================================================
+
+
+	//=========================================================================
+	//セッター
+	public void SetSelectedFlag(bool x) { _selectedFlag = x; }
+	//=========================================================================
+	//=========================================================================
 
 
 	// Use this for initialization
@@ -31,6 +40,7 @@ public class Cursor : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//カーソルのアニメーション------------------------------------------------------
 		float posY = transform.position.y;
 		if (_downFlag) {
 			transform.Translate (0, -_moveSpeed * Time.deltaTime, 0, Space.World);
@@ -43,6 +53,7 @@ public class Cursor : MonoBehaviour {
 				_downFlag = true;
 			}
 		}
+		//-----------------------------------------------------------------------------
 
 		if (Input.GetMouseButtonDown (0)) {
 			RaycastHit2D hit = _rayShooter.Shoot (Input.mousePosition);
