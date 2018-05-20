@@ -50,10 +50,7 @@ public class MillioareDieMono : MonoBehaviour {
 
     }
 
-   public void MonoColor( ) {
-        _animator.SetTrigger( "MonoColorFlag" );
-    }
-
+   
     public void Effectblood( ) {
 
         bool value = true;

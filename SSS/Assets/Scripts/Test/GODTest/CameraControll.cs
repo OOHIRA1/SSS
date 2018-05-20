@@ -27,10 +27,14 @@ public class CameraControll : MonoBehaviour {
 		_camera.orthographicSize -= zoomvalue;
 	}
 
-	//--カメラをtargetに向かせる処理
-	public void LookTarget( Transform target ) {
-		Vector3 targetPos = target.position;
-		_camera.transform.position = new Vector3 (targetPos.x, targetPos.y, _camera.transform.position.z);
+    //--カメラの正投影サイズを変更する関数
+    public void ChangeOrthographicSize(float orthographicSize) {
+        _camera.orthographicSize = orthographicSize;
+    }
+
+	//--カメラをtargetPositionに向かせる処理
+	public void LookTarget( Vector3 targetPosition ) {
+		_camera.transform.position = new Vector3 (targetPosition.x, targetPosition.y, _camera.transform.position.z);
 	}
 	//===================================================
 	//===================================================

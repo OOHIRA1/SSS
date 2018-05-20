@@ -16,6 +16,13 @@ public class Detective : MonoBehaviour {
 	[SerializeField] float _moveTouchUp = -4.0f;
 	[SerializeField] float _moveTouchDown = -6.0f;
 
+
+	//====================================================
+	//ゲッター
+	public bool GetIsAnimWalk() { return _isAnimWalk; }
+	//====================================================
+	//====================================================
+
 	// Use this for initialization
 	void Start( ) {
 		_anim = GetComponent< Animator >( );

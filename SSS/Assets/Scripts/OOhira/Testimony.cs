@@ -21,9 +21,12 @@ public class Testimony : MonoBehaviour {
 
 	//===========================================================
 	//コライダー検出時処理関数
-	void OnTriggerEnter2D( Collider2D col ) {
+	void OnTriggerStay2D( Collider2D col ) {
 		if (col.tag == "Player") {
-			_testimonyBalloon.SetActive (true);
+			Detective detective = col.gameObject.GetComponent<Detective> ();
+			if (!detective.GetIsAnimWalk ()) {
+				_testimonyBalloon.SetActive (true);
+			}
 		}
 	}
 

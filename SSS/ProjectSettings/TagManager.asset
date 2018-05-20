@@ -10,6 +10,7 @@ TagManager:
   - Evening
   - EvidenceManager
   - GameDataManager
+  - EvidenceIcon
   layers:
   - Default
   - TransparentFX

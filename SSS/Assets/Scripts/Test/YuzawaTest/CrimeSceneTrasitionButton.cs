@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class YuzawaTest : MonoBehaviour {
+public class CrimeSceneTrasitionButton : MonoBehaviour {
 	//[SerializeField]GameObject _crimeSceneTransitionButton;
 	[SerializeField]Animator _animator = null;
 	[SerializeField]GameObject[] _crimeSceneButton = new GameObject[4];

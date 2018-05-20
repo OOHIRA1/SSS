@@ -23,12 +23,14 @@ public class DetectiveOfficeManager : MonoBehaviour {
 	EvidenceManager _evidenceManager;
 	[SerializeField] Cursor _cursorForCriminalChoise = null;						//犯人指摘用のカーソル
 	[SerializeField] Cursor _cursorForDangerousWeaponChoise = null;					//凶器選択用のカーソル
-	[SerializeField] LaboUIManager _laboUIManager = null;
+	//[SerializeField] LaboUIManager _laboUIManager = null;
 	[SerializeField] Curtain _curtain = null;										//カーテン
 	[SerializeField] Detective _detective = null;									//探偵
 	[SerializeField] GameObject[] _npcCharacters = null;							//Npcキャラクター
 	bool _curtainClosedStateCriminalChose;											//犯人指摘ステート中にカーテンを閉じたかどうかのフラグ
 	bool _curtainOpenedStateCriminalChose;											//犯人指摘ステート中にカーテンを開いたかどうかのフラグ
+	//[SerializeField] Evidence _evidence3 = null;
+	[SerializeField] BoxCollider2D _cookBoxCollider2D = null;
 
 
 	//===================================================================================
@@ -45,6 +47,7 @@ public class DetectiveOfficeManager : MonoBehaviour {
 		_evidenceManager = GameObject.FindWithTag ("EvidenceManager").GetComponent<EvidenceManager> ();
 		_curtainClosedStateCriminalChose = false;
 		_curtainOpenedStateCriminalChose = false;
+		_cookBoxCollider2D.enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -79,6 +82,10 @@ public class DetectiveOfficeManager : MonoBehaviour {
 				if (_detectiveTalk[_detectiveTalkIndex].GetTalkFinishedFlag ()) {
 					_detectiveTalk [_detectiveTalkIndex].gameObject.SetActive (false);
 					switch (_detectiveTalkIndex) {
+					case 1:
+						_state = State.INVESTIGATE;
+						_cookBoxCollider2D.enabled = true;
+						break;
 					case 2:
 						_state = State.CRIMINAL_CHOISE;
 						break;
@@ -171,13 +178,15 @@ public class DetectiveOfficeManager : MonoBehaviour {
 		//---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 		//調査Stateでない時探偵の操作を受け付けない処理-------
-		if (_state != State.INVESTIGATE) {
+		if (_state != State.INVESTIGATE && !_curtain.IsStateOpen()) {
 			_detective.enabled = false;
 		} else {
 			_detective.enabled = true;
 		}
 		//--------------------------------------------------
 	}
+
+
 
 
 	//--uiのアクティブ・非アクティブを現在のステートがstateかどうかで変える関数
