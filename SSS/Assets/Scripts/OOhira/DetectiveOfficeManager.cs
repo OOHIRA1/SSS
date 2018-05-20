@@ -11,6 +11,7 @@ public class DetectiveOfficeManager : MonoBehaviour {
 		DETECTIVE_TALKING,			//探偵によるテキスト表示
 		CRIMINAL_CHOISE,			//犯人指摘
 		DANGEROUS_WEAPON_CHOISE,	//凶器選択
+		FINAL_JUDGE					//最終確認
 	}
 
 	[SerializeField] State _state;									//現在の探偵ラボのStateを格納する変数
@@ -23,7 +24,7 @@ public class DetectiveOfficeManager : MonoBehaviour {
 	EvidenceManager _evidenceManager;
 	[SerializeField] Cursor _cursorForCriminalChoise = null;						//犯人指摘用のカーソル
 	[SerializeField] Cursor _cursorForDangerousWeaponChoise = null;					//凶器選択用のカーソル
-	//[SerializeField] LaboUIManager _laboUIManager = null;
+	[SerializeField] LaboUIManager _laboUIManager = null;
 	[SerializeField] Curtain _curtain = null;										//カーテン
 	[SerializeField] Detective _detective = null;									//探偵
 	[SerializeField] GameObject[] _npcCharacters = null;							//Npcキャラクター
@@ -65,15 +66,18 @@ public class DetectiveOfficeManager : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.R)) {
 			_state = State.DANGEROUS_WEAPON_CHOISE;
 		}
+		if (Input.GetKeyDown (KeyCode.T)) {
+			_state = State.FINAL_JUDGE;
+		}
 		if (Input.GetKeyDown (KeyCode.U)) {
 			_curtain.Close ();
 		}
 		//-----------------------------------------------
 
 		switch( _state ) {
-		case State.INVESTIGATE:
+		case State.INVESTIGATE://調査
 			break;
-		case State.DETECTIVE_TALKING:
+		case State.DETECTIVE_TALKING://探偵によるテキスト表示
 			if (!_detectiveTalk [_detectiveTalkIndex].gameObject.activeInHierarchy) {
 				_detectiveTalk [_detectiveTalkIndex].gameObject.SetActive (true);
 			}
@@ -82,15 +86,19 @@ public class DetectiveOfficeManager : MonoBehaviour {
 				if (_detectiveTalk[_detectiveTalkIndex].GetTalkFinishedFlag ()) {
 					_detectiveTalk [_detectiveTalkIndex].gameObject.SetActive (false);
 					switch (_detectiveTalkIndex) {
-					case 1:
+					case 1://証拠品3取得後の発言
 						_state = State.INVESTIGATE;
 						_cookBoxCollider2D.enabled = true;
 						break;
-					case 2:
+					case 2://犯人指摘前の発言
 						_state = State.CRIMINAL_CHOISE;
 						break;
-					case 3:
+					case 3://凶器選択前の発音
 						_state = State.DANGEROUS_WEAPON_CHOISE;
+						break;
+					case 4://最終確認前の発言
+						_laboUIManager.DisplayJudgeUI ();
+						_state = State.FINAL_JUDGE;
 						break;
 					default :
 						_state = State.INVESTIGATE;
@@ -102,7 +110,7 @@ public class DetectiveOfficeManager : MonoBehaviour {
 				//-----------------------------------------------------------------------	
 			}
 			break;
-		case State.CRIMINAL_CHOISE:
+		case State.CRIMINAL_CHOISE://犯人指摘
 			if (_cursorForCriminalChoise.GetSelectedFlag ()) {
 				if (!_curtain.IsStateClose () && !_curtainClosedStateCriminalChose) {
 					_curtain.Close ();
@@ -126,12 +134,46 @@ public class DetectiveOfficeManager : MonoBehaviour {
 				}
 			}
 			break;
-		case State.DANGEROUS_WEAPON_CHOISE:
+		case State.DANGEROUS_WEAPON_CHOISE://凶器選択
 			if (_cursorForDangerousWeaponChoise.GetSelectedFlag ()) {
 				_detectiveTalkIndex = 4;
 				_state = State.DETECTIVE_TALKING;
 				_cursorForDangerousWeaponChoise.gameObject.SetActive (false);	//「これでいいんだな？」で「いいえ」を選んだらカーソルをアクティブに戻す！
 			}
+			break;
+		case State.FINAL_JUDGE://最終確認
+			switch (_laboUIManager.GetJudge ()) {
+			case LaboUIManager.Judge.YES:
+				_curtain.Close ();
+				break;
+			case LaboUIManager.Judge.NO:
+				if (!_curtain.IsStateClose () && !_curtainClosedStateCriminalChose) {
+					_cursorForCriminalChoise.SetSelectedFlag (false);
+					_curtain.Close ();
+					_curtainClosedStateCriminalChose = true;
+				}
+				if (_curtain.IsStateClose () && _curtain.ResearchStatePlayTime () >= 1f) {
+					for (int i = 0; i < _npcCharacters.Length; i++) {
+						if (_npcCharacters [i] != _cursorForCriminalChoise.GetSelectedGameObject ()) {
+							_npcCharacters [i].SetActive (true);
+						}
+					}
+					_cursorForDangerousWeaponChoise.SetSelectedFlag (false);
+					_curtain.Open ();
+					_curtainOpenedStateCriminalChose = true;
+				}
+				if (_curtain.IsStateOpen () && _curtain.ResearchStatePlayTime () >= 1f && _curtainOpenedStateCriminalChose) {
+					_curtainClosedStateCriminalChose = false;
+					_curtainOpenedStateCriminalChose = false;
+					_cursorForDangerousWeaponChoise.gameObject.SetActive (true);
+					_laboUIManager.SetJudgeFlag ((int)LaboUIManager.Judge.OTHERWISE);
+					_state = State.INVESTIGATE;
+				}
+				break;
+			default :
+				break;
+			}
+
 			break;
 		default :
 			break;
@@ -184,6 +226,8 @@ public class DetectiveOfficeManager : MonoBehaviour {
 			_detective.enabled = false;
 		}
 		//--------------------------------------------------------------------------------------------------------
+
+		Debug.Log (_laboUIManager.GetJudge());
 	}
 
 

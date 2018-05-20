@@ -15,7 +15,7 @@ public class LaboUIManager : MonoBehaviour {
 		
 	[SerializeField] GameObject _controllUI = null;
 	[SerializeField] GameObject _judgeUI = null;
-	[SerializeField] Judge _judged;
+	[SerializeField] Judge _judged;					//JudgeUIで何を選択したかを持つ変数
 
 
 	//=================================================
@@ -26,7 +26,7 @@ public class LaboUIManager : MonoBehaviour {
 
 	//=================================================
 	//セッター
-	public void SetJudgeFlag(Judge x) { _judged = x; }
+	public void SetJudgeFlag(int x) { _judged = (Judge)x; }
 	//=================================================
 	//=================================================
 
