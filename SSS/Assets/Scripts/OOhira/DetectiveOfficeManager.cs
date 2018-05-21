@@ -120,6 +120,8 @@ public class DetectiveOfficeManager : MonoBehaviour {
 					for (int i = 0; i < _npcCharacters.Length; i++) {
 						if (_npcCharacters [i] != _cursorForCriminalChoise.GetSelectedGameObject ()) {
 							_npcCharacters [i].SetActive (false);
+						} else {
+							_npcCharacters [i].GetComponent<BoxCollider2D> ().enabled = false;//凶器カーソルも反応してしまうバグ修正
 						}
 					}
 					_curtain.Open ();
@@ -148,6 +150,8 @@ public class DetectiveOfficeManager : MonoBehaviour {
 				break;
 			case LaboUIManager.Judge.NO:
 				if (!_curtain.IsStateClose () && !_curtainClosedStateCriminalChose) {
+					GameObject npc = _cursorForCriminalChoise.GetSelectedGameObject ();
+					npc.GetComponent<BoxCollider2D> ().enabled = true;
 					_cursorForCriminalChoise.SetSelectedFlag (false);
 					_curtain.Close ();
 					_curtainClosedStateCriminalChose = true;
