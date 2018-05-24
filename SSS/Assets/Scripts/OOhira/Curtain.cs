@@ -65,6 +65,12 @@ public class Curtain : MonoBehaviour {
 		AnimatorStateInfo animatorStateInfo = _animator.GetCurrentAnimatorStateInfo (layer);
 		return animatorStateInfo.normalizedTime;
 	}
+
+
+	//--カーテンが動いているかどうかを返す関数
+	public bool IsMoving( ) {
+		return (IsStateClose () && ResearchStatePlayTime () < 1f) || (IsStateOpen () && ResearchStatePlayTime () < 1f);
+	}
     //----------------------------------------------
     //----------------------------------------------
 
