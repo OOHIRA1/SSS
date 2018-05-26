@@ -69,7 +69,7 @@ public class Curtain : MonoBehaviour {
 
 	//--カーテンが動いているかどうかを返す関数
 	public bool IsMoving( ) {
-		return (IsStateClose () && ResearchStatePlayTime () < 1f) || (IsStateOpen () && ResearchStatePlayTime () < 1f);
+		return ( ( IsStateClose () || IsStateOpen () || IsStateWait() ) && ResearchStatePlayTime () < 1f );
 	}
     //----------------------------------------------
     //----------------------------------------------

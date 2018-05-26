@@ -12,7 +12,6 @@ public class MillionareCrimeCameraWork : MonoBehaviour {
 	[SerializeField]float _distance;
 
     int Number_of_times = 365;
-	Vector3 pos;
 	Vector3 _nowPos;
     float SPEED = -0.01f;
 	float a;
@@ -43,9 +42,9 @@ public class MillionareCrimeCameraWork : MonoBehaviour {
 			_camera.transform.Translate(0, _distance / Number_of_times, 0);
 
         } else {
-			_millionareCamera.ChangeOrthographicSize( CameraControll.DEFAULT_ORTHOGRAPHIC_SIZE );
-			_camera.transform.position = _nowPos;
-        }
+        _millionareCamera.ChangeOrthographicSize(CameraControll.DEFAULT_ORTHOGRAPHIC_SIZE);
+        _camera.transform.position = _nowPos;
+    }
 
 
         _count++;

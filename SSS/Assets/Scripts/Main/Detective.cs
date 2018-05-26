@@ -78,9 +78,9 @@ public class Detective : MonoBehaviour {
     //アニメーション処理---------------------
     void Motion( ) {
         if ( _isAnimWalk ) {
-            _anim.SetBool( "Walk", true );
+            _anim.SetBool( "WalkFlag", true );
         } else {
-            _anim.SetBool( "Walk", false );
+            _anim.SetBool( "WalkFlag", false );
         }
 
     }

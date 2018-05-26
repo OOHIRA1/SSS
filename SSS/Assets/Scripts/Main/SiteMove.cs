@@ -164,7 +164,7 @@ public class SiteMove : MonoBehaviour {
     //-----------------------------------------------------------------------------------
 
 
-    public void LeftButton( ) {
+    public void RightButton( ) {
 
         //左移動が選択されたとき----------------------------------------------------
         if ( !_rightSitemove && !_leftSitemove ) {
@@ -176,7 +176,7 @@ public class SiteMove : MonoBehaviour {
     }
 
     
-    public void RightButton( ) {
+    public void LeftButton( ) {
 
         //右移動が選択されたとき----------------------------------------------------
         if ( !_rightSitemove && !_leftSitemove ) {

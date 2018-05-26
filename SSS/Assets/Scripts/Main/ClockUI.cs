@@ -21,6 +21,13 @@ public class ClockUI : MonoBehaviour {
     Vector3 minutesHandRota;                                //長針の角度
     Vector3 hourHandRota;                                   //短針の角度
 
+	[ SerializeField ] GameObject _noonUI = null;
+	[ SerializeField ] GameObject _noonMonoUI = null;
+	[ SerializeField ] GameObject _afternoonUI = null;
+	[ SerializeField ] GameObject _afternoonMonoUI = null;
+	[ SerializeField ] GameObject _nightUI = null;
+	[ SerializeField ] GameObject _nightMonoUI = null;
+
     [ SerializeField ] MoviePlaySystem _moviPlaySystem = null;    //ムービープレイマネージャー
     string _pushed;                                              //クリックされたもの
     // Use this for initialization
@@ -41,18 +48,51 @@ public class ClockUI : MonoBehaviour {
 		ClockNeedleMove( );
 	}
 
-	//レイが当たったtagに応じてシーン遷移-----------------------------------------------------
+	//レイが当たったtagに応じて画像を変えてシーン遷移-----------------------------------------------------
 	void CutainClose( ) {
 		RaycastHit2D hit;
 		hit = _rayShooter.Shoot( Input.mousePosition );
 		if ( hit ) {
-            if ( hit.collider.tag == "Night" ) {
-                _pushed = "Night";
+
+			if ( hit.collider.tag == "Noon" ) {
+				_noonUI.SetActive( true );
+				_noonMonoUI.SetActive( false );
+
+				_afternoonUI.SetActive( false );
+				_afternoonMonoUI.SetActive( true );
+
+				_nightUI.SetActive( false );
+				_nightMonoUI.SetActive( true );
+
+				_pushed = "Noon";
+			}
+				
+            if ( hit.collider.tag == "Evening" ) {
+				_noonUI.SetActive( false );
+				_noonMonoUI.SetActive( true );
+
+				_afternoonUI.SetActive( true );
+				_afternoonMonoUI.SetActive( false );
+
+				_nightUI.SetActive( false );
+				_nightMonoUI.SetActive( true );
+
+                _pushed = "Evening";
             }
 
-            if ( hit.collider.tag == "Evening" ) {
-                _pushed = "Evening";
-            }	
+			if ( hit.collider.tag == "Night" ) {
+				_noonUI.SetActive( false );
+				_noonMonoUI.SetActive( true );
+
+				_afternoonUI.SetActive( false );
+				_afternoonMonoUI.SetActive( true );
+
+				_nightUI.SetActive( true );
+				_nightMonoUI.SetActive( false );
+
+				_pushed = "Night";
+			}
+
 		}
 	}
 	//-----------------------------------------------------------------------------------------

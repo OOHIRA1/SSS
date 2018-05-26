@@ -29,7 +29,7 @@ public class MillioareDieMono : MonoBehaviour {
 
         if ( transform.position.x < 0 ) {　//ｘが0よりも小さいならの条件式MillioareScrollを呼ぶ
             MillioareScroll( );             
-            //transform.position += _move_dir * SPEED * 0;
+            transform.position += _move_dir * SPEED * 0;
         } else {
             transform.position = new Vector3( 0, transform.position.y, 0 );　//止まる座標
         }
