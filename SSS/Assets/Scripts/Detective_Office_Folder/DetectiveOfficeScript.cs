@@ -4,76 +4,49 @@ using UnityEngine;
 
 public class DetectiveOfficeScript : MonoBehaviour {
 
-    Rigidbody2D rb;
-
 	Animator _animator;
-
-
 
 	// Use this for initialization
 	void Start () {
 		
 		_animator = GetComponentInChildren<Animator> ();
-        rb = GetComponent<Rigidbody2D>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
     }
-	
+
+	public void DetectiveWalk01(){
+		_animator.SetBool( "DetectiveWalk", true );
+	}
+	public void DetectiveWalk02(){
+		_animator.SetBool( "DetectiveWalk", false );
+	}
+	public void DetectiveThink01(){
+		_animator.SetBool( "DetectiveThink", true );
+	}
+	public void DetectiveThink02(){
+		_animator.SetBool( "DetectiveThink", false );
+	}
+	public void DetectiveBow01(){
+		_animator.SetBool( "DetectiveBow", true );
+	}
+	public void DetectiveBow02(){
+		_animator.SetBool( "DetectiveBow", false );
+	}
+	public void DetectiveConcetrate01(){
+		_animator.SetBool( "DetectiveConcetrate", true );
+	}
+	public void DetectiveConcetrate02(){
+		_animator.SetBool( "DetectiveConcetrate", false );
+	}
+	public void DetectiveDown01(){
+		_animator.SetBool( "DetectiveDown", true );
+	}
+	public void DetectiveDown02(){
+		_animator.SetBool( "DetectiveDown", false );
+	}
 
 
-	public void GameOver () {
-		_animator.SetBool( "boolGameOver", true );
-	}
-	
 
-	public void Pipe () {
-		_animator.SetBool( "pipe", true );
-	}
-	public void Voldemort () {
-		_animator.SetBool( "koziki", true );
-	}
-	public void Grass () {
-		_animator.SetBool( "grass", true );
-	}
-	public void WalkLft () {
-		//rb.AddForce ( Vector3.left * 0.5f );
-           rb.velocity = new Vector2(-2f, 0);
-           _animator.SetBool( "fin", true );
-           _animator.SetBool( "pipe", false );
-           _animator.SetBool( "koziki", false );
-           _animator.SetBool( "grass", false );
-		_animator.SetBool( "walk", true );
-		this.transform.localScale = new Vector3 ( 1, 1, 1 );
-	}
-      public void WalkLft0 () {
-           rb.velocity = new Vector2(0, 0);
-           _animator.SetBool( "fin", false );
-           _animator.SetBool( "walk", false );
-       }
-
-	public void walk () {
-           //rb.AddForce (Vector3.right * 0.5f);
-           rb.velocity = new Vector2(2f, 0);
-           _animator.SetBool( "fin", true );
-           
-           _animator.SetBool( "pipe", false );
-           _animator.SetBool( "koziki", false );
-           _animator.SetBool( "grass", false );
-           _animator.SetBool( "walk", true );
-		this.transform.localScale = new Vector3 ( -1, 1, 1 );
-	}
-       public void walk0 () {
-           rb.velocity = new Vector2(0, 0);
-           _animator.SetBool( "walk", false );
-           _animator.SetBool( "fin", false );
-        }
-
-    public void Disappear () {
-        _animator.SetBool( "Disappear", true );
-    }
-    public void appear () {
-        _animator.SetBool( "Disappear", false );
-    }
 }
