@@ -27,13 +27,26 @@ public class GameDataManager : MonoBehaviour {
 	}
 
 	[SerializeField] int _advancedData;	//進行状況を格納する変数
+	[SerializeField] GameObject _criminal;				//プレイヤーが選択した犯人(探偵ラボで指摘)
+	[SerializeField] GameObject _dangerousWeapon;		//プレイヤーが選択した凶器(探偵ラボで指摘)
 
 
 	//==================================================================================
 	//ゲッター
 	public int GetAdvancedData() { return _advancedData; }
+	public GameObject GetCriminal() { return _criminal;	}
+	public GameObject GetDangerousWeapon() { return _dangerousWeapon; }
 	//==================================================================================
 	//==================================================================================
+
+
+	//==================================================================================
+	//セッター
+	public void SetCriminal( GameObject x ) { _criminal = x; }
+	public void SetDangerousWeapon( GameObject x ){ _dangerousWeapon = x; }
+	//==================================================================================
+	//==================================================================================
+
 
 
 	// Use this for initialization

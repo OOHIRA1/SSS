@@ -293,6 +293,10 @@ public class DetectiveOfficeManager : MonoBehaviour {
 				_curtain.Close ();
 				_curtainClosedStateFinalJudge = true;
 			}
+			if (_curtainClosedStateFinalJudge && _curtain.IsStateClose () && _curtain.ResearchStatePlayTime () >= 1f) {
+				_gameDataManager.SetCriminal (_cursorForCriminalChoise.GetSelectedGameObject());
+				_gameDataManager.SetDangerousWeapon (_cursorForDangerousWeaponChoise.GetSelectedGameObject());
+			}
 			//_curtain.Close ();
 			break;
 		case LaboUIManager.Judge.NO:
