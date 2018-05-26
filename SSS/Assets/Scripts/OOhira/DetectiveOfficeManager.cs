@@ -36,6 +36,8 @@ public class DetectiveOfficeManager : MonoBehaviour {
 	[SerializeField] DarkingControll _darkingControll = null;
 	[SerializeField] CutinControll _cutinControll = null;
 	bool _cutinPlayedFlag;															//カットインをしたかどうかのフラグ
+	bool _curtainClosedStateFinalJudge;											//最終確認ステート中にカーテンを閉じたかどうかのフラグ
+
 
 
 	//===================================================================================
@@ -54,6 +56,7 @@ public class DetectiveOfficeManager : MonoBehaviour {
 		_curtainOpenedStateCriminalChose = false;
 		_cookBoxCollider2D.enabled = false;
 		_cutinPlayedFlag = false;
+		_curtainClosedStateFinalJudge = false;
 	}
 	
 	// Update is called once per frame
@@ -277,10 +280,18 @@ public class DetectiveOfficeManager : MonoBehaviour {
 	void FinalJudgeAction() {
 		switch (_laboUIManager.GetJudge ()) {
 		case LaboUIManager.Judge.YES:
-			_darkingControll.Darking ();
-			if (!_cutinPlayedFlag && _darkingControll.IsStateFadein() && _darkingControll.ResearchStatePlayTime () >= 1f) {
+			if (!_cutinPlayedFlag) {
+				_darkingControll.Darking ();
+			}
+			if (!_cutinPlayedFlag && _darkingControll.IsStateFadein () && _darkingControll.ResearchStatePlayTime () >= 1f) {
 				_cutinControll.StartCutin ();
 				_cutinPlayedFlag = true;
+			}
+			if (_cutinControll.GetFinishFlag () && !_curtainClosedStateFinalJudge) {
+				//_darkingControll.Bright ();	//明転処理はいらない
+				_cutinControll.FinishCutin ();
+				_curtain.Close ();
+				_curtainClosedStateFinalJudge = true;
 			}
 			//_curtain.Close ();
 			break;
