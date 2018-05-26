@@ -32,6 +32,7 @@ public class DetectiveOfficeManager : MonoBehaviour {
 	bool _curtainOpenedStateCriminalChose;											//犯人指摘ステート中にカーテンを開いたかどうかのフラグ
 	//[SerializeField] Evidence _evidence3 = null;
 	[SerializeField] BoxCollider2D _cookBoxCollider2D = null;
+	Vector3 _selectedNpcPosition;													//選択した犯人の座標を格納する変数
 
 
 	//===================================================================================
@@ -220,6 +221,7 @@ public class DetectiveOfficeManager : MonoBehaviour {
 			if (!_curtain.IsStateClose () && !_curtainClosedStateCriminalChose) {
 				_curtain.Close ();
 				_curtainClosedStateCriminalChose = true;
+				_selectedNpcPosition = _cursorForCriminalChoise.GetSelectedGameObject ().transform.position;	//選んだNpcの座標を格納
 			}
 			//-----------------------------------------------------------------------
 
@@ -277,7 +279,6 @@ public class DetectiveOfficeManager : MonoBehaviour {
 			if (!_curtain.IsStateClose () && !_curtainClosedStateCriminalChose) {
 				GameObject npc = _cursorForCriminalChoise.GetSelectedGameObject ();
 				npc.GetComponent<BoxCollider2D> ().enabled = true;
-				_cursorForCriminalChoise.SetSelectedFlag (false);
 				_curtain.Close ();
 				_curtainClosedStateCriminalChose = true;
 			}
@@ -285,6 +286,8 @@ public class DetectiveOfficeManager : MonoBehaviour {
 				for (int i = 0; i < _npcCharacters.Length; i++) {
 					if (_npcCharacters [i] != _cursorForCriminalChoise.GetSelectedGameObject ()) {
 						_npcCharacters [i].SetActive (true);
+					} else {
+						_npcCharacters [i].transform.position = _selectedNpcPosition;	//Npcを元の位置に戻す
 					}
 				}
 				_cursorForCriminalChoise.SetSelectedFlag (false);//犯人選択カーソルのSelectedFlagをfalseに
