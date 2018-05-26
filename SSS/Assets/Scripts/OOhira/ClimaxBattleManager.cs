@@ -17,6 +17,7 @@ public class ClimaxBattleManager : MonoBehaviour {
 	[SerializeField] State _state;
 	GameDataManager _gameDataManager;
 	[SerializeField] Curtain _curtain = null;
+	[SerializeField] SpriteRenderer _background = null;	//背景画像
 
 	// Use this for initialization
 	void Start () {
