@@ -9,7 +9,7 @@ public class SiteNoonManager : MonoBehaviour {
     [ SerializeField ] ScenesManager _scenesManager = null;
 	[ SerializeField ] Curtain _cutain = null;
     [ SerializeField ] ClockUI _clockUI = null;
-	[ SerializeField ] GameObject[] _ui = new GameObject[ 1 ];
+	//[ SerializeField ] GameObject[] _ui = new GameObject[ 1 ];
 	[ SerializeField ] UnityEngine.UI.Button[] _button = new  UnityEngine.UI.Button[ 1 ];
 	[ SerializeField ] GameObject _evidenceFile = null;
 
@@ -49,7 +49,7 @@ public class SiteNoonManager : MonoBehaviour {
 
     void Regulation( ) {
         _detective.SetIsMove( false );
-        _detective.ResetPos( );
+        //_detective.ResetPos( );
     }
 
 	//カーテンがアニメーションをしてたときとしていないときの処理-------------------------

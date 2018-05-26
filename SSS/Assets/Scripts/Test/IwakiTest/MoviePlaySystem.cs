@@ -76,6 +76,14 @@ public class MoviePlaySystem : MonoBehaviour {
 
 	//=======================================================================
 	//public関数
+
+	//停止しているかどうかを取得する
+    public bool GetStop( ) { return _stop; }
+
+	//操作可能にするか不可にするかを切り替える
+	public void SetOperation( bool value ) { _isOperation = value; }
+
+
 	//--再生・一時停止を処理する関数
 	public void StopAndPlayTime( ) {
 		if ( !_stop ) {
@@ -104,11 +112,6 @@ public class MoviePlaySystem : MonoBehaviour {
     //時間を取得する(バーの大きさを時間に変換)
     public float MoviTime( ) { return _bar.GetBarScale( ).x * _maxTime; }
 
-	//停止しているかどうかを取得する
-    public bool GetStop( ) { return _stop; }
-
-	//操作可能にするか不可にするかを切り替える
-	public void SetOperation( bool value ) { _isOperation = value; }
 	//=======================================================================
 	//=======================================================================
 }

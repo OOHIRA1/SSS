@@ -94,9 +94,25 @@ public class Detective : MonoBehaviour {
             transform.localScale = new Vector3( 1, 1, 1 );
         }
     }
-    //---------------------------------------------------------
+	//---------------------------------------------------------
 
-    //一時停止したら場所をリセットする--------------
+    //現場(昼・夕方・夜)マネージャーが動けるかどうか命令するため--
+    public void SetIsMove( bool isMove ) { _isMove = isMove; }
+    //------------------------------------------------------------
+
+	public bool GetCheckPos( ) {
+		if ( transform.position == _initialPos ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public Vector3 GetInitialPos( ) {
+		return _initialPos;
+	}
+
+	//再生したら場所をリセットする--------------
     public void  ResetPos( ) {
         transform.position = _initialPos;   //探偵を初期位置に
         _move = transform.position;         //移動場所をリセット
@@ -105,8 +121,5 @@ public class Detective : MonoBehaviour {
     }
     //-----------------------------------------------
 
-    //現場(昼・夕方・夜)マネージャーが動けるかどうか命令するため--
-    public void SetIsMove( bool isMove ) { _isMove = isMove; }
-    //------------------------------------------------------------
 
 }
