@@ -15,24 +15,29 @@ public class MoviePlaySystem : MonoBehaviour {
 	float _posParSecond;							//pointの1秒当たりに進む座標
 	bool _stop;										//再生されているか
 
-	[SerializeField] int _barTouchDown = 180;
+	[SerializeField] int _barTouchDown = 180;		//バーのタッチできる領域
 	[SerializeField] int _barTouchUp = 240;
+
+	bool _isOperation;								//操作可能かどうか
 
 	// Use this for initialization
 	void Start( ) {
 		_posParSecond = _point.GetMaxRange( ) / _maxTime;
 		_stop = true;
+		_isOperation = true;
 	}
 	
 	// Update is called once per frame
 	void Update( ) {
-			 
-		PointUpdate( );
+		if ( _isOperation ) {
 
-		BarUpdate( );
+			PointUpdate( );
 
-		MovieUpdate( );
+			BarUpdate( );
 
+			MovieUpdate( );
+
+		}
 	}
 
 	//--ポイントの座標を更新する関数
@@ -99,7 +104,11 @@ public class MoviePlaySystem : MonoBehaviour {
     //時間を取得する(バーの大きさを時間に変換)
     public float MoviTime( ) { return _bar.GetBarScale( ).x * _maxTime; }
 
+	//停止しているかどうかを取得する
     public bool GetStop( ) { return _stop; }
+
+	//操作可能にするか不可にするかを切り替える
+	public void SetOperation( bool value ) { _isOperation = value; }
 	//=======================================================================
 	//=======================================================================
 }

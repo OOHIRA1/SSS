@@ -10,6 +10,12 @@ public class ClockUI : MonoBehaviour {
     const float NOT_FB = 5f;                                //この時間以下のときに早戻ししたら指定の位置に止める
     const float SKIP_TIME = 5f;                             //飛ばす時間
 
+	enum TimeZone {
+		NOON,
+		AFTERNOON,
+		NIGHT
+	}
+
 	[ SerializeField ] RayShooter _rayShooter = null;		//レイ飛ばし
 
 	[ SerializeField ] GameObject _minutesHand = null;		//長針
@@ -21,12 +27,8 @@ public class ClockUI : MonoBehaviour {
     Vector3 minutesHandRota;                                //長針の角度
     Vector3 hourHandRota;                                   //短針の角度
 
-	[ SerializeField ] GameObject _noonUI = null;
-	[ SerializeField ] GameObject _noonMonoUI = null;
-	[ SerializeField ] GameObject _afternoonUI = null;
-	[ SerializeField ] GameObject _afternoonMonoUI = null;
-	[ SerializeField ] GameObject _nightUI = null;
-	[ SerializeField ] GameObject _nightMonoUI = null;
+	[ SerializeField ] GameObject[] _TimeZoneColor = new GameObject[ 1 ];
+	[ SerializeField ] GameObject[] _TimeZoneMono = new GameObject[ 1 ]; 
 
     [ SerializeField ] MoviePlaySystem _moviPlaySystem = null;    //ムービープレイマネージャー
     string _pushed;                                              //クリックされたもの
@@ -55,42 +57,42 @@ public class ClockUI : MonoBehaviour {
 		if ( hit ) {
 
 			if ( hit.collider.tag == "Noon" ) {
-				_noonUI.SetActive( true );
-				_noonMonoUI.SetActive( false );
+				_TimeZoneColor[ ( int )TimeZone.NOON ].SetActive( true );
+				_TimeZoneMono[ ( int )TimeZone.NOON ].SetActive( false );
 
-				_afternoonUI.SetActive( false );
-				_afternoonMonoUI.SetActive( true );
+				_TimeZoneColor[ ( int )TimeZone.AFTERNOON ].SetActive( false );
+				_TimeZoneMono[ ( int )TimeZone.AFTERNOON ].SetActive( true );
 
-				_nightUI.SetActive( false );
-				_nightMonoUI.SetActive( true );
+				_TimeZoneColor[ ( int )TimeZone.NIGHT ].SetActive( false );
+				_TimeZoneMono[ ( int )TimeZone.NIGHT ].SetActive( true );
 
-				_pushed = "Noon";
+				_pushed = "SiteNoon";
 			}
 				
             if ( hit.collider.tag == "Evening" ) {
-				_noonUI.SetActive( false );
-				_noonMonoUI.SetActive( true );
+				_TimeZoneColor[ ( int )TimeZone.NOON ].SetActive( false );
+				_TimeZoneMono[ ( int )TimeZone.NOON ].SetActive( true );
 
-				_afternoonUI.SetActive( true );
-				_afternoonMonoUI.SetActive( false );
+				_TimeZoneColor[ ( int )TimeZone.AFTERNOON ].SetActive( true );
+				_TimeZoneMono[ ( int )TimeZone.AFTERNOON ].SetActive( false );
 
-				_nightUI.SetActive( false );
-				_nightMonoUI.SetActive( true );
+				_TimeZoneColor[ ( int )TimeZone.NIGHT ].SetActive( false );
+				_TimeZoneMono[ ( int )TimeZone.NIGHT ].SetActive( true );
 
-                _pushed = "Evening";
+                _pushed = "SiteEvening";
             }
 
 			if ( hit.collider.tag == "Night" ) {
-				_noonUI.SetActive( false );
-				_noonMonoUI.SetActive( true );
+				_TimeZoneColor[ ( int )TimeZone.NOON ].SetActive( false );
+				_TimeZoneMono[ ( int )TimeZone.NOON ].SetActive( true );
 
-				_afternoonUI.SetActive( false );
-				_afternoonMonoUI.SetActive( true );
+				_TimeZoneColor[ ( int )TimeZone.AFTERNOON ].SetActive( false );
+				_TimeZoneMono[ ( int )TimeZone.AFTERNOON ].SetActive( true );
 
-				_nightUI.SetActive( true );
-				_nightMonoUI.SetActive( false );
+				_TimeZoneColor[ ( int )TimeZone.NIGHT ].SetActive( true );
+				_TimeZoneMono[ ( int )TimeZone.NIGHT ].SetActive( false );
 
-				_pushed = "Night";
+				_pushed = "SiteNight";
 			}
 
 		}
@@ -125,4 +127,13 @@ public class ClockUI : MonoBehaviour {
     //時計ＵＩのどの時間帯がタッチされたか
      public string GetPushed( ) { return _pushed; } 
 
+
+	//コライダーを操作して時計ＵＩを操作可能か不可かを切り替える-------------------------------------
+	public void Operation( bool value ) {
+		for ( int i = 0; i < _TimeZoneMono.Length; i++ ) {
+			PolygonCollider2D collider = _TimeZoneMono[ i ].GetComponent< PolygonCollider2D >( );
+			collider.enabled = value;
+		}
+	}
+	//------------------------------------------------------------------------------------------------
 }

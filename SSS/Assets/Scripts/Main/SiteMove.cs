@@ -5,14 +5,18 @@ using UnityEngine;
 public class SiteMove : MonoBehaviour {
     const float DOWN_ROOM_POS = -30f;
     [ SerializeField ] GameObject[ ] _site    = new GameObject[ 4 ];        //現場四つ	1:Bedroom 2:Graden 3:Kitchen 4:ServingRoom の順番で入れること 
-    [ SerializeField ] float _leftRoomPos = -21f;
-    [ SerializeField ] float _rightRoomPos = 21f;
+	[ SerializeField ] float _neighborRoom = 21f;							//左右の部屋のpos(-を付けると左の部屋のpos。そのままだと右の部屋のpos。)
     [ SerializeField ] float _moveSpeed = 1f; 
     bool _leftSitemove;                                                     //左に移動する場合
     bool _rightSitemove;                                                    //右に移動する場合
     bool _oneTimeOnly;                                                      //移動するときの一回だけの処理
     public static int _nowSiteNum = 0;                                      //現在のシーン(別シーンから現場シーンに移動するときはこれを変えてから遷移すること)
     int[ ] _nextNextSiteNum;                                                //現在のシーンから1つ先と2つ先と3つ先のシーン
+
+	Vector3 _nowSitePos;													//現在の現場のpos
+	Vector3 _nextOneSitePos;												//次に真ん中にくる現場のpos
+	Vector3 _nextTwoSitePos;												//下から真ん中の現場の隣にくる現場のpos
+	Vector3 _nextThreeSitePos;												//真ん中の現場の隣から下にいく現場のpos
 
 	public enum _siteNum {
 		BEDROOM,
@@ -28,6 +32,11 @@ public class SiteMove : MonoBehaviour {
         _rightSitemove = false;
         _oneTimeOnly = false;
         _nextNextSiteNum = new int [ 3 ];
+
+		_nowSitePos = new Vector3( _moveSpeed, 0, 0 );
+		_nextOneSitePos = new Vector3( _moveSpeed, 0, 0 );
+		_nextTwoSitePos = new Vector3( _neighborRoom, 0, 0 );
+		_nextThreeSitePos = new Vector3( 0, DOWN_ROOM_POS, 0 );
 
        SiteInitialPos( );
 
@@ -54,26 +63,26 @@ public class SiteMove : MonoBehaviour {
 
 
         //選択されたときの移動処理---------------
-        if ( _leftSitemove )  LeftSitemove( );
-        if ( _rightSitemove ) RightSitemove( );
+        if ( _leftSitemove )  RightSiteMove( );
+        if ( _rightSitemove ) LeftSiteMove( );
         //--------------------------------------
 
 	}
 
 
-    //シーン遷移直後の現場の配置-------------------------------------------------------
+    //シーン遷移直後の現場の配置-----------------------------------------------------------------
     void SiteInitialPos( ) {
          for ( int i = 0; i < _nextNextSiteNum.Length; i++ ) {
             _nextNextSiteNum[ i ] = AddSiteNum( i + 1 );
         }
 
          _site[ _nowSiteNum ].transform.position = new Vector3( 0, 0, 0 );
-         _site[ _nextNextSiteNum[ 0 ] ].transform.position = new Vector3( _rightRoomPos, 0, 0 );
+         _site[ _nextNextSiteNum[ 0 ] ].transform.position = new Vector3( _neighborRoom, 0, 0 );
          _site[ _nextNextSiteNum[ 1 ] ].transform.position = new Vector3( 0, DOWN_ROOM_POS, 0 );
-         _site[ _nextNextSiteNum[ 2 ] ].transform.position = new Vector3( _leftRoomPos, 0, 0 );
+         _site[ _nextNextSiteNum[ 2 ] ].transform.position = new Vector3( -_neighborRoom, 0, 0 );
 
     }
-    //---------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------
 
 
     //左移動が選択されたとき現場番号をずらして入れる----------
@@ -119,22 +128,22 @@ public class SiteMove : MonoBehaviour {
 
 
     //左に移動する処理--------------------------------------------------------------------
-    void LeftSitemove( ) {
+    void RightSiteMove( ) {
         
-        if ( _site[ _nextNextSiteNum[ 0 ] ].transform.position.x != 0 ) {
+        if ( _site[ _nextNextSiteNum[ 0 ] ].transform.position.x != 0 ) {			//右の現場が真ん中に移動している途中だったら
 
-            _site[ _nowSiteNum ].transform.position += new Vector3( -_moveSpeed, 0, 0 );
+            _site[ _nowSiteNum ].transform.position -= _nowSitePos;					//現在真ん中にある現場が左の場所に移動
 
-            _site[  _nextNextSiteNum[ 0 ] ].transform.position += new Vector3( -_moveSpeed, 0, 0 );
+            _site[  _nextNextSiteNum[ 0 ] ].transform.position -= _nextOneSitePos;	//右の現場が真ん中に移動
 
-            _site[ _nextNextSiteNum[ 1 ] ].transform.position = new Vector3( _rightRoomPos, 0, 0 );
+            _site[ _nextNextSiteNum[ 1 ] ].transform.position = _nextTwoSitePos;	//下の現場を右の場所に移す	
 
-            _site[ _nextNextSiteNum[ 2 ] ].transform.position = new Vector3( 0, DOWN_ROOM_POS, 0 );
+            _site[ _nextNextSiteNum[ 2 ] ].transform.position = _nextThreeSitePos;	//左の現場を下の場所に移す
 
         } else {
-            _leftSitemove = false;
-            _nowSiteNum++;
-            if ( _nowSiteNum > 3 ) _nowSiteNum = 0;    
+            _leftSitemove = false;													//移動し終わったらこの関数に入らないようにする
+            _nowSiteNum++;															//現場番号を合わす
+            if ( _nowSiteNum > 3 ) _nowSiteNum = 0;									//最大番号を超えていたら最初にループさせる
         }
 
     }
@@ -142,22 +151,22 @@ public class SiteMove : MonoBehaviour {
 
 
     //右に移動する処理------------------------------------------------------------------
-    void RightSitemove( ) {
+    void LeftSiteMove( ) {
 
-        if ( _site[ _nextNextSiteNum[ 0 ] ].transform.position.x != 0 ) {
+        if ( _site[ _nextNextSiteNum[ 0 ] ].transform.position.x != 0 ) {			//左の現場が真ん中に移動している途中だったら
 
-            _site[ _nowSiteNum ].transform.position += new Vector3( _moveSpeed, 0, 0 );
+            _site[ _nowSiteNum ].transform.position += _nowSitePos;					//現在真ん中にある現場が右の場所に移動
 
-            _site[  _nextNextSiteNum[ 0 ] ].transform.position += new Vector3( _moveSpeed, 0, 0 );
+            _site[  _nextNextSiteNum[ 0 ] ].transform.position += _nextOneSitePos;	//左の現場が真ん中に移動
 
-            _site[ _nextNextSiteNum[ 1 ] ].transform.position = new Vector3( _leftRoomPos, 0, 0 );
+            _site[ _nextNextSiteNum[ 1 ] ].transform.position = -_nextTwoSitePos;	//下の現場を左の場所に移す
 
-            _site[ _nextNextSiteNum[ 2 ] ].transform.position = new Vector3( 0, DOWN_ROOM_POS, 0 );
+            _site[ _nextNextSiteNum[ 2 ] ].transform.position = _nextThreeSitePos;	//右の現場を下の場所に移す
 
         } else {
-            _rightSitemove = false;
-            _nowSiteNum--;
-             if ( _nowSiteNum < 0 ) _nowSiteNum = 3;    
+            _rightSitemove = false;													//移動し終わったらこの関数に入らないようにする
+            _nowSiteNum--;															//現場番号を合わす
+             if ( _nowSiteNum < 0 ) _nowSiteNum = 3;								//最小番号を下回っていたら最後にループさせる
         }
 
     }

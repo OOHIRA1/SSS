@@ -515,7 +515,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &468274332
 GameObject:
@@ -886,12 +886,14 @@ MonoBehaviour:
   _minutesHand: {fileID: 1297508210}
   _hourHand: {fileID: 2089979912}
   _time: 60
-  _noonUI: {fileID: 1191377483}
-  _noonMonoUI: {fileID: 1296333194}
-  _afternoonUI: {fileID: 823237769}
-  _afternoonMonoUI: {fileID: 1355267552}
-  _nightUI: {fileID: 1605511576}
-  _nightMonoUI: {fileID: 1386226116}
+  _TimeZoneColor:
+  - {fileID: 1191377483}
+  - {fileID: 823237769}
+  - {fileID: 1605511576}
+  _TimeZoneMono:
+  - {fileID: 1296333194}
+  - {fileID: 1355267552}
+  - {fileID: 1386226116}
   _moviPlaySystem: {fileID: 450558421}
 --- !u!1 &622422993
 GameObject:
@@ -2119,7 +2121,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4119510801210774, guid: 5d86012c12644124eb289cb228179c31, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114411689036062998, guid: 5d86012c12644124eb289cb228179c31,
         type: 2}
@@ -3358,7 +3360,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1486480765
 Prefab:
@@ -3397,7 +3399,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4967858615188970, guid: fdc119ec1b51f6b41a5a70a8e53d88cb, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fdc119ec1b51f6b41a5a70a8e53d88cb, type: 2}
@@ -4444,8 +4446,7 @@ MonoBehaviour:
   - {fileID: 194089684}
   - {fileID: 1362372972}
   - {fileID: 1833555953}
-  _leftRoomPos: -21
-  _rightRoomPos: 21
+  _neighborRoom: 21
   _moveSpeed: 1
 --- !u!4 &1958605189
 Transform:
@@ -4458,7 +4459,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1993976991
 GameObject:

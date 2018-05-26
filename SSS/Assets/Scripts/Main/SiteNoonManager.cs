@@ -13,16 +13,14 @@ public class SiteNoonManager : MonoBehaviour {
 	[ SerializeField ] UnityEngine.UI.Button[] _button = new  UnityEngine.UI.Button[ 1 ];
 	[ SerializeField ] GameObject _evidenceFile = null;
 
-	bool tach;
 	// Use this for initialization
 	void Start( ) {
-		tach = false;
 	}
 	
 	// Update is called once per frame
 	void Update( ) {
+		CutainState( );		//時計ＵＩがタッチされたら処理しない
         ScenesTransitionWithAnim( );
-		if ( !tach ) CutainState( );
 
         if ( !_movePlaySystem.GetStop( ) ) {
             Regulation( );
@@ -32,26 +30,20 @@ public class SiteNoonManager : MonoBehaviour {
 
 	}
 
-    //押されたものが時計ＵＩの夜か夕方だったらする処理--------------------------------------------------------------
+    //押されたものが時計ＵＩの昼か夕方か夜だったらする処理------------------------------------------------------------------------------------------
     void ScenesTransitionWithAnim( ) {
 
-        if ( _clockUI.GetPushed( ) == "Night" ) {
+		if ( _clockUI.GetPushed( ) != "none"  ) {
+			_evidenceFile.SetActive( false );			//証拠品ファイルを非表示
+			_detective.SetIsMove( false );				//探偵を動けないようにする
+			_clockUI.Operation( false );				//時計ＵＩを操作不可にする
+			_movePlaySystem.SetOperation( false );		//動画(シークバー)を操作不可にする
 			AllButtonInteractable( false );				//ボタンを押せないようにする
-			//AllUiActive( false );
-			tach = true;
-            _cutain.Close( );							//カーテンを閉める
-            if ( _cutain.IsStateClose( ) && _cutain.ResearchStatePlayTime( ) >= 1f ) _scenesManager.SiteScenesTransition( "SiteNight" );		//カーテンが閉まりきったらシーン遷移する
-            
-        }
-		//クロックＵＩはコライダーを消す
-        if ( _clockUI.GetPushed( ) == "Evening" ) {
-			AllButtonInteractable( false );
-			//AllUiActive( false );
-			tach = true;
-            _cutain.Close( );
-            if ( _cutain.IsStateClose( ) && _cutain.ResearchStatePlayTime( ) >= 1f ) _scenesManager.SiteScenesTransition( "SiteEvening" );
 
-        }
+            _cutain.Close( );							//カーテンを閉める
+            if ( _cutain.IsStateClose( ) && _cutain.ResearchStatePlayTime( ) >= 1f ) _scenesManager.SiteScenesTransition( _clockUI.GetPushed( ) );		//カーテンが閉まりきったらシーン遷移する
+		}
+
     }
     //-------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -60,33 +52,34 @@ public class SiteNoonManager : MonoBehaviour {
         _detective.ResetPos( );
     }
 
-	//カーテンがアニメーションをしてたらUIを非表示-------------------------
+	//カーテンがアニメーションをしてたときとしていないときの処理-------------------------
 	void CutainState( ) {
-		if ( _cutain.ResearchStatePlayTime( ) < 1f ) {		//カーテンが動いているか閉まるモーション状態だったら(わずかに1を超えてもWaitモーションに入らず閉まるモーションのため)
+		if ( _cutain.ResearchStatePlayTime( ) < 1f ) {		//カーテンが動いていたら
 			_evidenceFile.SetActive( false );
 			_detective.SetIsMove( false );
-			AllUiActive( false );
+			_clockUI.Operation( false );
+			_movePlaySystem.SetOperation( false );				
+			AllButtonInteractable( false );
 
 		} else {
-			
 			_detective.SetIsMove( true );
-			AllUiActive( true );
-
-		}
-			
-	}
-
-	void AllUiActive( bool active ) {
-		for ( int i = 0; i < _ui.Length; i++ ) {
-			_ui[ i ].SetActive( active );
+			_clockUI.Operation( true );
+			_movePlaySystem.SetOperation( true );
+			AllButtonInteractable( true );
 		}
 	}
+	//-------------------------------------------------------------------------
 
+
+	//すべてのボタンを操作不能にする------------------------------
 	void AllButtonInteractable( bool inter ) {
 		for (int i = 0; i < _button.Length; i++) {
 			_button [i].interactable = inter;
 		}
 	}
+	//------------------------------------------------------------
+
+
 	//----------------------------------------------------------------------
 
 	//ムービーが再生状態だったらＵＩを非表示-------
