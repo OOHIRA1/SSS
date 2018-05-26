@@ -118,6 +118,8 @@ public class CutinControll : MonoBehaviour {
 		} while( time < movingTime );
 		_backgroundImagesRectTransform [0].anchoredPosition = destination;
 		_cutinImageRectTransform.anchoredPosition = _destination [1];
+		yield return new WaitForSeconds (1f);	//カットインをしばらくするための時間稼ぎ
+		SetFinishFlag (true);
 	}
 
 
