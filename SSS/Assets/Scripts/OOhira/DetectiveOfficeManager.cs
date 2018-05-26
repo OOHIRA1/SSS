@@ -33,6 +33,9 @@ public class DetectiveOfficeManager : MonoBehaviour {
 	//[SerializeField] Evidence _evidence3 = null;
 	[SerializeField] BoxCollider2D _cookBoxCollider2D = null;
 	Vector3 _selectedNpcPosition;													//選択した犯人の座標を格納する変数
+	[SerializeField] DarkingControll _darkingControll = null;
+	[SerializeField] CutinControll _cutinControll = null;
+	bool _cutinPlayedFlag;															//カットインをしたかどうかのフラグ
 
 
 	//===================================================================================
@@ -50,6 +53,7 @@ public class DetectiveOfficeManager : MonoBehaviour {
 		_curtainClosedStateCriminalChose = false;
 		_curtainOpenedStateCriminalChose = false;
 		_cookBoxCollider2D.enabled = false;
+		_cutinPlayedFlag = false;
 	}
 	
 	// Update is called once per frame
@@ -273,7 +277,12 @@ public class DetectiveOfficeManager : MonoBehaviour {
 	void FinalJudgeAction() {
 		switch (_laboUIManager.GetJudge ()) {
 		case LaboUIManager.Judge.YES:
-			_curtain.Close ();
+			_darkingControll.Darking ();
+			if (!_cutinPlayedFlag && _darkingControll.IsStateFadein() && _darkingControll.ResearchStatePlayTime () >= 1f) {
+				_cutinControll.StartCutin ();
+				_cutinPlayedFlag = true;
+			}
+			//_curtain.Close ();
 			break;
 		case LaboUIManager.Judge.NO:
 			if (!_curtain.IsStateClose () && !_curtainClosedStateCriminalChose) {
