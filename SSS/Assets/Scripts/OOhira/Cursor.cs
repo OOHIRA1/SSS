@@ -55,6 +55,14 @@ public class Cursor : MonoBehaviour {
 		}
 		//-----------------------------------------------------------------------------
 
+		//_selectedFlagが立っていたら常に_selectedGameObjectを指し続ける--------
+		if ( _selectedFlag ) {
+			Vector3 pos = _selectedGameObject.transform.position;
+			transform.position = new Vector3 (pos.x, _firstPosition.y, pos.z);
+			return;
+		}
+		//---------------------------------------------------------------------
+
 		if (Input.GetMouseButtonDown (0)) {
 			RaycastHit2D hit = _rayShooter.Shoot (Input.mousePosition);
 			if (hit) {

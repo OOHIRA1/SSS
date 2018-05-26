@@ -76,108 +76,19 @@ public class DetectiveOfficeManager : MonoBehaviour {
 
 		switch( _state ) {
 		case State.INVESTIGATE://調査
+			InvestigateAction();
 			break;
 		case State.DETECTIVE_TALKING://探偵によるテキスト表示
-			if (!_detectiveTalk [_detectiveTalkIndex].gameObject.activeInHierarchy) {
-				_detectiveTalk [_detectiveTalkIndex].gameObject.SetActive (true);
-			}
-			if (Input.GetMouseButtonDown (0)) {
-				//次の文を表示するか次のStateに移動する処理-------------------------------
-				if (_detectiveTalk[_detectiveTalkIndex].GetTalkFinishedFlag ()) {
-					_detectiveTalk [_detectiveTalkIndex].gameObject.SetActive (false);
-					switch (_detectiveTalkIndex) {
-					case 1://証拠品3取得後の発言
-						_state = State.INVESTIGATE;
-						_cookBoxCollider2D.enabled = true;
-						break;
-					case 2://犯人指摘前の発言
-						_state = State.CRIMINAL_CHOISE;
-						break;
-					case 3://凶器選択前の発音
-						_state = State.DANGEROUS_WEAPON_CHOISE;
-						break;
-					case 4://最終確認前の発言
-						_laboUIManager.DisplayJudgeUI ();
-						_state = State.FINAL_JUDGE;
-						break;
-					default :
-						_state = State.INVESTIGATE;
-						break;
-					}
-				} else {
-					_detectiveTalk[_detectiveTalkIndex].Talk ();
-				}
-				//-----------------------------------------------------------------------	
-			}
+			DetectiveTalkingAction();
 			break;
 		case State.CRIMINAL_CHOISE://犯人指摘
-			if (_cursorForCriminalChoise.GetSelectedFlag ()) {
-				if (!_curtain.IsStateClose () && !_curtainClosedStateCriminalChose) {
-					_curtain.Close ();
-					_curtainClosedStateCriminalChose = true;
-				}
-				if (_curtain.IsStateClose () && _curtain.ResearchStatePlayTime () >= 1f) {
-					for (int i = 0; i < _npcCharacters.Length; i++) {
-						if (_npcCharacters [i] != _cursorForCriminalChoise.GetSelectedGameObject ()) {
-							_npcCharacters [i].SetActive (false);
-						} else {
-							_npcCharacters [i].GetComponent<BoxCollider2D> ().enabled = false;//凶器カーソルも反応してしまうバグ修正
-						}
-					}
-					_curtain.Open ();
-					_curtainOpenedStateCriminalChose = true;
-				}
-				if (_curtain.IsStateOpen () && _curtain.ResearchStatePlayTime () >= 1f && _curtainOpenedStateCriminalChose) {
-					_detectiveTalkIndex = 3;
-					_state = State.DETECTIVE_TALKING;
-					_curtainClosedStateCriminalChose = false;
-					_curtainOpenedStateCriminalChose = false;
-					_cursorForCriminalChoise.SetSelectedFlag (false);
-				}
-			}
+			CriminalChoiseAction();
 			break;
 		case State.DANGEROUS_WEAPON_CHOISE://凶器選択
-			if (_cursorForDangerousWeaponChoise.GetSelectedFlag ()) {
-				_detectiveTalkIndex = 4;
-				_state = State.DETECTIVE_TALKING;
-				_cursorForDangerousWeaponChoise.gameObject.SetActive (false);	//「これでいいんだな？」で「いいえ」を選んだらカーソルをアクティブに戻す！
-			}
+			DangerousWeaponChoiseAction();
 			break;
 		case State.FINAL_JUDGE://最終確認
-			switch (_laboUIManager.GetJudge ()) {
-			case LaboUIManager.Judge.YES:
-				_curtain.Close ();
-				break;
-			case LaboUIManager.Judge.NO:
-				if (!_curtain.IsStateClose () && !_curtainClosedStateCriminalChose) {
-					GameObject npc = _cursorForCriminalChoise.GetSelectedGameObject ();
-					npc.GetComponent<BoxCollider2D> ().enabled = true;
-					_cursorForCriminalChoise.SetSelectedFlag (false);
-					_curtain.Close ();
-					_curtainClosedStateCriminalChose = true;
-				}
-				if (_curtain.IsStateClose () && _curtain.ResearchStatePlayTime () >= 1f) {
-					for (int i = 0; i < _npcCharacters.Length; i++) {
-						if (_npcCharacters [i] != _cursorForCriminalChoise.GetSelectedGameObject ()) {
-							_npcCharacters [i].SetActive (true);
-						}
-					}
-					_cursorForDangerousWeaponChoise.SetSelectedFlag (false);
-					_curtain.Open ();
-					_curtainOpenedStateCriminalChose = true;
-				}
-				if (_curtain.IsStateOpen () && _curtain.ResearchStatePlayTime () >= 1f && _curtainOpenedStateCriminalChose) {
-					_curtainClosedStateCriminalChose = false;
-					_curtainOpenedStateCriminalChose = false;
-					_cursorForDangerousWeaponChoise.gameObject.SetActive (true);
-					_laboUIManager.SetJudgeFlag ((int)LaboUIManager.Judge.OTHERWISE);
-					_state = State.INVESTIGATE;
-				}
-				break;
-			default :
-				break;
-			}
-
+			FinalJudgeAction();
 			break;
 		default :
 			break;
@@ -185,7 +96,7 @@ public class DetectiveOfficeManager : MonoBehaviour {
 
 		//各UIのオンオフを処理---------------------------------------------------------------------------------------------------------------
 		ChangeActive (_detectiveTalkingUI, State.DETECTIVE_TALKING);
-		ChangeActive (_criminalChoiseUI, State.CRIMINAL_CHOISE, _curtainClosedStateCriminalChose);
+		ChangeActive (_criminalChoiseUI, State.CRIMINAL_CHOISE, /*_curtainClosedStateCriminalChose*/false, _cursorForCriminalChoise.GetSelectedFlag());
 		ChangeActive (_dangerousWeaponChoiseUI, State.DANGEROUS_WEAPON_CHOISE, false, _cursorForDangerousWeaponChoise.GetSelectedFlag());
 		//----------------------------------------------------------------------------------------------------------------------------------
 		Debug.Log (_state);
@@ -255,6 +166,144 @@ public class DetectiveOfficeManager : MonoBehaviour {
 			if (_state == state) {
 				ui.SetActive (true);
 			}
+		}
+	}
+
+
+	//--INVESTIGATE時の処理をする関数
+	void InvestigateAction() {
+		
+	}
+
+
+	//--DETECTIVE_TALKING時の処理をする関数
+	void DetectiveTalkingAction() {
+		if (!_detectiveTalk [_detectiveTalkIndex].gameObject.activeInHierarchy) {
+			_detectiveTalk [_detectiveTalkIndex].gameObject.SetActive (true);
+		}
+		if (Input.GetMouseButtonDown (0)) {
+			//次の文を表示するか次のStateに移動する処理-------------------------------
+			if (_detectiveTalk[_detectiveTalkIndex].GetTalkFinishedFlag ()) {
+				_detectiveTalk [_detectiveTalkIndex].gameObject.SetActive (false);
+				switch (_detectiveTalkIndex) {
+				case 1://証拠品3取得後の発言
+					_state = State.INVESTIGATE;
+					_cookBoxCollider2D.enabled = true;
+					break;
+				case 2://犯人指摘前の発言
+					_state = State.CRIMINAL_CHOISE;
+					break;
+				case 3://凶器選択前の発音
+					_state = State.DANGEROUS_WEAPON_CHOISE;
+					break;
+				case 4://最終確認前の発言
+					_laboUIManager.DisplayJudgeUI ();
+					_state = State.FINAL_JUDGE;
+					break;
+				default :
+					_state = State.INVESTIGATE;
+					break;
+				}
+			} else {
+				_detectiveTalk[_detectiveTalkIndex].Talk ();
+			}
+			//-----------------------------------------------------------------------	
+		}
+	}
+
+
+	//--CRIMINAL_CHOISE時の処理をする関数
+	void CriminalChoiseAction() {
+		//犯人選択後の処理-----------------------------------------------------------------------------------------------------
+		if (_cursorForCriminalChoise.GetSelectedFlag ()) {
+			//カーテンを閉じる処理----------------------------------------------------
+			if (!_curtain.IsStateClose () && !_curtainClosedStateCriminalChose) {
+				_curtain.Close ();
+				_curtainClosedStateCriminalChose = true;
+			}
+			//-----------------------------------------------------------------------
+
+			//選択していないNPCを非アクティブにしコライダーを非アクティブにする処理----------------------------------------------
+			if (_curtain.IsStateClose () && _curtain.ResearchStatePlayTime () >= 1f) {
+				for (int i = 0; i < _npcCharacters.Length; i++) {
+					if (_npcCharacters [i] != _cursorForCriminalChoise.GetSelectedGameObject ()) {
+						_npcCharacters [i].SetActive (false);
+					} else {
+						_npcCharacters [i].GetComponent<BoxCollider2D> ().enabled = false;//凶器カーソルも反応してしまうバグ修正
+						_npcCharacters[i].transform.position = _npcCharacters[_npcCharacters.Length - 1].transform.position;//選択したNPCを右端に移動
+					}
+				}
+				_curtain.Open ();
+				_curtainOpenedStateCriminalChose = true;
+			}
+			//---------------------------------------------------------------------------------------------------------------
+
+			//カーソルを消す処理------------------------------------------------------------------------------------------------
+			if (_curtain.IsStateOpen () && _curtain.ResearchStatePlayTime () >= 0.5f && _curtainOpenedStateCriminalChose) {
+				_cursorForCriminalChoise.gameObject.SetActive (false);	//「これでいいんだな？」で「いいえ」を選んだらカーソルをアクティブに戻す！
+			}
+			//-----------------------------------------------------------------------------------------------------------------
+
+			//カーテンを再び開いたら変数を初期化して次のStateへ-----------------------------------------------------------------
+			if (_curtain.IsStateOpen () && _curtain.ResearchStatePlayTime () >= 1f && _curtainOpenedStateCriminalChose) {
+				_detectiveTalkIndex = 3;
+				_state = State.DETECTIVE_TALKING;
+				_curtainClosedStateCriminalChose = false;
+				_curtainOpenedStateCriminalChose = false;
+			}
+			//----------------------------------------------------------------------------------------------------------------
+		}
+		//-----------------------------------------------------------------------------------------------------------------------
+	}
+
+
+	//--DANGEROUS_WEAPON_CHOISE時の処理をする関数
+	void DangerousWeaponChoiseAction() {
+		if (_cursorForDangerousWeaponChoise.GetSelectedFlag ()) {
+			_detectiveTalkIndex = 4;
+			_state = State.DETECTIVE_TALKING;
+			_cursorForDangerousWeaponChoise.gameObject.SetActive (false);	//「これでいいんだな？」で「いいえ」を選んだらカーソルをアクティブに戻す！
+		}
+	}
+
+
+	//--FINAL_JUDGE時の処理をする関数
+	void FinalJudgeAction() {
+		switch (_laboUIManager.GetJudge ()) {
+		case LaboUIManager.Judge.YES:
+			_curtain.Close ();
+			break;
+		case LaboUIManager.Judge.NO:
+			if (!_curtain.IsStateClose () && !_curtainClosedStateCriminalChose) {
+				GameObject npc = _cursorForCriminalChoise.GetSelectedGameObject ();
+				npc.GetComponent<BoxCollider2D> ().enabled = true;
+				_cursorForCriminalChoise.SetSelectedFlag (false);
+				_curtain.Close ();
+				_curtainClosedStateCriminalChose = true;
+			}
+			if (_curtain.IsStateClose () && _curtain.ResearchStatePlayTime () >= 1f) {
+				for (int i = 0; i < _npcCharacters.Length; i++) {
+					if (_npcCharacters [i] != _cursorForCriminalChoise.GetSelectedGameObject ()) {
+						_npcCharacters [i].SetActive (true);
+					}
+				}
+				_cursorForCriminalChoise.SetSelectedFlag (false);//犯人選択カーソルのSelectedFlagをfalseに
+				_cursorForDangerousWeaponChoise.SetSelectedFlag (false);//凶器選択カーソルのSelectedFlagをfalseに
+
+				_curtain.Open ();
+				_curtainOpenedStateCriminalChose = true;
+			}
+			if (_curtain.IsStateOpen () && _curtain.ResearchStatePlayTime () >= 1f && _curtainOpenedStateCriminalChose) {
+				_curtainClosedStateCriminalChose = false;
+				_curtainOpenedStateCriminalChose = false;
+				_cursorForCriminalChoise.gameObject.SetActive (true);
+				_cursorForDangerousWeaponChoise.gameObject.SetActive (true);
+				_laboUIManager.SetJudgeFlag ((int)LaboUIManager.Judge.OTHERWISE);
+				_state = State.INVESTIGATE;
+			}
+			break;
+		default :
+			break;
 		}
 	}
 }
