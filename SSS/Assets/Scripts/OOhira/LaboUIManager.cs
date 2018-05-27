@@ -47,13 +47,13 @@ public class LaboUIManager : MonoBehaviour {
 	//--ジャッジパネルを表示する関数
 	public void DisplayJudgeUI( ) {
 		_judgeUI.SetActive (true);
-		_controllUI.SetActive (false);
+		//_controllUI.SetActive (false);	//judgeUIの表示位置変更により非アクティブする必要なし
 	}
 
 	//--ジャッジパネルを非表示にする関数
 	public void DisappearJudgeUI( ) {
 		_judgeUI.SetActive (false);
-		_controllUI.SetActive (true);
+		//_controllUI.SetActive (true);		//judgeUIの表示位置変更により非アクティブする必要なし
 	}
 
 	//===========================================
