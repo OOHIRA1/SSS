@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Catcher : MonoBehaviour {
 	[ SerializeField ] Detective _player = null;
-	[ SerializeField ] GameObject _rope = null;
+	[ SerializeField ] Rope _rope = null;
 	[ SerializeField ] MoviePlaySystem _moviePlaySystem = null;
 	bool _catcher;
+    bool _transported;
 	float count;
 	bool a;
 	bool b;
@@ -18,7 +19,8 @@ public class Catcher : MonoBehaviour {
 	// Use this for initialization
 	void Start( ) {
 		_catcher = false;
-		count = 5f;
+        //_transported = 
+		count = 0;
 		a = false;
 		b = false;
 		c = false;
@@ -30,8 +32,50 @@ public class Catcher : MonoBehaviour {
 	void Update( ) {
 		//ロープにコライダーをつけてisTriggerにしてプレイヤーと触れたら一緒に一定以上、上がるようにして、上がったら初期posをみてそこにあわせて連れて行く
 		//別と別のゲームオブジェクトが当たったことを判定できるものを探す
-		Debug.Log(debug);
-		Vector3 aa = _player.GetInitialPos( );
+		Debug.Log(_rope.Getfureru());
+
+        if ( _catcher ) {
+            
+			if (!b) {
+				_rope.transform.position = new Vector3( _player.transform.position.x, _rope.transform.position.y, 0 );
+				b = true;
+			}
+
+            if (_player.transform.position.y < 1.7f ) {
+                if (!_player.GetRopeTouch( )){
+                    _rope.transform.position -= new Vector3(0, 0.1f, 0);
+                }else{
+                    _rope.transform.position += new Vector3(0, 0.1f, 0);
+                    _player.transform.position += new Vector3(0, 0.1f, 0);
+                    //count++;
+                }
+            }
+
+            if (_player.transform.position.y >= 1.7f && !a) {
+				Vector3 aa = _player.GetInitialPos ();
+				if (aa.x != _player.transform.position.x) {
+					if (aa.x < _player.transform.position.x) {
+						_rope.transform.position -= new Vector3 (0.1f, 0, 0);
+						_player.transform.position -= new Vector3 (0.1f, 0, 0);
+					} else {
+						_rope.transform.position += new Vector3 (0.1f, 0, 0);
+						_player.transform.position += new Vector3 (0.1f, 0, 0);
+					}
+				} else {
+					if (aa.y != _player.transform.position.y) {
+						_rope.transform.position -= new Vector3 (0, 0.1f, 0);
+						_player.transform.position -= new Vector3 (0, 0.1f, 0);
+					} else {
+						a = true;
+					}
+				}
+            }
+
+			if (a) {
+				_rope.transform.position += new Vector3 (0, 0.1f, 0);
+			}
+
+        }
 
 		//if ( _catcher ) {
 		//	_rope.transform.position = new Vector3( _player.transform.position.x, 0, 0 );

@@ -9,6 +9,8 @@ public class Detective : MonoBehaviour {
     bool _isFlip;                                       //反転するかどうか
     bool _isMove;                                       //動けるかどうか
 
+    bool _isRopeTouch;                                  //ロープが触れているかどうか
+
     Vector3 _move;                                      //探偵が動く場所
     Vector3 _initialPos;                                //探偵の初期位置
 
@@ -29,6 +31,7 @@ public class Detective : MonoBehaviour {
         _isAnimWalk = false;        
         _isFlip = true;
         _isMove = true;
+        _isRopeTouch = false;
         _move = transform.position;
         _initialPos = transform.position;
 	}
@@ -41,6 +44,10 @@ public class Detective : MonoBehaviour {
 
         Flip( );
 	}
+
+    void OnTriggerEnter2D( Collider2D collision ) {
+        if ( collision.gameObject.tag == "Rope" ) _isRopeTouch = true;
+    }
 
     //探偵の動き処理--------------------------------------------------------------------------------------------
     void Move( ) {
@@ -108,9 +115,9 @@ public class Detective : MonoBehaviour {
 		}
 	}
 
-	public Vector3 GetInitialPos( ) {
-		return _initialPos;
-	}
+	public Vector3 GetInitialPos( ) { return _initialPos; }
+
+    public bool GetRopeTouch( ) { return _isRopeTouch; }
 
 	//再生したら場所をリセットする--------------
     public void  ResetPos( ) {

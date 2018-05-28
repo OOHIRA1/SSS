@@ -19,7 +19,7 @@ public class SiteNoonManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update( ) {
-		CutainState( );		//時計ＵＩがタッチされたら処理しない
+		CutainState( );
         ScenesTransitionWithAnim( );
 
         if ( !_movePlaySystem.GetStop( ) ) {
