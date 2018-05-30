@@ -5,13 +5,14 @@ using UnityEngine.UI;
 
 public class SiteNoonManager : MonoBehaviour {
     [ SerializeField ] Detective _detective = null;
-    [ SerializeField ] MoviePlaySystem _movePlaySystem = null;
+    [ SerializeField ] MoviePlaySystem _moviePlaySystem = null;
     [ SerializeField ] ScenesManager _scenesManager = null;
 	[ SerializeField ] Curtain _cutain = null;
     [ SerializeField ] ClockUI _clockUI = null;
 	//[ SerializeField ] GameObject[] _ui = new GameObject[ 1 ];
 	[ SerializeField ] UnityEngine.UI.Button[] _button = new  UnityEngine.UI.Button[ 1 ];
 	[ SerializeField ] GameObject _evidenceFile = null;
+    [ SerializeField ] Catcher _catcher = null;
 
 	// Use this for initialization
 	void Start( ) {
@@ -22,62 +23,78 @@ public class SiteNoonManager : MonoBehaviour {
 		CutainState( );
         ScenesTransitionWithAnim( );
 
-        if ( !_movePlaySystem.GetStop( ) ) {
-            Regulation( );
-        } else {
-            _detective.SetIsMove( true );
+        if ( !_moviePlaySystem.GetStop( ) ) {								//動画が停止していなかったら(停止していたらCutainStateのほうでtrueになる)（修正したほうがいいか）
+            _detective.SetIsMove( false );			 
         }
 
+        if ( _catcher.GetIsCatch( ) || _detective.GetIsM( ) ) {             //ロープアクションしている途中か探偵がマウス以外の指定された場所に歩いている途中だったら
+            Regulation( );
+        } 
+        
+       
+
 	}
+
+    //操作をいろいろ制限する------------------------------------------------------------
+    void Regulation( ) {
+        _evidenceFile.SetActive( false );			//証拠品ファイルを非表示
+		_detective.SetIsMove( false );				//探偵を動けないようにする
+		_clockUI.Operation( false );				//時計ＵＩを操作不可にする
+		_moviePlaySystem.SetOperation( false );		//動画(シークバー)を操作不可にする
+		AllButtonInteractable( false );				//ボタンを押せないようにする
+    }
+    //-----------------------------------------------------------------------------------
 
     //押されたものが時計ＵＩの昼か夕方か夜だったらする処理------------------------------------------------------------------------------------------
     void ScenesTransitionWithAnim( ) {
 
-		if ( _clockUI.GetPushed( ) != "none"  ) {
-			_evidenceFile.SetActive( false );			//証拠品ファイルを非表示
-			_detective.SetIsMove( false );				//探偵を動けないようにする
-			_clockUI.Operation( false );				//時計ＵＩを操作不可にする
-			_movePlaySystem.SetOperation( false );		//動画(シークバー)を操作不可にする
-			AllButtonInteractable( false );				//ボタンを押せないようにする
-
+		if ( _clockUI.GetPushed( ) != "none"  ) {       //時計UIのいずれかの時間帯がタッチされたら       
+			Regulation( );
             _cutain.Close( );							//カーテンを閉める
-            if ( _cutain.IsStateClose( ) && _cutain.ResearchStatePlayTime( ) >= 1f ) _scenesManager.SiteScenesTransition( _clockUI.GetPushed( ) );		//カーテンが閉まりきったらシーン遷移する
+
+            if ( _cutain.IsStateClose( ) && _cutain.ResearchStatePlayTime( ) >= 1f )    //カーテンが閉まりきったらシーン遷移する
+                _scenesManager.SiteScenesTransition( _clockUI.GetPushed( ) );		
+
 		}
 
     }
     //-------------------------------------------------------------------------------------------------------------------------------------------
 
-    void Regulation( ) {
-        _detective.SetIsMove( false );
-        //_detective.ResetPos( );
-    }
+    
 
 	//カーテンがアニメーションをしてたときとしていないときの処理-------------------------
 	void CutainState( ) {
 		if ( _cutain.ResearchStatePlayTime( ) < 1f ) {		//カーテンが動いていたら
-			_evidenceFile.SetActive( false );
-			_detective.SetIsMove( false );
-			_clockUI.Operation( false );
-			_movePlaySystem.SetOperation( false );				
-			AllButtonInteractable( false );
-
+			Regulation( );
 		} else {
 			_detective.SetIsMove( true );
 			_clockUI.Operation( true );
-			_movePlaySystem.SetOperation( true );
+			_moviePlaySystem.SetOperation( true );
 			AllButtonInteractable( true );
 		}
 	}
-	//-------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
 
-
-	//すべてのボタンを操作不能にする------------------------------
-	void AllButtonInteractable( bool inter ) {
+    //すべてのボタンを操作不能にする------------------------------
+    void AllButtonInteractable( bool inter ) {
 		for (int i = 0; i < _button.Length; i++) {
 			_button [i].interactable = inter;
 		}
 	}
 	//------------------------------------------------------------
+
+
+	 //再生＆一時停止ボタンを押したらロープアクションをするかどうかの判定---
+    public void RopeAction( ) {
+		if ( !_moviePlaySystem.GetStop( ) && !_detective.GetCheckPos( ) ) {    //動画が再生されていて探偵が初期値にいなかったら
+			if ( _detective.transform.position.x < 0 ) {						//探偵が指定位置より左側にいたら歩いて戻る。右側にいたらロープアクションで戻る
+				_detective.DesignationMove( _detective.GetInitialPos( ) );		
+			} else {
+				_catcher.ToRopeAction( );
+			}
+		}
+	}
+    //----------------------------------------------------------------------
 
 
 	//----------------------------------------------------------------------

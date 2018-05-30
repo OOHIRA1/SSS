@@ -648,6 +648,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveTouchUp: -4
   _moveTouchDown: -6
+  _speed: 0.1
 --- !u!61 &488384835
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1390,8 +1391,9 @@ MonoBehaviour:
 --- !u!1 &927972218
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabParentObject: {fileID: 1480385955201722, guid: 2697fb97684691c4281bd9e03438a855,
+    type: 2}
+  m_PrefabInternal: {fileID: 1228330575}
   serializedVersion: 5
   m_Component:
   - component: {fileID: 927972221}
@@ -1407,8 +1409,9 @@ GameObject:
 --- !u!114 &927972219
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabParentObject: {fileID: 114965736205080334, guid: 2697fb97684691c4281bd9e03438a855,
+    type: 2}
+  m_PrefabInternal: {fileID: 1228330575}
   m_GameObject: {fileID: 927972218}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -1425,8 +1428,9 @@ MonoBehaviour:
 --- !u!114 &927972220
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabParentObject: {fileID: 114106652748000764, guid: 2697fb97684691c4281bd9e03438a855,
+    type: 2}
+  m_PrefabInternal: {fileID: 1228330575}
   m_GameObject: {fileID: 927972218}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -1439,8 +1443,9 @@ MonoBehaviour:
 --- !u!4 &927972221
 Transform:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabParentObject: {fileID: 4013058918981372, guid: 2697fb97684691c4281bd9e03438a855,
+    type: 2}
+  m_PrefabInternal: {fileID: 1228330575}
   m_GameObject: {fileID: 927972218}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -1663,8 +1668,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1110853210}
-        m_MethodName: StopButton
+      - m_Target: {fileID: 1461087935}
+        m_MethodName: RopeAction
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2196,9 +2201,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba7137e3f838eeb45aec70369972cf16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speed: 1
+  _toTakeHeight: 10
   _player: {fileID: 488384834}
   _rope: {fileID: 1335868435}
-  _moviePlaySystem: {fileID: 450558421}
 --- !u!1001 &1125567012
 Prefab:
   m_ObjectHideFlags: 0
@@ -2310,6 +2316,48 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!1001 &1228330575
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4013058918981372, guid: 2697fb97684691c4281bd9e03438a855, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013058918981372, guid: 2697fb97684691c4281bd9e03438a855, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013058918981372, guid: 2697fb97684691c4281bd9e03438a855, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013058918981372, guid: 2697fb97684691c4281bd9e03438a855, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013058918981372, guid: 2697fb97684691c4281bd9e03438a855, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013058918981372, guid: 2697fb97684691c4281bd9e03438a855, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013058918981372, guid: 2697fb97684691c4281bd9e03438a855, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4013058918981372, guid: 2697fb97684691c4281bd9e03438a855, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 2697fb97684691c4281bd9e03438a855, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1296333194
 GameObject:
   m_ObjectHideFlags: 0
@@ -3472,7 +3520,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _detective: {fileID: 488384834}
-  _movePlaySystem: {fileID: 450558421}
+  _moviePlaySystem: {fileID: 450558421}
   _scenesManager: {fileID: 233796247}
   _cutain: {fileID: 336788341}
   _clockUI: {fileID: 611535454}
@@ -3485,6 +3533,7 @@ MonoBehaviour:
   - {fileID: 1313608122}
   - {fileID: 499720542}
   _evidenceFile: {fileID: 932153497}
+  _catcher: {fileID: 1110853210}
 --- !u!4 &1461087936
 Transform:
   m_ObjectHideFlags: 0
