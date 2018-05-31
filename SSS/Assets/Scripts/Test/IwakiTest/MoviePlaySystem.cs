@@ -12,7 +12,7 @@ public class MoviePlaySystem : MonoBehaviour {
 								
 	[SerializeField] float _maxTime  = 60.0f;		//最大再生時間
 
-	float _posParSecond;							//pointの1秒当たりに進む座標
+	float _forcedPosParSecond;					    //pointの1秒当たりに進む座標
 	bool _stop;										//再生されているか
 
 	[SerializeField] int _barTouchDown = 180;		//バーのタッチできる領域
@@ -22,7 +22,7 @@ public class MoviePlaySystem : MonoBehaviour {
 
 	// Use this for initialization
 	void Start( ) {
-		_posParSecond = _point.GetMaxRange( ) / _maxTime;
+		_forcedPosParSecond = _point.GetMaxRange( ) / _maxTime;
 		_stop = true;
 		_isOperation = true;
 	}
@@ -43,7 +43,7 @@ public class MoviePlaySystem : MonoBehaviour {
 	//--ポイントの座標を更新する関数
 	void PointUpdate( ) {
 		Vector2 pointPos = _point.GetTransform( ); 
-		if ( !_stop ) pointPos.x = _point.GetTransform ().x + ( _posParSecond * Time.deltaTime );
+		if ( !_stop ) pointPos.x = _point.GetTransform ().x + ( _forcedPosParSecond * Time.deltaTime );
 
 		if ( Input.GetMouseButtonDown( 0 ) ) {	//マウスを押したかどうか
 			Vector2 mousePos = Vector2.zero;
@@ -96,7 +96,7 @@ public class MoviePlaySystem : MonoBehaviour {
 	//--5秒巻き戻し(FastBackword)をする関数
 	public void FastBackword( ) {
 		Vector3 pointPos = _point.GetTransform( );
-		pointPos.x -= _posParSecond * 5;
+		pointPos.x -= _forcedPosParSecond * 5;
 		_point.MovePosition ( pointPos );  //0.5fは戻した直後にシークバーがすぐに動くのを防ぐため
         _stop = false;
 	}
@@ -104,7 +104,7 @@ public class MoviePlaySystem : MonoBehaviour {
 	//--5秒早送り(FastForward)をする関数
 	public void FastForward( ) {
 		Vector3 pointPos = _point.GetTransform( );
-		pointPos.x += _posParSecond * 5;
+		pointPos.x += _forcedPosParSecond * 5;
 		_point.MovePosition ( pointPos );
         _stop = false;
 	}

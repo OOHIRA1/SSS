@@ -11,6 +11,7 @@ public class Bar : MonoBehaviour {
 	// Use this for initialization
 	void Start( ) {
 		_rectTransform = GetComponent<RectTransform>( );
+        _rectTransform.localScale = new Vector2( 0, 1 );
 	}
 
 	//=================================================

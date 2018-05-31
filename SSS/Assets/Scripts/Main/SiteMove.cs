@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SiteMove : MonoBehaviour {
-    const float DOWN_ROOM_POS = -30f;
+    const float DOWN_ROOM_forcedPos = -30f;
     [ SerializeField ] GameObject[ ] _site    = new GameObject[ 4 ];        //現場四つ	1:Bedroom 2:Graden 3:Kitchen 4:ServingRoom の順番で入れること 
 	[ SerializeField ] float _neighborRoom = 21f;							//左右の部屋のpos(-を付けると左の部屋のpos。そのままだと右の部屋のpos。)
     [ SerializeField ] float _moveSpeed = 1f; 
@@ -36,7 +36,7 @@ public class SiteMove : MonoBehaviour {
 		_nowSitePos = new Vector3( _moveSpeed, 0, 0 );
 		_nextOneSitePos = new Vector3( _moveSpeed, 0, 0 );
 		_nextTwoSitePos = new Vector3( _neighborRoom, 0, 0 );
-		_nextThreeSitePos = new Vector3( 0, DOWN_ROOM_POS, 0 );
+		_nextThreeSitePos = new Vector3( 0, DOWN_ROOM_forcedPos, 0 );
 
        SiteInitialPos( );
 
@@ -78,7 +78,7 @@ public class SiteMove : MonoBehaviour {
 
          _site[ _nowSiteNum ].transform.position = new Vector3( 0, 0, 0 );
          _site[ _nextNextSiteNum[ 0 ] ].transform.position = new Vector3( _neighborRoom, 0, 0 );
-         _site[ _nextNextSiteNum[ 1 ] ].transform.position = new Vector3( 0, DOWN_ROOM_POS, 0 );
+         _site[ _nextNextSiteNum[ 1 ] ].transform.position = new Vector3( 0, DOWN_ROOM_forcedPos, 0 );
          _site[ _nextNextSiteNum[ 2 ] ].transform.position = new Vector3( -_neighborRoom, 0, 0 );
 
     }

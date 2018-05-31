@@ -65,10 +65,18 @@ public class MillioareDieMono : MonoBehaviour {
 
         }
         _effectBlood.SetActive( value );
-
-
-
     }
 
+    public bool IsStateMillionaireDieMiddle2( ) {
+        int layer = _animator.GetLayerIndex( "Base Layer" );
+        AnimatorStateInfo animatorStateInfo = _animator.GetCurrentAnimatorStateInfo( layer );
+        return animatorStateInfo.IsName( "MillioareDieMiddle2" );
+    }
+
+    public float ResearchStatePlayTime( ) {
+        int layer = _animator.GetLayerIndex( "Base Layer" );
+        AnimatorStateInfo animatorStateInfo = _animator.GetCurrentAnimatorStateInfo( layer );
+        return animatorStateInfo.normalizedTime;
+    }
 
 }

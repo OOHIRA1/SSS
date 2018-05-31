@@ -9,7 +9,7 @@ public class Point : MonoBehaviour {
 	RectTransform _transform;
 	[SerializeField] float _leftPos  = 0;			//pointのｘ座標の最小値
 	[SerializeField] float _rightPos = 0;			//pointのｘ座標の最大値
-	float _maxRange;									//pointの最大移動範囲
+	float _maxRange;								//pointの最大移動範囲
 
 	// Use this for initialization
 	void Start( ) {

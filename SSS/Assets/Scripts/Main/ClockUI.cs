@@ -24,8 +24,10 @@ public class ClockUI : MonoBehaviour {
     float _hourHandInitialRota;  		                    //短針の初期角度
 	float _RotaParSecondMinutes;							//1秒当たりに進む長針の角度
 	float _RotaParSecondHour;								//1秒あたりに進む短針の角度
-    Vector3 minutesHandRota;                                //長針の角度
-    Vector3 hourHandRota;                                   //短針の角度
+    Vector3 _minutesHandRota;                               //長針の角度
+    Vector3 _hourHandRota;                                  //短針の角度
+    Vector3 _minutesHandStopPos;                            //長針の止まる角度
+    Vector3 _hourHandStopPos;                               //短針の止まる角度
 
 	[ SerializeField ] GameObject[] _TimeZoneColor = new GameObject[ 1 ];
 	[ SerializeField ] GameObject[] _TimeZoneMono = new GameObject[ 1 ]; 
@@ -34,9 +36,11 @@ public class ClockUI : MonoBehaviour {
     string _pushed;                                              //クリックされたもの
     // Use this for initialization
     void Start( ) {
-        minutesHandRota = _minutesHand.transform.localEulerAngles;
-        hourHandRota = _hourHand.transform.localEulerAngles;
+        _minutesHandRota = _minutesHand.transform.localEulerAngles;
+        _hourHandRota = _hourHand.transform.localEulerAngles;
         _hourHandInitialRota = _hourHand.transform.localEulerAngles.z;
+        _minutesHandStopPos = new Vector3( 0, 0, 0.1f );
+        _hourHandStopPos = new Vector3( 0, 0, _hourHandInitialRota - ONE_HOUR );
 		_RotaParSecondMinutes = 360f / _time;
 		_RotaParSecondHour = _RotaParSecondMinutes / 12f;
         _pushed = "none";
@@ -102,24 +106,24 @@ public class ClockUI : MonoBehaviour {
 	//動画にあわせて針を動かす------------------------------------------------------------------------------------------
 	void ClockNeedleMove( ) {
 		//長針の動き---------------------------------------------------------------------
-        minutesHandRota.z = _RotaParSecondMinutes * _moviPlaySystem.MoviTime( );
+        _minutesHandRota.z = _RotaParSecondMinutes * _moviPlaySystem.MoviTime( );
 		
 		if ( ( _minutesHand.transform.localEulerAngles.z < MINUTES_HAND_STOP_LEFT ) &&		//長針を止めたい範囲だったら
 			 ( _minutesHand.transform.localEulerAngles.z > MINUTES_HAND_STOP_RIGHT ) ) {
 
-			_minutesHand.transform.localEulerAngles = new Vector3( 0, 0, 0.1f );
+			_minutesHand.transform.localEulerAngles = _minutesHandStopPos;
       
 		}
-        _minutesHand.transform.localEulerAngles = -minutesHandRota;
+        _minutesHand.transform.localEulerAngles = -_minutesHandRota;
 		//-------------------------------------------------------------------------------
 
 		//短針の動き------------------------------------------------------------------------------------
-         hourHandRota.z = _hourHandInitialRota - _RotaParSecondHour * _moviPlaySystem.MoviTime( );
+         _hourHandRota.z = _hourHandInitialRota - _RotaParSecondHour * _moviPlaySystem.MoviTime( );
 		
 		if ( _hourHand.transform.localEulerAngles.z <= _hourHandInitialRota - ONE_HOUR ) {	//短針が動いてほしい角度を超えたら
-			_hourHand.transform.localEulerAngles = new Vector3( 0, 0, _hourHandInitialRota - ONE_HOUR );
+			_hourHand.transform.localEulerAngles = _hourHandStopPos;
 		}
-		_hourHand.transform.localEulerAngles = hourHandRota;
+		_hourHand.transform.localEulerAngles = _hourHandRota;
 		//-----------------------------------------------------------------------------------------------
 	}
 	//-------------------------------------------------------------------------------------------------------------------

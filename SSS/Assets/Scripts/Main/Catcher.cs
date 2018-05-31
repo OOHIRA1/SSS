@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Catcher : MonoBehaviour {
-    const float ROPE_STOP_POS = 15f;                                //ロープが停止する位置(Y座標)
+    const float ROPE_STOP_forcedDestination = 15f;                                //ロープが停止する位置(Y座標)
 
     [ SerializeField ] float _speed = 0.1f;                         //ロープアクションの速度
     [ SerializeField ] float _toTakeHeight = 10f;                   //探偵を持ち上げる高さ
 
     [ SerializeField ] Detective _player = null;
-	[ SerializeField ] Rope _rope = null;
+	[ SerializeField ] GameObject _rope = null;
 	//[ SerializeField ] MoviePlaySystem _moviePlaySystem = null;
 
     bool _initialRope;                                              //ロープの初期化を行ったかどうか
@@ -116,7 +116,7 @@ public class Catcher : MonoBehaviour {
     void RopeExit( ) {
         _rope.transform.position += _moveY;
 
-        if ( _rope.transform.position.y > ROPE_STOP_POS ) StepReset( );     //ロープが指定位置まで行ったら工程をリセットさせて終了
+        if ( _rope.transform.position.y > ROPE_STOP_forcedDestination ) StepReset( );     //ロープが指定位置まで行ったら工程をリセットさせて終了
         
     }
     //-----------------------------------------------------------------------
