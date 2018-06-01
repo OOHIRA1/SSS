@@ -180,7 +180,11 @@ public class DetectiveOfficeManager : MonoBehaviour {
 
 	//--INVESTIGATE時の処理をする関数
 	void InvestigateAction() {
-		
+		//犯人指摘のフラグが立っていたら犯人指摘ステートへ--------
+		if (_laboUIManager.GetCriminalChoiseFlag ()) {
+			_state = State.CRIMINAL_CHOISE;
+		}
+		//-----------------------------------------------------
 	}
 
 
@@ -199,7 +203,8 @@ public class DetectiveOfficeManager : MonoBehaviour {
 					_cookBoxCollider2D.enabled = true;
 					break;
 				case 2://犯人指摘前の発言
-					_state = State.CRIMINAL_CHOISE;
+					_state = State.INVESTIGATE;
+					_laboUIManager.DisplayCriminalChoiseButton ();
 					break;
 				case 3://凶器選択前の発音
 					_state = State.DANGEROUS_WEAPON_CHOISE;
@@ -259,6 +264,7 @@ public class DetectiveOfficeManager : MonoBehaviour {
 				_state = State.DETECTIVE_TALKING;
 				_curtainClosedStateCriminalChose = false;
 				_curtainOpenedStateCriminalChose = false;
+				_laboUIManager.SetCriminalChoiseFlag (false);	//犯人指摘フラグを戻す
 			}
 			//----------------------------------------------------------------------------------------------------------------
 		}

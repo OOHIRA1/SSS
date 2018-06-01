@@ -15,22 +15,42 @@ public class EvidenceFile : MonoBehaviour {
 	void Start () {
 		_evidenceManager = GameObject.FindGameObjectWithTag ("EvidenceManager").GetComponent<EvidenceManager>();
 
-		//証拠品バナーの追加---------------------------------------------------------------------------------------------------------------
-		RectTransform contentRectTransform = _content.GetComponent<RectTransform> ();
 		for (int i = 0; i < _evidenceBannar.Length; i++) {
-			_evidenceBannar [i] = (GameObject)Resources.Load ("EvidenceBannar/Evidence" + (i + 1));
-			if (_evidenceManager.CheckEvidence (_enum [i])) {
-				GameObject.Instantiate (_evidenceBannar [i], _content.transform.position, Quaternion.identity, _content.transform);
-				Vector2 sizeDelta = _evidenceBannar [i].GetComponent<RectTransform> ().sizeDelta;
-				contentRectTransform.sizeDelta += new Vector2(0, sizeDelta.y);
-			}
+			_evidenceBannar [i] = (GameObject)Resources.Load ("EvidenceBannar/Evidence" + (i + 1));	//証拠品バナーのロード
 		}
-		contentRectTransform.anchoredPosition = Vector2.zero;	//anchoredPositionの初期化(これをしないとなぜか毎回yが200の状態で始まる)
-		//--------------------------------------------------------------------------------------------------------------------------------
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+
+
+	//=========================================================================================================================================
+	//public関数
+	//--証拠品バナーを最新の状態にアップデートする関数
+	public void UpdateEvidenceBannar() {
+		//証拠品バナーの追加---------------------------------------------------------------------------------------------------------------
+		RectTransform contentRectTransform = _content.GetComponent<RectTransform> ();
+		Transform[ ] evidenceBannarTransform = _content.GetComponentsInChildren<Transform> (); 
+		for (int i = 0; i < _evidenceBannar.Length; i++) {
+			if (_evidenceManager.CheckEvidence (_enum [i])) {
+				bool instantiateFlag = true;	//証拠品バナーを新しく生成するかのフラグ
+				for (int j = 0; j < evidenceBannarTransform.Length; j++) {
+					if (evidenceBannarTransform [j].gameObject.name ==  "Evidence" + (i + 1) + "(Clone)") {
+						instantiateFlag = false;
+					}
+				}
+				if (instantiateFlag) {
+					GameObject.Instantiate (_evidenceBannar [i], _content.transform.position, Quaternion.identity, _content.transform);
+					Vector2 sizeDelta = _evidenceBannar [i].GetComponent<RectTransform> ().sizeDelta;
+					contentRectTransform.sizeDelta += new Vector2 (0, sizeDelta.y);
+				}
+			}
+		}
+		contentRectTransform.anchoredPosition = Vector2.zero;	//anchoredPositionの初期化(これをしないとなぜか毎回yが200の状態で始まる)
+		//--------------------------------------------------------------------------------------------------------------------------------
+	}
+	//=========================================================================================================================================
+	//=========================================================================================================================================
 }
