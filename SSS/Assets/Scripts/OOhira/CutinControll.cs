@@ -26,11 +26,13 @@ public class CutinControll : MonoBehaviour {
 
 	bool _finishFlag;							//カットイン演出を終了したかどうかのフラグ
 	[SerializeField] Vector3 _finishSpeedPerSecond = new Vector3(0, 0.1f, 0);	//終了演出時の画像の縮小速度
+	bool _cutinMoveFinishedFlag;				//カットインの動きを終了したかどうかのフラグ
 
 
 	//========================================
 	//ゲッター
 	public bool GetFinishFlag() { return _finishFlag; }
+	public bool GetCutinMoveFinishedFlag() { return _cutinMoveFinishedFlag;	}
 	//========================================
 	//========================================
 
@@ -47,6 +49,7 @@ public class CutinControll : MonoBehaviour {
 		_backgroundFirstAnchoredPosition = _backgroundImagesRectTransform [0].anchoredPosition;
 		_cutinImageFirstAnchoredPosition = _cutinImageRectTransform.anchoredPosition;
 		_finishFlag = false;
+		_cutinMoveFinishedFlag = false;
 	}
 	
 	// Update is called once per frame
@@ -112,13 +115,13 @@ public class CutinControll : MonoBehaviour {
 			for ( int i = 0; i < _cutinImageMovingTime.Length; i++ ) {
 				bool conditionalExpression = false;	//条件式
 				if ( i == 0 ) {
-					conditionalExpression = time <= _cutinImageMovingTime[i];
+					conditionalExpression = ( time <= _cutinImageMovingTime[i] );
 				} else {
 					float t = 0;
 					for ( int j = 0; j < i; j++ ) {
 						t += _cutinImageMovingTime[j];
 					}
-					conditionalExpression = time > t && time <= t + _cutinImageMovingTime[i];
+					conditionalExpression = ( time > t && time <= t + _cutinImageMovingTime[i] );
 				}
 				if ( conditionalExpression ) {
 					_cutinImageRectTransform.anchoredPosition += cutinImageVelocity[i] * Time.deltaTime;
@@ -147,7 +150,7 @@ public class CutinControll : MonoBehaviour {
 		_backgroundImagesRectTransform [0].anchoredPosition = destination;
 		_cutinImageRectTransform.anchoredPosition = _destination [_destination.Length - 1];
 		yield return new WaitForSeconds (1f);	//カットインをしばらくするための時間稼ぎ
-		SetFinishFlag (true);
+		_cutinMoveFinishedFlag = true;
 	}
 
 
@@ -156,12 +159,20 @@ public class CutinControll : MonoBehaviour {
 		float time = 0;	//カットインしている時間
 		Vector2 destination = new Vector2 (-_backgroundFirstAnchoredPosition.x, _backgroundFirstAnchoredPosition.y);	//背景画像の目的地
 		Vector2 backgroundVelocity = (destination - _backgroundFirstAnchoredPosition) / _backgroundMovingTime;	//背景画像の速度
-		Vector2[] cutinImageVelocity = {	//カットイン画像の速度
-			(_destination [0] - _cutinImageFirstAnchoredPosition) / _cutinImageMovingTime [0],
-			(_destination [1] - _destination[0]) / _cutinImageMovingTime [1]
-		};
-		float cutinImageMaxMovingTime = _cutinImageMovingTime [0] + _cutinImageMovingTime [1];	//カットイン画像の最大移動時間
-		//float movingTime = ( cutinImageMaxMovingTime > _backgroundMovingTime ) ? cutinImageMaxMovingTime : _backgroundMovingTime;	//カットインの時間
+		Vector2[] cutinImageVelocity = new Vector2[_cutinImageMovingTime.Length];	//カットイン画像の速度	//要素数：_cutinImageMovingTime.Length, 各要素をfor文で上手く初期化出来そう(その方が汎用性あり)
+		for (int i = 0; i < _cutinImageMovingTime.Length; i++) {
+			if (i == 0) {
+				cutinImageVelocity [i] = (_destination [i] - _cutinImageFirstAnchoredPosition) / _cutinImageMovingTime [i];
+			} else {
+				cutinImageVelocity [i] = (_destination [i] - _destination [i - 1]) / _cutinImageMovingTime [i];
+			}
+		}
+		float cutinImageMaxMovingTime = 0;	//カットイン画像の最大移動時間
+		for( int i = 0; i < _cutinImageMovingTime.Length; i++ ) {
+			cutinImageMaxMovingTime += _cutinImageMovingTime [i];
+		}
+		float movingTime = ( cutinImageMaxMovingTime > _backgroundMovingTime ) ? cutinImageMaxMovingTime : _backgroundMovingTime;	//カットインの時間
+
 		do {
 			//背景画像の演出------------------------------------------------------------------------
 			switch(_reverseFlag) {
@@ -189,14 +200,28 @@ public class CutinControll : MonoBehaviour {
 			//-------------------------------------------------------------------------------------
 
 			//カットイン画像の演出--------------------------------------------------------------------
-			if ( time < _cutinImageMovingTime[0] ) {
-				_cutinImageRectTransform.anchoredPosition += cutinImageVelocity[0] * Time.deltaTime;
-			} else if ( time < cutinImageMaxMovingTime ) {
-				_cutinImageRectTransform.anchoredPosition += cutinImageVelocity[1] * Time.deltaTime;
-			} else {
-				_cutinImageRectTransform.anchoredPosition = _destination [1];
+			for ( int i = 0; i < _cutinImageMovingTime.Length; i++ ) {
+				bool conditionalExpression = false;	//条件式
+				if ( i == 0 ) {
+					conditionalExpression = ( time <= _cutinImageMovingTime[i] );
+				} else {
+					float t = 0;
+					for ( int j = 0; j < i; j++ ) {
+						t += _cutinImageMovingTime[j];
+					}
+					conditionalExpression = ( time > t && time <= t + _cutinImageMovingTime[i] );
+				}
+				if ( conditionalExpression ) {
+					_cutinImageRectTransform.anchoredPosition += cutinImageVelocity[i] * Time.deltaTime;
+				}
+			}
+			if ( time > cutinImageMaxMovingTime ) {
+				_cutinImageRectTransform.anchoredPosition = _destination [_destination.Length - 1];
 			}
 			//---------------------------------------------------------------------------------------
+			if ( time > cutinImageMaxMovingTime + 1f ) {	//カットインをしばらくするための時間稼ぎ
+				_cutinMoveFinishedFlag = true;
+			}
 			time += Time.deltaTime;
 			yield return new WaitForSeconds(Time.deltaTime);
 		} while( !_finishFlag );

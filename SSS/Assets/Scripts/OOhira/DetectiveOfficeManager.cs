@@ -290,10 +290,11 @@ public class DetectiveOfficeManager : MonoBehaviour {
 				_darkingControll.Darking ();
 			}
 			if (!_cutinPlayedFlag && _darkingControll.IsStateFadein () && _darkingControll.ResearchStatePlayTime () >= 1f) {
-				_cutinControll.StartCutin ();
+				//_cutinControll.StartCutin ();
+				_cutinControll.StartCutinPart2();
 				_cutinPlayedFlag = true;
 			}
-			if (_cutinControll.GetFinishFlag () && !_curtainClosedStateFinalJudge) {
+			if (_cutinControll.GetCutinMoveFinishedFlag() && !_curtainClosedStateFinalJudge) {
 				//_darkingControll.Bright ();	//明転処理はいらない
 				_cutinControll.FinishCutin ();
 				_curtain.Close ();
