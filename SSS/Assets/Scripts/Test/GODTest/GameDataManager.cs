@@ -26,7 +26,7 @@ public class GameDataManager : MonoBehaviour {
 		COME_TO_DETECTIVE_OFFICE_WITH_ALL_EVIDENCE 	= 65536		//証拠品を全て揃えて探偵ラボに来る
 	}
 
-	[SerializeField] int _advancedData;	//進行状況を格納する変数
+	[SerializeField] int _advancedData;	                //進行状況を格納する変数
 	[SerializeField] GameObject _criminal;				//プレイヤーが選択した犯人(探偵ラボで指摘)
 	[SerializeField] GameObject _dangerousWeapon;		//プレイヤーが選択した凶器(探偵ラボで指摘)
 
@@ -66,7 +66,7 @@ public class GameDataManager : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update( ) {
 		
 	}
 

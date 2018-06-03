@@ -10,7 +10,7 @@ public class EvidenceFileControll : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		_evidenceFile.SetActive (false);
+		//_evidenceFile.SetActive (false);
 	}
 	
 	// Update is called once per frame

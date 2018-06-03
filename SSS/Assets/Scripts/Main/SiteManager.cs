@@ -7,9 +7,9 @@ public class SiteManager : MonoBehaviour {
     [ SerializeField ] Detective _detective = null;
     [ SerializeField ] MoviePlaySystem _moviePlaySystem = null;
     [ SerializeField ] ScenesManager _scenesManager = null;
+    [ SerializeField ] GameObject _ui = null;
 	[ SerializeField ] Curtain _cutain = null;
     [ SerializeField ] ClockUI _clockUI = null;
-	//[ SerializeField ] GameObject[] _ui = new GameObject[ 1 ];
 	[ SerializeField ] UnityEngine.UI.Button[] _button = new  UnityEngine.UI.Button[ 1 ];
 	[ SerializeField ] GameObject _evidenceFile = null;
     [ SerializeField ] Catcher _catcher = null;
@@ -33,10 +33,15 @@ public class SiteManager : MonoBehaviour {
             Regulation( );
         } 
         
-       if ( _millioareDieMono.IsStateMillionaireDieMiddle2( ) && _millioareDieMono.ResearchStatePlayTime( ) < 1f ) {
-            //モノクロアニメーションをしていたら処理
+        if ( _scenesManager.GetNowScenes( ) == "SiteNight"  ) {
+            if ( !( _millioareDieMono.IsStateMillionaireDieMiddle2( ) && _millioareDieMono.ResearchStatePlayTime( ) > 1f ) ) {   //モノクロアニメーションが終わっていなかったら
+                //Regulation( );
+                _ui.SetActive( false );
+                _detective.transform.position = new Vector3( -20, _detective.transform.position.y, 0 );
+            } else {
+                _ui.SetActive( true );
+            }
         }
-
 	}
 
     //操作をいろいろ制限する------------------------------------------------------------

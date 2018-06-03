@@ -160,4 +160,9 @@ public class ScenesManager : MonoBehaviour {
     }
     //-------------------------------------------------------------
 
+    //現在のシーンの名前を返す
+    public string GetNowScenes( ) { return SceneManager.GetActiveScene( ).name; } 
+
+
+
 }

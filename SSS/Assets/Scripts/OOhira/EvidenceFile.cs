@@ -18,6 +18,7 @@ public class EvidenceFile : MonoBehaviour {
 		for (int i = 0; i < _evidenceBannar.Length; i++) {
 			_evidenceBannar [i] = (GameObject)Resources.Load ("EvidenceBannar/Evidence" + (i + 1));	//証拠品バナーのロード
 		}
+		gameObject.SetActive (false);
 	}
 	
 	// Update is called once per frame
