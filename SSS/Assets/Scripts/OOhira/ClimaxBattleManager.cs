@@ -18,6 +18,9 @@ public class ClimaxBattleManager : MonoBehaviour {
 	GameDataManager _gameDataManager;
 	[SerializeField] Curtain _curtain = null;
 	[SerializeField] SpriteRenderer _background = null;	//背景画像
+	[SerializeField] RayShooter _rayshooter = null;
+	[SerializeField] GameObject _playerLifeUI = null;	//プレイヤーのライフUI
+	[SerializeField] GameObject _choises = null;		//選択肢群
 
 	// Use this for initialization
 	void Start () {
@@ -47,7 +50,33 @@ public class ClimaxBattleManager : MonoBehaviour {
 			break;
 		}
 		Debug.Log (_state);
+
+		ChangeActive ( _playerLifeUI, State.WATCH_MOVIE, false, _state == State.CHOOSE_CHOISES );
+		ChangeActive ( _choises, State.CHOOSE_CHOISES );
 	}
+
+
+	//--uiのアクティブ・非アクティブを現在のステートがstateかどうかで変える関数
+	void ChangeActive( GameObject ui, State state, bool forcedNonActiveFlag = false, bool forcedActieFlag = false ) {
+		if (forcedNonActiveFlag) {	//stateによらずforcedNonActiveFlagがtrueなら強制的に非アクティブにする
+			ui.SetActive (false);
+			return;
+		}
+		if (forcedActieFlag) {		//stateによらずforcedActiveFlagがtrueなら強制的にアクティブにする
+			ui.SetActive (true);
+			return;
+		}
+		if (ui.activeInHierarchy) {
+			if (_state != state) {
+				ui.SetActive (false);
+			}
+		} else {
+			if (_state == state) {
+				ui.SetActive (true);
+			}
+		}
+	}
+
 
 
 	//--TRUE_OR_FALSEのステートの時の処理をする関数
@@ -71,7 +100,12 @@ public class ClimaxBattleManager : MonoBehaviour {
 
 	//--CHOOSE_CHOISESのステートの時の処理をする関数
 	void ChooseChoisesAction(){
-		
+		if (Input.GetMouseButtonDown (0)) {
+			RaycastHit2D hit = _rayshooter.Shoot ( Input.mousePosition );
+			if (hit) {
+				Debug.Log (hit.collider.name);
+			}
+		}
 	}
 
 
