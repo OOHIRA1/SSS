@@ -16,7 +16,7 @@ public class ClimaxBattleManager : MonoBehaviour {
 
 	[SerializeField] State _state;
 	GameDataManager _gameDataManager;
-	[SerializeField] Curtain _curtain = null;
+	[SerializeField] DoubleDoorCurtain _curtain = null;
 	[SerializeField] SpriteRenderer _background = null;	//背景画像
 	[SerializeField] RayShooter _rayshooter = null;
 	[SerializeField] GameObject _playerLifeUI = null;	//プレイヤーのライフUI
