@@ -37,6 +37,7 @@ public class DetectiveOfficeManager : MonoBehaviour {
 	[SerializeField] CutinControll _cutinControll = null;
 	bool _cutinPlayedFlag;															//カットインをしたかどうかのフラグ
 	bool _curtainClosedStateFinalJudge;											//最終確認ステート中にカーテンを閉じたかどうかのフラグ
+	[SerializeField] ScenesManager _scenesManager;
 
 
 
@@ -287,11 +288,11 @@ public class DetectiveOfficeManager : MonoBehaviour {
 		switch (_laboUIManager.GetJudge ()) {
 		case LaboUIManager.Judge.YES:
 			if (!_cutinPlayedFlag) {
-				_darkingControll.Darking ();
+				_darkingControll.Darking ();//暗転処理
 			}
 			if (!_cutinPlayedFlag && _darkingControll.IsStateFadein () && _darkingControll.ResearchStatePlayTime () >= 1f) {
 				//_cutinControll.StartCutin ();
-				_cutinControll.StartCutinPart2();
+				_cutinControll.StartCutinPart2();//カットイン処理
 				_cutinPlayedFlag = true;
 			}
 			if (_cutinControll.GetCutinMoveFinishedFlag() && !_curtainClosedStateFinalJudge) {
@@ -301,8 +302,9 @@ public class DetectiveOfficeManager : MonoBehaviour {
 				_curtainClosedStateFinalJudge = true;
 			}
 			if (_curtainClosedStateFinalJudge && _curtain.IsStateClose () && _curtain.ResearchStatePlayTime () >= 1f) {
-				_gameDataManager.SetCriminal (_cursorForCriminalChoise.GetSelectedGameObject());
-				_gameDataManager.SetDangerousWeapon (_cursorForDangerousWeaponChoise.GetSelectedGameObject());
+				_gameDataManager.SetCriminal (_cursorForCriminalChoise.GetSelectedGameObject().name);
+				_gameDataManager.SetDangerousWeapon (_cursorForDangerousWeaponChoise.GetSelectedGameObject().name);
+				_scenesManager.ScenesTransition ("ClimaxBattle");
 			}
 			//_curtain.Close ();
 			break;

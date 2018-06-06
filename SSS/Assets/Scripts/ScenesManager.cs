@@ -88,6 +88,9 @@ public class ScenesManager : MonoBehaviour {
 			SceneManager.LoadScene( "SiteNight" );
 			break;
 
+		case "ClimaxBattle":
+			SceneManager.LoadScene ("ClimaxBattle");
+			break;
 		}
 			
 	}
