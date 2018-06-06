@@ -348,7 +348,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 2811dc11c98bdce4189f4d3f5cb35a6c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1551,6 +1551,16 @@ Prefab:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: 26c9c68c0ab340743a9e45f482397396, type: 2}
+    - target: {fileID: 212214632841800910, guid: 9b2640d3ce7ae00419d9faed77e5c9c0,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 212214632841800910, guid: 9b2640d3ce7ae00419d9faed77e5c9c0,
+        type: 2}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9b2640d3ce7ae00419d9faed77e5c9c0, type: 2}
   m_IsPrefabParent: 0
@@ -1585,6 +1595,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1257887969 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1307098372612358, guid: 2f844eae803620f41bccb2b434e746e5,
+    type: 2}
+  m_PrefabInternal: {fileID: 1930376629}
+--- !u!114 &1257887976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1257887969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72c72c0c8d1c49147a91f087cef05eac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveTouchUp: -4
+  _moveTouchDown: -6
+  _speed: 0.1
+  _forcedSpeed: 0.02
 --- !u!1 &1297585622
 GameObject:
   m_ObjectHideFlags: 0
@@ -2186,9 +2216,16 @@ MonoBehaviour:
   _state: 0
   _curtain: {fileID: 411758636}
   _background: {fileID: 1755035905}
+  _detectiveOffice: {fileID: 21300000, guid: 077bf9e351c9f504782872355527dc24, type: 3}
+  _hanamichi: {fileID: 1848373197}
+  _detective: {fileID: 1257887976}
   _rayshooter: {fileID: 2066571479}
   _playerLifeUI: {fileID: 1827327384}
   _choises: {fileID: 1147524986}
+  _detectiveMovePos: {x: -1.8, y: -6, z: 0}
+  _cutinControlls:
+  - {fileID: 538495279}
+  - {fileID: 2092332870}
 --- !u!4 &1699993572
 Transform:
   m_ObjectHideFlags: 0
@@ -2347,13 +2384,15 @@ GameObject:
   m_Component:
   - component: {fileID: 1848373195}
   - component: {fileID: 1848373194}
+  - component: {fileID: 1848373196}
+  - component: {fileID: 1848373197}
   m_Layer: 0
   m_Name: Hanamichi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1848373194
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2385,7 +2424,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0a670b3fca02ef24a847a9dee65141dc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2408,6 +2447,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1848373196
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1848373193}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a1078839cf15b784dadd4bb9c1503bd5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &1848373197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1848373193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15ff9505e8fd63d4a84b4c22cc7831b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1868271573
 GameObject:
   m_ObjectHideFlags: 0
@@ -2590,6 +2657,11 @@ Prefab:
     - target: {fileID: 4011543874168304, guid: 5267b23e2078134449675fd79c9db680, type: 2}
       propertyPath: m_RootOrder
       value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 114732505815527232, guid: 5267b23e2078134449675fd79c9db680,
+        type: 2}
+      propertyPath: _criminal
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5267b23e2078134449675fd79c9db680, type: 2}
@@ -3196,6 +3268,7 @@ GameObject:
   - component: {fileID: 2066571475}
   - component: {fileID: 2066571474}
   - component: {fileID: 2066571479}
+  - component: {fileID: 2066571480}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3285,6 +3358,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _drawRayDistance: 100
+--- !u!114 &2066571480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2066571473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0306fcad93bf184e89f4f9110c4c6a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2092332868
 GameObject:
   m_ObjectHideFlags: 0
