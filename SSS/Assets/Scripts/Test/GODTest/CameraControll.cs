@@ -36,6 +36,21 @@ public class CameraControll : MonoBehaviour {
 	public void LookTarget( Vector3 targetPosition ) {
 		_camera.transform.position = new Vector3 (targetPosition.x, targetPosition.y, _camera.transform.position.z);
 	}
+		
+
+	//--カメラを徐々にズームインする関数
+	public void Zoom( float zoomvalue, float time ) {
+		StartCoroutine ( ZoomGradually(zoomvalue, time) );
+	}
+
+	//--カメラを徐々にズームインする関数(Coroutine)
+	IEnumerator ZoomGradually( float zoomvaluePertime, float time ) {
+		while (time > 0) {
+			Zoom (zoomvaluePertime * Time.deltaTime);
+			time -= Time.deltaTime;
+			yield return new WaitForSeconds (Time.deltaTime);
+		}
+	}
 	//===================================================
 	//===================================================
 }

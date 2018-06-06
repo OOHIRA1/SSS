@@ -26,7 +26,9 @@ public class ClimaxBattleManager : MonoBehaviour {
 	[SerializeField] GameObject _choises = null;		//選択肢群
 	[SerializeField] Vector3 _detectiveMovePos = new Vector3(0,0,0);
 	[SerializeField] CutinControll[] _cutinControlls = new CutinControll[2];
-	bool _cutinFlag;											//カットイン演出をしたかどうかのフラグ
+	bool _cutinFlag;									//カットイン演出をしたかどうかのフラグ
+//	[SerializeField] GameObject _charactors = null;
+
 
 
 	// Use this for initialization
@@ -112,6 +114,9 @@ public class ClimaxBattleManager : MonoBehaviour {
 					_detective.DesignationMove ( _detectiveMovePos );
 					_cutinFlag = true;
 				}
+//				if (_detective.GetIsM ()) {
+//					_charactors.transform.localScale = new Vector3 (1.1f, 1.1f,0);
+//				}
 				if (_cutinControlls[0].GetCutinMoveFinishedFlag () && !_detective.GetIsM() && _cutinFlag) {
 					for (int i = 0; i < _cutinControlls.Length; i++) {
 						_cutinControlls[i].FinishCutin ();
