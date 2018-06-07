@@ -13,6 +13,7 @@ TagManager:
   - EvidenceIcon
   - Noon
   - Rope
+  - BGMManager
   layers:
   - Default
   - TransparentFX

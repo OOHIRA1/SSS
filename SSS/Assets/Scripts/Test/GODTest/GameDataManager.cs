@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//ゲーム進行状況を管理するクラス
+//==ゲーム進行状況を管理するクラス
 //
 //使用方法：常にアクティブなゲームオブジェクトにアタッチ
 public class GameDataManager : MonoBehaviour {

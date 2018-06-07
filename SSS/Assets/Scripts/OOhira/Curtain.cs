@@ -8,14 +8,34 @@ using UnityEngine;
 //使い方：Curtainにアタッチ
 public class Curtain : MonoBehaviour {
 	Animator _animator;
+	AudioSource _audioSource;
+	bool _seSounded;			//SEを鳴らしたかどうかのフラグ(1回のみ鳴らすようにするため)
 
 	// Use this for initialization
 	void Start () {
 		_animator = GetComponentInChildren<Animator> ( );
+		_audioSource = GetComponentInChildren<AudioSource> ();
+		_seSounded = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		//音を出す処理------------------------------------------------------
+//		if (IsStateClose () && ResearchStatePlayTime () >= 0f && !_seSounded) {
+//			_audioSource.PlayOneShot ( _audioSource.clip );
+//			_seSounded = true;
+//		}
+//		if (IsStateClose () && ResearchStatePlayTime () >= 1f && _seSounded) {
+//			_seSounded = false;
+//		}
+//		if (IsStateOpen () && ResearchStatePlayTime () >= 0f && !_seSounded) {
+//			_audioSource.PlayOneShot ( _audioSource.clip );
+//			_seSounded = true;
+//		}
+//		if (IsStateOpen () && ResearchStatePlayTime () >= 1f && _seSounded) {
+//			_seSounded = false;
+//		}
+		//------------------------------------------------------------------
     }
 
 
@@ -26,12 +46,14 @@ public class Curtain : MonoBehaviour {
 	//--カーテンを開ける関数
 	public void Open( ) {
 		_animator.SetTrigger ( "OpenFlag" );
+		_audioSource.PlayOneShot ( _audioSource.clip );
 	}
 
 
 	//--カーテンを閉める関数
 	public void Close( ) {
 		_animator.SetTrigger ( "CloseFlag" );
+		_audioSource.PlayOneShot ( _audioSource.clip );
 	}
 
 
