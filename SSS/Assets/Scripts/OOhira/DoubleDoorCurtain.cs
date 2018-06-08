@@ -7,10 +7,12 @@ using UnityEngine;
 //使用方法：DoubleDoorCurtainにアタッチ
 public class DoubleDoorCurtain : MonoBehaviour {
 	Animator[] _animators;
+	AudioSource _audioSource;
 
 	// Use this for initialization
 	void Start () {
 		_animators = GetComponentsInChildren<Animator> ();
+		_audioSource = GetComponentInChildren<AudioSource> ();
 	}
 	
 	// Update is called once per frame
@@ -28,6 +30,8 @@ public class DoubleDoorCurtain : MonoBehaviour {
 		for (int i = 0; i < _animators.Length; i++) {
 			_animators[i].SetTrigger ("OpenTrigger");
 		}
+		_audioSource.pitch = 0.4f;	//丁度いいピッチに変更
+		_audioSource.PlayOneShot (_audioSource.clip);
 	}
 
 
@@ -36,6 +40,8 @@ public class DoubleDoorCurtain : MonoBehaviour {
 		for (int i = 0; i < _animators.Length; i++) {
 			_animators[i].SetTrigger ("CloseTrigger");
 		}
+		_audioSource.pitch = 1f;	//丁度いいピッチに変更
+		_audioSource.PlayOneShot (_audioSource.clip);
 	}
 
 

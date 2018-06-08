@@ -18,20 +18,20 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 2
-        time: 1.8285714
+        time: 3.857143
         value: {x: -2.4, y: -3.7, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
       - serializedVersion: 2
-        time: 2.2285714
-        value: {x: -2.4, y: -2.8, z: 0}
+        time: 4.257143
+        value: {x: -2.4, y: -2.8, z: 1}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
       - serializedVersion: 2
-        time: 2.8285713
-        value: {x: -2.4, y: -5.5, z: 0}
+        time: 4.857143
+        value: {x: -2.4, y: -5.5, z: 1}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -61,7 +61,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 2.8285713
+    m_StopTime: 4.857143
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -81,13 +81,13 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 2
-        time: 1.8285714
+        time: 3.857143
         value: -2.4
         inSlope: 0
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 2.2285714
+        time: 4.257143
         value: -2.4
         inSlope: 0
         outSlope: 0
@@ -103,19 +103,19 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 2
-        time: 1.8285714
+        time: 3.857143
         value: -3.7
         inSlope: 0
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 2.2285714
+        time: 4.257143
         value: -2.8
         inSlope: 0
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 2.8285713
+        time: 4.857143
         value: -5.5
         inSlope: 0
         outSlope: 0
@@ -131,8 +131,14 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 2
-        time: 1.8285714
+        time: 3.857143
         value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+      - serializedVersion: 2
+        time: 4.257143
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -148,11 +154,4 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_GenerateMotionCurves: 0
   m_IsEmpty: 0
-  m_Events:
-  - time: 2.2857144
-    functionName: BoxLayer
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: -5
-    messageOptions: 0
+  m_Events: []

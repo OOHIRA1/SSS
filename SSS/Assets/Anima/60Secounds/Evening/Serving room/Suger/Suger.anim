@@ -18,13 +18,13 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 2
-        time: 2.6571429
+        time: 5
         value: {x: -2.48, y: -3.95, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
       - serializedVersion: 2
-        time: 3.6571429
+        time: 6
         value: {x: -5.52, y: -3.95, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
@@ -45,7 +45,7 @@ AnimationClip:
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 3.6571429
+        time: 6
         value: 1
         inSlope: 0
         outSlope: 0
@@ -67,7 +67,7 @@ AnimationClip:
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 3.6571429
+        time: 6
         value: 1
         inSlope: 0
         outSlope: 0
@@ -89,7 +89,7 @@ AnimationClip:
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 3.6571429
+        time: 6
         value: 1
         inSlope: 0
         outSlope: 0
@@ -111,19 +111,19 @@ AnimationClip:
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 3.6571429
+        time: 6
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 9.742857
+        time: 26.6
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 9.857142
+        time: 26.714285
         value: 0
         inSlope: 0
         outSlope: 0
@@ -179,7 +179,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 9.857142
+    m_StopTime: 26.714285
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -199,13 +199,13 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 2
-        time: 2.6571429
+        time: 5
         value: -2.48
         inSlope: 0
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 3.6571429
+        time: 6
         value: -5.52
         inSlope: 0
         outSlope: 0
@@ -221,13 +221,13 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 2
-        time: 2.6571429
+        time: 5
         value: -3.95
         inSlope: 0
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 3.6571429
+        time: 6
         value: -3.95
         inSlope: 0
         outSlope: 0
@@ -243,13 +243,13 @@ AnimationClip:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 2
-        time: 2.6571429
+        time: 5
         value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 3.6571429
+        time: 6
         value: 0
         inSlope: 0
         outSlope: 0
@@ -271,7 +271,7 @@ AnimationClip:
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 3.6571429
+        time: 6
         value: 1
         inSlope: 0
         outSlope: 0
@@ -293,7 +293,7 @@ AnimationClip:
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 3.6571429
+        time: 6
         value: 1
         inSlope: 0
         outSlope: 0
@@ -315,7 +315,7 @@ AnimationClip:
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 3.6571429
+        time: 6
         value: 1
         inSlope: 0
         outSlope: 0
@@ -337,19 +337,19 @@ AnimationClip:
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 3.6571429
+        time: 6
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 9.742857
+        time: 26.6
         value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 9.857142
+        time: 26.714285
         value: 0
         inSlope: 0
         outSlope: 0
