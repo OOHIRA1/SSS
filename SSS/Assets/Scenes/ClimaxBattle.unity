@@ -572,6 +572,23 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 538495277}
+--- !u!1 &569736551 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1061690681151764, guid: 58399a294a8f76747855fcd60e6c39a7,
+    type: 2}
+  m_PrefabInternal: {fileID: 1795764703}
+--- !u!114 &569736552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 569736551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db1f335fbf8d3d44391b252a7629edb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _moveSpeed: 2
 --- !u!1 &606621474
 GameObject:
   m_ObjectHideFlags: 0
@@ -1334,7 +1351,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 200}
   m_SizeDelta: {x: 0, y: 200}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &875290730
@@ -1581,6 +1598,10 @@ Prefab:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: 26c9c68c0ab340743a9e45f482397396, type: 2}
+    - target: {fileID: 1106389182470496, guid: 9b2640d3ce7ae00419d9faed77e5c9c0, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9b2640d3ce7ae00419d9faed77e5c9c0, type: 2}
   m_IsPrefabParent: 0
@@ -2256,6 +2277,8 @@ MonoBehaviour:
   _cutinControlls:
   - {fileID: 538495279}
   - {fileID: 2092332870}
+  _butler: {fileID: 569736552}
+  _butlerMovePos: {x: 1.2, y: -6, z: 0}
 --- !u!4 &1699993572
 Transform:
   m_ObjectHideFlags: 0

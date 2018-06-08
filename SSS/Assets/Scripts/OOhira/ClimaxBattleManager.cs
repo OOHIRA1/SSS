@@ -24,10 +24,11 @@ public class ClimaxBattleManager : MonoBehaviour {
 	[SerializeField] RayShooter _rayshooter = null;
 	[SerializeField] GameObject _playerLifeUI = null;	//プレイヤーのライフUI
 	[SerializeField] GameObject _choises = null;		//選択肢群
-	[SerializeField] Vector3 _detectiveMovePos = new Vector3(0,0,0);
+	[SerializeField] Vector3 _detectiveMovePos = new Vector3(0, 0, 0);
 	[SerializeField] CutinControll[] _cutinControlls = new CutinControll[2];
 	bool _cutinFlag;									//カットイン演出をしたかどうかのフラグ
-//	[SerializeField] GameObject _charactors = null;
+	[SerializeField] Butler _butler = null;
+	[SerializeField] Vector3 _butlerMovePos = new Vector3(0, 0, 0);
 
 
 
@@ -92,7 +93,7 @@ public class ClimaxBattleManager : MonoBehaviour {
 
 	//--TRUE_OR_FALSEのステートの時の処理をする関数
 	void TrueOrFalseAction(){
-		if (_gameDataManager.GetCriminal () == "" && _gameDataManager.GetDangerousWeapon() == "" ) {
+		if (_gameDataManager.GetCriminal () == "" && _gameDataManager.GetDangerousWeapon() == "" ) {	//選んだものが正しいかの確認
 			_background.sprite = _detectiveOffice;
 		}
 		_state = State.INTRODUCTION;
@@ -113,6 +114,7 @@ public class ClimaxBattleManager : MonoBehaviour {
 					}
 					_detective.SetIsMove (false);
 					_detective.DesignationMove ( _detectiveMovePos );
+					_butler.MoveToPos ( _butlerMovePos );
 					_cutinFlag = true;
 				}
 //				if (_detective.GetIsM ()) {
