@@ -37,8 +37,8 @@ public class DetectiveOfficeManager : MonoBehaviour {
 	[SerializeField] CutinControll _cutinControll = null;
 	bool _cutinPlayedFlag;															//カットインをしたかどうかのフラグ
 	bool _curtainClosedStateFinalJudge;											//最終確認ステート中にカーテンを閉じたかどうかのフラグ
-	[SerializeField] ScenesManager _scenesManager;
-
+	[SerializeField] ScenesManager _scenesManager = null;
+	[SerializeField] Vector3 _exitPos = new Vector3(0, 0, 0);					//探偵が退場後の座標
 
 
 	//===================================================================================
@@ -145,9 +145,11 @@ public class DetectiveOfficeManager : MonoBehaviour {
 
 		//調査Stateでカーテンが開ききっている時のみ探偵の操作を受け付ける処理----------------------------------------
 		if (_state == State.INVESTIGATE && _curtain.IsStateOpen() && _curtain.ResearchStatePlayTime() >= 1f) {
-			_detective.enabled = true;
+			//_detective.enabled = true;
+			_detective.SetIsMove(true);
 		} else {
-			_detective.enabled = false;
+			//_detective.enabled = false;
+			_detective.SetIsMove(false);//タッチで反応しなくなる関数
 		}
 		//--------------------------------------------------------------------------------------------------------
 
@@ -292,19 +294,22 @@ public class DetectiveOfficeManager : MonoBehaviour {
 			}
 			if (!_cutinPlayedFlag && _darkingControll.IsStateFadein () && _darkingControll.ResearchStatePlayTime () >= 1f) {
 				//_cutinControll.StartCutin ();
-				_cutinControll.StartCutinPart2();//カットイン処理
+				_cutinControll.StartCutinPart2 ();//カットイン処理
 				_cutinPlayedFlag = true;
 			}
-			if (_cutinControll.GetCutinMoveFinishedFlag() && !_curtainClosedStateFinalJudge) {
+			if (_cutinControll.GetCutinMoveFinishedFlag () && !_curtainClosedStateFinalJudge) {
 				//_darkingControll.Bright ();	//明転処理はいらない
 				_cutinControll.FinishCutin ();
 				_curtain.Close ();
 				_curtainClosedStateFinalJudge = true;
 			}
 			if (_curtainClosedStateFinalJudge && _curtain.IsStateClose () && _curtain.ResearchStatePlayTime () >= 1f) {
-				_gameDataManager.SetCriminal (_cursorForCriminalChoise.GetSelectedGameObject().name);
-				_gameDataManager.SetDangerousWeapon (_cursorForDangerousWeaponChoise.GetSelectedGameObject().name);
-				_scenesManager.ScenesTransition ("ClimaxBattle");
+				_gameDataManager.SetCriminal (_cursorForCriminalChoise.GetSelectedGameObject ().name);
+				_gameDataManager.SetDangerousWeapon (_cursorForDangerousWeaponChoise.GetSelectedGameObject ().name);
+				if (!_detective.GetIsForcedMove ()) {
+					StartCoroutine ("DetectiveExitAndSceneChange");
+				}
+				//_scenesManager.ScenesTransition ("ClimaxBattle");
 			}
 			//_curtain.Close ();
 			break;
@@ -341,5 +346,16 @@ public class DetectiveOfficeManager : MonoBehaviour {
 		default :
 			break;
 		}
+	}
+
+
+	//--探偵を退場させ,シーン移動する関数(コルーチン)
+	IEnumerator DetectiveExitAndSceneChange() {
+		_detective.SetIsMove (false);
+		_detective.DesignationMove (_exitPos);
+		while (_detective.GetIsForcedMove ()) {
+			yield return new WaitForSeconds (Time.deltaTime);
+		}
+		_scenesManager.ScenesTransition ("ClimaxBattle");
 	}
 }

@@ -3097,6 +3097,16 @@ Prefab:
       propertyPath: _scenesManager
       value: 
       objectReference: {fileID: 1274862350}
+    - target: {fileID: 114831756376500476, guid: d3206f9827c783e448661d89d102df91,
+        type: 2}
+      propertyPath: _exitPos.y
+      value: -3.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 114831756376500476, guid: d3206f9827c783e448661d89d102df91,
+        type: 2}
+      propertyPath: _exitPos.x
+      value: -12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d3206f9827c783e448661d89d102df91, type: 2}
   m_IsPrefabParent: 0
