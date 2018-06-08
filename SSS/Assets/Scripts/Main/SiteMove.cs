@@ -10,6 +10,7 @@ public class SiteMove : MonoBehaviour {
     bool _leftSitemove;                                                     //左に移動する場合
     bool _rightSitemove;                                                    //右に移動する場合
     bool _oneTimeOnly;                                                      //移動するときの一回だけの処理
+	bool _checkTiming;														//移動したそのシーンが縛りをかける場所かチェックしてもらうタイミング
     public static int _nowSiteNum = 0;                                      //現在のシーン(別シーンから現場シーンに移動するときはこれを変えてから遷移すること) 0:Bedroom 1:Graden 2:Kitchen 3:ServingRoom
     int[ ] _nextNextSiteNum;                                                //現在のシーンから1つ先と2つ先と3つ先のシーン
 
@@ -31,6 +32,7 @@ public class SiteMove : MonoBehaviour {
         _leftSitemove = false;
         _rightSitemove = false;
         _oneTimeOnly = false;
+		_checkTiming = false;
         _nextNextSiteNum = new int [ 3 ];
 
 		_nowSitePos = new Vector3( _moveSpeed, 0, 0 );
@@ -142,6 +144,7 @@ public class SiteMove : MonoBehaviour {
 
         } else {
             _leftSitemove = false;													//移動し終わったらこの関数に入らないようにする
+			_checkTiming = true;													//チェックしてもらうタイミングを立てる
             _nowSiteNum++;															//現場番号を合わす
             if ( _nowSiteNum > 3 ) 
 				_nowSiteNum = 0;									//最大番号を超えていたら最初にループさせる
@@ -166,6 +169,7 @@ public class SiteMove : MonoBehaviour {
 
         } else {
             _rightSitemove = false;													//移動し終わったらこの関数に入らないようにする
+			_checkTiming = true;													//チェックしてもらうタイミングを立てる
             _nowSiteNum--;															//現場番号を合わす
              if ( _nowSiteNum < 0 ) _nowSiteNum = 3;								//最小番号を下回っていたら最後にループさせる
         }
@@ -195,6 +199,15 @@ public class SiteMove : MonoBehaviour {
         }
         //-------------------------------------------------------------------------
     }
+
+
+	public bool GetCheckTiming( ) {
+		bool relay = _checkTiming;
+
+		if ( _checkTiming ) _checkTiming = false;
+
+		return relay;
+	}
 
     
 }

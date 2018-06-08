@@ -18,7 +18,7 @@ public class Detective : MonoBehaviour {
 
 
     bool _isFlip;                                       //反転するかどうか
-    bool _isForcedMoveove;                              //動けるかどうか
+	bool _isMove;                              //動けるかどうか
     bool _isRopeTouch;                                  //ロープが触れているかどうか
 	bool _isForcedMove;								    //強制移動するかどうか
 
@@ -43,7 +43,7 @@ public class Detective : MonoBehaviour {
         _isAnimWalk = false;
 		_isAnimShocked = false;        
         _isFlip = true;
-        _isForcedMoveove = true;
+		_isMove = true;
         _isRopeTouch = false;
 		_isForcedMove = false;
         _firstStep = false; 
@@ -60,7 +60,7 @@ public class Detective : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update( ) {
-        if ( _isForcedMoveove ) Move( );     //動ける状態だったら
+		if ( _isMove ) Move( );     //動ける状態だったら
 		
         Motion( );
 
@@ -149,6 +149,8 @@ public class Detective : MonoBehaviour {
 
 	//指定された場所に強制移動する-------------------------------
 	void ForcedMove( ) {
+		if ( _isMove ) _isMove = false;						//探偵が動ける状態だったら動けなくする
+
 		if ( !_firstStep ) ForcedMoveX( );                    //第一工程が終わってなかったらｘ座標を動かす
         if ( _firstStep && !_secondStep ) ForcedMoveY( );     //第一工程が終わって第二工程が終わってなかったらｙ座標を動かす
         if ( _secondStep ) StepReset( );                      //第二工程が終わったら工程をリセットする
@@ -226,6 +228,7 @@ public class Detective : MonoBehaviour {
         _isForcedMove = false;
         _firstStep = false;
         _secondStep = false;
+		_isMove = true;
     }
     //------------------------------
 
@@ -245,7 +248,7 @@ public class Detective : MonoBehaviour {
 	//セッター=========================================================================
 
     //現場(昼・夕方・夜)マネージャーが動けるかどうか命令するため---------
-    public void SetIsMove( bool isMove ) { _isForcedMoveove = isMove; }
+    public void SetIsMove( bool isMove ) { _isMove = isMove; }
     //-------------------------------------------------------------------
 
 	//マウス以外の指定された場所に移動する場所を決めて、その場所に動くようにする--

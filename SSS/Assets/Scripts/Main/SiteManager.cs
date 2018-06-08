@@ -12,13 +12,14 @@ public class SiteManager : MonoBehaviour {
 	[ SerializeField ] ProgressConditionManager _progressConditionManager = null;
 	[ SerializeField ] StoryBoundManeger _storyBoundManeger = null;
 	//[ SerializeField ] EvidenceManager _evidenceManager = null;
-	//[ SerializeField ] SiteMove _siteMove = null;
+	[ SerializeField ] SiteMove _siteMove = null;
     //[ SerializeField ] GameObject _ui = null;
 	[ SerializeField ] Curtain _cutain = null;
     [ SerializeField ] ClockUI _clockUI = null;
 	[ SerializeField ] UnityEngine.UI.Button[] _button = new  UnityEngine.UI.Button[ 1 ];
 	[ SerializeField ] GameObject _evidenceFile = null;
-    [ SerializeField ] Catcher _catcher = null;                                         
+    [ SerializeField ] Catcher _catcher = null;
+	[ SerializeField ] DetectiveTalk[ ] _detectiveTalk = null;
 
     enum PartStatus {
         INVESTIGATION_PART,
@@ -66,11 +67,15 @@ public class SiteManager : MonoBehaviour {
             return;
         }
 
-		/*if ( テキストが存在していたら ) {
-			_status = PartStatus.TALK_PART;
-			return;
-		}*/
+		for ( int i = 0; i < _detectiveTalk.Length; i++ ) {
 
+			if ( _detectiveTalk[ i ].gameObject.activeInHierarchy ) {
+				_status = PartStatus.TALK_PART;
+				return;
+			}
+
+		}
+			
         _detective.SetIsMove( true );
         _clockUI.Operation( true );
         _moviePlaySystem.SetOperation( true );
@@ -89,10 +94,14 @@ public class SiteManager : MonoBehaviour {
             return;
         }
 
-		/*if ( テキストが存在していたら ) {
-			_status = PartStatus.TALK_PART;
-			return;
-		}*/
+		for ( int i = 0; i < _detectiveTalk.Length; i++ ) {
+
+			if ( _detectiveTalk[ i ].gameObject.activeInHierarchy ) {
+				_status = PartStatus.TALK_PART;
+				return;
+			}
+
+		}
 
         _detective.SetIsMove( false );
         _clockUI.Operation( true );
@@ -105,18 +114,28 @@ public class SiteManager : MonoBehaviour {
 
     //お話パート
     void TalkPart( ) {
-		/*if ( テキストが存在していなかったら ) {
-			_status = PartStatus.INVESTIGATION_PART;
-			return;
-		}*/
+		int displayText = 0;
+		for ( int i = 0; i < _detectiveTalk.Length; i++ ) {
+
+			if ( _detectiveTalk[ i ].gameObject.activeInHierarchy ) {				//テキストが存在したら
+				displayText = i;													//どのテキストを進めるか入れる
+				break;			
+			}
+
+			if ( i == _detectiveTalk.Length - 1 ) {									//テキストが存在しなかったら
+				_status = PartStatus.INVESTIGATION_PART;
+				return;
+			}
+		}
 
 		if ( Input.GetMouseButtonDown( 0 ) ) {
 			//トークを進める処理
+			_detectiveTalk[ displayText ].Talk( );
 		}
 
-		/*if ( //トークが最後までいっていたら ) {
+		if ( _detectiveTalk[ displayText ].GetTalkFinishedFlag() ) {
 				//トークを消す
-		}*/
+		}
 
 		Regulation( );
     }
@@ -125,21 +144,23 @@ public class SiteManager : MonoBehaviour {
     void  StoryBound( ) {
 
 		bool[,] site = {							//どの部屋を閉じる状態にするかの配列。false：閉じない true：閉じる
-			{ false, false, false, false },			//右から寝室、キッチン、給仕室、庭。（部屋番号に対応）
+			{ false, false, false, true },			//右から寝室、キッチン、給仕室、庭。（部屋番号に対応）
 			{ false, false, false, false },			//上から昼、夕方、夜。
 			{ false, false, false, false }
 		};
 
+		if ( _siteMove.GetCheckTiming( ) ) {
+			_storyBoundManeger.CutainCloseBound( site );
+		}
 
-		//_storyBoundManeger.CutainCloseBound( site );
 
 		if ( !_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_MILLIONARE_MURDER_ANIM ) ) {	//モノクロアニメーションを見ていなかったら
 			
-			if ( _progressConditionManager.ShowMillionareMurderAnimProgress( ) ) {										//モノクロアニメーションを見終わったら
+			if ( _progressConditionManager.ShowMillionareMurderAnimProgress( ) ) {								//モノクロアニメーションを見終わったら
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.SHOW_MILLIONARE_MURDER_ANIM );  //チェックポイントを更新する
-				//_storyBoundManeger.ShowMillionareMurderAnimBound( false );
+				_storyBoundManeger.ShowMillionareMurderAnimBound( false );
 			} else {
-				//_storyBoundManeger.ShowMillionareMurderAnimBound( true );
+				_storyBoundManeger.ShowMillionareMurderAnimBound( true );
 			}
 
 		} else if ( !_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIND_POISONED_DISH ) ) {
@@ -290,9 +311,9 @@ public class SiteManager : MonoBehaviour {
 
 
 		if ( _scenesManager.GetNowScenes( ) == "SiteNight" && SiteMove._nowSiteNum == 0 ) {		//夜の寝室だったら
-			//_moviePlaySystem.SetFixed( true );
+			_moviePlaySystem.SetFixed( true );
 		} else {
-			//_moviePlaySystem.SetFixed( false );
+			_moviePlaySystem.SetFixed( false );
 		}
 
 
@@ -329,6 +350,90 @@ public class SiteManager : MonoBehaviour {
         //------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     }
+
+
+	void DisplayCondition( ) {
+		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_MILLIONARE_MURDER_ANIM ) ) {
+			
+			_detectiveTalk[ 1 ].gameObject.SetActive( true );
+
+		} else if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIND_POISONED_DISH ) ) {
+			
+			_detectiveTalk[ 2 ].gameObject.SetActive( true );
+
+		} else if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE1 ) ) {
+			
+			_detectiveTalk[ 3 ].gameObject.SetActive( true );
+
+		} else if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_TAP_EVIDENCE_FILE ) ) {
+
+			_detectiveTalk[ 4 ].gameObject.SetActive( true );
+
+		} else if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_CLOSE_EVIDENCE_FILE ) ) {
+
+			_detectiveTalk[ 5 ].gameObject.SetActive( true );
+
+		} else if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_KITCHEN ) ) {
+
+			_detectiveTalk[ 6 ].gameObject.SetActive( true );
+
+		} else if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_SERVING_ROOM ) ) {
+
+			_detectiveTalk[ 7 ].gameObject.SetActive( true );
+
+		} else if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_BACKYARD ) ) {
+
+			_detectiveTalk[ 8 ].gameObject.SetActive( true );
+
+		} else if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_BACKYARD_MOVIE ) ) {
+
+			_detectiveTalk[ 9 ].gameObject.SetActive( true );
+
+		} else if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.STOP_MOVIE_WHICH_GAEDENAR_ATE_CAKE ) ) {
+
+			_detectiveTalk[ 10 ].gameObject.SetActive( true );
+
+		} else if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE2 ) ) {
+
+			_detectiveTalk[ 11 ].gameObject.SetActive( true );
+
+		} else if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_DETECTIVE_OFFICE ) ) {
+
+			_detectiveTalk[ 12 ].gameObject.SetActive( true );
+
+		} else if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE3 ) ) {
+
+			_detectiveTalk[ 13 ].gameObject.SetActive( true );
+
+		} else if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE4 ) ) {
+
+			_detectiveTalk[ 14 ].gameObject.SetActive( true );
+
+		} else if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE5 ) ) {
+
+			_detectiveTalk[ 15 ].gameObject.SetActive( true );
+
+		} else if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE6 ) ) {
+
+			_detectiveTalk[ 16 ].gameObject.SetActive( true );
+
+		} else if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.COME_TO_DETECTIVE_OFFICE_WITH_ALL_EVIDENCE ) ) {
+
+			_detectiveTalk[ 17 ].gameObject.SetActive( true );
+
+		}
+
+
+
+
+
+
+
+
+
+
+
+	}
 
 
     //操作をいろいろ制限する------------------------------------------------------------
@@ -409,5 +514,7 @@ public class SiteManager : MonoBehaviour {
 		}
 	}*/
 	//---------------------------------------------
+
+
 }
 

@@ -23,7 +23,7 @@ public class Catcher : MonoBehaviour {
 	// Use this for initialization
 	void Start( ) {
 		_isRopeAction = false;
-        _initialRope = true;
+        _initialRope = false;
         _firstStep = false;
         _secondStep = false;
         _destination = _player.GetInitialPos( );
@@ -36,7 +36,7 @@ public class Catcher : MonoBehaviour {
 
         if ( _isRopeAction ) {                      //ロープアクションをするかどうか
 
-            if (_initialRope) {
+            if ( !_initialRope ) {
                 InitialRope( );     //一回ロープの位置の初期化をしたかどうか
                 _destination = _player.GetInitialPos( );
             }
@@ -51,7 +51,7 @@ public class Catcher : MonoBehaviour {
         initialPos.x = _player.transform.position.x;
         initialPos.y = _rope.transform.position.y;
         _rope.transform.position = initialPos;
-        _initialRope = false;
+        _initialRope = true;
     }
     //------------------------------------------------------
 
@@ -127,7 +127,7 @@ public class Catcher : MonoBehaviour {
     //工程をリセットする---------
     void StepReset( ) {
         _isRopeAction = false;
-        _initialRope = true;
+        _initialRope = false;
         _firstStep = false;
         _secondStep = false;
     }

@@ -981,6 +981,12 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1902687551}
   m_Script: {fileID: 11500000, guid: 862ad918d6a34b9408f8bc727de6e4d4, type: 3}
+--- !u!114 &1819857783 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114040537068500706, guid: 39b6c024fd075054e9e6966d809f87d0,
+    type: 2}
+  m_PrefabInternal: {fileID: 1902687551}
+  m_Script: {fileID: 11500000, guid: 875f44fe78903414cb11173cb2049349, type: 3}
 --- !u!1 &1878117737
 GameObject:
   m_ObjectHideFlags: 0
@@ -1164,6 +1170,11 @@ Prefab:
       propertyPath: _progressConditionManager
       value: 
       objectReference: {fileID: 583237390}
+    - target: {fileID: 114671006718207692, guid: 39b6c024fd075054e9e6966d809f87d0,
+        type: 2}
+      propertyPath: _siteMove
+      value: 
+      objectReference: {fileID: 1819857783}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 39b6c024fd075054e9e6966d809f87d0, type: 2}
   m_IsPrefabParent: 0

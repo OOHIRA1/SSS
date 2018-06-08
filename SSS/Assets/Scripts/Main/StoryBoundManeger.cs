@@ -40,7 +40,7 @@ public class StoryBoundManeger : MonoBehaviour {
 
 
 
-
+	//縛りがかかる場所だったらカーテンを閉じてそうでなかったらカーテンを開ける関数--------
 	//カーテンのフラグがトリガーのためやりずらい。ブールならやりやすいかも
 	public void CutainCloseBound( bool[,] site ) {
 		int iSite = 0;								//事件現場
@@ -83,13 +83,9 @@ public class StoryBoundManeger : MonoBehaviour {
 		_cutain.Open( );							//最後まで終了しなかったら(閉じたい場所と現在いる場所が同じじゃなかったら)
 
 
-
-
-
-
-		//なぜか閉じたときと開いたときに一回だけ繰り返してしまう。その修正をしないといけない
-
 	}
+	//----------------------------------------------------------------------------------------------------------------------
+
 
 	//SiteManagerにも同じ関数がある。どうしたものか
 	void AllButtonInteractable( bool inter ) {
