@@ -2262,7 +2262,7 @@ MonoBehaviour:
   _rayshooter: {fileID: 2066571479}
   _playerLifeUI: {fileID: 1827327384}
   _choises: {fileID: 1147524986}
-  _detectiveMovePos: {x: -1.8, y: -6, z: 0}
+  _detectiveMovePos: {x: -1.5, y: -6, z: 0}
   _cutinControlls:
   - {fileID: 538495279}
   - {fileID: 2092332870}

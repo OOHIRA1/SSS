@@ -239,7 +239,7 @@ public class DetectiveOfficeManager : MonoBehaviour {
 			//-----------------------------------------------------------------------
 
 			//選択していないNPCを非アクティブにしコライダーを非アクティブにする処理----------------------------------------------
-			if (_curtain.IsStateClose () && _curtain.ResearchStatePlayTime () >= 1f) {
+			if (_curtain.IsStateWait () && _curtain.ResearchStatePlayTime () >= 1f && !_curtainOpenedStateCriminalChose) {	/*_curtain.IsStateClose () && _curtain.ResearchStatePlayTime () >= 1f	//※これだとカーテンSEを組み込み時に音ズレ発生*/
 				for (int i = 0; i < _npcCharacters.Length; i++) {
 					if (_npcCharacters [i] != _cursorForCriminalChoise.GetSelectedGameObject ()) {
 						_npcCharacters [i].SetActive (false);
@@ -315,7 +315,7 @@ public class DetectiveOfficeManager : MonoBehaviour {
 				_curtain.Close ();
 				_curtainClosedStateCriminalChose = true;
 			}
-			if (_curtain.IsStateClose () && _curtain.ResearchStatePlayTime () >= 1f) {
+			if (_curtain.IsStateWait () && _curtain.ResearchStatePlayTime () >= 1f && !_curtainOpenedStateCriminalChose) {	/*_curtain.IsStateClose () && _curtain.ResearchStatePlayTime () >= 1f	//※これだとカーテンSEを組み込み時に音ズレ発生*/
 				for (int i = 0; i < _npcCharacters.Length; i++) {
 					if (_npcCharacters [i] != _cursorForCriminalChoise.GetSelectedGameObject ()) {
 						_npcCharacters [i].SetActive (true);

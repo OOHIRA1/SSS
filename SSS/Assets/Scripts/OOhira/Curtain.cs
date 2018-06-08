@@ -9,13 +9,13 @@ using UnityEngine;
 public class Curtain : MonoBehaviour {
 	Animator _animator;
 	AudioSource _audioSource;
-	bool _seSounded;			//SEを鳴らしたかどうかのフラグ(1回のみ鳴らすようにするため)
+//	bool _seSounded;			//SEを鳴らしたかどうかのフラグ(1回のみ鳴らすようにするため)
 
 	// Use this for initialization
 	void Start () {
 		_animator = GetComponentInChildren<Animator> ( );
 		_audioSource = GetComponentInChildren<AudioSource> ();
-		_seSounded = false;
+//		_seSounded = false;
 	}
 	
 	// Update is called once per frame
@@ -46,6 +46,7 @@ public class Curtain : MonoBehaviour {
 	//--カーテンを開ける関数
 	public void Open( ) {
 		_animator.SetTrigger ( "OpenFlag" );
+		_audioSource.pitch = 0.8f;	//丁度いいピッチに変更
 		_audioSource.PlayOneShot ( _audioSource.clip );
 	}
 
@@ -53,6 +54,7 @@ public class Curtain : MonoBehaviour {
 	//--カーテンを閉める関数
 	public void Close( ) {
 		_animator.SetTrigger ( "CloseFlag" );
+		_audioSource.pitch = 1f;	//丁度いいピッチに変更
 		_audioSource.PlayOneShot ( _audioSource.clip );
 	}
 

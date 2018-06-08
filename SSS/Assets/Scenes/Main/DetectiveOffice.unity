@@ -1239,6 +1239,27 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 212573053140183016, guid: f4b5447e7f5965f4b9d0618052f04048,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 077bf9e351c9f504782872355527dc24,
+        type: 3}
+    - target: {fileID: 212573053140183016, guid: f4b5447e7f5965f4b9d0618052f04048,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 20.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 212573053140183016, guid: f4b5447e7f5965f4b9d0618052f04048,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 11.86
+      objectReference: {fileID: 0}
+    - target: {fileID: 212573053140183016, guid: f4b5447e7f5965f4b9d0618052f04048,
+        type: 2}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f4b5447e7f5965f4b9d0618052f04048, type: 2}
   m_IsPrefabParent: 0
@@ -2721,22 +2742,22 @@ Prefab:
     - target: {fileID: 224394165995765710, guid: 517f78c5dc5529a4b835580cfe252dea,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224394165995765710, guid: 517f78c5dc5529a4b835580cfe252dea,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224112228567966528, guid: 517f78c5dc5529a4b835580cfe252dea,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224112228567966528, guid: 517f78c5dc5529a4b835580cfe252dea,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224094797657249394, guid: 517f78c5dc5529a4b835580cfe252dea,
         type: 2}

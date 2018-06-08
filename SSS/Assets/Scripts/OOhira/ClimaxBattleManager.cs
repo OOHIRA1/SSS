@@ -111,13 +111,14 @@ public class ClimaxBattleManager : MonoBehaviour {
 					for (int i = 0; i < _cutinControlls.Length; i++) {
 						_cutinControlls[i].StartCutinPart2 ();
 					}
+					_detective.SetIsMove (false);
 					_detective.DesignationMove ( _detectiveMovePos );
 					_cutinFlag = true;
 				}
 //				if (_detective.GetIsM ()) {
 //					_charactors.transform.localScale = new Vector3 (1.1f, 1.1f,0);
 //				}
-				if (_cutinControlls[0].GetCutinMoveFinishedFlag () && !_detective.GetIsM() && _cutinFlag) {
+				if (_cutinControlls[0].GetCutinMoveFinishedFlag () && !_detective.GetIsForcedMove() && _cutinFlag) {
 					for (int i = 0; i < _cutinControlls.Length; i++) {
 						_cutinControlls[i].FinishCutin ();
 					}

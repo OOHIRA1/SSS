@@ -10,10 +10,12 @@ public class StageSelectManager : MonoBehaviour {
 	[SerializeField] Curtain _curtain = null;
 	[SerializeField] ScenesManager _scenesManager = null;
 	GameDataManager _gameDataManager;
+	BGMManager _bgmManager;
 
 	// Use this for initialization
 	void Start () {
 		_gameDataManager = GameObject.FindWithTag ("GameDataManager").GetComponent<GameDataManager>();
+		_bgmManager = GameObject.FindWithTag ("BGMManager").GetComponent<BGMManager> ();
 	}
 	
 	// Update is called once per frame
@@ -30,6 +32,7 @@ public class StageSelectManager : MonoBehaviour {
 		//------------------------------------------------------------------------
 
 		if (_curtain.IsStateClose () && _curtain.ResearchStatePlayTime () >= 1f) {
+			Destroy (_bgmManager.gameObject);
 			if (!_gameDataManager.CheckAdvancedData (GameDataManager.CheckPoint.SHOW_MILLIONARE_MURDER_ANIM)) {
 				_scenesManager.ScenesTransition ("SiteNight_Bedroom");
 			} else {
