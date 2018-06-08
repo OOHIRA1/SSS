@@ -7,23 +7,26 @@ using UnityEngine;
 //使用方法：常にアクティブなゲームオブジェクトにアタッチ
 public class GameDataManager : MonoBehaviour {
 	public enum CheckPoint {
-		SHOW_MILLIONARE_MURDER_ANIM 				= 1,		//富豪の殺人アニメーションを見る
-		FIND_POISONED_DISH							= 2,		//毒の付いた食器を発見する
-		GET_EVIDENCE1 								= 4,		//証拠品1を入手する
-		FIRST_TAP_EVIDENCE_FILE 					= 8,		//証拠品ファイルを初めてタップする
-		FIRST_CLOSE_EVIDENCE_FILE 					= 16,		//証拠品ファイルを初めて閉じる
-		FIRST_COME_TO_KITCHEN 						= 32,		//初めて厨房に来る
-		FIRST_COME_TO_SERVING_ROOM 					= 64,		//初めて給仕室に来る
-		FIRST_COME_TO_BACKYARD 						= 128,		//初めて裏庭に来る
-		SHOW_BACKYARD_MOVIE 						= 256,		//裏庭(夜)の動画を見る
-		STOP_MOVIE_WHICH_GAEDENAR_ATE_CAKE 			= 512,		//庭師がケーキを食べた瞬間でストップ
-		GET_EVIDENCE2 							  	= 1024,		//証拠品2を入手する
-		FIRST_COME_TO_DETECTIVE_OFFICE 			  	= 2048,		//初めて探偵ラボに来る
-		GET_EVIDENCE3 								= 4096,		//証拠品3を入手する
-		GET_EVIDENCE4 								= 8192,		//証拠品4を入手する
-		GET_EVIDENCE5 							   	= 16384,	//証拠品5を入手する
-		GET_EVIDENCE6 							   	= 32768,	//証拠品6を入手する
-		COME_TO_DETECTIVE_OFFICE_WITH_ALL_EVIDENCE 	= 65536		//証拠品を全て揃えて探偵ラボに来る
+		SHOW_MILLIONARE_MURDER_ANIM 				= 1 << 0,	//1			//富豪の殺人アニメーションを見る
+		DETECTIVE_FIRST_TALK						= 1 << 1,	//2			//初めて探偵の解説が表示される
+		FIND_POISONED_DISH							= 1 << 2,	//4,		//毒の付いた食器を発見する
+		GET_EVIDENCE1 								= 1 << 3,	//8,		//証拠品1を入手する
+		FIRST_TAP_EVIDENCE_FILE 					= 1 << 4,	//16,		//証拠品ファイルを初めてタップする
+		FIRST_CLOSE_EVIDENCE_FILE 					= 1 << 5,	//32,		//証拠品ファイルを初めて閉じる
+		FIRST_COME_TO_KITCHEN 						= 1 << 6,	//64,		//初めて厨房に来る
+		FIRST_COME_TO_SERVING_ROOM 					= 1 << 7,	//128,		//初めて給仕室に来る
+		FIRST_COME_TO_BACKYARD 						= 1 << 8,	//256,		//初めて裏庭に来る
+		SHOW_BACKYARD_MOVIE 						= 1 << 9,	//512,		//裏庭(夜)の動画を見る
+		STOP_MOVIE_WHICH_GAEDENAR_ATE_CAKE 			= 1 << 10,	//1024,		//庭師がケーキを食べた瞬間でストップ
+		GET_EVIDENCE2 							  	= 1 << 11,	//2048,		//証拠品2を入手する
+		FIRST_COME_TO_DETECTIVE_OFFICE 			  	= 1 << 12,	//4096,		//初めて探偵ラボに来る
+		GET_EVIDENCE3 								= 1 << 13,	//8192,		//証拠品3を入手する
+		SHOW_BUTLER_PUT_SILVER_BOX					= 1 << 14,	//16384,	//執事が銀箱をしまった瞬間を見る
+		SHOW_COOK_PUT_YELLOW_BOX					= 1 << 15,	//32768,	//料理長が黄箱をしまった瞬間を見る
+		GET_EVIDENCE4 								= 1 << 16,	//65536,	//証拠品4を入手する
+		GET_EVIDENCE5 							   	= 1 << 17,	//131072,	//証拠品5を入手する
+		GET_EVIDENCE6 							   	= 1 << 18,	//262144,	//証拠品6を入手する
+		COME_TO_DETECTIVE_OFFICE_WITH_ALL_EVIDENCE 	= 1 << 19,	//524288,	//証拠品を全て揃えて探偵ラボに来る
 	}
 
 	[SerializeField] int _advancedData;	                //進行状況を格納する変数
