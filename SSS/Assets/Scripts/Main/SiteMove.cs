@@ -10,7 +10,7 @@ public class SiteMove : MonoBehaviour {
     bool _leftSitemove;                                                     //左に移動する場合
     bool _rightSitemove;                                                    //右に移動する場合
     bool _oneTimeOnly;                                                      //移動するときの一回だけの処理
-    public static int _nowSiteNum = 0;                                      //現在のシーン(別シーンから現場シーンに移動するときはこれを変えてから遷移すること)
+    public static int _nowSiteNum = 0;                                      //現在のシーン(別シーンから現場シーンに移動するときはこれを変えてから遷移すること) 0:Bedroom 1:Graden 2:Kitchen 3:ServingRoom
     int[ ] _nextNextSiteNum;                                                //現在のシーンから1つ先と2つ先と3つ先のシーン
 
 	Vector3 _nowSitePos;													//現在の現場のpos
@@ -143,7 +143,8 @@ public class SiteMove : MonoBehaviour {
         } else {
             _leftSitemove = false;													//移動し終わったらこの関数に入らないようにする
             _nowSiteNum++;															//現場番号を合わす
-            if ( _nowSiteNum > 3 ) _nowSiteNum = 0;									//最大番号を超えていたら最初にループさせる
+            if ( _nowSiteNum > 3 ) 
+				_nowSiteNum = 0;									//最大番号を超えていたら最初にループさせる
         }
 
     }

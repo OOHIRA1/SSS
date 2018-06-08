@@ -35,8 +35,11 @@ public class Catcher : MonoBehaviour {
 	void Update( ) {
 
         if ( _isRopeAction ) {                      //ロープアクションをするかどうか
-            
-	        if ( _initialRope ) InitialRope( );     //一回ロープの位置の初期化をしたかどうか
+
+            if (_initialRope) {
+                InitialRope( );     //一回ロープの位置の初期化をしたかどうか
+                _destination = _player.GetInitialPos( );
+            }
 			
             ToCarryMove( );
         }	

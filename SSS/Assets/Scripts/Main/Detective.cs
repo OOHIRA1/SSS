@@ -273,7 +273,7 @@ public class Detective : MonoBehaviour {
 
     public bool GetRopeTouch( ) { return _isRopeTouch; }
 
-	public bool GetIsM( ) { return _isForcedMove; }
+	public bool GetIsForcedMove( ) { return _isForcedMove; }
 
 
 	//====================================================

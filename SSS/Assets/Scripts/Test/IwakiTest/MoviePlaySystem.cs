@@ -19,16 +19,28 @@ public class MoviePlaySystem : MonoBehaviour {
 	[SerializeField] int _barTouchUp = 240;
 
 	bool _isOperation;								//操作可能かどうか
+	bool _isFixed;									//固定するかどうか
+	bool _isReturn;									//場所を戻すかどうか
+
+	Vector2 _pointPos;
+	Vector2 _prePointPos;
 
 	// Use this for initialization
 	void Start( ) {
+		_pointPos    = Vector2.zero;
+		_prePointPos = Vector2.zero;
 		_forcedPosParSecond = _point.GetMaxRange( ) / _maxTime;
 		_stop = true;
 		_isOperation = true;
+		_isFixed = false;
+		_isReturn = false;
 	}
 	
 	// Update is called once per frame
 	void Update( ) {
+	
+		Fixed( );
+
 		if ( _isOperation ) {
 
 			PointUpdate( );
@@ -38,21 +50,31 @@ public class MoviePlaySystem : MonoBehaviour {
 			MovieUpdate( );
 
 		}
+			
+        //Debug.Log(_stop );
 	}
 
 	//--ポイントの座標を更新する関数
 	void PointUpdate( ) {
-		Vector2 pointPos = _point.GetTransform( ); 
-		if ( !_stop ) pointPos.x = _point.GetTransform ().x + ( _forcedPosParSecond * Time.deltaTime );
+		 _pointPos = _point.GetTransform( );
+
+		
+			
+		if ( !_stop ) {
+			_pointPos.x = _point.GetTransform( ).x + ( _forcedPosParSecond * Time.deltaTime );
+			//Debug.Log( _pointPos );
+		}
+
+		
 
 		if ( Input.GetMouseButtonDown( 0 ) ) {	//マウスを押したかどうか
 			Vector2 mousePos = Vector2.zero;
 			mousePos = GetMouse( );
 			if ( mousePos.y >= _barTouchDown && mousePos.y <= _barTouchUp ) {
-				pointPos.x = mousePos.x;
+				_pointPos.x = mousePos.x;
 			}
 		}
-		_point.MovePosition( pointPos );
+		_point.MovePosition( _pointPos );
 	}
 
 	//--バーのスケールを更新する関数
@@ -72,6 +94,29 @@ public class MoviePlaySystem : MonoBehaviour {
 
 	}
 
+	void Fixed( ) {
+		if ( !_isFixed ) {
+			if ( _isReturn ) {
+				_pointPos.x = _prePointPos.x;
+				_point.MovePosition( _pointPos );
+				_isReturn = false;
+			} else {
+				return;
+			}
+		}
+
+		if ( _isFixed ) {
+			if ( !_isReturn ) {
+				_prePointPos.x = _point.GetTransform( ).x;
+				_isReturn = true;
+			}
+
+			_pointPos.x = 2000f;
+			_point.MovePosition( _pointPos );
+		}
+
+	}
+
 	Vector2 GetMouse( ) { return Input.mousePosition; }
 
 	//=======================================================================
@@ -82,6 +127,8 @@ public class MoviePlaySystem : MonoBehaviour {
 
 	//操作可能にするか不可にするかを切り替える
 	public void SetOperation( bool value ) { _isOperation = value; }
+
+	public void SetFixed( bool value ) { _isFixed = value; }
 
 
 	//--再生・一時停止を処理する関数
