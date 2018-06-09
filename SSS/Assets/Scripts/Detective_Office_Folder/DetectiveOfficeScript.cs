@@ -46,6 +46,9 @@ public class DetectiveOfficeScript : MonoBehaviour {
 	public void DetectiveDown02(){
 		_animator.SetBool( "DetectiveDown", false );
 	}
+	public void DetectiveGameOver(){
+		_animator.SetBool ("GameOver", true);
+	}
 
 
 	//--現在のStateの再生時間を返す関数( 返り値：0~1(開始時：0, 終了時：1) )
@@ -56,11 +59,19 @@ public class DetectiveOfficeScript : MonoBehaviour {
 	}
 
 
-	//--カーテンのStateが開いている状態かどうかを返す関数
+	//--探偵のStateがおじぎ状態かどうかを返す関数
 	public bool IsStateBowStart( ) {
 		int layer = _animator.GetLayerIndex ("Base Layer");
 		AnimatorStateInfo animatorStateInfo = _animator.GetCurrentAnimatorStateInfo (layer);
 		return animatorStateInfo.IsName ("DetectiveBowStart");
+	}
+
+
+	//--探偵のStateがおじぎ状態かどうかを返す関数
+	public bool IsStateGameOver( ) {
+		int layer = _animator.GetLayerIndex ("Base Layer");
+		AnimatorStateInfo animatorStateInfo = _animator.GetCurrentAnimatorStateInfo (layer);
+		return animatorStateInfo.IsName ("game_over");
 	}
 
 }
