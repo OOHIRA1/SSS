@@ -23,6 +23,9 @@ public class GameClearManager : MonoBehaviour {
 	bool _fanfareStarted;							//ファンファーレが始まったかどうかのフラグ
 	[SerializeField] DoubleDoorCurtain _curtain = null;
 	[SerializeField] GameObject _confettiParticles = null;	//紙吹雪
+	[SerializeField] DetectiveTalk _detectiveTalk = null;
+	[SerializeField] ScenesManager _scenesManager = null;
+
 
 	// Use this for initialization
 	void Start () {
@@ -74,6 +77,8 @@ public class GameClearManager : MonoBehaviour {
 		}
 		if (_fanfareStarted && !_se.isPlaying && Input.GetMouseButtonDown(0)) {
 			_curtain.Close ();
+			_confettiParticles.SetActive (false);
+			_clearText.SetActive (false);
 			_state = State.SHOW_TEXT;
 		}
 	}
@@ -81,16 +86,24 @@ public class GameClearManager : MonoBehaviour {
 
 	//--SHOW_TEXT時の処理をする関数
 	void ShowTextAction() {
-		_confettiParticles.SetActive (false);
-		_clearText.SetActive (false);
+		if (!_detectiveTalk.gameObject.activeInHierarchy && _curtain.IsStateClose() && _curtain.ResearchStatePlayTime() > 1f) {
+			_detectiveTalk.gameObject.SetActive (true);
+		} else {
+			if (Input.GetMouseButtonDown (0)) {
+				if (!_detectiveTalk.GetTalkFinishedFlag ()) {
+					_detectiveTalk.Talk ();
+				} else {
+					_detectiveTalk.gameObject.SetActive (false);
+					_scenesManager.ScenesTransition ("StageSelect");
+				}
+			}
+		}
+
 	}
 
 
 	//--GameClearテキストを表示する関数(コルーチン)
 	IEnumerator ClearTextDisplay() {
-//		while (!_detectiveAnimManager.IsStateBow()) {
-//			yield return new WaitForSeconds (Time.deltaTime);
-//		}
 		while (!_detectiveAnimManager.IsStateBowStart() || _detectiveAnimManager.ResearchStatePlayTime () < 3.0f / 5) {
 			yield return new WaitForSeconds (Time.deltaTime);
 		}
