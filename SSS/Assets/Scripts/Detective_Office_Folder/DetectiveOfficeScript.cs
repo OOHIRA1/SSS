@@ -29,10 +29,10 @@ public class DetectiveOfficeScript : MonoBehaviour {
 		_animator.SetBool( "DetectiveThink", false );
 	}
 	public void DetectiveBow01(){
-		_animator.SetBool( "DetectiveBow", true );
+		_animator.SetBool( "BowFlag", true );
 	}
 	public void DetectiveBow02(){
-		_animator.SetBool( "DetectiveBow", false );
+		_animator.SetBool( "BowFlag", false );
 	}
 	public void DetectiveConcetrate01(){
 		_animator.SetBool( "DetectiveConcetrate", true );
@@ -48,5 +48,19 @@ public class DetectiveOfficeScript : MonoBehaviour {
 	}
 
 
+	//--現在のStateの再生時間を返す関数( 返り値：0~1(開始時：0, 終了時：1) )
+	public float ResearchStatePlayTime() {
+		int layer = _animator.GetLayerIndex ("Base Layer");
+		AnimatorStateInfo animatorStateInfo = _animator.GetCurrentAnimatorStateInfo (layer);
+		return animatorStateInfo.normalizedTime;
+	}
+
+
+	//--カーテンのStateが開いている状態かどうかを返す関数
+	public bool IsStateBowStart( ) {
+		int layer = _animator.GetLayerIndex ("Base Layer");
+		AnimatorStateInfo animatorStateInfo = _animator.GetCurrentAnimatorStateInfo (layer);
+		return animatorStateInfo.IsName ("DetectiveBowStart");
+	}
 
 }
