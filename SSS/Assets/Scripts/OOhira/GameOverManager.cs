@@ -10,6 +10,7 @@ public class GameOverManager : MonoBehaviour {
 	public enum State {
 		FADE_IN,	//明転処理
 		BOOING,		//ブーイング
+		SHOW_TEXT,	//テキスト解説
 		CONTINUE	//コンティニュー画面
 	}
 
@@ -27,6 +28,7 @@ public class GameOverManager : MonoBehaviour {
 	[SerializeField] GabegeShooter _gabegeShooter = null;
 	[SerializeField] GameObject _gabeges = null;			//ゴミのゲームオブジェクト
 	[SerializeField] DetectiveTalk _detectiveTalk = null;
+	[SerializeField] GameObject _continuePanel = null;		//コンティニュー確認UI
 	[SerializeField] ScenesManager _scenesManager = null;
 
 	// Use this for initialization
@@ -42,6 +44,9 @@ public class GameOverManager : MonoBehaviour {
 			break;
 		case State.BOOING:
 			BooingAction ();
+			break;
+		case State.SHOW_TEXT:
+			ShowTextAction ();
 			break;
 		case State.CONTINUE:
 			ContinueAction ();
@@ -77,20 +82,39 @@ public class GameOverManager : MonoBehaviour {
 			_gabegeShooter.Shoot ();
 			_booingStarted = true;
 		}
-		if (_booingStarted && !_se.isPlaying && Input.GetMouseButtonDown(0)) {
-			_curtain.Close ();
-			_confettiParticles.SetActive (false);
-			_spotLight.SetActive (false);
-			_gameOverText.SetActive (false);
-			_gabeges.SetActive (false);
-			_state = State.CONTINUE;
+		if (_booingStarted && !_se.isPlaying ) {
+			_state = State.SHOW_TEXT;
+		}
+	}
+
+
+	//--SHOW_TEXT時の処理をする関数
+	void ShowTextAction() {
+		if (!_detectiveTalk.gameObject.activeInHierarchy) {
+			_detectiveTalk.gameObject.SetActive (true);
+		} else {
+			if (Input.GetMouseButtonDown (0)) {
+				if (!_detectiveTalk.GetTalkFinishedFlag ()) {
+					_detectiveTalk.Talk ();
+				} else {
+					_detectiveTalk.gameObject.SetActive (false);
+					_curtain.Close ();
+					_confettiParticles.SetActive (false);
+					_spotLight.SetActive (false);
+					_gameOverText.SetActive (false);
+					_gabeges.SetActive (false);
+					_state = State.CONTINUE;
+				}
+			}
 		}
 	}
 
 
 	//--CONTINUE時の処理をする関数
 	void ContinueAction() {
-		
+		if (!_continuePanel.activeInHierarchy && _curtain.IsStateClose() && _curtain.ResearchStatePlayTime() > 1f) {
+			_continuePanel.SetActive (true);
+		}
 	}
 
 

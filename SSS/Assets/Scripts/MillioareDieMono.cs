@@ -27,7 +27,7 @@ public class MillioareDieMono : MonoBehaviour {
 
         _time += Time.deltaTime;
 
-        if ( transform.position.x < 0 ) {　//ｘが0よりも小さいならの条件式MillioareScrollを呼ぶ
+        if ( transform.position.x == 0 ) {　//ｘが0よりも小さいならの条件式MillioareScrollを呼ぶ
             MillioareScroll( );             
             transform.position += _move_dir * SPEED * 0;
         } else {
