@@ -91,6 +91,13 @@ public class ScenesManager : MonoBehaviour {
 		case "ClimaxBattle":
 			SceneManager.LoadScene ("ClimaxBattle");
 			break;
+
+		case "GameClear":
+			SceneManager.LoadScene ("GameClear");
+			break;
+		case "GameOver":
+			SceneManager.LoadScene ("GameOver");
+			break;
 		}
 			
 	}

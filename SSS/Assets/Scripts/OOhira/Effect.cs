@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//==ハテナエフェクトを管理するクラス
+//==エフェクトを管理するクラス
 //
-//使用方法：ハテナエフェクトにアタッチ
-public class EffectQuestion : MonoBehaviour {
+//使用方法：エフェクトにアタッチ
+public class Effect : MonoBehaviour {
 	Animator _animator;
 
 	// Use this for initialization

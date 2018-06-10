@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 //==クライマックスバトルシーンを管理するクラス
 //
@@ -11,7 +13,8 @@ public class ClimaxBattleManager : MonoBehaviour {
 		INTRODUCTION,	//導入
 		WATCH_MOVIE,	//動画鑑賞
 		CHOOSE_CHOISES,	//選択
-		RESULT			//対決の結果
+		RESULT,			//対決の結果
+		FADE_OUT		//フェードアウト（暗転処理）
 	};
 
 	[SerializeField] State _state;
@@ -31,9 +34,13 @@ public class ClimaxBattleManager : MonoBehaviour {
 	[SerializeField] Vector3 _npcAppearPos = new Vector3(0, 0, 0);	//選択した犯人の出現する座標
 	Butler _butler = null;
 	[SerializeField] Vector3 _butlerMovePos = new Vector3(0, 0, 0);	//執事の移動先座標
-	[SerializeField] EffectQuestion _effectQuestion = null;			//ハテナエフェクト
+	[SerializeField] Effect _effectQuestion = null;					//ハテナエフェクト
 	bool _questionEffectAppearFlag;									//ハテナエフェクトをしたかどうかのフラグ
-	bool _fallFlag;													//落ちたかどうかのフラグ
+	bool _startfallingFlag;													//落ち始めたかどうかのフラグ
+	[SerializeField] FalledTrigger _falledTrigger = null;
+	[SerializeField] ScenesManager _scenesManager = null;
+	[SerializeField] Image _fadeOutPanel = null;
+	[SerializeField] float _fadeOutSpeed = 0;	//暗転処理のスピード(alpha/second) 
 
 
 
@@ -47,7 +54,7 @@ public class ClimaxBattleManager : MonoBehaviour {
 		_criminal = Instantiate (_criminal, _npcAppearPos, Quaternion.identity);//生成したGameObjectの参照を渡す
 		//-------------------------------------------------------------------------------------------
 		_questionEffectAppearFlag = false;
-		_fallFlag = false;
+		_startfallingFlag = false;
 	}
 	
 	// Update is called once per frame
@@ -67,6 +74,9 @@ public class ClimaxBattleManager : MonoBehaviour {
 			break;
 		case State.RESULT:
 			ResultAction ();
+			break;
+		case State.FADE_OUT:
+			FadeOutAction ();
 			break;
 		default:
 			break;
@@ -116,10 +126,15 @@ public class ClimaxBattleManager : MonoBehaviour {
 				_detective.SetIsAnimShocked (true);
 			}
 			//------------------------------------------------------------------------------------------------------
-			if (!_fallFlag && _questionEffectAppearFlag && _effectQuestion.ResearchStatePlayTime () > 0.4f) {
+			//落下処理----------------------------------------------------------------------------------------------
+			if (!_startfallingFlag && _questionEffectAppearFlag && _effectQuestion.ResearchStatePlayTime () > 0.4f) {
 				_effectQuestion.gameObject.SetActive (false);
 				_detective.Fall ();
-				_fallFlag = true;
+				_startfallingFlag = true;
+			}
+			//------------------------------------------------------------------------------------------------------
+			if (_falledTrigger.GetFallFlag ()) {
+				_state = State.FADE_OUT;
 			}
 		}
 
@@ -138,7 +153,6 @@ public class ClimaxBattleManager : MonoBehaviour {
 					for (int i = 0; i < _cutinControlls.Length; i++) {
 						_cutinControlls[i].StartCutinPart2 ();
 					}
-					_detective.SetIsMove (false);
 					_detective.DesignationMove ( _detectiveMovePos );
 					_butler.MoveToPos ( _butlerMovePos );
 					_cutinFlag = true;
@@ -162,12 +176,12 @@ public class ClimaxBattleManager : MonoBehaviour {
 
 	//--WATCH_MOVIEのステートの時の処理をする関数
 	void WatchMovieAction(){
-		
+		_detective.SetIsMove (false);
 	}
 
 
 	//--CHOOSE_CHOISESのステートの時の処理をする関数
-	void ChooseChoisesAction(){
+	void ChooseChoisesAction() {
 		if (Input.GetMouseButtonDown (0)) {
 			RaycastHit2D hit = _rayshooter.Shoot ( Input.mousePosition );
 			if (hit) {
@@ -178,7 +192,22 @@ public class ClimaxBattleManager : MonoBehaviour {
 
 
 	//--RESULTのステートの時の処理をする関数
-	void ResultAction(){
+	void ResultAction() {
 		_curtain.Close ();
+	}
+
+
+	//--FADE_OUTのステート時の処理をする関数
+	void FadeOutAction() {
+		if (_fadeOutPanel.color.a < 1f) {
+			Color color = _fadeOutPanel.color;
+			_fadeOutPanel.color = new Color (color.r, color.g, color.b, color.a + _fadeOutSpeed * Time.deltaTime);
+		} else {
+			if (_falledTrigger.GetFalledGameObject () == _detective.gameObject) {
+				_scenesManager.ScenesTransition ("GameOver");
+			} else {
+				_scenesManager.ScenesTransition ("GameClear");
+			}
+		}
 	}
 }
