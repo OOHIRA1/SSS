@@ -7,10 +7,13 @@ public class ProgressConditionManager : MonoBehaviour {
 	[ SerializeField ] MillioareDieMono _millioareDieMono = null;
 	[ SerializeField ] GameObject[] _evidenceIcon = null;
 	[ SerializeField ] Detective _detective = null;
+	[ SerializeField ] EvidenceFile _evidenceFile = null;
+
+	EvidenceManager _evidenceManager;
 
 	// Use this for initialization
 	void Start () {
-		
+		_evidenceManager = GameObject.FindGameObjectWithTag( "EvidenceManager" ).GetComponent< EvidenceManager >( );
 	}
 	
 	// Update is called once per frame
@@ -45,6 +48,23 @@ public class ProgressConditionManager : MonoBehaviour {
 		}
 	}
 
+
+	public bool GetEvidence1Progress( ) {
+		if ( _evidenceManager.CheckEvidence( EvidenceManager.Evidence.STORY1_EVIDENCE1 ) ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+		
+
+	public bool FirstTapEvidenceFileProgress( ) {
+		if ( _evidenceFile.gameObject.activeInHierarchy ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
 
 }

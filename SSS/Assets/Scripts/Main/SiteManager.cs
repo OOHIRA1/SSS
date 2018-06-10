@@ -22,6 +22,7 @@ public class SiteManager : MonoBehaviour {
 	[ SerializeField ] DetectiveTalk[ ] _detectiveTalk = null;
 
 	int _talkIndex;						//どのトークを表示させるか
+	bool _onlyOne;						//一回だけ処理したいとき
 
     enum PartStatus {
         INVESTIGATION_PART,
@@ -39,6 +40,7 @@ public class SiteManager : MonoBehaviour {
 		_gameDateManager = GameObject.FindGameObjectWithTag( "GameDataManager" ).GetComponent< GameDataManager >( );
 		_evidenceManager = GameObject.FindGameObjectWithTag ( "EvidenceManager" ).GetComponent< EvidenceManager > ( );
 		_talkIndex = -1;
+		_onlyOne = true;
 
 
 	}
@@ -149,172 +151,13 @@ public class SiteManager : MonoBehaviour {
 		bool[,] site = {							//どの部屋を閉じる状態にするかの配列。false：閉じない true：閉じる
 			{ false, false, false, true },			//右から寝室、キッチン、給仕室、庭。（部屋番号に対応）
 			{ false, false, false, false },			//上から昼、夕方、夜。
-			{ false, false, false, false }
+			{ false, true, false, false }
 		};
 
 		if ( _siteMove.GetCheckTiming( ) ) {
 			_storyBoundManeger.CutainCloseBound( site );
 		}
-
-
-		if ( !_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_MILLIONARE_MURDER_ANIM ) ) {	//モノクロアニメーションを見ていなかったら
 			
-			if ( _progressConditionManager.ShowMillionareMurderAnimProgress( ) ) {								//モノクロアニメーションを見終わったら
-				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.SHOW_MILLIONARE_MURDER_ANIM );  //チェックポイントを更新する
-				_storyBoundManeger.ShowMillionareMurderAnimBound( false );
-			} else {
-				_storyBoundManeger.ShowMillionareMurderAnimBound( true );
-			}
-
-		} else if ( !_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIND_POISONED_DISH ) ) {
-			
-			if ( _progressConditionManager.FindPoisonedDishProgress( ) ) {						//毒のついた皿を発見したら
-				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.FIND_POISONED_DISH );  //チェックポイントを更新する
-				//_storyBoundManeger.FindPoisonedDishBound( false );
-			} else {
-				//_storyBoundManeger.FindPoisonedDishBound( true );
-			}
-
-		} else if ( !_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE1 ) ) {
-
-			if ( /*_progressConditionManager.FindPoisonedDishProgress( )*/true ) {						//証拠品1を入手したら
-				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE1 );  //チェックポイントを更新する
-				//_storyBoundManeger.FindPoisonedDishBound( false );
-			} else {
-				//_storyBoundManeger.ShowMillionareMurderAnimBound( true );
-			}
-				
-		} else if ( !_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_TAP_EVIDENCE_FILE ) ) {
-
-			if ( /*_progressConditionManager.FindPoisonedDishProgress( )*/true ) {						//証拠品ファイルを初めてタップしたら
-				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.FIRST_TAP_EVIDENCE_FILE );  //チェックポイントを更新する
-				//_storyBoundManeger.FindPoisonedDishBound( false );
-			} else {
-				//_storyBoundManeger.ShowMillionareMurderAnimBound( true );
-			}
-
-		} else if ( !_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_CLOSE_EVIDENCE_FILE ) ) {
-
-			if ( /*_progressConditionManager.FindPoisonedDishProgress( )*/true ) {						//証拠品ファイルを初めて閉じたら
-				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.FIRST_CLOSE_EVIDENCE_FILE );  //チェックポイントを更新する
-				//_storyBoundManeger.FindPoisonedDishBound( false );
-			} else {
-				//_storyBoundManeger.ShowMillionareMurderAnimBound( true );
-			}
-
-		} else if ( !_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_KITCHEN ) ) {
-
-			if ( /*_progressConditionManager.FindPoisonedDishProgress( )*/true ) {						//初めて厨房に来たら
-				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_KITCHEN );  //チェックポイントを更新する
-				//_storyBoundManeger.FindPoisonedDishBound( false );
-			} else {
-				//_storyBoundManeger.ShowMillionareMurderAnimBound( true );
-			}
-
-		} else if ( !_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_SERVING_ROOM ) ) {
-
-			if ( /*_progressConditionManager.FindPoisonedDishProgress( )*/true ) {						//初めて給仕室に来たら
-				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_SERVING_ROOM );  //チェックポイントを更新する
-				//_storyBoundManeger.FindPoisonedDishBound( false );
-			} else {
-				//_storyBoundManeger.ShowMillionareMurderAnimBound( true );
-			}
-
-		} else if ( !_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_BACKYARD ) ) {
-
-			if ( /*_progressConditionManager.FindPoisonedDishProgress( )*/true ) {						//初めて裏庭に来たら
-				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_BACKYARD );  //チェックポイントを更新する
-				//_storyBoundManeger.FindPoisonedDishBound( false );
-			} else {
-				//_storyBoundManeger.ShowMillionareMurderAnimBound( true );
-			}
-
-		} else if ( !_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_BACKYARD_MOVIE ) ) {
-
-			if ( /*_progressConditionManager.FindPoisonedDishProgress( )*/true ) {						//裏庭(夜)の動画を見たら
-				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.SHOW_BACKYARD_MOVIE );  //チェックポイントを更新する
-				//_storyBoundManeger.FindPoisonedDishBound( false );
-			} else {
-				//_storyBoundManeger.ShowMillionareMurderAnimBound( true );
-			}
-
-		} else if ( !_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.STOP_MOVIE_WHICH_GAEDENAR_ATE_CAKE ) ) {
-
-			if ( /*_progressConditionManager.FindPoisonedDishProgress( )*/true ) {						//庭師がケーキを食べた瞬間でストップしたら
-				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.STOP_MOVIE_WHICH_GAEDENAR_ATE_CAKE );  //チェックポイントを更新する
-				//_storyBoundManeger.FindPoisonedDishBound( false );
-			} else {
-				//_storyBoundManeger.ShowMillionareMurderAnimBound( true );
-			}
-
-		} else if ( !_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE2 ) ) {
-
-			if ( /*_progressConditionManager.FindPoisonedDishProgress( )*/true ) {						//証拠品2を入手したら
-				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE2 );  //チェックポイントを更新する
-				//_storyBoundManeger.FindPoisonedDishBound( false );
-			} else {
-				//_storyBoundManeger.ShowMillionareMurderAnimBound( true );
-			}
-
-		} else if ( !_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_DETECTIVE_OFFICE ) ) {
-
-			if ( /*_progressConditionManager.FindPoisonedDishProgress( )*/true ) {						//初めて探偵ラボに来たら
-				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_DETECTIVE_OFFICE );  //チェックポイントを更新する
-				//_storyBoundManeger.FindPoisonedDishBound( false );
-			} else {
-				//_storyBoundManeger.ShowMillionareMurderAnimBound( true );
-			}
-
-		} else if ( !_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE3 ) ) {
-
-			if ( /*_progressConditionManager.FindPoisonedDishProgress( )*/true ) {						//証拠品3を入手したら
-				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE3 );  //チェックポイントを更新する
-				//_storyBoundManeger.FindPoisonedDishBound( false );
-			} else {
-				//_storyBoundManeger.ShowMillionareMurderAnimBound( true );
-			}
-
-		} else if ( !_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE4 ) ) {
-
-			if ( /*_progressConditionManager.FindPoisonedDishProgress( )*/true ) {						//証拠品4を入手したら
-				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE4 );  //チェックポイントを更新する
-				//_storyBoundManeger.FindPoisonedDishBound( false );
-			} else {
-				//_storyBoundManeger.ShowMillionareMurderAnimBound( true );
-			}
-
-		} else if ( !_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE5 ) ) {
-
-			if ( /*_progressConditionManager.FindPoisonedDishProgress( )*/true ) {						//証拠品5を入手したら
-				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE5 );  //チェックポイントを更新する
-				//_storyBoundManeger.FindPoisonedDishBound( false );
-			} else {
-				//_storyBoundManeger.ShowMillionareMurderAnimBound( true );
-			}
-
-		} else if ( !_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE6 ) ) {
-
-			if ( /*_progressConditionManager.FindPoisonedDishProgress( )*/true ) {						//証拠品6を入手したら
-				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE6 );  //チェックポイントを更新する
-				//_storyBoundManeger.FindPoisonedDishBound( false );
-			} else {
-				//_storyBoundManeger.ShowMillionareMurderAnimBound( true );
-			}
-
-		} else if ( !_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.COME_TO_DETECTIVE_OFFICE_WITH_ALL_EVIDENCE ) ) {
-
-			if ( /*_progressConditionManager.FindPoisonedDishProgress( )*/true ) {						//証拠品を全て揃えて探偵ラボに来たら
-				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.COME_TO_DETECTIVE_OFFICE_WITH_ALL_EVIDENCE );  //チェックポイントを更新する
-				//_storyBoundManeger.FindPoisonedDishBound( false );
-			} else {
-				//_storyBoundManeger.ShowMillionareMurderAnimBound( true );
-			}
-
-		}
-
-
-
-
 		//どこかに順番にではなく、すぐに満たしてしまう条件があるかも
 		if ( !_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_MILLIONARE_MURDER_ANIM ) ) {
 
@@ -342,13 +185,14 @@ public class SiteManager : MonoBehaviour {
 
 		}
 
-
+		Debug.Log( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIND_POISONED_DISH ) );
 		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.DETECTIVE_FIRST_TALK ) &&	//初めて探偵の解説が表示されていて、毒の食器を発見していなかったら
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIND_POISONED_DISH ) ) {
 
 			if (_progressConditionManager.FindPoisonedDishProgress ()) {
-				//_talkIndex = 1;			//近づけたテキストと証拠品タップしてみようテキスト
-				//_status = PartStatus.TALK_PART;
+				
+				_talkIndex = 1;			//近づけたテキストと証拠品タップしてみようテキスト
+				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.FIND_POISONED_DISH );
 				_storyBoundManeger.FindPoisonedDishBound( false );
 			} else {
@@ -361,10 +205,13 @@ public class SiteManager : MonoBehaviour {
 		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIND_POISONED_DISH ) &&	//毒の食器を発見していて、証拠品１（食器）を入手していなかったら
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE1 ) ) {
 
-			if ( /*証拠品１（食器）を入手できたら*/false ) {
-				//_talkIndex = 2;			//証拠品タップできたテキストと証拠品ファイルタップしてみようテキスト
+			if ( _progressConditionManager.GetEvidence1Progress( ) ) {
+				_talkIndex = 2;			//証拠品タップできたテキストと証拠品ファイルタップしてみようテキスト
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE1 );
+				_storyBoundManeger.GetEvidence1Bound( false );
+			} else {
+				_storyBoundManeger.GetEvidence1Bound( true );
 			}
 				
 		}
@@ -373,10 +220,13 @@ public class SiteManager : MonoBehaviour {
 		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE1 ) &&	//証拠品１（食器）を入手していて、初めて証拠品ファイルをタップしていなかったら
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_TAP_EVIDENCE_FILE ) ) {
 
-			if ( /*証拠品ファイルをタップしたら*/false ) {
+			if ( _progressConditionManager.FirstTapEvidenceFileProgress( ) ) {
 				//_talkIndex = 2;
 				//_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.FIRST_TAP_EVIDENCE_FILE );
+				_storyBoundManeger.FirstTapEvidenceFileBound( false );
+			} else {
+				_storyBoundManeger.FirstTapEvidenceFileBound( true );
 			}
 
 		}
@@ -583,89 +433,6 @@ public class SiteManager : MonoBehaviour {
     }
 
 
-	void DisplayCondition( ) {
-		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_MILLIONARE_MURDER_ANIM ) ) {
-			
-			_detectiveTalk[ 1 ].gameObject.SetActive( true );
-
-		} else if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIND_POISONED_DISH ) ) {
-			
-			_detectiveTalk[ 2 ].gameObject.SetActive( true );
-
-		} else if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE1 ) ) {
-			
-			_detectiveTalk[ 3 ].gameObject.SetActive( true );
-
-		} else if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_TAP_EVIDENCE_FILE ) ) {
-
-			_detectiveTalk[ 4 ].gameObject.SetActive( true );
-
-		} else if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_CLOSE_EVIDENCE_FILE ) ) {
-
-			_detectiveTalk[ 5 ].gameObject.SetActive( true );
-
-		} else if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_KITCHEN ) ) {
-
-			_detectiveTalk[ 6 ].gameObject.SetActive( true );
-
-		} else if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_SERVING_ROOM ) ) {
-
-			_detectiveTalk[ 7 ].gameObject.SetActive( true );
-
-		} else if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_BACKYARD ) ) {
-
-			_detectiveTalk[ 8 ].gameObject.SetActive( true );
-
-		} else if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_BACKYARD_MOVIE ) ) {
-
-			_detectiveTalk[ 9 ].gameObject.SetActive( true );
-
-		} else if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.STOP_MOVIE_WHICH_GAEDENAR_ATE_CAKE ) ) {
-
-			_detectiveTalk[ 10 ].gameObject.SetActive( true );
-
-		} else if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE2 ) ) {
-
-			_detectiveTalk[ 11 ].gameObject.SetActive( true );
-
-		} else if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_DETECTIVE_OFFICE ) ) {
-
-			_detectiveTalk[ 12 ].gameObject.SetActive( true );
-
-		} else if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE3 ) ) {
-
-			_detectiveTalk[ 13 ].gameObject.SetActive( true );
-
-		} else if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE4 ) ) {
-
-			_detectiveTalk[ 14 ].gameObject.SetActive( true );
-
-		} else if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE5 ) ) {
-
-			_detectiveTalk[ 15 ].gameObject.SetActive( true );
-
-		} else if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE6 ) ) {
-
-			_detectiveTalk[ 16 ].gameObject.SetActive( true );
-
-		} else if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.COME_TO_DETECTIVE_OFFICE_WITH_ALL_EVIDENCE ) ) {
-
-			_detectiveTalk[ 17 ].gameObject.SetActive( true );
-
-		}
-
-
-
-
-
-
-
-
-
-
-
-	}
-
 
     //操作をいろいろ制限する------------------------------------------------------------
     void Regulation( ) {
@@ -682,7 +449,11 @@ public class SiteManager : MonoBehaviour {
 
 		if ( _clockUI.GetPushed( ) != "none"  ) {       //時計UIのいずれかの時間帯がタッチされたら       
 			Regulation( );
-            _cutain.Close( );							//カーテンを閉める
+
+			if ( _onlyOne ) {									//毎フレームだと間に合わないのかカーテンがOpenのステートのときかつアニメーションが終わっている時にしても複数呼ばれてしまう
+            	_cutain.Close( );							//カーテンを閉める
+				_onlyOne = false;
+			}
 
             if ( _cutain.IsStateClose( ) && _cutain.ResearchStatePlayTime( ) >= 1f )    //カーテンが閉まりきったらシーン遷移する
                 _scenesManager.SiteScenesTransition( _clockUI.GetPushed( ) );		

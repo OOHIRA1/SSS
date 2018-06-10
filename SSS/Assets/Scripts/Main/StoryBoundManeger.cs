@@ -16,6 +16,17 @@ public class StoryBoundManeger : MonoBehaviour {
 	//[ SerializeField ] MillioareDieMono _millioareDieMono = null;
 	//[ SerializeField ] SiteMove _siteMove = null;
 
+
+	enum ButtonNum {
+		START_AND_STOP_BUTTON,
+		FF_BUTTON,
+		FB_BUTTON,
+		LABO_TRANSITION_UI,
+		TIRANGLE_LEFT,
+		TIRANGLE_RIGHT,
+		EVIDENCE_UI
+	};
+
 	// Use this for initialization
 	void Start( ) {
 	}
@@ -32,6 +43,7 @@ public class StoryBoundManeger : MonoBehaviour {
 		} else {
 			_ui.SetActive( true );
 			_clockUI.gameObject.SetActive( true );
+			_detective.DesignationMove( _detective.GetInitialPos( ) );			//初期位置に移動させる
 		}
 	}
 
@@ -49,21 +61,55 @@ public class StoryBoundManeger : MonoBehaviour {
 	public void FindPoisonedDishBound( bool application ) {
 		bool able = true;
 
-		if ( application ) {
+		if ( application ) {		//適用するのであれば利用できなくする
+			able = false;
+		} else {					//適用しないのであれば利用できる様にする
+			able = true;
+		}
+
+
+		//for (int i = 0; i < _button.Length; i++) {
+			//_button[ i ].interactable = able;
+		//}
+
+		_clockUI.gameObject.SetActive( able );
+		for ( int i = 0; i < _button.Length; i++ ) {
+			_button[ i ].gameObject.SetActive( able );
+		}
+	}
+
+	public void GetEvidence1Bound( bool application ) {
+		bool able = true;
+
+		if ( application ) {		
 			able = false;
 		} else {
 			able = true;
 		}
 
+		_detective.SetIsMove( able );
+		_clockUI.gameObject.SetActive( able );
+		for ( int i = 0; i < _button.Length; i++ ) {
+			_button[ i ].gameObject.SetActive( able );
+		}
+	}
 
-		for (int i = 0; i < _button.Length; i++) {
-			_button[ i ].interactable = able;
+	public void FirstTapEvidenceFileBound( bool application ) {
+		bool able = true;
+
+		if ( application ) {		
+			able = false;
+		} else {
+			able = true;
 		}
 
-
-//		for (int i = 0; i < _button.Length; i++) {
-		//_button [i].gameObject.SetActive (able);
-//		}
+		_detective.SetIsMove( able );
+		_clockUI.gameObject.SetActive( able );
+		for ( int i = 0; i < _button.Length; i++ ) {
+			if ( i != ( int )ButtonNum.EVIDENCE_UI ) {		//証拠品ファイルは規制をかけない
+				_button[ i ].gameObject.SetActive( able );
+			}
+		}
 	}
 
 
@@ -108,8 +154,10 @@ public class StoryBoundManeger : MonoBehaviour {
 			}
 		}
 
-		_cutain.Open( );							//最後まで終了しなかったら(閉じたい場所と現在いる場所が同じじゃなかったら)
-
+		//最後まで終了しなかったら(閉じたい場所と現在いる場所が同じじゃなかったら)
+		if ( _cutain.IsStateWait( ) ) {	//カーテンが閉まっている状態だったら
+			_cutain.Open( );							
+		}
 
 	}
 	//----------------------------------------------------------------------------------------------------------------------
