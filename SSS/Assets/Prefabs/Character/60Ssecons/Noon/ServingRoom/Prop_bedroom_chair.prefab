@@ -9,18 +9,18 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1046017684811118}
+  m_RootGameObject: {fileID: 1851101991776310}
   m_IsPrefabParent: 1
---- !u!1 &1046017684811118
+--- !u!1 &1851101991776310
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4778824782785196}
-  - component: {fileID: 212947688287600850}
-  - component: {fileID: 95071824095605662}
+  - component: {fileID: 4216514029235154}
+  - component: {fileID: 212976900454304080}
+  - component: {fileID: 95599624232381920}
   m_Layer: 0
   m_Name: Prop_bedroom_chair
   m_TagString: Untagged
@@ -28,12 +28,12 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4778824782785196
+--- !u!4 &4216514029235154
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1046017684811118}
+  m_GameObject: {fileID: 1851101991776310}
   m_LocalRotation: {x: -0, y: -0, z: -0.22002581, w: 0.9754941}
   m_LocalPosition: {x: 0.5173533, y: -4.783293, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -41,13 +41,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -25.421001}
---- !u!95 &95071824095605662
+--- !u!95 &95599624232381920
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1046017684811118}
+  m_GameObject: {fileID: 1851101991776310}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 4d294d57d31120e4a9d05b071636dd54, type: 2}
@@ -58,15 +58,16 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!212 &212947688287600850
+--- !u!212 &212976900454304080
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1046017684811118}
+  m_GameObject: {fileID: 1851101991776310}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
@@ -82,14 +83,22 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5f1eb3d0fccd43d468f7288fc40427d7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
