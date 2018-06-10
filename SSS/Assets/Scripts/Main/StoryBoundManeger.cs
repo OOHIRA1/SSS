@@ -16,7 +16,6 @@ public class StoryBoundManeger : MonoBehaviour {
 	//[ SerializeField ] MillioareDieMono _millioareDieMono = null;
 	//[ SerializeField ] SiteMove _siteMove = null;
 
-
 	enum ButtonNum {
 		START_AND_STOP_BUTTON,
 		FF_BUTTON,
@@ -112,6 +111,103 @@ public class StoryBoundManeger : MonoBehaviour {
 		}
 	}
 
+	public void FirstCloseEvidenceFileBound( bool application ) {
+		bool able = true;
+
+		if ( application ) {		
+			able = false;
+		} else {
+			able = true;
+		}
+
+		_detective.SetIsMove( able );
+		_clockUI.gameObject.SetActive( able );
+		for ( int i = 0; i < _button.Length; i++ ) {
+			if ( i != ( int )ButtonNum.EVIDENCE_UI ) {		//証拠品ファイルは規制をかけない
+				_button[ i ].gameObject.SetActive( able );
+			}
+		}
+
+	}
+
+
+	public void FirstComeToKitchenBound( bool application ) {
+		bool able = true;
+
+		if ( application ) {		
+			able = false;
+		} else {
+			able = true;
+		}
+			
+		_clockUI.gameObject.SetActive( able );
+		for ( int i = 0; i < _button.Length; i++ ) {
+			if ( i != ( int )ButtonNum.EVIDENCE_UI && i != ( int )ButtonNum.TIRANGLE_RIGHT ) {		//証拠品ファイルと三角UI（右）には規制をかけない
+				_button[ i ].gameObject.SetActive( able );
+			}
+		}
+	}
+
+
+	public void FirstComeToServingRoomBound( bool application ) {
+		bool able = true;
+
+		if ( application ) {		
+			able = false;
+		} else {
+			able = true;
+		}
+
+		_clockUI.gameObject.SetActive( able );
+		_button[ ( int )ButtonNum.LABO_TRANSITION_UI ].gameObject.SetActive( able );
+		_button[ ( int )ButtonNum.TIRANGLE_LEFT ].gameObject.SetActive( able );
+	}
+
+	public void FirstComeToBackyardBound( bool application ) {
+		bool able = true;
+
+		if ( application ) {		
+			able = false;
+		} else {
+			able = true;
+		}
+
+		_clockUI.gameObject.SetActive( able );
+		_button[ ( int )ButtonNum.LABO_TRANSITION_UI ].gameObject.SetActive( able );
+		_button[ ( int )ButtonNum.TIRANGLE_LEFT ].gameObject.SetActive( able );
+	}
+
+
+	public void ShowBackYardMovieBound( bool application ) {
+		bool able = true;
+
+		if ( application ) {		
+			able = false;
+		} else {
+			able = true;
+		}
+
+		_clockUI.gameObject.SetActive( able );
+		_button[ ( int )ButtonNum.LABO_TRANSITION_UI ].gameObject.SetActive( able );
+		_button[ ( int )ButtonNum.TIRANGLE_LEFT ].gameObject.SetActive( able );
+		_button[ ( int )ButtonNum.TIRANGLE_RIGHT ].gameObject.SetActive( able );
+	}
+
+
+	public void StopMovieWhichGaedenarAteCakeBound( bool application ) {
+		bool able = true;
+
+		if ( application ) {		
+			able = false;
+		} else {
+			able = true;
+		}
+
+		_clockUI.gameObject.SetActive( able );
+		_button[ ( int )ButtonNum.LABO_TRANSITION_UI ].gameObject.SetActive( able );
+		_button[ ( int )ButtonNum.TIRANGLE_LEFT ].gameObject.SetActive( able );
+		_button[ ( int )ButtonNum.TIRANGLE_RIGHT ].gameObject.SetActive( able );
+	}
 
 
 	//縛りがかかる場所だったらカーテンを閉じてそうでなかったらカーテンを開ける関数--------

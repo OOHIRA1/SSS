@@ -21,6 +21,7 @@ public class MoviePlaySystem : MonoBehaviour {
 	bool _isOperation;								//操作可能かどうか
 	bool _isFixed;									//固定するかどうか
 	bool _isReturn;									//場所を戻すかどうか
+	bool _isMouseMove;								//マウス操作が出来るかどうか
 
 	Vector2 _pointPos;
 	Vector2 _prePointPos;
@@ -34,6 +35,7 @@ public class MoviePlaySystem : MonoBehaviour {
 		_isOperation = true;
 		_isFixed = false;
 		_isReturn = false;
+		_isMouseMove = true;
 	}
 	
 	// Update is called once per frame
@@ -62,18 +64,19 @@ public class MoviePlaySystem : MonoBehaviour {
 			
 		if ( !_stop ) {
 			_pointPos.x = _point.GetTransform( ).x + ( _forcedPosParSecond * Time.deltaTime );
-			//Debug.Log( _pointPos );
 		}
 
 		
-
-		if ( Input.GetMouseButtonDown( 0 ) ) {	//マウスを押したかどうか
-			Vector2 mousePos = Vector2.zero;
-			mousePos = GetMouse( );
-			if ( mousePos.y >= _barTouchDown && mousePos.y <= _barTouchUp ) {
-				_pointPos.x = mousePos.x;
+		if ( _isMouseMove ) {
+			if ( Input.GetMouseButtonDown( 0 ) ) {	//マウスを押したかどうか
+				Vector2 mousePos = Vector2.zero;
+				mousePos = GetMouse( );
+				if ( mousePos.y >= _barTouchDown && mousePos.y <= _barTouchUp ) {
+					_pointPos.x = mousePos.x;
+				}
 			}
 		}
+
 		_point.MovePosition( _pointPos );
 	}
 
@@ -126,11 +129,24 @@ public class MoviePlaySystem : MonoBehaviour {
 	//停止しているかどうかを取得する
     public bool GetStop( ) { return _stop; }
 
+	//再生が最後までいっていたら
+	public bool EndPlayBack( ) {
+		if ( _point.GetTransform( ).x >= _point.GetMaxRange( ) ) {
+			return true;
+		} else {
+			return false;
+		}
+
+	} 
+
 	//操作可能にするか不可にするかを切り替える
 	public void SetOperation( bool value ) { _isOperation = value; }
 
+	//動画を最後のほうで固定するかどうか
 	public void SetFixed( bool value ) { _isFixed = value; }
 
+	//マウスで操作できるかどうかを切り替える
+	public void SetMouseMove( bool value ) { _isMouseMove = value; }
 
 	//--再生・一時停止を処理する関数
 	public void StopAndPlayTime( ) {

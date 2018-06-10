@@ -151,7 +151,7 @@ public class SiteManager : MonoBehaviour {
 		bool[,] site = {							//どの部屋を閉じる状態にするかの配列。false：閉じない true：閉じる
 			{ false, false, false, true },			//右から寝室、キッチン、給仕室、庭。（部屋番号に対応）
 			{ false, false, false, false },			//上から昼、夕方、夜。
-			{ false, true, false, false }
+			{ false, false, false, false }
 		};
 
 		if ( _siteMove.GetCheckTiming( ) ) {
@@ -185,7 +185,7 @@ public class SiteManager : MonoBehaviour {
 
 		}
 
-		Debug.Log( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIND_POISONED_DISH ) );
+
 		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.DETECTIVE_FIRST_TALK ) &&	//初めて探偵の解説が表示されていて、毒の食器を発見していなかったら
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIND_POISONED_DISH ) ) {
 
@@ -221,8 +221,6 @@ public class SiteManager : MonoBehaviour {
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_TAP_EVIDENCE_FILE ) ) {
 
 			if ( _progressConditionManager.FirstTapEvidenceFileProgress( ) ) {
-				//_talkIndex = 2;
-				//_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.FIRST_TAP_EVIDENCE_FILE );
 				_storyBoundManeger.FirstTapEvidenceFileBound( false );
 			} else {
@@ -235,10 +233,13 @@ public class SiteManager : MonoBehaviour {
 		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_TAP_EVIDENCE_FILE ) &&	//初めて証拠品ファイルをタップしていて、証拠品ファイルを閉じていなかったら
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_CLOSE_EVIDENCE_FILE ) ) {
 
-			if ( /*証拠品ファイルを閉じたら*/false) {
-				//_talkIndex = 3;			//説明まとめテキストと検死結果テキストと移動してみようテキスト
+			if (_progressConditionManager.FirstCloseEvidenceFileProgress ()) {
+				_talkIndex = 3;			//説明まとめテキストと検死結果テキストと移動してみようテキスト
 				_status = PartStatus.TALK_PART;
-				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.FIRST_CLOSE_EVIDENCE_FILE );
+				_gameDateManager.UpdateAdvancedData (GameDataManager.CheckPoint.FIRST_CLOSE_EVIDENCE_FILE);
+				_storyBoundManeger.FirstCloseEvidenceFileBound( false );
+			} else {
+				_storyBoundManeger.FirstCloseEvidenceFileBound( true );
 			}
 
 		}
@@ -247,10 +248,13 @@ public class SiteManager : MonoBehaviour {
 		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_CLOSE_EVIDENCE_FILE ) &&	//証拠品ファイルを閉じていて、キッチンに移動していなかったら
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_KITCHEN ) ) {
 				//庭に現場を移動できないようにする
-			if ( /*キッチンにきたら*/false ) {
-				//_talkIndex = 4;			//厨房きたよテキストとシークバー説明テキスト
+			if (_progressConditionManager.FirstComeToKitchenProgress ()) {
+				_talkIndex = 4;			//厨房きたよテキストとシークバー説明テキスト
 				_status = PartStatus.TALK_PART;
-				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_KITCHEN );
+				_gameDateManager.UpdateAdvancedData (GameDataManager.CheckPoint.FIRST_COME_TO_KITCHEN);
+				_storyBoundManeger.FirstComeToKitchenBound( false );
+			} else {
+				_storyBoundManeger.FirstComeToKitchenBound( true );
 			}
 
 		}
@@ -259,10 +263,13 @@ public class SiteManager : MonoBehaviour {
 		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_KITCHEN ) &&	//キッチンに移動していて、給仕室に移動していなっかたら
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_SERVING_ROOM ) ) {
 			//シークバー解禁
-			if ( /*給仕室にきたら*/false ) {
-				//_talkIndex = 4;			//給仕室きたよテキスト
+			if ( _progressConditionManager.FirstComeToServingRoomProgress( ) ) {
+				_talkIndex = 5;			//給仕室きたよテキスト
 				_status = PartStatus.TALK_PART;
-				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_SERVING_ROOM );
+				_gameDateManager.UpdateAdvancedData (GameDataManager.CheckPoint.FIRST_COME_TO_SERVING_ROOM);
+				_storyBoundManeger.FirstComeToServingRoomBound( false );
+			} else {
+				_storyBoundManeger.FirstComeToServingRoomBound( true );
 			}
 
 		}
@@ -271,10 +278,13 @@ public class SiteManager : MonoBehaviour {
 		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_SERVING_ROOM ) &&	//給仕室に移動していて、庭に移動していなっかたら
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_BACKYARD ) ) {	
 		
-			if ( /*庭にきたら*/false ) {
-				//_talkIndex = 5;			//庭きたよテキスト
+			if (_progressConditionManager.FirstComeToBackyardProgress( ) ) {
+				_talkIndex = 6;			//庭きたよテキスト
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_BACKYARD );
+				_storyBoundManeger.FirstComeToBackyardBound( false );
+			} else {
+				_storyBoundManeger.FirstComeToBackyardBound( true );
 			}
 
 		}
@@ -283,10 +293,13 @@ public class SiteManager : MonoBehaviour {
 		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_BACKYARD ) &&	//庭に移動していて、庭（夜）の動画をみていなかったら
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_BACKYARD_MOVIE ) ) {	
 
-			if ( /*動画が最後まで再生されたら*/false ) {	//クリックとボタンの操作を制限するかも
-				//_talkIndex = 6;			//動画最後まで見たテキストとそこで止めてみようテキスト
+			if ( _progressConditionManager.ShowBackYardMovieProgress( ) ) {	//クリックとボタンの操作を制限するかも
+				_talkIndex = 7;			//動画最後まで見たテキストとそこで止めてみようテキスト
 				_status = PartStatus.TALK_PART;
-				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.SHOW_BACKYARD_MOVIE );
+				_gameDateManager.UpdateAdvancedData (GameDataManager.CheckPoint.SHOW_BACKYARD_MOVIE);
+				_storyBoundManeger.ShowBackYardMovieBound( false );
+			} else {
+				_storyBoundManeger.ShowBackYardMovieBound( true );
 			}
 
 		}
@@ -295,10 +308,13 @@ public class SiteManager : MonoBehaviour {
 		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_BACKYARD_MOVIE ) &&	//庭（夜）の動画を見ていて、決定的瞬間で一時停止していなかったら
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.STOP_MOVIE_WHICH_GAEDENAR_ATE_CAKE ) ) {	
 
-			if ( /*決定的瞬間のタイミングで一時停止したら*/false ) {	//クリックとボタンの操作を制限するかも
-				//_talkIndex = 7;			//そこに行ってみようテキスト
+			if ( _progressConditionManager.StopMovieWhichGaedenarAteCakeProgress( ) ) {	//クリックとボタンの操作を制限するかも
+				_talkIndex = 8;			//そこに行ってみようテキスト
 				_status = PartStatus.TALK_PART;
-				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.STOP_MOVIE_WHICH_GAEDENAR_ATE_CAKE );
+				_gameDateManager.UpdateAdvancedData (GameDataManager.CheckPoint.STOP_MOVIE_WHICH_GAEDENAR_ATE_CAKE);
+				_storyBoundManeger.StopMovieWhichGaedenarAteCakeBound( false );
+			} else {
+				_storyBoundManeger.StopMovieWhichGaedenarAteCakeBound( true );
 			}
 
 		}
