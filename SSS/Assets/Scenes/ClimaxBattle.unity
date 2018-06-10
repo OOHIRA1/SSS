@@ -1304,7 +1304,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 200}
   m_SizeDelta: {x: 0, y: 200}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &875290730
@@ -1903,6 +1903,22 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1449501990}
+--- !u!1 &1537772367 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1886548707524434, guid: 4d66a6533e4147f4c921bf9771c72fc7,
+    type: 2}
+  m_PrefabInternal: {fileID: 2035516901}
+--- !u!114 &1537772368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1537772367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b761f52c2ec0ff04087ed9d958f2383d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1591182834
 GameObject:
   m_ObjectHideFlags: 0
@@ -2233,6 +2249,7 @@ MonoBehaviour:
   - {fileID: 2092332870}
   _npcAppearPos: {x: 2, y: -3.7, z: 0}
   _butlerMovePos: {x: 1.2, y: -6, z: 0}
+  _effectQuestion: {fileID: 1537772368}
 --- !u!4 &1699993572
 Transform:
   m_ObjectHideFlags: 0
@@ -2631,7 +2648,7 @@ Prefab:
     - target: {fileID: 114732505815527232, guid: 5267b23e2078134449675fd79c9db680,
         type: 2}
       propertyPath: _dangerousWeapon
-      value: DangerousWepon3
+      value: DangerousWepon2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5267b23e2078134449675fd79c9db680, type: 2}
@@ -3056,11 +3073,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4669298117369404, guid: 4d66a6533e4147f4c921bf9771c72fc7, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 21.071121
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4669298117369404, guid: 4d66a6533e4147f4c921bf9771c72fc7, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.380377
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 4669298117369404, guid: 4d66a6533e4147f4c921bf9771c72fc7, type: 2}
       propertyPath: m_LocalPosition.z
@@ -3085,6 +3102,10 @@ Prefab:
     - target: {fileID: 4669298117369404, guid: 4d66a6533e4147f4c921bf9771c72fc7, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1886548707524434, guid: 4d66a6533e4147f4c921bf9771c72fc7, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4d66a6533e4147f4c921bf9771c72fc7, type: 2}

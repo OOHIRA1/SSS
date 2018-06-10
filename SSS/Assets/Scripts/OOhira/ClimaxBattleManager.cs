@@ -31,7 +31,9 @@ public class ClimaxBattleManager : MonoBehaviour {
 	[SerializeField] Vector3 _npcAppearPos = new Vector3(0, 0, 0);	//選択した犯人の出現する座標
 	Butler _butler = null;
 	[SerializeField] Vector3 _butlerMovePos = new Vector3(0, 0, 0);	//執事の移動先座標
-	[SerializeField] GameObject _effectQuestion = null;				//ハテナエフェクト
+	[SerializeField] EffectQuestion _effectQuestion = null;			//ハテナエフェクト
+	bool _questionEffectAppearFlag;									//ハテナエフェクトをしたかどうかのフラグ
+	bool _fallFlag;													//落ちたかどうかのフラグ
 
 
 
@@ -44,6 +46,8 @@ public class ClimaxBattleManager : MonoBehaviour {
 		_criminal = Resources.Load<GameObject> ( "Characters/" + _gameDataManager.GetCriminal( ) );
 		_criminal = Instantiate (_criminal, _npcAppearPos, Quaternion.identity);//生成したGameObjectの参照を渡す
 		//-------------------------------------------------------------------------------------------
+		_questionEffectAppearFlag = false;
+		_fallFlag = false;
 	}
 	
 	// Update is called once per frame
@@ -100,10 +104,23 @@ public class ClimaxBattleManager : MonoBehaviour {
 
 	//--TRUE_OR_FALSEのステートの時の処理をする関数
 	void TrueOrFalseAction(){
-		if (_gameDataManager.GetCriminal () == "Butler" && _gameDataManager.GetDangerousWeapon() == "DangerousWepon3" ) {	//選んだものが正しいかの確認
+		if (_gameDataManager.GetCriminal () == "Butler" && _gameDataManager.GetDangerousWeapon () == "DangerousWepon3") {	//選んだものが正しいかの確認
 			_background.sprite = _detectiveOffice;	//背景を探偵ラボに差し替え
-			_butler = _criminal.GetComponent<Butler>();
+			_butler = _criminal.GetComponent<Butler> ();
 			_state = State.INTRODUCTION;
+		} else {//選択が間違っていたら…
+			//ハテナエフェクト・探偵驚き処理-------------------------------------------------------------------------
+			if (!_questionEffectAppearFlag && _curtain.IsStateOpen () && _curtain.ResearchStatePlayTime () > 1f) {
+				_effectQuestion.gameObject.SetActive (true);
+				_questionEffectAppearFlag = true;
+				_detective.SetIsAnimShocked (true);
+			}
+			//------------------------------------------------------------------------------------------------------
+			if (!_fallFlag && _questionEffectAppearFlag && _effectQuestion.ResearchStatePlayTime () > 0.4f) {
+				_effectQuestion.gameObject.SetActive (false);
+				_detective.Fall ();
+				_fallFlag = true;
+			}
 		}
 
 

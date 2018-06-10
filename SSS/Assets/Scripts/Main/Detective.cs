@@ -39,6 +39,8 @@ public class Detective : MonoBehaviour {
     Vector3 _forcedMoveX;                               //強制移動ｘ座標
     Vector3 _forcedMoveY;                               //強制移動ｙ座標
 
+	Rigidbody2D _rigidbody2D;
+
 	// Use this for initialization
 	void Start( ) {
 		_anim = GetComponent< Animator >( );
@@ -58,7 +60,8 @@ public class Detective : MonoBehaviour {
         _notFlip = new Vector3( 1, 1, 1 );
 		_forcedDestination = Vector3.zero;
         _forcedMoveX = new Vector3( _forcedSpeed, 0, 0 );
-        _forcedMoveY = new Vector3( 0, _forcedSpeed, 0 ); 
+        _forcedMoveY = new Vector3( 0, _forcedSpeed, 0 );
+		_rigidbody2D = GetComponent<Rigidbody2D> ();
 	}
 	
 	// Update is called once per frame
@@ -281,7 +284,28 @@ public class Detective : MonoBehaviour {
 
 	public bool GetIsForcedMove( ) { return _isForcedMove; }
 
-	public bool GetIsAnimShocked( ) { return _isAnimShocked; }
+	public void SetIsAnimShocked( bool x ) { _isAnimShocked = x; }
+
+
+	//--探偵を落下させる関数(クライマックスシーンで使用)
+	public void Fall() {
+		StartCoroutine ("FallCoroutine");
+	}
+
+
+	//--探偵を落下させる関数(コルーチン)
+	IEnumerator FallCoroutine() {
+		SetIsMove (false);
+		_rigidbody2D.constraints = RigidbodyConstraints2D.None;
+		_rigidbody2D.velocity = new Vector3 (-2,0,0);
+		float time = 0;
+		const float ROTATE_TIME = 3f;//回転時間
+		while(time < ROTATE_TIME) {
+			transform.Rotate (0, 0, 1f);
+			time += Time.deltaTime;
+			yield return new WaitForSeconds (Time.deltaTime);
+		}
+	}
 
 	//====================================================
 	//====================================================
