@@ -11,7 +11,7 @@ public class SiteManager : MonoBehaviour {
     [ SerializeField ] ScenesManager _scenesManager = null;
 	[ SerializeField ] ProgressConditionManager _progressConditionManager = null;
 	[ SerializeField ] StoryBoundManeger _storyBoundManeger = null;
-	//[ SerializeField ] EvidenceManager _evidenceManager = null;
+	EvidenceManager _evidenceManager;
 	[ SerializeField ] SiteMove _siteMove = null;
     //[ SerializeField ] GameObject _ui = null;
 	[ SerializeField ] Curtain _cutain = null;
@@ -20,6 +20,8 @@ public class SiteManager : MonoBehaviour {
 	[ SerializeField ] GameObject _evidenceFile = null;
     [ SerializeField ] Catcher _catcher = null;
 	[ SerializeField ] DetectiveTalk[ ] _detectiveTalk = null;
+
+	int _talkIndex;						//どのトークを表示させるか
 
     enum PartStatus {
         INVESTIGATION_PART,
@@ -35,6 +37,9 @@ public class SiteManager : MonoBehaviour {
     void Start( ) {
 		//GameObject[] gameDataManager = GameObject.FindGameObjectsWithTag ("GameDataManager");
 		_gameDateManager = GameObject.FindGameObjectWithTag( "GameDataManager" ).GetComponent< GameDataManager >( );
+		_evidenceManager = GameObject.FindGameObjectWithTag ( "EvidenceManager" ).GetComponent< EvidenceManager > ( );
+		_talkIndex = -1;
+
 
 	}
 	
@@ -114,28 +119,26 @@ public class SiteManager : MonoBehaviour {
 
     //お話パート
     void TalkPart( ) {
-		int displayText = 0;
-		for ( int i = 0; i < _detectiveTalk.Length; i++ ) {
-
-			if ( _detectiveTalk[ i ].gameObject.activeInHierarchy ) {				//テキストが存在したら
-				displayText = i;													//どのテキストを進めるか入れる
-				break;			
-			}
-
-			if ( i == _detectiveTalk.Length - 1 ) {									//テキストが存在しなかったら
-				_status = PartStatus.INVESTIGATION_PART;
-				return;
-			}
+		
+		if (!_detectiveTalk [_talkIndex].gameObject.activeInHierarchy) {
+			_detectiveTalk [_talkIndex].gameObject.SetActive (true);
 		}
 
+		//トークを進める処理
 		if ( Input.GetMouseButtonDown( 0 ) ) {
-			//トークを進める処理
-			_detectiveTalk[ displayText ].Talk( );
+			
+			_detectiveTalk[ _talkIndex ].Talk( );
 		}
 
-		if ( _detectiveTalk[ displayText ].GetTalkFinishedFlag() ) {
-				//トークを消す
+		//トークを消す
+		if ( _detectiveTalk[ _talkIndex ].GetTalkFinishedFlag() ) {
+			if (Input.GetMouseButtonDown (0)) {
+				_detectiveTalk [_talkIndex].gameObject.SetActive (false);
+				_status = PartStatus.INVESTIGATION_PART;
+			}
 		}
+
+
 
 		Regulation( );
     }
@@ -308,6 +311,234 @@ public class SiteManager : MonoBehaviour {
 			}
 
 		}
+
+
+
+
+		//どこかに順番にではなく、すぐに満たしてしまう条件があるかも
+		if ( !_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_MILLIONARE_MURDER_ANIM ) ) {
+
+			if ( _progressConditionManager.ShowMillionareMurderAnimProgress( ) ) {								//モノクロアニメーションを見終わったら
+				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.SHOW_MILLIONARE_MURDER_ANIM );  //チェックポイントを更新する
+				_storyBoundManeger.ShowMillionareMurderAnimBound( false );
+			} else {
+				_storyBoundManeger.ShowMillionareMurderAnimBound( true );
+			}
+
+		}
+
+
+		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_MILLIONARE_MURDER_ANIM ) &&	//モノクロアニメーションを見終わっていて、初めて探偵の解説が表示されていなかったら
+		     !_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.DETECTIVE_FIRST_TALK )  ) {
+
+			if ( _progressConditionManager.DetectiveFirstTalkProgress ( ) ) {
+				_talkIndex = 0;				//最初の解説テキストと近づいてみようテキストまで
+				_status = PartStatus.TALK_PART;
+				_gameDateManager.UpdateAdvancedData ( GameDataManager.CheckPoint.DETECTIVE_FIRST_TALK );
+				_storyBoundManeger.DetectiveFirstTalkBound ( false );
+			} else {
+				_storyBoundManeger.DetectiveFirstTalkBound ( true );
+			}
+
+		}
+
+
+		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.DETECTIVE_FIRST_TALK ) &&	//初めて探偵の解説が表示されていて、毒の食器を発見していなかったら
+			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIND_POISONED_DISH ) ) {
+
+			if (_progressConditionManager.FindPoisonedDishProgress ()) {
+				//_talkIndex = 1;			//近づけたテキストと証拠品タップしてみようテキスト
+				//_status = PartStatus.TALK_PART;
+				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.FIND_POISONED_DISH );
+				_storyBoundManeger.FindPoisonedDishBound( false );
+			} else {
+				_storyBoundManeger.FindPoisonedDishBound( true );
+			}
+
+		}
+
+
+		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIND_POISONED_DISH ) &&	//毒の食器を発見していて、証拠品１（食器）を入手していなかったら
+			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE1 ) ) {
+
+			if ( /*証拠品１（食器）を入手できたら*/false ) {
+				//_talkIndex = 2;			//証拠品タップできたテキストと証拠品ファイルタップしてみようテキスト
+				_status = PartStatus.TALK_PART;
+				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE1 );
+			}
+				
+		}
+
+
+		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE1 ) &&	//証拠品１（食器）を入手していて、初めて証拠品ファイルをタップしていなかったら
+			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_TAP_EVIDENCE_FILE ) ) {
+
+			if ( /*証拠品ファイルをタップしたら*/false ) {
+				//_talkIndex = 2;
+				//_status = PartStatus.TALK_PART;
+				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.FIRST_TAP_EVIDENCE_FILE );
+			}
+
+		}
+
+
+		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_TAP_EVIDENCE_FILE ) &&	//初めて証拠品ファイルをタップしていて、証拠品ファイルを閉じていなかったら
+			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_CLOSE_EVIDENCE_FILE ) ) {
+
+			if ( /*証拠品ファイルを閉じたら*/false) {
+				//_talkIndex = 3;			//説明まとめテキストと検死結果テキストと移動してみようテキスト
+				_status = PartStatus.TALK_PART;
+				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.FIRST_CLOSE_EVIDENCE_FILE );
+			}
+
+		}
+
+
+		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_CLOSE_EVIDENCE_FILE ) &&	//証拠品ファイルを閉じていて、キッチンに移動していなかったら
+			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_KITCHEN ) ) {
+				//庭に現場を移動できないようにする
+			if ( /*キッチンにきたら*/false ) {
+				//_talkIndex = 4;			//厨房きたよテキストとシークバー説明テキスト
+				_status = PartStatus.TALK_PART;
+				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_KITCHEN );
+			}
+
+		}
+
+
+		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_KITCHEN ) &&	//キッチンに移動していて、給仕室に移動していなっかたら
+			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_SERVING_ROOM ) ) {
+			//シークバー解禁
+			if ( /*給仕室にきたら*/false ) {
+				//_talkIndex = 4;			//給仕室きたよテキスト
+				_status = PartStatus.TALK_PART;
+				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_SERVING_ROOM );
+			}
+
+		}
+
+
+		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_SERVING_ROOM ) &&	//給仕室に移動していて、庭に移動していなっかたら
+			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_BACKYARD ) ) {	
+		
+			if ( /*庭にきたら*/false ) {
+				//_talkIndex = 5;			//庭きたよテキスト
+				_status = PartStatus.TALK_PART;
+				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_BACKYARD );
+			}
+
+		}
+
+
+		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_BACKYARD ) &&	//庭に移動していて、庭（夜）の動画をみていなかったら
+			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_BACKYARD_MOVIE ) ) {	
+
+			if ( /*動画が最後まで再生されたら*/false ) {	//クリックとボタンの操作を制限するかも
+				//_talkIndex = 6;			//動画最後まで見たテキストとそこで止めてみようテキスト
+				_status = PartStatus.TALK_PART;
+				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.SHOW_BACKYARD_MOVIE );
+			}
+
+		}
+
+
+		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_BACKYARD_MOVIE ) &&	//庭（夜）の動画を見ていて、決定的瞬間で一時停止していなかったら
+			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.STOP_MOVIE_WHICH_GAEDENAR_ATE_CAKE ) ) {	
+
+			if ( /*決定的瞬間のタイミングで一時停止したら*/false ) {	//クリックとボタンの操作を制限するかも
+				//_talkIndex = 7;			//そこに行ってみようテキスト
+				_status = PartStatus.TALK_PART;
+				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.STOP_MOVIE_WHICH_GAEDENAR_ATE_CAKE );
+			}
+
+		}
+
+
+		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.STOP_MOVIE_WHICH_GAEDENAR_ATE_CAKE ) &&	//決定的瞬間で一時停止していて、証拠品２を入手していなかったら
+			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE2 ) ) {	
+
+			if ( /*証拠品２を入手していたら*/false ) {	
+				//_talkIndex = 8;			//矛盾あったねテキストとラボに行ってみようテキスト
+				_status = PartStatus.TALK_PART;
+				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE2 );
+			}
+
+		}
+
+
+		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE3 ) &&	//証拠品３を入手していて、執事が箱をしまった
+			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_BUTLER_PUT_SILVER_BOX ) ) {	
+
+			if ( /*その時に冷蔵庫のまえで止まったら*/false ) {	
+				//_talkIndex = 9;			//執事が箱しまってたテキスト
+				_status = PartStatus.TALK_PART;
+				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.SHOW_BUTLER_PUT_SILVER_BOX );
+			}
+
+		}
+
+
+		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE3 ) &&	//証拠品３を入手していて、料理長が箱をしまった
+			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_COOK_PUT_YELLOW_BOX ) ) {	
+
+			if ( /*その時に冷蔵庫のまえで止まったら*/false ) {	
+				//_talkIndex = 10;			//料理長が箱しまってたテキスト
+				_status = PartStatus.TALK_PART;
+				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.SHOW_COOK_PUT_YELLOW_BOX );
+			}
+
+		}
+
+
+		if ( ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_BUTLER_PUT_SILVER_BOX ) && _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_COOK_PUT_YELLOW_BOX ) ) &&	
+			  !_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE4 ) ) {		//二つの箱を見ていて、証拠品４を入手していなかったら	
+
+			if ( /*証拠品４を入手したら*/false ) {	
+				//_talkIndex = 11;			//なんか気付いたよテキスト
+				_status = PartStatus.TALK_PART;
+				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE4 );
+			}
+
+		}
+
+
+
+		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE4 ) &&	//証拠品４を入手していて、証拠品５を入手していなかったら
+			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE5 ) ) {	
+
+			if ( /*証拠品５を入手したら*/false ) {
+				//_talkIndex = 12;			//なんかわかったテキストと次が最後テキスト
+				_status = PartStatus.TALK_PART;
+				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE5 );
+			}
+
+		}
+
+
+		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE5 ) &&	//証拠品５を入手していて、証拠品６を入手していなかったら
+			!_evidenceManager.CheckEvidence( EvidenceManager.Evidence.STORY1_EVIDENCE6 ) ) {	
+
+			if ( /*証拠品６を入手したら*/false ) {
+				//_talkIndex = 13;			//全貌見えてきたテキスト
+				_status = PartStatus.TALK_PART;
+			}
+
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 		if ( _scenesManager.GetNowScenes( ) == "SiteNight" && SiteMove._nowSiteNum == 0 ) {		//夜の寝室だったら

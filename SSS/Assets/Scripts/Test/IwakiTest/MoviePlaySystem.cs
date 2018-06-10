@@ -112,6 +112,7 @@ public class MoviePlaySystem : MonoBehaviour {
 			}
 
 			_pointPos.x = 2000f;
+			_pointPos.y = _point.GetTransform ().y;		//無理やり高さを合わせた。一回非アクティブにするせいか次にアクティブになる時にこの処理をするとｙ軸の値がバグる
 			_point.MovePosition( _pointPos );
 		}
 

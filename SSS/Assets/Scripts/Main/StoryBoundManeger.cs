@@ -26,16 +26,44 @@ public class StoryBoundManeger : MonoBehaviour {
 
 	public void ShowMillionareMurderAnimBound( bool application ) {
 		if ( application ) {
-				_ui.SetActive( false );
-				_detective.transform.position = new Vector3( -20, _detective.transform.position.y, 0 );
-			} else {
-			    _ui.SetActive( true );
-			}
+			_ui.SetActive( false );
+			_clockUI.gameObject.SetActive( false );
+			_detective.transform.position = new Vector3( -20, _detective.transform.position.y, 0 );
+		} else {
+			_ui.SetActive( true );
+			_clockUI.gameObject.SetActive( true );
+		}
+	}
+
+
+	public void DetectiveFirstTalkBound( bool application ) {
+		if ( application ) {
+			_ui.SetActive( false );
+			_clockUI.gameObject.SetActive( false );
+		} else {
+			_ui.SetActive( true );
+			_clockUI.gameObject.SetActive( true );
+		}
+	}
+
+	public void FindPoisonedDishBound( bool application ) {
+		bool able = true;
+
+		if ( application ) {
+			able = false;
+		} else {
+			able = true;
 		}
 
 
-	public void FindPoisonedDishBound( bool application, bool text = false ) {
+		for (int i = 0; i < _button.Length; i++) {
+			_button[ i ].interactable = able;
+		}
 
+
+//		for (int i = 0; i < _button.Length; i++) {
+		//_button [i].gameObject.SetActive (able);
+//		}
 	}
 
 
@@ -85,14 +113,6 @@ public class StoryBoundManeger : MonoBehaviour {
 
 	}
 	//----------------------------------------------------------------------------------------------------------------------
-
-
-	//SiteManagerにも同じ関数がある。どうしたものか
-	void AllButtonInteractable( bool inter ) {
-		for (int i = 0; i < _button.Length; i++) {
-			_button [i].interactable = inter;
-		}
-	}
 
 }
 

@@ -5,6 +5,9 @@ using UnityEngine;
 public class ProgressConditionManager : MonoBehaviour {
 	[ SerializeField ] ScenesManager _scenesManager = null;
 	[ SerializeField ] MillioareDieMono _millioareDieMono = null;
+	[ SerializeField ] GameObject[] _evidenceIcon = null;
+	[ SerializeField ] Detective _detective = null;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -26,13 +29,20 @@ public class ProgressConditionManager : MonoBehaviour {
 		return false;
 	}
 
+	public bool DetectiveFirstTalkProgress( ) {
+		if ( _detective.GetCheckPos ( ) ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public bool FindPoisonedDishProgress( ) {
-		//if ( ) {										//毒の付いた皿を発見したら
-		//	return true;
-		//} else {
-		//	return false;
-		//}									
-		return false;
+		if ( _evidenceIcon[ 0 ].activeInHierarchy ) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	

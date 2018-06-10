@@ -25,6 +25,8 @@ public class Detective : MonoBehaviour {
     bool _firstStep;                                    //強制移動の第一工程
 	bool _secondStep;                                   //強制移動の第二工程
 
+	bool _checkPos;
+
     Vector3 _destination;                               //探偵が動く場所
     Vector3 _initialPos;                                //探偵の初期位置
     Vector3 _move;                                      //探偵の移動
@@ -48,6 +50,7 @@ public class Detective : MonoBehaviour {
 		_isForcedMove = false;
         _firstStep = false; 
         _secondStep = false;
+		_checkPos = false;
         _destination = transform.position;
         _initialPos = transform.position;
         _move = new Vector3( _speed ,0, 0 );
@@ -67,7 +70,6 @@ public class Detective : MonoBehaviour {
         Flip( );
 
 		if ( _isForcedMove ) ForcedMove( );	//マウス以外のところが指定されたら
-
 	}
 
     void OnTriggerEnter2D( Collider2D collision ) {
@@ -99,6 +101,7 @@ public class Detective : MonoBehaviour {
         }
 
         if ( transform.position.x < ( _destination.x + 0.1f ) && transform.position.x > ( _destination.x - 0.1f ) ) {     //指定範囲内まで移動したら止まって歩くアニメーションをやめる
+			transform.position = _destination;										//目的地にピッタリ合うための処理
             _isAnimWalk = false;
         } else {
                                                                                    //指定範囲外だったらそこまで移動して歩くモーションをする
@@ -265,7 +268,7 @@ public class Detective : MonoBehaviour {
 	public bool GetIsAnimWalk() { return _isAnimWalk; }
 
     public bool GetCheckPos( ) {
-		if ( transform.position == _initialPos ) {              //初期地にいるかどうか
+		if ( transform.position.x == _initialPos.x ) {              //初期地にいるかどうか
 			return true;
 		} else {
 			return false;

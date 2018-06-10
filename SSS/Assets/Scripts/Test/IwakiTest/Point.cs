@@ -42,7 +42,7 @@ public class Point : MonoBehaviour {
 		if (vector.x > _rightPos) {
 			pos.x = _rightPos;
 		}
-
+			
 		_transform.position = pos;
 	}
 	//=============================================================
