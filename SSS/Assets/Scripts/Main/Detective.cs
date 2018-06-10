@@ -281,6 +281,7 @@ public class Detective : MonoBehaviour {
 
 	public bool GetIsForcedMove( ) { return _isForcedMove; }
 
+	public bool GetIsAnimShocked( ) { return _isAnimShocked; }
 
 	//====================================================
 	//====================================================

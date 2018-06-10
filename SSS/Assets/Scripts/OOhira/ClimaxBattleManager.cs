@@ -26,9 +26,12 @@ public class ClimaxBattleManager : MonoBehaviour {
 	[SerializeField] GameObject _choises = null;		//選択肢群
 	[SerializeField] Vector3 _detectiveMovePos = new Vector3(0, 0, 0);
 	[SerializeField] CutinControll[] _cutinControlls = new CutinControll[2];
-	bool _cutinFlag;									//カットイン演出をしたかどうかのフラグ
-	[SerializeField] Butler _butler = null;
-	[SerializeField] Vector3 _butlerMovePos = new Vector3(0, 0, 0);
+	bool _cutinFlag;												//カットイン演出をしたかどうかのフラグ
+	GameObject _criminal = null;									//選択した犯人
+	[SerializeField] Vector3 _npcAppearPos = new Vector3(0, 0, 0);	//選択した犯人の出現する座標
+	Butler _butler = null;
+	[SerializeField] Vector3 _butlerMovePos = new Vector3(0, 0, 0);	//執事の移動先座標
+	[SerializeField] GameObject _effectQuestion = null;				//ハテナエフェクト
 
 
 
@@ -37,6 +40,10 @@ public class ClimaxBattleManager : MonoBehaviour {
 		_state = State.TRUE_OR_FALSE;
 		_gameDataManager = GameObject.FindGameObjectWithTag ("GameDataManager").GetComponent<GameDataManager>();
 		_cutinFlag = false;
+		//選択した犯人をロードして壇上に生成する-------------------------------------------------------
+		_criminal = Resources.Load<GameObject> ( "Characters/" + _gameDataManager.GetCriminal( ) );
+		_criminal = Instantiate (_criminal, _npcAppearPos, Quaternion.identity);//生成したGameObjectの参照を渡す
+		//-------------------------------------------------------------------------------------------
 	}
 	
 	// Update is called once per frame
@@ -93,10 +100,12 @@ public class ClimaxBattleManager : MonoBehaviour {
 
 	//--TRUE_OR_FALSEのステートの時の処理をする関数
 	void TrueOrFalseAction(){
-		if (_gameDataManager.GetCriminal () == "" && _gameDataManager.GetDangerousWeapon() == "" ) {	//選んだものが正しいかの確認
-			_background.sprite = _detectiveOffice;
+		if (_gameDataManager.GetCriminal () == "Butler" && _gameDataManager.GetDangerousWeapon() == "DangerousWepon3" ) {	//選んだものが正しいかの確認
+			_background.sprite = _detectiveOffice;	//背景を探偵ラボに差し替え
+			_butler = _criminal.GetComponent<Butler>();
+			_state = State.INTRODUCTION;
 		}
-		_state = State.INTRODUCTION;
+
 
 	}
 
