@@ -192,7 +192,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1449501991}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.65694684
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2156,7 +2156,7 @@ VideoPlayer:
   m_PlayOnAwake: 1
   m_SkipOnDrop: 1
   m_Looping: 0
-  m_WaitForFirstFrame: 0
+  m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
 --- !u!4 &827208715
 Transform:
@@ -2614,7 +2614,7 @@ GameObject:
   - component: {fileID: 1248947136}
   - component: {fileID: 1248947135}
   m_Layer: 0
-  m_Name: Audio Source
+  m_Name: Audio SourceForVideo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6050,24 +6050,21 @@ MonoBehaviour:
   _state: 0
   _result: 0
   _videoController: {fileID: 827208716}
-  _checkPointTime:
-  - 16
-  - 30
-  - 61
-  _showChoicesGroupsTime:
-  - 22.5
-  - 34
-  - 66
-  _choicesGroups:
-  - {fileID: 1956058250}
-  - {fileID: 235631519}
-  - {fileID: 1500271267}
-  _correctchoices:
-  - {fileID: 1573673418}
-  - {fileID: 605999885}
-  - {fileID: 1608307324}
   _playerLife: {fileID: 1827327388}
   _moviePlaySystem: {fileID: 1737738766}
+  _battleTurn:
+  - _checkPointTime: 16
+    _showChoicesTime: 22.5
+    _choices: {fileID: 1956058250}
+    _correctchoice: {fileID: 1573673418}
+  - _checkPointTime: 30
+    _showChoicesTime: 34
+    _choices: {fileID: 235631519}
+    _correctchoice: {fileID: 605999885}
+  - _checkPointTime: 61
+    _showChoicesTime: 65.5
+    _choices: {fileID: 1500271267}
+    _correctchoice: {fileID: 1608307324}
 --- !u!4 &2115214289
 Transform:
   m_ObjectHideFlags: 0

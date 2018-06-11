@@ -16,20 +16,25 @@ public class ClimaxBattleSystem : MonoBehaviour {
 		WIN,			//勝利
 		LOSE			//敗北
 	}
-	const float INTERVAL = 5.5f;								//次の選択肢までのインターバル(VideoPlayer.timeへの値の反映は数フレームしないと反映されない(Unityのバグ!? or 仕様!?)のため)
+	const float INTERVAL = 5.5f;								//次の選択肢までのインターバル　※VideoPlayer.timeへの値の反映は数フレームしないと反映されない(Unityのバグ!? or 仕様!?)のため
+
+	[System.Serializable]
+	class BattleTurn {	//バトルターン
+		public double _checkPointTime = 0;			//途中再生時の時間の秒数(チェックポイントとなる時間の秒数)
+		public double _showChoicesTime = 0;			//選択肢群を表示する時間の秒数
+		public GameObject _choices = null;			//選択肢群
+		public GameObject _correctchoice = null;	//正しい選択肢
+	};
 
 	[SerializeField] State _state;
 	[SerializeField] Result _result;
 	[SerializeField] VideoController _videoController = null;
-	[SerializeField] double[] _checkPointTime = null;			//途中再生時の時間の秒数(チェックポイントとなる時間の秒数)
-	[SerializeField] double[] _showChoicesGroupsTime = null;	//選択肢群を表示する時間の秒数
-	[SerializeField] GameObject[] _choicesGroups = null;		//選択肢群
-	int _showChoicesGroupsIndex;								//表示する選択肢群の配列番号
-	[SerializeField] GameObject[] _correctchoices = null;		//正しい選択肢
 	[SerializeField] PlayerLife _playerLife = null;
 	[SerializeField] MoviePlaySystem _moviePlaySystem = null;
+	[SerializeField] BattleTurn[] _battleTurn = null;
+	int _battleTurnArrayIndex;								//現在の_battleTurnの配列番号
 	GameObject _playerChoice;									//プレイヤーが選んだ選択肢
-	bool _playVideo;	//何度も再生しないように(再生する関数を呼んでも再生するまでのラグがある模様…)
+	bool _playVideo;	//再生したかどうかのフラグ　※何度も再生しないように(再生する関数を呼んでも再生するまでのラグがある模様…)
 	bool _showChoicesFlag;										//選択肢を見せるかどうかのフラグ
 
 	//================================================================
@@ -50,10 +55,10 @@ public class ClimaxBattleSystem : MonoBehaviour {
 	void Start () {
 		_state = State.SHOW_VIDEO;
 		_result = Result.NOW_FIGHTING;
-		_showChoicesGroupsIndex = 0;
+		_battleTurnArrayIndex = 0;
 		_moviePlaySystem.SetMouseMove (false);	//マウス操作を受け付けなくする
-		_playerChoice = null;
 		_moviePlaySystem.SetOperation(false);
+		_playerChoice = null;
 		_playVideo = false;
 		_showChoicesFlag = true;
 	}
@@ -76,7 +81,7 @@ public class ClimaxBattleSystem : MonoBehaviour {
 		Debug.Log ("ClimaxBattleSystem._state:" + _state);
 
 		//プレイヤーのライフが無くなるか全問正解したらRESULTステートへ--------------------------------------
-		if (_playerLife.GetDead () || _showChoicesGroupsIndex == _showChoicesGroupsTime.Length) {
+		if (_playerLife.GetDead () || _battleTurnArrayIndex == _battleTurn.Length) {
 			_state = State.RESULT;
 		}
 		//---------------------------------------------------------------------------------------------
@@ -85,7 +90,7 @@ public class ClimaxBattleSystem : MonoBehaviour {
 
 	//--SHOW_VIDEOのステートの時の処理をする関数
 	void ShowVideoAction() {
-		if (!_videoController.IsPlaying () /*&& !_playVideo*/) {
+		if (!_videoController.IsPlaying () && !_playVideo) {
 			_videoController.PlayVideo ();
 			_playVideo = true;
 		}
@@ -98,7 +103,7 @@ public class ClimaxBattleSystem : MonoBehaviour {
 //				_state = State.CHOOSE_CHOICES;
 //			}
 			/*VideoPlayer.timeへの値の反映は数フレームしないと反映されない(Unityのバグ!? or 仕様!?)のため,コルーチンで意図的に間を作る！*/
-			if (_videoController.GetTime () >= _showChoicesGroupsTime [_showChoicesGroupsIndex]) {
+			if (_videoController.GetTime () >= _battleTurn [_battleTurnArrayIndex]._showChoicesTime) {
 				if (_showChoicesFlag) {
 					StartCoroutine (ShowChices());
 				}
@@ -112,35 +117,35 @@ public class ClimaxBattleSystem : MonoBehaviour {
 	//--CHOOSE_CHOICESのステートの時の処理をする関数
 	void ChooseChoicesAction() {
 		if (_playerChoice ) {
-			if (_playerChoice == _correctchoices [_showChoicesGroupsIndex]) {//正解処理
-				_choicesGroups [_showChoicesGroupsIndex].SetActive (false);
-				_showChoicesGroupsIndex++;
+			if (_playerChoice == _battleTurn [_battleTurnArrayIndex]._correctchoice) {//正解処理
+				_battleTurn[_battleTurnArrayIndex]._choices.SetActive (false);
+				_battleTurnArrayIndex++;
 				_moviePlaySystem.FastBackword ();
 				_moviePlaySystem.SetOperation (false);
 				_moviePlaySystem.StopAndPlayTime ();
 				_playerChoice = null;
 				_state = State.SHOW_VIDEO;
 			} else {//不正解処理
-				_choicesGroups [_showChoicesGroupsIndex].SetActive (false);
+				_battleTurn[_battleTurnArrayIndex]._choices.SetActive (false);
 				_playerLife.Damege();
 				_moviePlaySystem.FastBackword ();
 				_moviePlaySystem.SetOperation (false);
 				_moviePlaySystem.StopAndPlayTime ();
 				_playerChoice = null;
-				_videoController.PlayVideo ( _checkPointTime[_showChoicesGroupsIndex] );//チェックポイントとなる時間に戻す
+				_videoController.PlayVideo ( _battleTurn[_battleTurnArrayIndex]._checkPointTime );//チェックポイントとなる時間に戻す
 				_state = State.SHOW_VIDEO;
 			}
 			
 		}
 
 		if (_moviePlaySystem.EndPlayBack ()) {//時間切れ処理
-			_choicesGroups [_showChoicesGroupsIndex].SetActive (false);
+			_battleTurn[_battleTurnArrayIndex]._choices.SetActive (false);
 			_playerLife.Damege();
 			_moviePlaySystem.FastBackword ();
 			_moviePlaySystem.SetOperation (false);
 			_moviePlaySystem.StopAndPlayTime ();
 
-			_videoController.PlayVideo ( _checkPointTime[_showChoicesGroupsIndex] );//チェックポイントとなる時間に戻す
+			_videoController.PlayVideo ( _battleTurn[_battleTurnArrayIndex]._checkPointTime );//チェックポイントとなる時間に戻す
 			_state = State.SHOW_VIDEO;
 		}
 	}
@@ -155,7 +160,7 @@ public class ClimaxBattleSystem : MonoBehaviour {
 	//--選択肢を表示する関数(コルーチン)
 	IEnumerator ShowChices() {
 		_showChoicesFlag = false;
-		_choicesGroups [_showChoicesGroupsIndex].SetActive (true);
+		_battleTurn [_battleTurnArrayIndex]._choices.SetActive (true);
 		_moviePlaySystem.StopAndPlayTime ();
 		_moviePlaySystem.SetOperation (true);
 		_state = State.CHOOSE_CHOICES;
