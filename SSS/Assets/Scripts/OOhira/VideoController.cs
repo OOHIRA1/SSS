@@ -8,13 +8,27 @@ using UnityEngine.Video;
 //使用方法：VideoPlayerがアタッチされているゲームオブジェクトにアタッチ
 public class VideoController : MonoBehaviour {
 	VideoPlayer _videoPlayer;
-	[SerializeField] long _flame = 0;
-	[SerializeField] double _time = 0;
+	[SerializeField] GameObject _videoScreen = null;	//Videoを映すスクリーン
+//	[SerializeField] double[] _checkPointTime = null;	//途中再生時の時間の秒数(チェックポイントとなる時間の秒数)
+	[SerializeField] double _maxTime = 0;				//動画の最大時間(単位：second) 読み取り専用(正直、無くてもよいが開発しやすくするため)
+	[SerializeField] double _time = 0;					//現在の再生時間(単位：second) 読み取り専用(正直、無くてもよいが開発しやすくするため)
 	[SerializeField] VideoClip[] _videoClips = null;
+
+
+	//========================================================
+	//ゲッター
+	public double GetMaxTime() { return _maxTime; }
+	public double GetTime() { return _videoPlayer.time;}//_time; }
+	//========================================================
+	//========================================================
+
 
 	// Use this for initialization
 	void Start () {
 		_videoPlayer = GetComponent<VideoPlayer> ();
+		_maxTime = (double)_videoPlayer.frameCount / _videoPlayer.frameRate;
+		_videoPlayer.Stop ();//停止をする
+		_videoScreen.SetActive (false);
 	}
 	
 	// Update is called once per frame
@@ -23,20 +37,60 @@ public class VideoController : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.A))
 			_videoPlayer.Pause ();
 		if (Input.GetKeyDown (KeyCode.B))
-			_videoPlayer.Play ();
+			PlayVideo ();
 		if (Input.GetKeyDown (KeyCode.C))
-			_videoPlayer.Stop ();
+			FinishVideo ();
 		if (Input.GetKeyDown (KeyCode.D))
-			_videoPlayer.frame = _flame;
+			PauseVideo();//_videoPlayer.frame = _flame;
 		if (Input.GetKeyDown (KeyCode.E))
 			_videoPlayer.time = _time;
 		if (Input.GetKeyDown (KeyCode.Alpha0))
-			_videoPlayer.clip = _videoClips [0];
+			ChangeVideoClip ( 0 );
 		if (Input.GetKeyDown (KeyCode.Alpha1))
-			_videoPlayer.clip = _videoClips [1];
-		Debug.Log (_videoPlayer.frameCount / _videoPlayer.frameRate);
-		Debug.Log (_videoPlayer.time);
-
+			ChangeVideoClip ( 1 );
 		//---------------------------------------------
+		_maxTime = (double)_videoPlayer.frameCount / _videoPlayer.frameRate;	//_maxTimeの更新
+		_time = _videoPlayer.time;												//_timeの更新
 	}
+
+
+	//======================================================================================
+	//public関数
+
+	//--ビデオを(time秒目から)再生する関数
+	public void PlayVideo( double time = 0 ) {
+		if (!_videoScreen.activeInHierarchy) {
+			_videoScreen.SetActive (true);
+		}
+		_videoPlayer.time = time;
+		_videoPlayer.Play ();
+	}
+
+
+	//--ビデオのclipを入れ替える関数
+	public void ChangeVideoClip( int videoClipsIndex ) {
+		_videoPlayer.Stop ();
+		_videoPlayer.clip = _videoClips[videoClipsIndex];
+	}
+
+
+	//--ビデオ再生を終了する関数
+	public void FinishVideo() {
+		_videoPlayer.Stop ();
+		_videoScreen.SetActive (false);
+	}
+
+
+	//--ビデオを一時停止する関数
+	public void PauseVideo() {
+		_videoPlayer.Pause ();
+	}
+
+
+	//--ビデオを再生中かどうかを返す関数
+	public bool IsPlaying() {
+		return _videoPlayer.isPlaying;
+	}
+	//======================================================================================
+	//======================================================================================
 }

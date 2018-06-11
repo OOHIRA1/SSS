@@ -40,7 +40,9 @@ public class ClimaxBattleManager : MonoBehaviour {
 	[SerializeField] FalledTrigger _falledTrigger = null;
 	[SerializeField] ScenesManager _scenesManager = null;
 	[SerializeField] Image _fadeOutPanel = null;
-	[SerializeField] float _fadeOutSpeed = 0;	//暗転処理のスピード(alpha/second) 
+	[SerializeField] float _fadeOutSpeed = 0;	//暗転処理のスピード(alpha/second)
+	[SerializeField] GameObject _climaxBattleSystem = null;
+
 
 
 
@@ -177,6 +179,7 @@ public class ClimaxBattleManager : MonoBehaviour {
 	//--WATCH_MOVIEのステートの時の処理をする関数
 	void WatchMovieAction(){
 		_detective.SetIsMove (false);
+		_climaxBattleSystem.SetActive (true);
 	}
 
 
