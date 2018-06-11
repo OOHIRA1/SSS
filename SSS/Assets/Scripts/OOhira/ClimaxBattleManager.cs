@@ -11,8 +11,7 @@ public class ClimaxBattleManager : MonoBehaviour {
 	enum State {
 		TRUE_OR_FALSE,	//正誤判定
 		INTRODUCTION,	//導入
-		WATCH_MOVIE,	//動画鑑賞
-		CHOOSE_CHOISES,	//選択
+		BATTLE,			//対決
 		RESULT,			//対決の結果
 		FADE_OUT		//フェードアウト（暗転処理）
 	};
@@ -26,7 +25,6 @@ public class ClimaxBattleManager : MonoBehaviour {
 	[SerializeField] Detective _detective = null;
 	[SerializeField] RayShooter _rayshooter = null;
 	[SerializeField] GameObject _playerLifeUI = null;	//プレイヤーのライフUI
-	[SerializeField] GameObject _choises = null;		//選択肢群
 	[SerializeField] Vector3 _detectiveMovePos = new Vector3(0, 0, 0);
 	[SerializeField] CutinControll[] _cutinControlls = new CutinControll[2];
 	bool _cutinFlag;												//カットイン演出をしたかどうかのフラグ
@@ -41,7 +39,8 @@ public class ClimaxBattleManager : MonoBehaviour {
 	[SerializeField] ScenesManager _scenesManager = null;
 	[SerializeField] Image _fadeOutPanel = null;
 	[SerializeField] float _fadeOutSpeed = 0;	//暗転処理のスピード(alpha/second)
-	[SerializeField] GameObject _climaxBattleSystem = null;
+	[SerializeField] ClimaxBattleSystem _climaxBattleSystem = null;
+	[SerializeField] GameObject _timeControllUI = null;		//シークバーUI
 
 
 
@@ -68,11 +67,8 @@ public class ClimaxBattleManager : MonoBehaviour {
 		case State.INTRODUCTION:
 			IntroductionAction ();
 			break;
-		case State.WATCH_MOVIE:
-			WatchMovieAction ();
-			break;
-		case State.CHOOSE_CHOISES:
-			ChooseChoisesAction ();
+		case State.BATTLE:
+			BattleAction ();
 			break;
 		case State.RESULT:
 			ResultAction ();
@@ -85,8 +81,8 @@ public class ClimaxBattleManager : MonoBehaviour {
 		}
 		Debug.Log (_state);
 
-		ChangeActive ( _playerLifeUI, State.WATCH_MOVIE, false, _state == State.CHOOSE_CHOISES );
-		ChangeActive ( _choises, State.CHOOSE_CHOISES );
+		ChangeActive ( _playerLifeUI, State.BATTLE );
+		ChangeActive ( _timeControllUI, State.BATTLE );
 
 	}
 
@@ -159,7 +155,7 @@ public class ClimaxBattleManager : MonoBehaviour {
 					_butler.MoveToPos ( _butlerMovePos );
 					_cutinFlag = true;
 				}
-//				if (_detective.GetIsM ()) {
+//				if (_detective.GetIsM ()) {//拡大処理（後で）
 //					_charactors.transform.localScale = new Vector3 (1.1f, 1.1f,0);
 //				}
 				if (_cutinControlls[0].GetCutinMoveFinishedFlag () && !_detective.GetIsForcedMove() && _cutinFlag) {
@@ -169,34 +165,54 @@ public class ClimaxBattleManager : MonoBehaviour {
 					_cutinFlag = false;	//フラグをリセット(if文に1回のみ入るようにするため)
 				}
 				if (_cutinControlls[0].GetFinishFlag ()) {
-					_state = State.WATCH_MOVIE;
+					_state = State.BATTLE;
 				}
 			}
 		}
 	}
 
 
-	//--WATCH_MOVIEのステートの時の処理をする関数
-	void WatchMovieAction(){
-		_detective.SetIsMove (false);
-		_climaxBattleSystem.SetActive (true);
-	}
-
-
-	//--CHOOSE_CHOISESのステートの時の処理をする関数
-	void ChooseChoisesAction() {
-		if (Input.GetMouseButtonDown (0)) {
-			RaycastHit2D hit = _rayshooter.Shoot ( Input.mousePosition );
-			if (hit) {
-				Debug.Log (hit.collider.name);
-			}
+	//--BATTLEのステートの時の処理をする関数
+	void BattleAction() {
+		if (!_climaxBattleSystem.gameObject.activeInHierarchy) {
+			_detective.SetIsMove (false);
+			_climaxBattleSystem.gameObject.SetActive (true);//バトルシステム始動！
+		}
+		if (_climaxBattleSystem.GetResult () != ClimaxBattleSystem.Result.NOW_FIGHTING) {//勝敗が付いたら
+			_state = State.RESULT;
 		}
 	}
 
 
 	//--RESULTのステートの時の処理をする関数
 	void ResultAction() {
-		_curtain.Close ();
+		switch (_climaxBattleSystem.GetResult ()) {
+		case ClimaxBattleSystem.Result.WIN:
+			//落下処理-------------------------
+			if (!_startfallingFlag) {
+				_butler.Fall ();
+				_startfallingFlag = true;
+			}
+			//--------------------------------
+			if (_falledTrigger.GetFallFlag ()) {
+				_state = State.FADE_OUT;
+			}
+			break;
+		case ClimaxBattleSystem.Result.LOSE:
+			//落下処理-------------------------
+			if (!_startfallingFlag) {
+				_detective.SetIsAnimShocked (true);
+				_detective.Fall ();
+				_startfallingFlag = true;
+			}
+			//--------------------------------
+			if (_falledTrigger.GetFallFlag ()) {
+				_state = State.FADE_OUT;
+			}
+			break;
+		default:
+			break;
+		}
 	}
 
 

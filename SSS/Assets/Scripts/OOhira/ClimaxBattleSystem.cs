@@ -9,6 +9,7 @@ public class ClimaxBattleSystem : MonoBehaviour {
 	public enum State {
 		SHOW_VIDEO,			//ビデオ再生
 		CHOOSE_CHOICES,		//選択
+		BRIGHTING,			//明転処理
 		RESULT				//バトル結果
 	}
 	public enum Result {
@@ -72,13 +73,16 @@ public class ClimaxBattleSystem : MonoBehaviour {
 		case State.CHOOSE_CHOICES:
 			ChooseChoicesAction ();
 			break;
+		case State.BRIGHTING:
+			BrightingAction ();
+			break;
 		case State.RESULT:
 			ResultAction ();
 			break;
 		default :
 			break;
 		}
-		Debug.Log ("ClimaxBattleSystem._state:" + _state);
+		Debug.Log ("ClimaxBattleSystem:" + _state);
 
 		//プレイヤーのライフが無くなるか全問正解したらRESULTステートへ--------------------------------------
 		if (_playerLife.GetDead () || _battleTurnArrayIndex == _battleTurn.Length) {
@@ -116,44 +120,45 @@ public class ClimaxBattleSystem : MonoBehaviour {
 
 	//--CHOOSE_CHOICESのステートの時の処理をする関数
 	void ChooseChoicesAction() {
-		if (_playerChoice ) {
-			if (_playerChoice == _battleTurn [_battleTurnArrayIndex]._correctchoice) {//正解処理
-				_battleTurn[_battleTurnArrayIndex]._choices.SetActive (false);
-				_battleTurnArrayIndex++;
-				_moviePlaySystem.FastBackword ();
-				_moviePlaySystem.SetOperation (false);
-				_moviePlaySystem.StopAndPlayTime ();
-				_playerChoice = null;
-				_state = State.SHOW_VIDEO;
-			} else {//不正解処理
-				_battleTurn[_battleTurnArrayIndex]._choices.SetActive (false);
-				_playerLife.Damege();
-				_moviePlaySystem.FastBackword ();
-				_moviePlaySystem.SetOperation (false);
-				_moviePlaySystem.StopAndPlayTime ();
-				_playerChoice = null;
-				_videoController.PlayVideo ( _battleTurn[_battleTurnArrayIndex]._checkPointTime );//チェックポイントとなる時間に戻す
-				_state = State.SHOW_VIDEO;
-			}
-			
-		}
-
-		if (_moviePlaySystem.EndPlayBack ()) {//時間切れ処理
+		//選択肢表示の時間が切れたら行う処理----------------------------------------------------------------------------------------
+		if (_moviePlaySystem.EndPlayBack ()) {
 			_battleTurn[_battleTurnArrayIndex]._choices.SetActive (false);
-			_playerLife.Damege();
-			_moviePlaySystem.FastBackword ();
+			if (_playerChoice == _battleTurn [_battleTurnArrayIndex]._correctchoice) {//正解処理
+				_battleTurnArrayIndex++;
+			} else {//不正解or未選択処理
+				_playerLife.Damege ();
+				_videoController.PlayVideo (_battleTurn [_battleTurnArrayIndex]._checkPointTime);//チェックポイントとなる時間に戻す
+			}
+			_moviePlaySystem.FastBackword ();	//バーを5秒巻き戻し
 			_moviePlaySystem.SetOperation (false);
 			_moviePlaySystem.StopAndPlayTime ();
-
-			_videoController.PlayVideo ( _battleTurn[_battleTurnArrayIndex]._checkPointTime );//チェックポイントとなる時間に戻す
+			_playerChoice = null;
 			_state = State.SHOW_VIDEO;
+		}
+		//-----------------------------------------------------------------------------------------------------------------------
+		if (_playerChoice) {
+			_battleTurn[_battleTurnArrayIndex]._choices.SetActive (false);
 		}
 	}
 
 
 	//--RESULTのステートの時の処理をする関数
-	void ResultAction() {
+	void BrightingAction() {
 		
+	}
+
+
+	//--RESULTのステートの時の処理をする関数
+	void ResultAction() {
+		if (_result == Result.NOW_FIGHTING) {
+			if (_playerLife.GetDead ()) {//ライフが無くなっていたら
+				_result = Result.LOSE;
+				_videoController.FinishVideo ();
+			} else if (!_videoController.IsPlaying ()) {//ライフがあり　かつ　ビデオをを最後まで見れたら
+				_result = Result.WIN;
+				_videoController.FinishVideo ();
+			}
+		}
 	}
 
 
