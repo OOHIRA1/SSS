@@ -59,11 +59,12 @@ public class VideoController : MonoBehaviour {
 
 	//--ビデオを(time秒目から)再生する関数
 	public void PlayVideo( double time = 0 ) {
-		if (!_videoScreen.activeInHierarchy) {
-			_videoScreen.SetActive (true);
-		}
-		_videoPlayer.time = time;
-		_videoPlayer.Play ();
+//		if (!_videoScreen.activeInHierarchy) {//この方法だとビルド後にクラッシュする
+//			_videoScreen.SetActive (true);
+//		}
+//		_videoPlayer.time = time;
+//		_videoPlayer.Play ();
+		StartCoroutine(PlayVideoCoroutine(time));
 	}
 
 
@@ -93,4 +94,21 @@ public class VideoController : MonoBehaviour {
 	}
 	//======================================================================================
 	//======================================================================================
+
+
+	//--ビデオを(time秒目から)再生する関数(コルーチン)
+	IEnumerator PlayVideoCoroutine( double time = 0 ) {
+		if (!_videoScreen.activeInHierarchy) {
+			_videoScreen.SetActive (true);
+		}
+		_videoPlayer.Play ();
+		bool timeSelected = false;
+		while (!timeSelected) {
+			if (_videoPlayer.isPlaying) {
+				_videoPlayer.time = time;
+				timeSelected = true;
+			}
+			yield return new WaitForSeconds (Time.deltaTime);
+		}
+	}
 }
