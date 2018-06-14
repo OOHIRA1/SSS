@@ -1887,8 +1887,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveTouchUp: -4
   _moveTouchDown: -6
-  _speed: 0.1
-  _forcedSpeed: 0.02
+  _speed: 6
+  _forcedSpeed: 1.15
 --- !u!1 &1297585622
 GameObject:
   m_ObjectHideFlags: 0
@@ -3166,7 +3166,7 @@ Prefab:
     - target: {fileID: 114732505815527232, guid: 5267b23e2078134449675fd79c9db680,
         type: 2}
       propertyPath: _dangerousWeapon
-      value: DangerousWepon2
+      value: DangerousWepon3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5267b23e2078134449675fd79c9db680, type: 2}
