@@ -21,9 +21,9 @@ public class SiteMove : MonoBehaviour {
 
 	public enum _siteNum {
 		BEDROOM,
-		GARDEN,
 		KITCHEN,
-		SERVING_ROOM
+		SERVING_ROOM,
+		GARDEN
 	}
 
 

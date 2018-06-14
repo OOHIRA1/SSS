@@ -29,6 +29,12 @@ public class ClockUI : MonoBehaviour {
     Vector3 _minutesHandStopPos;                            //長針の止まる角度
     Vector3 _hourHandStopPos;                               //短針の止まる角度
 
+
+	Vector3 _initialMinutesHandRota;                        //長針の角度をゼロにする
+    Vector3 _initialHourHandRota;                           //短針の角度をゼロにする
+	bool _isRewind;											//バイツァ・ダストをするかどうか
+	[ SerializeField ] float _speed = 0;					//バイツァ・ダストのスピード
+
 	[ SerializeField ] GameObject[] _TimeZoneColor = new GameObject[ 1 ];
 	[ SerializeField ] GameObject[] _TimeZoneMono = new GameObject[ 1 ]; 
 
@@ -45,13 +51,31 @@ public class ClockUI : MonoBehaviour {
 		_RotaParSecondHour = _RotaParSecondMinutes / 12f;
         _pushed = "none";
 
+		_initialMinutesHandRota = Vector3.zero;
+		_initialHourHandRota = Vector3.zero;   
+		_isRewind = false;
 	}
 
 	// Update is called once per frame
 	void Update( ) {
-		if ( Input.GetMouseButtonDown( 0 ) ) CutainClose( );
+		if ( !_isRewind ) {											//バイツゥア・ダストをしていたら処理しない
+			if ( Input.GetMouseButtonDown( 0 ) ) CutainClose( );
+			ClockNeedleMove( );
+		} else {
 
-		ClockNeedleMove( );
+			Rewind( );
+
+			_TimeZoneColor[ ( int )TimeZone.NOON ].SetActive( true );		//バイツゥア・ダストをするとなぜか夕方を押した状態の画像になる
+			_TimeZoneMono[ ( int )TimeZone.NOON ].SetActive( false );		//なので無理やり変えてみたがそれでもなぜか一瞬だけその状態になる
+																			//今のところ思いつく解決策は使うところだけClolrとMonoの画像を変えてどうなっても画像が変わらないようにするくらいか
+			_TimeZoneColor[ ( int )TimeZone.AFTERNOON ].SetActive( false );
+			_TimeZoneMono[ ( int )TimeZone.AFTERNOON ].SetActive( true );
+
+			_TimeZoneColor[ ( int )TimeZone.NIGHT ].SetActive( false );
+			_TimeZoneMono[ ( int )TimeZone.NIGHT ].SetActive( true );
+
+		}
+
 	}
 
 	//レイが当たったtagに応じて画像を変えてシーン遷移-----------------------------------------------------
@@ -127,6 +151,28 @@ public class ClockUI : MonoBehaviour {
 		//-----------------------------------------------------------------------------------------------
 	}
 	//-------------------------------------------------------------------------------------------------------------------
+
+
+	//バイツゥア・ダスト関数---------------------------------------------------------
+	void Rewind( ) {
+
+		//長針の動き-----------------------------------------------------
+        _minutesHandRota.z += _speed * Time.deltaTime;
+      
+        _minutesHand.transform.localEulerAngles = _minutesHandRota;
+		//----------------------------------------------------------------
+
+		//短針の動き----------------------------------------------
+         _hourHandRota.z += _speed * Time.deltaTime;
+		
+		_hourHand.transform.localEulerAngles = _hourHandRota;
+		//--------------------------------------------------------
+	}
+	//--------------------------------------------------------------------------------
+	
+	//バイツゥア・ダストするかどうか
+	public void SetRewind( bool value ) { _isRewind = value; }
+
 
     //時計ＵＩのどの時間帯がタッチされたか
      public string GetPushed( ) { return _pushed; } 

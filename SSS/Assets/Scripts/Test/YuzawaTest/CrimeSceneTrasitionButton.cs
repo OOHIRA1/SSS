@@ -12,16 +12,23 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 	[SerializeField]GameObject[] _clockApper = new GameObject[4];
 	[SerializeField]float[] _time = new float[4];
 	[SerializeField]float _animTime = 500;
+	[SerializeField]ScenesManager _scenesManager = null;
+	[SerializeField]Curtain _curtain = null;
+	[SerializeField]bool[] _clicked = new bool[12];
 
 	int _num;
     bool Disapper = true;
     bool ClockDisapper = true;
 
-
 	// Use this for initialization
 	void Start () {
 		_num = -1;
 		_time[ 0 ] = 0;
+
+		for ( int i = 0; i < _clicked.Length; i++ ) {
+			_clicked[ i ] = false;
+		}
+
 	}
 	
 	// Update is called once per frame
@@ -45,6 +52,56 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 		{
 			_time[3] += Time.deltaTime;
 		}
+
+		_curtain.ResearchStatePlayTime ();
+		if (_clicked[0]) {
+			NightGarden ();
+		}
+
+		if (_clicked[1]) {
+			NoonGarden ();
+		}
+
+		if (_clicked[2]) {
+			EveningGarden ();
+		}
+
+		if (_clicked[3]) {
+			NightKitchen ();
+		}
+
+		if (_clicked[4]) {
+			NoonKitchen ();
+		}
+
+		if (_clicked[5]) {
+			EveningKitchen ();
+		}
+
+		if (_clicked[6]) {
+			NightServingRoom ();
+		}
+
+		if (_clicked[7]) {
+			NoonServingRoom ();
+		}
+
+		if (_clicked[8]) {
+			EveningServingRoom ();
+		}
+
+		if (_clicked[9]) {
+			NightBedRoom ();
+		}
+
+		if (_clicked[10]) {
+			NoonBedRoom ();
+		}
+
+		if (_clicked[11]) {
+			EveningBedRoom ();
+		}
+
 	}
 
 	//public void OnClickedButton( ) {
@@ -152,5 +209,123 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 	//	_animation.SetBool ("SpeechBalloonFlag", value);
 	//}
 
+	public void ButtonJudgement0(){
+		_clicked[0] = true;
+	}
 
+	public void ButtonJudgement1(){
+		_clicked[1] = true;
+	}
+
+	public void ButtonJudgement2(){
+		_clicked[2] = true;
+	}
+
+	public void ButtonJudgement3(){
+		_clicked[3] = true;
+	}
+
+	public void ButtonJudgement4(){
+		_clicked[4] = true;
+	}
+
+	public void ButtonJudgement5(){
+		_clicked[5] = true;
+	}
+
+	public void ButtonJudgement6(){
+		_clicked[6] = true;
+	}
+
+	public void ButtonJudgement7(){
+		_clicked[7] = true;
+	}
+
+	public void ButtonJudgement8(){
+		_clicked[8] = true;
+	}
+
+	public void ButtonJudgement9(){
+		_clicked[9] = true;
+	}
+
+	public void ButtonJudgement10(){
+		_clicked[10] = true;
+	}
+
+	public void ButtonJudgement11(){
+		_clicked[11] = true;
+	}
+
+	public void NightGarden(){
+		if (_clicked[0] && _curtain.IsStateWait () ) {
+			_scenesManager.ScenesTransition ("SiteNight_Garden");
+		}
+	}
+
+	public void NoonGarden(){
+		if (_clicked[1] && _curtain.IsStateWait ()) {
+			_scenesManager.ScenesTransition ("SiteNoon_Garden");
+		}
+	}
+
+	public void EveningGarden(){
+		if (_clicked[2] && _curtain.IsStateWait()) {
+			_scenesManager.ScenesTransition ("SiteEvening_Garden");
+		}
+	}
+
+	public void NightKitchen(){
+		if (_clicked[3] && _curtain.IsStateWait()) {
+			_scenesManager.ScenesTransition ("SiteNight_Kitchen");
+		}
+	}
+
+	public void NoonKitchen(){
+		if (_clicked[4] && _curtain.IsStateWait()) {
+			_scenesManager.ScenesTransition ("SiteNoon_Kitchen");
+		}
+	}
+
+	public void EveningKitchen(){
+		if (_clicked[5] && _curtain.IsStateWait()) {
+			_scenesManager.ScenesTransition ("SiteEvening_Kitchen");
+		}
+	}
+
+	public void NightServingRoom(){
+		if (_clicked[6] && _curtain.IsStateWait()) {
+			_scenesManager.ScenesTransition ("SiteNight_ServingRoom");
+		}
+	}
+
+	public void NoonServingRoom(){
+		if (_clicked[7] && _curtain.IsStateWait()) {
+			_scenesManager.ScenesTransition ("SiteNoon_ServingRoom");
+		}
+	}
+
+	public void EveningServingRoom(){
+		if (_clicked[8] && _curtain.IsStateWait()) {
+			_scenesManager.ScenesTransition ("SiteEvening_ServingRoom");
+		}
+	}
+
+	public void NightBedRoom(){
+		if (_clicked[9] && _curtain.IsStateWait()) {
+			_scenesManager.ScenesTransition ("SiteNight_Bedroom");
+		}
+	}
+
+	public void NoonBedRoom(){
+		if (_clicked[10] && _curtain.IsStateWait()) {
+			_scenesManager.ScenesTransition ("SiteNoon_Bedroom");
+		}
+	}
+
+	public void EveningBedRoom(){
+		if (_clicked[11] && _curtain.IsStateWait()) {
+			_scenesManager.ScenesTransition ("SiteEvening_Bedroom");
+		}
+	}
 }

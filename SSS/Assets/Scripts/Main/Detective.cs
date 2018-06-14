@@ -106,8 +106,8 @@ public class Detective : MonoBehaviour {
         if ( transform.position.x < ( _destination.x + 0.1f ) && transform.position.x > ( _destination.x - 0.1f ) ) {     //指定範囲内まで移動したら止まって歩くアニメーションをやめる
 			transform.position = _destination;										//目的地にピッタリ合うための処理
             _isAnimWalk = false;
-        } else {
-                                                                                   //指定範囲外だったらそこまで移動して歩くモーションをする
+        } else {																	//指定範囲外だったらそこまで移動して歩くモーションをする
+            _move.x = Time.deltaTime * _speed;                                        
             if ( transform.position.x < _destination.x ) {
 				transform.position += _move;
 				_isFlip = true;
@@ -166,8 +166,8 @@ public class Detective : MonoBehaviour {
     //強制移動(ｘ座標)----------------------------------------------
     void ForcedMoveX( ) {
 		_isAnimWalk = true;
+		_forcedMoveX.x = Time.deltaTime * _forcedSpeed;
         if ( _forcedDestination.x < transform.position.x ) {        //目的地が探偵より左側にあったら
-
 			transform.position -= _forcedMoveX;
 			_isFlip = false;
 
@@ -179,7 +179,6 @@ public class Detective : MonoBehaviour {
 		    }   
    
 		} else {                                                    //目的地が探偵より右側にあったら
-
 			transform.position += _forcedMoveX;
 			_isFlip = true;
 			
@@ -199,8 +198,8 @@ public class Detective : MonoBehaviour {
 
     //強制移動(ｙ座標)-----------------------------------------------------
     void ForcedMoveY( ) {
+		_forcedMoveY.y = Time.deltaTime * _forcedSpeed;
         if ( _forcedDestination.y < transform.position.y ) {        //目的地が探偵より下にあったら
-
 			transform.position -= _forcedMoveY;
 
             if ( _forcedDestination.y > transform.position.y ) {    //目的地より下に行ってしまったら
@@ -211,7 +210,6 @@ public class Detective : MonoBehaviour {
 		    }   
    
 		} else {                                                    //目的地が探偵より上にあったら
-
 			transform.position += _forcedMoveY;
 			
             if ( _forcedDestination.y < transform.position.y ) {    //目的地より上に行ってしまったら

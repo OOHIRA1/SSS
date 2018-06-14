@@ -24,7 +24,7 @@ public class SiteManager : MonoBehaviour {
 	[ SerializeField ] DetectiveTalk[ ] _detectiveTalk = null;
 	[ SerializeField ] GameObject _camera = null;
 
-	[ SerializeField ] EvidenceManager _aaa = null;
+	[ SerializeField ] EvidenceManager _aaa = null;	//デバッグ用
 
 	EvidenceManager _evidenceManager;
 
@@ -351,9 +351,23 @@ public class SiteManager : MonoBehaviour {
         if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE2 ) &&	
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_DETECTIVE_OFFICE ) ) {	
 
-				_storyBoundManeger.GetEvidence2Bound( true );
+				_storyBoundManeger.FirstComeToDetectiveOfficeBound( );
 
 		}
+
+		/*if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE3 ) &&
+			!_gameDateManager.CheckAdvancedData( 初めて昼か夜に遷移してきたら ) ) {
+
+			if ( _progressConditionManager.初めて昼か夜に遷移してきた条件() ) {
+				_talkIndex = 1111;		//初めて違う時間帯に遷移したテキスト
+				_status = PartStatus.TALK_PART;
+				_gameDateManager.UpdateAdvancedData( 初めて昼か夜に遷移した );
+				_storyBoundManeger.初めて昼か夜に遷移していなかったらかかる縛り(false);
+			} else {
+				_storyBoundManeger.初めて昼か夜に遷移していなかったらかかる縛り(true);
+			}
+
+		}*/
 
 
 		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE3 ) &&	//証拠品３を入手していて、執事が箱をしまったところで停止してなかったら
@@ -464,10 +478,25 @@ public class SiteManager : MonoBehaviour {
 		if ( _clockUI.GetPushed( ) != "none"  ) {       //時計UIのいずれかの時間帯がタッチされたら       
 			Regulation( );
 
-			if ( _onlyOne ) {									//毎フレームだと間に合わないのかカーテンがOpenのステートのときかつアニメーションが終わっている時にしても複数呼ばれてしまう
+			//遷移する前に初期位置に戻す処理（改良の余地あり。うまく既存の関数を使うようにする)------------------------
+			if ( !_detective.GetCheckPos( ) ) {										//探偵が初期値にいなかったら
+				if ( _detective.transform.position.x < 0 ) {						//探偵が指定位置より左側にいたら歩いて戻る。右側にいたらロープアクションで戻る
+			
+					if ( !_catcher.GetIsCatch( ) ) {									//探偵がロープアクションをしていなかったら(この処理がないと境目を越えたときにバグる)
+						_detective.DesignationMove( _detective.GetInitialPos( ) );
+					}
+
+				} else {
+					_catcher.ToRopeAction( );
+				}
+			}
+
+
+			if ( _onlyOne &&  !( _catcher.GetIsCatch( ) || _detective.GetIsForcedMove( ) ) ) {								//毎フレームだと間に合わないのかカーテンがOpenのステートのときかつアニメーションが終わっている時にしても複数呼ばれてしまう	//強制移動かロープアクションをしていなかったら
             	_cutain.Close( );							//カーテンを閉める
 				_onlyOne = false;
 			}
+			//--------------------------------------------------------------------------------------------------------
 
             if ( _cutain.IsStateClose( ) && _cutain.ResearchStatePlayTime( ) >= 1f )    //カーテンが閉まりきったらシーン遷移する
                 _scenesManager.SiteScenesTransition( _clockUI.GetPushed( ) );		
@@ -482,11 +511,25 @@ public class SiteManager : MonoBehaviour {
     void LaboTransitionUIScenesTransitionWithAnim( ) {
         if ( _pushLaboTransitionUI ) {
             Regulation( );
+			//----------------------------------------------------------------------------------------
+            if ( !_detective.GetCheckPos( ) ) {										//探偵が初期値にいなかったら
+				if ( _detective.transform.position.x < 0 ) {						//探偵が指定位置より左側にいたら歩いて戻る。右側にいたらロープアクションで戻る
+			
+					if ( !_catcher.GetIsCatch( ) ) {									//探偵がロープアクションをしていなかったら(この処理がないと境目を越えたときにバグる)
+						_detective.DesignationMove( _detective.GetInitialPos( ) );
+					}
 
-            if ( _onlyOne ) {
-                _cutain.Close( );
-                _onlyOne = false;
-            }
+				} else {
+					_catcher.ToRopeAction( );
+				}
+			}
+
+
+			if ( _onlyOne &&  !( _catcher.GetIsCatch( ) || _detective.GetIsForcedMove( ) ) ) {								//毎フレームだと間に合わないのかカーテンがOpenのステートのときかつアニメーションが終わっている時にしても複数呼ばれてしまう	//強制移動かロープアクションをしていなかったら
+            	_cutain.Close( );							//カーテンを閉める
+				_onlyOne = false;
+			}
+			//-----------------------------------------------------------------------------------------
 
             if ( _cutain.IsStateClose( ) && _cutain.ResearchStatePlayTime( ) >= 1f )    //カーテンが閉まりきったらシーン遷移する
                 _scenesManager.ScenesTransition( "DetectiveOffice" );
@@ -526,7 +569,11 @@ public class SiteManager : MonoBehaviour {
     void RopeAction( ) {
 		if ( !_moviePlaySystem.GetStop( ) && !_detective.GetCheckPos( ) ) {    //動画が再生されていて探偵が初期値にいなかったら
 			if ( _detective.transform.position.x < 0 ) {						//探偵が指定位置より左側にいたら歩いて戻る。右側にいたらロープアクションで戻る
-				_detective.DesignationMove( _detective.GetInitialPos( ) );		
+
+				if ( !_catcher.GetIsCatch( ) ) {									//探偵がロープアクションをしていなかったら(この処理がないと境目を越えたときにバグる)
+					_detective.DesignationMove( _detective.GetInitialPos( ) );
+				}
+
 			} else {
 				_catcher.ToRopeAction( );
 			}
@@ -565,6 +612,9 @@ public class SiteManager : MonoBehaviour {
 		_aaa.UpdateEvidence( EvidenceManager.Evidence.STORY1_EVIDENCE2 );
 	}
 
+	public void bbbb( ) {
+		_aaa.UpdateEvidence( EvidenceManager.Evidence.STORY1_EVIDENCE6 );
+	}
 
 }
 

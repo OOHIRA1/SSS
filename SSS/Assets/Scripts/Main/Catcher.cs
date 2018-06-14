@@ -66,6 +66,7 @@ public class Catcher : MonoBehaviour {
     
     //探偵を捕まえて持ち上げるまでの動き-------------------------------
     void CatchAndUpMove( ) {
+		_moveY.y = Time.deltaTime * _speed;
         if ( !_player.GetRopeTouch( ) ) {                       //探偵がロープに触れていなかったらロープを下げる
             _rope.transform.position -= _moveY;
         } else {                                                //触れたら持ち上げる
@@ -80,7 +81,9 @@ public class Catcher : MonoBehaviour {
     //---------------------------------------------------------------------
 
     //探偵を初期地まで持っていくまでの動き(初期地より左側にいることはないので左側にいたときの計算はしない)----
-    void InitialPosPut( ) {  
+    void InitialPosPut( ) {
+		_moveX.x = Time.deltaTime * _speed;
+		_moveY.y = Time.deltaTime * _speed;  
         if ( _destination.x < _player.transform.position.x ) {          //初期地より探偵のｘ座標がずれていたらまずｘ座標を初期地に持ってく
 
             _rope.transform.position -= _moveX;
@@ -117,6 +120,7 @@ public class Catcher : MonoBehaviour {
 
     //探偵が初期地に着いたらロープを退場させる動き-----------
     void RopeExit( ) {
+		_moveY.y = Time.deltaTime * _speed;
         _rope.transform.position += _moveY;
 
         if ( _rope.transform.position.y > ROPE_STOP_forcedDestination ) StepReset( );     //ロープが指定位置まで行ったら工程をリセットさせて終了

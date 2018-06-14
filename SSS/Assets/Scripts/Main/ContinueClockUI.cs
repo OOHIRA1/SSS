@@ -17,7 +17,7 @@ public class ContinueClockUI : MonoBehaviour {
 	void Start( ) {
 		 _minutesHandRota = _minutesHand.transform.localEulerAngles;
         _hourHandRota = _hourHand.transform.localEulerAngles;
-		_isRewind = false;
+		_isRewind = true;
 	}
 	
 	// Update is called once per frame

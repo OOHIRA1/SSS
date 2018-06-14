@@ -16,7 +16,6 @@ public class ProgressConditionManager : MonoBehaviour {
 	}
 
 	[ SerializeField ] ScenesManager _scenesManager = null;
-	[ SerializeField ] GameObject[] _evidenceIcon = null;
 	[ SerializeField ] Detective _detective = null;
 	[ SerializeField ] EvidenceFile _evidenceFile = null;
 	[ SerializeField ] MoviePlaySystem _moviePlaySystem = null;
@@ -25,11 +24,13 @@ public class ProgressConditionManager : MonoBehaviour {
 	[ SerializeField ] KeyPos[] _keyPos = new KeyPos[ 1 ];
 
 	EvidenceManager _evidenceManager;
+	GameObject _evidenceIcon1 = null;
 	//MillioareDieMono _millioareDieMono;
 
 	// Use this for initialization
 	void Start () {
 		_evidenceManager = GameObject.FindGameObjectWithTag( "EvidenceManager" ).GetComponent< EvidenceManager >( );
+		_evidenceIcon1 = GameObject.Find( "EvidenceIcon1" );
 		//_millioareDieMono = GameObject.FindGameObjectWithTag( "MillioareMonoDie" ).GetComponent< MillioareDieMono >( );
 	}
 	
@@ -55,9 +56,12 @@ public class ProgressConditionManager : MonoBehaviour {
 	}
 
 	public bool FindPoisonedDishProgress( ) {
-		if ( _evidenceIcon[ 0 ].activeInHierarchy ) {
-			return true;
-		} 
+		_evidenceIcon1 = GameObject.Find( "EvidenceIcon1" );
+		if ( _evidenceIcon1 != null ) {					
+			if ( _evidenceIcon1.activeInHierarchy ) {
+				return true;
+			}
+		}
 		return false;
 	}
 
