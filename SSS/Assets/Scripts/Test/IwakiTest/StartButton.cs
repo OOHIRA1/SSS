@@ -34,10 +34,21 @@ public class StartButton : MonoBehaviour {
 
     }
 
-    public void Other_Click( ) {
+	//一時停止画像に切り替える関数-----------------
+    public void StopImageChange( ) {
         if ( !_playing ) {
 			_playing = true;
 			_buttonImage.sprite = _stopSprite;
         }
     }
+	//---------------------------------------------
+	
+	//再生画像に切り替える関数---------------------
+	public void StartImageChange( ) {
+		if ( _playing ) {
+			_playing = false;
+			_buttonImage.sprite = _startSprite;
+		}
+	}
+	//--------------------------------------------
 }

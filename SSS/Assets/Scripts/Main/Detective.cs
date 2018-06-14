@@ -254,6 +254,8 @@ public class Detective : MonoBehaviour {
 	//セッター=========================================================================
 
     //現場(昼・夕方・夜)マネージャーが動けるかどうか命令するため---------
+	public void SetIsAnimShocked( bool x ) { _isAnimShocked = x; }
+
     public void SetIsMove( bool isMove ) { _isMove = isMove; }
     //-------------------------------------------------------------------
 
@@ -283,8 +285,9 @@ public class Detective : MonoBehaviour {
     public bool GetRopeTouch( ) { return _isRopeTouch; }
 
 	public bool GetIsForcedMove( ) { return _isForcedMove; }
+	public Vector3 GetPos( ) { return transform.position; }
 
-	public void SetIsAnimShocked( bool x ) { _isAnimShocked = x; }
+
 
 
 	//--探偵を落下させる関数(クライマックスシーンで使用)

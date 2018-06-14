@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+//なぜかラボ遷移UIを押しても動かない
+
 public class SiteManager : MonoBehaviour {
 	GameDataManager _gameDateManager = null;
 
@@ -11,7 +14,6 @@ public class SiteManager : MonoBehaviour {
     [ SerializeField ] ScenesManager _scenesManager = null;
 	[ SerializeField ] ProgressConditionManager _progressConditionManager = null;
 	[ SerializeField ] StoryBoundManeger _storyBoundManeger = null;
-	EvidenceManager _evidenceManager;
 	[ SerializeField ] SiteMove _siteMove = null;
     //[ SerializeField ] GameObject _ui = null;
 	[ SerializeField ] Curtain _cutain = null;
@@ -20,9 +22,16 @@ public class SiteManager : MonoBehaviour {
 	[ SerializeField ] GameObject _evidenceFile = null;
     [ SerializeField ] Catcher _catcher = null;
 	[ SerializeField ] DetectiveTalk[ ] _detectiveTalk = null;
+	[ SerializeField ] GameObject _camera = null;
+
+	[ SerializeField ] EvidenceManager _aaa = null;
+
+	EvidenceManager _evidenceManager;
 
 	int _talkIndex;						//どのトークを表示させるか
 	bool _onlyOne;						//一回だけ処理したいとき
+    bool _remark;                       //発言したかどうか
+    bool _pushLaboTransitionUI;         //ラボ遷移UIが押されたかどうか
 
     enum PartStatus {
         INVESTIGATION_PART,
@@ -36,12 +45,12 @@ public class SiteManager : MonoBehaviour {
 
     // Use this for initialization
     void Start( ) {
-		//GameObject[] gameDataManager = GameObject.FindGameObjectsWithTag ("GameDataManager");
 		_gameDateManager = GameObject.FindGameObjectWithTag( "GameDataManager" ).GetComponent< GameDataManager >( );
 		_evidenceManager = GameObject.FindGameObjectWithTag ( "EvidenceManager" ).GetComponent< EvidenceManager > ( );
 		_talkIndex = -1;
 		_onlyOne = true;
-
+        _remark = false;
+        _pushLaboTransitionUI = false;
 
 	}
 	
@@ -87,10 +96,12 @@ public class SiteManager : MonoBehaviour {
         _clockUI.Operation( true );
         _moviePlaySystem.SetOperation( true );
         AllButtonInteractable( true );
+		RayShooterEnabled( true );
         RegurateByCurtainState( );
         IsRopeActionAndForcedMove( );
-        ScenesTransitionWithAnim( );
-
+        ClockUIScenesTransitionWithAnim( );
+		LaboTransitionUIScenesTransitionWithAnim( );
+        RopeAction( );
        
     }
     //動画再生パート
@@ -114,16 +125,19 @@ public class SiteManager : MonoBehaviour {
         _clockUI.Operation( true );
         _moviePlaySystem.SetOperation( true );
         AllButtonInteractable( true );
+		RayShooterEnabled( true );
         RegurateByCurtainState( );
         IsRopeActionAndForcedMove( );
-        ScenesTransitionWithAnim( );
+        ClockUIScenesTransitionWithAnim( );
+		LaboTransitionUIScenesTransitionWithAnim( );
+        RopeAction( );
     }
 
     //お話パート
     void TalkPart( ) {
 		
-		if (!_detectiveTalk [_talkIndex].gameObject.activeInHierarchy) {
-			_detectiveTalk [_talkIndex].gameObject.SetActive (true);
+		if ( !_detectiveTalk[ _talkIndex ].gameObject.activeInHierarchy ) {
+			_detectiveTalk [ _talkIndex ].gameObject.SetActive( true );
 		}
 
 		//トークを進める処理
@@ -133,30 +147,29 @@ public class SiteManager : MonoBehaviour {
 		}
 
 		//トークを消す
-		if ( _detectiveTalk[ _talkIndex ].GetTalkFinishedFlag() ) {
-			if (Input.GetMouseButtonDown (0)) {
-				_detectiveTalk [_talkIndex].gameObject.SetActive (false);
+		if ( _detectiveTalk[ _talkIndex ].GetTalkFinishedFlag( ) ) {
+			if ( Input.GetMouseButtonDown( 0 ) ) {
+				_detectiveTalk[ _talkIndex ].gameObject.SetActive( false );
 				_status = PartStatus.INVESTIGATION_PART;
 			}
 		}
 
-
-
+		RayShooterEnabled( false );
 		Regulation( );
     }
 
-    //ストーリの進行状況によって操作に縛りをかける関数
+    //ストーリの進行状況によって操作に縛りをかける関数--------------------------------------------------------------------------------------------------------------------------------------------------------------
     void  StoryBound( ) {
 
-		bool[,] site = {							//どの部屋を閉じる状態にするかの配列。false：閉じない true：閉じる
-			{ false, false, false, true },			//右から寝室、キッチン、給仕室、庭。（部屋番号に対応）
-			{ false, false, false, false },			//上から昼、夕方、夜。
-			{ false, false, false, false }
-		};
+		//bool[,] site = {							//どの部屋を閉じる状態にするかの配列。false：閉じない true：閉じる
+		//	{ false, false, false, true },			//右から寝室、キッチン、給仕室、庭。（部屋番号に対応）
+		//	{ false, false, false, false },			//上から昼、夕方、夜。
+		//	{ false, false, false, false }
+		//};
 
-		if ( _siteMove.GetCheckTiming( ) ) {
-			_storyBoundManeger.CutainCloseBound( site );
-		}
+		//if ( _siteMove.GetCheckTiming( ) ) {
+		//	_storyBoundManeger.CutainCloseBound( site );
+		//}
 			
 		//どこかに順番にではなく、すぐに満たしてしまう条件があるかも
 		if ( !_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_MILLIONARE_MURDER_ANIM ) ) {
@@ -283,6 +296,7 @@ public class SiteManager : MonoBehaviour {
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_BACKYARD );
 				_storyBoundManeger.FirstComeToBackyardBound( false );
+				_moviePlaySystem.MoviReset( );							//ここだけ動画をリセットする
 			} else {
 				_storyBoundManeger.FirstComeToBackyardBound( true );
 			}
@@ -323,47 +337,70 @@ public class SiteManager : MonoBehaviour {
 		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.STOP_MOVIE_WHICH_GAEDENAR_ATE_CAKE ) &&	//決定的瞬間で一時停止していて、証拠品２を入手していなかったら
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE2 ) ) {	
 
-			if ( /*証拠品２を入手していたら*/false ) {	
-				//_talkIndex = 8;			//矛盾あったねテキストとラボに行ってみようテキスト
+			if ( _progressConditionManager.GetEvidence2Progress( ) ) {	
+				_talkIndex = 9;			//矛盾あったねテキストとラボに行ってみようテキスト
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE2 );
+				_storyBoundManeger.GetEvidence2Bound( false );
+			} else {
+				_storyBoundManeger.GetEvidence2Bound( true );
 			}
 
 		}
 
+        if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE2 ) &&	
+			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_DETECTIVE_OFFICE ) ) {	
 
-		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE3 ) &&	//証拠品３を入手していて、執事が箱をしまった
+				_storyBoundManeger.GetEvidence2Bound( true );
+
+		}
+
+
+		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE3 ) &&	//証拠品３を入手していて、執事が箱をしまったところで停止してなかったら
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_BUTLER_PUT_SILVER_BOX ) ) {	
 
-			if ( /*その時に冷蔵庫のまえで止まったら*/false ) {	
-				//_talkIndex = 9;			//執事が箱しまってたテキスト
+			if ( _progressConditionManager.ShowButlerPutSilverBoxProgress( ) ) {	
+				_talkIndex = 10;			//執事が箱しまってたテキスト
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.SHOW_BUTLER_PUT_SILVER_BOX );
+				_storyBoundManeger.SilverAndYellowBoxBound( false );
+			} else {
+				_storyBoundManeger.SilverAndYellowBoxBound( true );
 			}
 
 		}
 
 
-		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE3 ) &&	//証拠品３を入手していて、料理長が箱をしまった
-			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_COOK_PUT_YELLOW_BOX ) ) {	
+		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE3 ) &&	//証拠品３を入手していて、料理長が箱をしまったところで停止してなかったら
+			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_COOK_PUT_YELLOW_BOX ) ) {
 
-			if ( /*その時に冷蔵庫のまえで止まったら*/false ) {	
-				//_talkIndex = 10;			//料理長が箱しまってたテキスト
-				_status = PartStatus.TALK_PART;
-				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.SHOW_COOK_PUT_YELLOW_BOX );
-			}
+            if ( _progressConditionManager.ShowCookPutYellowBoxProgress( ) ) {
+                _talkIndex = 11;            //料理長が箱しまってたテキスト
+                _status = PartStatus.TALK_PART;
+                _gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.SHOW_COOK_PUT_YELLOW_BOX );
+                _storyBoundManeger.SilverAndYellowBoxBound( false );
+            } else {
+                _storyBoundManeger.SilverAndYellowBoxBound( true );
+            }
 
 		}
 
 
 		if ( ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_BUTLER_PUT_SILVER_BOX ) && _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_COOK_PUT_YELLOW_BOX ) ) &&	
-			  !_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE4 ) ) {		//二つの箱を見ていて、証拠品４を入手していなかったら	
+			  !_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE4 ) ) {		//二つの箱を見ていて、証拠品４を入手していなかったら
 
-			if ( /*証拠品４を入手したら*/false ) {	
-				//_talkIndex = 11;			//なんか気付いたよテキスト
-				_status = PartStatus.TALK_PART;
+            if ( !_remark ) {               //一回発言したら処理しない
+                _talkIndex = 12;            //なんか気付いたよテキスト  //ここだけ会話の特別処理
+                _status = PartStatus.TALK_PART;
+                _remark = true;
+            }
+
+			if ( _progressConditionManager.GetEvidence4Progress( ) ) {	
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE4 );
-			}
+                _storyBoundManeger.GetEvidence4Bound( false );
+			} else {
+                _storyBoundManeger.GetEvidence4Bound( true );
+            }
 
 		}
 
@@ -372,11 +409,14 @@ public class SiteManager : MonoBehaviour {
 		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE4 ) &&	//証拠品４を入手していて、証拠品５を入手していなかったら
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE5 ) ) {	
 
-			if ( /*証拠品５を入手したら*/false ) {
-				//_talkIndex = 12;			//なんかわかったテキストと次が最後テキスト
+			if ( _progressConditionManager.GetEvidence5Progress( ) ) {
+				_talkIndex = 13;			//なんかわかったテキストと次が最後テキスト
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE5 );
-			}
+                _storyBoundManeger.GetEvidence5Bound( false );
+			} else {
+                _storyBoundManeger.GetEvidence5Bound( true );
+            }
 
 		}
 
@@ -384,70 +424,28 @@ public class SiteManager : MonoBehaviour {
 		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE5 ) &&	//証拠品５を入手していて、証拠品６を入手していなかったら
 			!_evidenceManager.CheckEvidence( EvidenceManager.Evidence.STORY1_EVIDENCE6 ) ) {	
 
-			if ( /*証拠品６を入手したら*/false ) {
-				//_talkIndex = 13;			//全貌見えてきたテキスト
+			if ( _progressConditionManager.GetEvidence6Progress( ) ) {
+				_talkIndex = 14;			//全貌見えてきたテキスト
 				_status = PartStatus.TALK_PART;
-			}
+                _storyBoundManeger.GetEvidence6Bound( false );
+			} else {
+                _storyBoundManeger.GetEvidence6Bound( true );
+            }
 
 		}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
 		if ( _scenesManager.GetNowScenes( ) == "SiteNight" && SiteMove._nowSiteNum == 0 ) {		//夜の寝室だったら
 			_moviePlaySystem.SetFixed( true );
+			_moviePlaySystem.SetMouseMove( false );
+			_button[ ( int )StoryBoundManeger.ButtonNum.START_AND_STOP_BUTTON ].interactable = false;
 		} else {
 			_moviePlaySystem.SetFixed( false );
+			_moviePlaySystem.SetMouseMove( true );
 		}
-
-
-        //縛り処理----------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-		/*if ( !_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_MILLIONARE_MURDER_ANIM ) ) {	//モノクロアニメーションを見ていなかったら
-			if ( _progressConditionManager.ShowMillionareMurderAnimProgress( ) ) {										//モノクロアニメーションを見終わったら
-				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.SHOW_MILLIONARE_MURDER_ANIM );  //チェックポイントを更新する
-				_storyBoundManeger.ShowMillionareMurderAnimBound( false );
-			} else {
-				_storyBoundManeger.ShowMillionareMurderAnimBound( true );
-			}
-		}*/ 
-
-
-
-		//if ( !_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIND_POISONED_DISH ) ) {	//毒の付いた皿を発見してなかったら
-		//	if ( _progressConditionManager.FindPoisonedDishProgress( ) ) {						//毒のついた皿を発見したら
-		//		//_evidenceManager.UpdateEvidence( EvidenceManager.Evidence.STORY1_EVIDENCE1 );	//証拠品１を格納する
-		//		_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.FIND_POISONED_DISH );  //チェックポイントを更新する
-		//		_storyBoundManeger.FindPoisonedDishBound( false );
-		//	} else {
-		//		if ( true ) {											//テキストが存在していたのなら探偵も操作不能にする
-		//			_storyBoundManeger.FindPoisonedDishBound( true, true );
-		//			//代わりにマウスを押してテキストを進める処理をする
-		//		} else {
-		//			_storyBoundManeger.FindPoisonedDishBound( true );
-		//		}
-		//	}
-		//}
-
-
-        //------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
     }
-
+    //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
     //操作をいろいろ制限する------------------------------------------------------------
@@ -461,7 +459,7 @@ public class SiteManager : MonoBehaviour {
     //-----------------------------------------------------------------------------------
 
     //押されたものが時計ＵＩの昼か夕方か夜だったらする処理------------------------------------------------------------------------------------------
-    void ScenesTransitionWithAnim( ) {
+    void ClockUIScenesTransitionWithAnim( ) {
 
 		if ( _clockUI.GetPushed( ) != "none"  ) {       //時計UIのいずれかの時間帯がタッチされたら       
 			Regulation( );
@@ -480,6 +478,23 @@ public class SiteManager : MonoBehaviour {
     //-------------------------------------------------------------------------------------------------------------------------------------------
 
     
+	//ラボ遷移UIが押されたらする処理-----------------------------------------------------------------
+    void LaboTransitionUIScenesTransitionWithAnim( ) {
+        if ( _pushLaboTransitionUI ) {
+            Regulation( );
+
+            if ( _onlyOne ) {
+                _cutain.Close( );
+                _onlyOne = false;
+            }
+
+            if ( _cutain.IsStateClose( ) && _cutain.ResearchStatePlayTime( ) >= 1f )    //カーテンが閉まりきったらシーン遷移する
+                _scenesManager.ScenesTransition( "DetectiveOffice" );
+
+        }
+    }
+	//-------------------------------------------------------------------------------------------------
+
 
 	//カーテンがアニメーションをしてたときの処理-------------------------------
 	void RegurateByCurtainState( ) {
@@ -507,8 +522,8 @@ public class SiteManager : MonoBehaviour {
     //----------------------------------------------------------------------------------------
 
 
-     //再生＆一時停止ボタンを押したらロープアクションをするか強制移動にするかの判定---
-    public void RopeAction( ) {
+     //動画が再生されたとき初期地にいなかったらロープアクションをするか強制移動にするかの判定---
+    void RopeAction( ) {
 		if ( !_moviePlaySystem.GetStop( ) && !_detective.GetCheckPos( ) ) {    //動画が再生されていて探偵が初期値にいなかったら
 			if ( _detective.transform.position.x < 0 ) {						//探偵が指定位置より左側にいたら歩いて戻る。右側にいたらロープアクションで戻る
 				_detective.DesignationMove( _detective.GetInitialPos( ) );		
@@ -517,7 +532,19 @@ public class SiteManager : MonoBehaviour {
 			}
 		}
 	}
-    //----------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------
+
+
+	//RayShooterのスクリプトを外すかどうかの関数----------------------------------------------------
+	void RayShooterEnabled( bool value ) { _camera.GetComponent< RayShooter >( ).enabled = value; }
+	//----------------------------------------------------------------------------------------------
+
+  
+	//ラボ遷移UIが押されたらフラグを立てる関数--
+    public void LaboTransitionUIButton( ) {
+        _pushLaboTransitionUI = true;
+    }
+    //------------------------------------------
 
 	//----------------------------------------------------------------------
 
@@ -532,6 +559,11 @@ public class SiteManager : MonoBehaviour {
 		}
 	}*/
 	//---------------------------------------------
+
+
+	public void  aaaa () {
+		_aaa.UpdateEvidence( EvidenceManager.Evidence.STORY1_EVIDENCE2 );
+	}
 
 
 }

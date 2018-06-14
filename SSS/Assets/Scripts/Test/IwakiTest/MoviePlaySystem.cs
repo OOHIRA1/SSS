@@ -6,9 +6,10 @@ using UnityEngine;
 //
 //使用方法：常にアクティブなゲームオブジェクトにアタッチ
 public class MoviePlaySystem : MonoBehaviour {
-	[SerializeField]Point _point = null;
-	[SerializeField]Bar   _bar   = null;
-	[SerializeField]Movie[ ] _movie = new Movie[ 1 ];
+	[ SerializeField ]Point _point = null;
+	[ SerializeField ]Bar   _bar   = null;
+	[ SerializeField ]Movie[ ] _movie = new Movie[ 1 ];
+	[ SerializeField ] StartButton _startAndStopButton = null;
 								
 	[SerializeField] float _maxTime  = 60.0f;		//最大再生時間
 
@@ -51,9 +52,12 @@ public class MoviePlaySystem : MonoBehaviour {
 
 			MovieUpdate( );
 
+			StopTime( );
+
 		}
 			
-        //Debug.Log(_stop );
+
+
 	}
 
 	//--ポイントの座標を更新する関数
@@ -97,6 +101,7 @@ public class MoviePlaySystem : MonoBehaviour {
 
 	}
 
+	//シークバーを特定の位置で固定する関数-----------------------------------
 	void Fixed( ) {
 		if ( !_isFixed ) {
 			if ( _isReturn ) {
@@ -120,6 +125,16 @@ public class MoviePlaySystem : MonoBehaviour {
 		}
 
 	}
+	//----------------------------------------------------------------------
+
+	//60秒を超えたら一時停止する----------------------
+	void StopTime( ) {
+		if ( MoviTime( ) >= 60f ) {
+			_stop = true;
+			_startAndStopButton.StartImageChange( );	//再生一時停止ボタンを画像を切り替える
+		} 
+	}
+	//--------------------------------------------------
 
 	Vector2 GetMouse( ) { return Input.mousePosition; }
 
@@ -128,16 +143,6 @@ public class MoviePlaySystem : MonoBehaviour {
 
 	//停止しているかどうかを取得する
     public bool GetStop( ) { return _stop; }
-
-	//再生が最後までいっていたら
-	public bool EndPlayBack( ) {
-		if ( _point.GetTransform( ).x >= _point.GetMaxRange( ) ) {
-			return true;
-		} else {
-			return false;
-		}
-
-	} 
 
 	//操作可能にするか不可にするかを切り替える
 	public void SetOperation( bool value ) { _isOperation = value; }
@@ -175,6 +180,9 @@ public class MoviePlaySystem : MonoBehaviour {
 
     //時間を取得する(バーの大きさを時間に変換)
     public float MoviTime( ) { return _bar.GetBarScale( ).x * _maxTime; }
+
+	//最初の再生位置に戻す
+	public void MoviReset( ) { _point.MovePosition( _point.GetInitialPos( ) ); }
 
 	//=======================================================================
 	//=======================================================================

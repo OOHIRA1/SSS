@@ -14,9 +14,9 @@ public class StoryBoundManeger : MonoBehaviour {
 	//[ SerializeField ] GameObject _evidenceFile = null;
 	[ SerializeField ] GameObject _ui = null;
 	//[ SerializeField ] MillioareDieMono _millioareDieMono = null;
-	//[ SerializeField ] SiteMove _siteMove = null;
+	[ SerializeField ] SiteMove _siteMove = null;
 
-	enum ButtonNum {
+	public enum ButtonNum {
 		START_AND_STOP_BUTTON,
 		FF_BUTTON,
 		FB_BUTTON,
@@ -48,13 +48,20 @@ public class StoryBoundManeger : MonoBehaviour {
 
 
 	public void DetectiveFirstTalkBound( bool application ) {
+		bool able = true;
+
 		if ( application ) {
-			_ui.SetActive( false );
-			_clockUI.gameObject.SetActive( false );
+			able = false;
 		} else {
-			_ui.SetActive( true );
-			_clockUI.gameObject.SetActive( true );
+			able = true;
 		}
+
+		
+		_ui.SetActive( able );
+		_clockUI.gameObject.SetActive( able );
+		_moviePlaySystem.SetMouseMove( able );
+		_moviePlaySystem.SetFixed( application );
+		
 	}
 
 	public void FindPoisonedDishBound( bool application ) {
@@ -72,6 +79,8 @@ public class StoryBoundManeger : MonoBehaviour {
 		//}
 
 		_clockUI.gameObject.SetActive( able );
+		_moviePlaySystem.SetMouseMove( able );
+		_moviePlaySystem.SetFixed( application );
 		for ( int i = 0; i < _button.Length; i++ ) {
 			_button[ i ].gameObject.SetActive( able );
 		}
@@ -88,6 +97,8 @@ public class StoryBoundManeger : MonoBehaviour {
 
 		_detective.SetIsMove( able );
 		_clockUI.gameObject.SetActive( able );
+		_moviePlaySystem.SetMouseMove( able );
+		_moviePlaySystem.SetFixed( application );
 		for ( int i = 0; i < _button.Length; i++ ) {
 			_button[ i ].gameObject.SetActive( able );
 		}
@@ -104,6 +115,8 @@ public class StoryBoundManeger : MonoBehaviour {
 
 		_detective.SetIsMove( able );
 		_clockUI.gameObject.SetActive( able );
+		_moviePlaySystem.SetMouseMove( able );
+		_moviePlaySystem.SetFixed( application );
 		for ( int i = 0; i < _button.Length; i++ ) {
 			if ( i != ( int )ButtonNum.EVIDENCE_UI ) {		//証拠品ファイルは規制をかけない
 				_button[ i ].gameObject.SetActive( able );
@@ -122,6 +135,8 @@ public class StoryBoundManeger : MonoBehaviour {
 
 		_detective.SetIsMove( able );
 		_clockUI.gameObject.SetActive( able );
+		_moviePlaySystem.SetMouseMove( able );
+		_moviePlaySystem.SetFixed( application );
 		for ( int i = 0; i < _button.Length; i++ ) {
 			if ( i != ( int )ButtonNum.EVIDENCE_UI ) {		//証拠品ファイルは規制をかけない
 				_button[ i ].gameObject.SetActive( able );
@@ -210,6 +225,72 @@ public class StoryBoundManeger : MonoBehaviour {
 	}
 
 
+	public void GetEvidence2Bound( bool application ) {
+		bool able = true;
+
+		if ( application ) {		
+			able = false;
+		} else {
+			able = true;
+		}
+
+		_clockUI.gameObject.SetActive( able );
+		_button[ ( int )ButtonNum.TIRANGLE_LEFT ].gameObject.SetActive( able );
+		_button[ ( int )ButtonNum.TIRANGLE_RIGHT ].gameObject.SetActive( able );
+	}
+
+    public void FirstComeToDetectiveOffice( ) {
+
+        _clockUI.gameObject.SetActive( false );
+		_button[ ( int )ButtonNum.TIRANGLE_LEFT ].gameObject.SetActive( false );
+		_button[ ( int )ButtonNum.TIRANGLE_RIGHT ].gameObject.SetActive( false );
+
+    }
+
+    
+    public void SilverAndYellowBoxBound( bool application ) {
+		bool[,] site = {									//どの部屋を閉じる状態にするかの配列。false：閉じない true：閉じる
+			{ true, false, true, true },					//右から寝室、キッチン、給仕室、庭。（部屋番号に対応）
+			{ true, false, true, true },					//上から昼、夕方、夜。
+			{ false, false, false, false }
+		};
+
+		if ( _siteMove.GetCheckTiming( ) ) {
+			CutainCloseBound( site );
+		}
+	}
+
+
+    public void GetEvidence4Bound( bool application ) {
+        bool[,] site = {
+			{ true, false, true, true },
+			{ true, false, true, true },
+			{ false, false, false, false }
+		};
+
+		if ( _siteMove.GetCheckTiming( ) ) {
+			CutainCloseBound( site );
+		}
+    }
+
+	//シーン遷移直後にはカーテンの縛りの判定ができない。修正しないと。
+	//シーン遷移直後の部屋番号がうまくできていないかも。
+    public void GetEvidence5Bound( bool application ) {
+  //      bool[,] site = {
+		//	{ true, false, true, true },
+		//	{ true, false, true, true },
+		//	{ false, false, false, false }
+		//};
+
+		//if ( _siteMove.GetCheckTiming( ) ) {
+		//	CutainCloseBound( site );
+		//}
+    }
+
+    public void GetEvidence6Bound( bool application ) {
+        //縛りあったっけ？
+    }
+
 	//縛りがかかる場所だったらカーテンを閉じてそうでなかったらカーテンを開ける関数--------
 	//カーテンのフラグがトリガーのためやりずらい。ブールならやりやすいかも
 	public void CutainCloseBound( bool[,] site ) {
@@ -223,7 +304,6 @@ public class StoryBoundManeger : MonoBehaviour {
 
 				if ( site[ i, j ] == true ) {			//閉じたい場所だったら
 					
-
 					iSite = j;							//閉じたい事件現場を入れる
 					switch ( i ) {						//時間帯を調べる
 						case 0:
@@ -237,12 +317,9 @@ public class StoryBoundManeger : MonoBehaviour {
 							break;
 					}
 
-
 					if ( sTimeZone == _scenesManager.GetNowScenes( ) && iSite == SiteMove._nowSiteNum ) {	//閉じたい場所と現在いる場所が同じだったら	
-						
 						_cutain.Close( );
 						return;
-				
 					}
 		
 				} 

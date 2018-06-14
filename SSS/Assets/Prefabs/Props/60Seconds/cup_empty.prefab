@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4580794897723764}
   - component: {fileID: 212003845502313466}
   - component: {fileID: 95822706571142496}
-  - component: {fileID: 114763202275447890}
   m_Layer: 0
   m_Name: cup_empty
   m_TagString: Untagged
@@ -59,19 +58,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114763202275447890
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1035426504756296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cda77cb2e2af8d24ebadbc6b74fc35d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cupFull: {fileID: 0}
-  _cupEmpty: {fileID: 1035426504756296}
 --- !u!212 &212003845502313466
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -102,7 +88,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b442ac7e19de105448953ee03d41c054, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
