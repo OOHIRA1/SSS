@@ -21,12 +21,13 @@ public class GameDataManager : MonoBehaviour {
 		GET_EVIDENCE2 							  	= 1 << 11,	//2048,		//証拠品2を入手する
 		FIRST_COME_TO_DETECTIVE_OFFICE 			  	= 1 << 12,	//4096,		//初めて探偵ラボに来る
 		GET_EVIDENCE3 								= 1 << 13,	//8192,		//証拠品3を入手する
-		SHOW_BUTLER_PUT_SILVER_BOX					= 1 << 14,	//16384,	//執事が銀箱をしまった瞬間を見る
-		SHOW_COOK_PUT_YELLOW_BOX					= 1 << 15,	//32768,	//料理長が黄箱をしまった瞬間を見る
-		GET_EVIDENCE4 								= 1 << 16,	//65536,	//証拠品4を入手する
-		GET_EVIDENCE5 							   	= 1 << 17,	//131072,	//証拠品5を入手する
-		GET_EVIDENCE6 							   	= 1 << 18,	//262144,	//証拠品6を入手する
-		COME_TO_DETECTIVE_OFFICE_WITH_ALL_EVIDENCE 	= 1 << 19,	//524288,	//証拠品を全て揃えて探偵ラボに来る
+		FIRST_COME_TO_KITCHEN_AT_NOON_OR_NIGHT		= 1 << 14,	//16384,	//初めて昼か夕方の厨房に来る
+		SHOW_BUTLER_PUT_SILVER_BOX					= 1 << 15,	//32768,	//執事が銀箱をしまった瞬間を見る
+		SHOW_COOK_PUT_YELLOW_BOX					= 1 << 16,	//65536,	//料理長が黄箱をしまった瞬間を見る
+		GET_EVIDENCE4 								= 1 << 17,	//131072,	//証拠品4を入手する
+		GET_EVIDENCE5 							   	= 1 << 18,	//262144,	//証拠品5を入手する
+		GET_EVIDENCE6 							   	= 1 << 19,	//524288,	//証拠品6を入手する
+		COME_TO_DETECTIVE_OFFICE_WITH_ALL_EVIDENCE 	= 1 << 20,	//1048576,	//証拠品を全て揃えて探偵ラボに来る
 	}
 
 	[SerializeField] int _advancedData;	                //進行状況を格納する変数
