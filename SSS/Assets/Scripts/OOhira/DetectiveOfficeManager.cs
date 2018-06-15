@@ -39,6 +39,7 @@ public class DetectiveOfficeManager : MonoBehaviour {
 	bool _curtainClosedStateFinalJudge;											//最終確認ステート中にカーテンを閉じたかどうかのフラグ
 	[SerializeField] ScenesManager _scenesManager = null;
 	[SerializeField] Vector3 _exitPos = new Vector3(0, 0, 0);					//探偵が退場後の座標
+	[SerializeField] GameObject[] _clockUIs = null;								//時計UI
 
 
 	//===================================================================================
@@ -143,15 +144,31 @@ public class DetectiveOfficeManager : MonoBehaviour {
 		}
 		//---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-		//調査Stateでカーテンが開ききっている時のみ探偵の操作を受け付ける処理----------------------------------------
+		//調査Stateでカーテンが開ききっている時のみ探偵やＵＩの操作を受け付ける処理----------------------------------------
 		if (_state == State.INVESTIGATE && _curtain.IsStateOpen() && _curtain.ResearchStatePlayTime() >= 1f) {
 			//_detective.enabled = true;
-			_detective.SetIsMove(true);
+			//時計ＵＩ表示時は探偵の操作を受け付けない処理----------------------
+			for ( int i = 0; i < _clockUIs.Length; i++ ) {
+				if (_clockUIs [i].activeInHierarchy) {
+					_detective.SetIsMove (false);
+					break;
+				}
+				if (i == _clockUIs.Length - 1) _detective.SetIsMove (true);
+			}
+			//---------------------------------------------------------------
+			_laboUIManager.ChangeEvidenceButtonIntaractive (true);
+			_laboUIManager.ChangeCrimeSceneButtonIntaractive (true);
+			_laboUIManager.ChangeCriminalChoiseButtonIntaractive (true);
 		} else {
 			//_detective.enabled = false;
 			_detective.SetIsMove(false);//タッチで反応しなくなる関数
+			_laboUIManager.ChangeEvidenceButtonIntaractive(false);
+			_laboUIManager.ChangeCrimeSceneButtonIntaractive (false);
+			_laboUIManager.ChangeCriminalChoiseButtonIntaractive (false);
 		}
-		//--------------------------------------------------------------------------------------------------------
+		//---------------------------------------------------------------------------------------------------------------
+
+
 
 		Debug.Log (_laboUIManager.GetJudge());
 	}
@@ -200,6 +217,7 @@ public class DetectiveOfficeManager : MonoBehaviour {
 			//次の文を表示するか次のStateに移動する処理-------------------------------
 			if (_detectiveTalk[_detectiveTalkIndex].GetTalkFinishedFlag ()) {
 				_detectiveTalk [_detectiveTalkIndex].gameObject.SetActive (false);
+				_laboUIManager.ChangeEvidenceButtonIntaractive (true);
 				switch (_detectiveTalkIndex) {
 				case 1://証拠品3取得後の発言
 					_state = State.INVESTIGATE;

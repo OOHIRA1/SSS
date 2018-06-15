@@ -812,6 +812,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4932240818610078, guid: ba1aee309ec8f4145afe8ad41e7c9a2a,
     type: 2}
   m_PrefabInternal: {fileID: 2071029231}
+--- !u!1 &488997875 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1430852003678924, guid: 517f78c5dc5529a4b835580cfe252dea,
+    type: 2}
+  m_PrefabInternal: {fileID: 1694568562}
 --- !u!1001 &500243250
 Prefab:
   m_ObjectHideFlags: 0
@@ -1179,6 +1184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _drawRayDistance: 100
+  _rayShootable: 1
 --- !u!1001 &825238029
 Prefab:
   m_ObjectHideFlags: 0
@@ -1526,6 +1532,12 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 38971322}
   m_Script: {fileID: 11500000, guid: cc832f959b291a046abf0a35a752e9ce, type: 3}
+--- !u!114 &1006373454 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114612142620690104, guid: 517f78c5dc5529a4b835580cfe252dea,
+    type: 2}
+  m_PrefabInternal: {fileID: 1694568562}
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &1031643947
 Prefab:
   m_ObjectHideFlags: 0
@@ -2125,6 +2137,12 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224040744649365492, guid: 16aaee5ceb6cca14a97334cf8584b458,
     type: 2}
   m_PrefabInternal: {fileID: 1362030467}
+--- !u!114 &1365001135 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114059107756453732, guid: 517f78c5dc5529a4b835580cfe252dea,
+    type: 2}
+  m_PrefabInternal: {fileID: 1694568562}
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!114 &1376325557 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114455382294817644, guid: 517f78c5dc5529a4b835580cfe252dea,
@@ -2219,6 +2237,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ba1aee309ec8f4145afe8ad41e7c9a2a, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1450859652 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1298621888892362, guid: 517f78c5dc5529a4b835580cfe252dea,
+    type: 2}
+  m_PrefabInternal: {fileID: 1694568562}
 --- !u!1001 &1469958141
 Prefab:
   m_ObjectHideFlags: 0
@@ -3753,6 +3776,21 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 114399031676816782, guid: 517f78c5dc5529a4b835580cfe252dea,
+        type: 2}
+      propertyPath: _evidenceButton
+      value: 
+      objectReference: {fileID: 1365001135}
+    - target: {fileID: 114399031676816782, guid: 517f78c5dc5529a4b835580cfe252dea,
+        type: 2}
+      propertyPath: _crimeSceneButton
+      value: 
+      objectReference: {fileID: 2059814107}
+    - target: {fileID: 114399031676816782, guid: 517f78c5dc5529a4b835580cfe252dea,
+        type: 2}
+      propertyPath: _criminalChoiseButton
+      value: 
+      objectReference: {fileID: 1006373454}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 517f78c5dc5529a4b835580cfe252dea, type: 2}
   m_IsPrefabParent: 0
@@ -3869,6 +3907,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114831756376500476, guid: d3206f9827c783e448661d89d102df91,
+        type: 2}
+      propertyPath: _clockUIs.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 114831756376500476, guid: d3206f9827c783e448661d89d102df91,
         type: 2}
       propertyPath: _detectiveTalk.Array.size
@@ -4056,6 +4099,26 @@ Prefab:
       propertyPath: _exitPos.x
       value: -12
       objectReference: {fileID: 0}
+    - target: {fileID: 114831756376500476, guid: d3206f9827c783e448661d89d102df91,
+        type: 2}
+      propertyPath: _clockUIs.Array.data[0]
+      value: 
+      objectReference: {fileID: 2062049589}
+    - target: {fileID: 114831756376500476, guid: d3206f9827c783e448661d89d102df91,
+        type: 2}
+      propertyPath: _clockUIs.Array.data[1]
+      value: 
+      objectReference: {fileID: 488997875}
+    - target: {fileID: 114831756376500476, guid: d3206f9827c783e448661d89d102df91,
+        type: 2}
+      propertyPath: _clockUIs.Array.data[2]
+      value: 
+      objectReference: {fileID: 1450859652}
+    - target: {fileID: 114831756376500476, guid: d3206f9827c783e448661d89d102df91,
+        type: 2}
+      propertyPath: _clockUIs.Array.data[3]
+      value: 
+      objectReference: {fileID: 2124314718}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d3206f9827c783e448661d89d102df91, type: 2}
   m_IsPrefabParent: 0
@@ -4559,6 +4622,17 @@ Transform:
   m_PrefabParentObject: {fileID: 4170840226540832, guid: 58399a294a8f76747855fcd60e6c39a7,
     type: 2}
   m_PrefabInternal: {fileID: 825238029}
+--- !u!114 &2059814107 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114568215874379776, guid: 517f78c5dc5529a4b835580cfe252dea,
+    type: 2}
+  m_PrefabInternal: {fileID: 1694568562}
+  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+--- !u!1 &2062049589 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1852915710921078, guid: 517f78c5dc5529a4b835580cfe252dea,
+    type: 2}
+  m_PrefabInternal: {fileID: 1694568562}
 --- !u!1001 &2071029231
 Prefab:
   m_ObjectHideFlags: 0
@@ -4635,3 +4709,8 @@ Transform:
   m_PrefabParentObject: {fileID: 4284305078344144, guid: 58d70a7c1303b6b46bc95e1887d781fa,
     type: 2}
   m_PrefabInternal: {fileID: 1508386406}
+--- !u!1 &2124314718 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1732258766638804, guid: 517f78c5dc5529a4b835580cfe252dea,
+    type: 2}
+  m_PrefabInternal: {fileID: 1694568562}

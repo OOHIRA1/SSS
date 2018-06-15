@@ -16,9 +16,10 @@ public class LaboUIManager : MonoBehaviour {
 	//[SerializeField] GameObject _controllUI = null;
 	[SerializeField] GameObject _judgeUI = null;
 	[SerializeField] Judge _judged;								//JudgeUIで何を選択したかを持つ変数
-	[SerializeField] GameObject _criminalChoiseButton = null;	//犯人指摘ボタン
 	bool _crimimalChoiseFlag;									//犯人指摘をするかどうかのフラグ
-
+	[SerializeField] UnityEngine.UI.Button _criminalChoiseButton = null;	//犯人指摘ボタン
+	[SerializeField] UnityEngine.UI.Button _evidenceButton = null;				//証拠品ファイルボタン(UnityEngine.UI.Buttonで宣言しないとinteractableが使えない)
+	[SerializeField] UnityEngine.UI.Button _crimeSceneButton = null;			//事件現場遷移ボタン
 
 	//=================================================
 	//ゲッター
@@ -38,7 +39,7 @@ public class LaboUIManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		_judged = Judge.OTHERWISE;
-		_criminalChoiseButton.SetActive (false);
+		_criminalChoiseButton.gameObject.SetActive (false);
 		_crimimalChoiseFlag = false;
 	}
 	
@@ -64,14 +65,30 @@ public class LaboUIManager : MonoBehaviour {
 
 	//--犯人指摘ボタンを表示する関数
 	public void DisplayCriminalChoiseButton( ) {
-		_criminalChoiseButton.SetActive (true);
+		_criminalChoiseButton.gameObject.SetActive (true);
 	}
 
 	//--犯人指摘ボタンを非表示にする関数
 	public void DisappearCriminalChoiseButton( ) {
-		_criminalChoiseButton.SetActive (false);
+		_criminalChoiseButton.gameObject.SetActive (false);
 	}
 
+	//--犯人指摘ボタンを反応しないようにする関数
+	public void ChangeCriminalChoiseButtonIntaractive( bool x ) {
+		_criminalChoiseButton.interactable = x;
+	}
+
+
+	//--証拠品ファイルボタンを反応しないようにする関数
+	public void ChangeEvidenceButtonIntaractive( bool x ) {
+		_evidenceButton.interactable = x;
+	}
+
+
+	//--事件現場遷移ボタンを反応しないようにする関数
+	public void ChangeCrimeSceneButtonIntaractive( bool x ) {
+		_crimeSceneButton.interactable = x;
+	}
 	//===========================================
 	//===========================================
 }
