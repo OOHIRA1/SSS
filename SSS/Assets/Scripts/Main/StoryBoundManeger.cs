@@ -300,20 +300,46 @@ public class StoryBoundManeger : MonoBehaviour {
     }
 
     public void GetEvidence5Bound( bool application ) {
-  //      bool[,] site = {
-		//	{ true, false, true, true },
-		//	{ true, false, true, true },
-		//	{ false, false, false, false }
-		//};
+        bool[,] site = {
+			{ false, false, false, false },
+			{ true, false, true, true },
+			{ true, false, false, false }
+		};
 
-		//if ( _siteMove.GetCheckTiming( ) ) {
-		//	CutainCloseBound( site );
-		//}
+		if ( _siteMove.GetCheckTiming( ) ||																
+			( ( _cutain.IsStateOpen( ) && _cutain.ResearchStatePlayTime( ) >= 1f ) && _onlyOnce ) ) {	
+			CutainCloseBound( site );
+			_onlyOnce = false;
+		}
     }
 
     public void GetEvidence6Bound( bool application ) {
-        //縛りあったっけ？
+		bool[,] site = {
+			{ false, false, false, false },
+			{ false, false, false, false },
+			{ true, false, false, false }
+		};
+
+		if ( _siteMove.GetCheckTiming( ) ||																
+			( ( _cutain.IsStateOpen( ) && _cutain.ResearchStatePlayTime( ) >= 1f ) && _onlyOnce ) ) {	
+			CutainCloseBound( site );
+			_onlyOnce = false;
+		}
     }
+
+	public void LastBound( ) {
+		bool[,] site = {
+			{ false, false, false, false },
+			{ false, false, false, false },
+			{ true, false, false, false }
+		};
+
+		if ( _siteMove.GetCheckTiming( ) ||																
+			( ( _cutain.IsStateOpen( ) && _cutain.ResearchStatePlayTime( ) >= 1f ) && _onlyOnce ) ) {	
+			CutainCloseBound( site );
+			_onlyOnce = false;
+		}
+	}
 
 	//縛りがかかる場所だったらカーテンを閉じてそうでなかったらカーテンを開ける関数--------
 	//カーテンのフラグがトリガーのためやりずらい。ブールならやりやすいかも

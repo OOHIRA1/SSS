@@ -171,7 +171,7 @@ public class CutinControll : MonoBehaviour {
 		for( int i = 0; i < _cutinImageMovingTime.Length; i++ ) {
 			cutinImageMaxMovingTime += _cutinImageMovingTime [i];
 		}
-		float movingTime = ( cutinImageMaxMovingTime > _backgroundMovingTime ) ? cutinImageMaxMovingTime : _backgroundMovingTime;	//カットインの時間
+		//float movingTime = ( cutinImageMaxMovingTime > _backgroundMovingTime ) ? cutinImageMaxMovingTime : _backgroundMovingTime;	//カットインの時間
 
 		do {
 			//背景画像の演出------------------------------------------------------------------------

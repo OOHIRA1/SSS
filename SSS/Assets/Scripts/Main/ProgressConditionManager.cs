@@ -67,7 +67,6 @@ public class ProgressConditionManager : MonoBehaviour {
 
 
 	public bool GetEvidence1Progress( ) {
-        Debug.Log( _evidenceManager.CheckEvidence( EvidenceManager.Evidence.STORY1_EVIDENCE3 ) );
 		if ( _evidenceManager.CheckEvidence( EvidenceManager.Evidence.STORY1_EVIDENCE1 ) ) {
 			return true;
 		}
