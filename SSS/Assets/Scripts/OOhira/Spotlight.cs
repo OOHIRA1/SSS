@@ -7,10 +7,18 @@ using UnityEngine;
 //使用方法：スポットライトにアタッチ
 public class Spotlight : MonoBehaviour {
 	[SerializeField] Transform _cursorTransform = null;		//カーソルのTransform
+	[SerializeField] GameObject _spotLight = null;
+
+	public AudioClip Spotlight1;
+    AudioSource audioSource;
+
 
 	// Use this for initialization
 	void Start () {
 		
+		audioSource = GetComponent<AudioSource>();
+		SpotLight();
+
 	}
 	
 	// Update is called once per frame
@@ -18,5 +26,11 @@ public class Spotlight : MonoBehaviour {
 		Vector3 pos = transform.position;
 		pos.x = _cursorTransform.position.x;
 		transform.position = pos;
+	}
+
+	public void SpotLight() {
+		if( _spotLight.activeInHierarchy ) {
+			audioSource.PlayOneShot(Spotlight1, 0.7F);
+		}
 	}
 }
