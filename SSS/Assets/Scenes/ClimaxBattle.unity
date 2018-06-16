@@ -526,7 +526,7 @@ RectTransform:
   - {fileID: 144613944}
   - {fileID: 605999886}
   m_Father: {fileID: 1667327336}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1482,8 +1482,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1827327388}
-        m_MethodName: Damege
+      - m_Target: {fileID: 827208716}
+        m_MethodName: PauseVideo
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2570,7 +2570,7 @@ RectTransform:
   m_Children:
   - {fileID: 203189312}
   m_Father: {fileID: 1667327336}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2855,7 +2855,7 @@ RectTransform:
   - {fileID: 1608307325}
   - {fileID: 978485404}
   m_Father: {fileID: 1667327336}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3393,12 +3393,12 @@ RectTransform:
   m_Children:
   - {fileID: 590587772}
   - {fileID: 2040559158}
-  - {fileID: 1827327385}
   - {fileID: 1318262397}
   - {fileID: 1956058251}
   - {fileID: 235631520}
   - {fileID: 1500271268}
   - {fileID: 1979554655}
+  - {fileID: 1827327385}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3794,7 +3794,7 @@ RectTransform:
   - {fileID: 1397835351}
   - {fileID: 726377255}
   m_Father: {fileID: 1667327336}
-  m_RootOrder: 2
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -4755,6 +4755,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 827208716}
+        m_MethodName: PlayVideoFromPausePoint
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1908771711
@@ -5112,7 +5123,7 @@ RectTransform:
   - {fileID: 1837868830}
   - {fileID: 1573673419}
   m_Father: {fileID: 1667327336}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -5183,7 +5194,7 @@ RectTransform:
   - {fileID: 2080489864}
   - {fileID: 455776088}
   m_Father: {fileID: 1667327336}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5917,6 +5928,7 @@ MonoBehaviour:
     _correctchoice: {fileID: 1608307324}
   _brightingPanel: {fileID: 203189313}
   _reverseTimeSE: {fileID: 1903104526}
+  _evidenceButton: {fileID: 726377256}
 --- !u!4 &2115214289
 Transform:
   m_ObjectHideFlags: 0

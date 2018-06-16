@@ -40,6 +40,7 @@ public class ClimaxBattleSystem : MonoBehaviour {
 	bool _showChoicesFlag;										//選択肢を見せるかどうかのフラグ
 	[SerializeField] Image _brightingPanel = null;				//明転処理で使うパネル
 	[SerializeField] AudioSource _reverseTimeSE = null;			//巻き戻しSE
+	[SerializeField] UnityEngine.UI.Button _evidenceButton = null;	//証拠品ファイルボタン
 
 	//================================================================
 	//ゲッター
@@ -86,6 +87,14 @@ public class ClimaxBattleSystem : MonoBehaviour {
 			break;
 		}
 		Debug.Log ("ClimaxBattleSystem:" + _state);
+
+		//_stateがCHOOSE_CHOICESの時,ビデオ停止時,ライフ0の時は証拠品ファイルボタンを押せなくする処理-------------
+		if (_state == State.CHOOSE_CHOICES || !_videoController.IsPlaying() || _playerLife.GetDead()) {
+			_evidenceButton.interactable = false;
+		} else {
+			_evidenceButton.interactable = true;
+		}
+		//---------------------------------------------------------------------------
 
 		//プレイヤーのライフが無くなるか全問正解したらRESULTステートへ--------------------------------------
 		if (_playerLife.GetDead () || _battleTurnArrayIndex == _battleTurn.Length) {
@@ -160,7 +169,7 @@ public class ClimaxBattleSystem : MonoBehaviour {
 			if (_playerLife.GetDead ()) {//ライフが無くなっていたら
 				_result = Result.LOSE;
 				_videoController.FinishVideo ();
-			} else if (!_videoController.IsPlaying ()) {//ライフがあり　かつ　ビデオをを最後まで見れたら
+			} else if (!_videoController.IsPlaying () && _videoController.GetTime() >= _videoController.GetMaxTime()) {//ライフがあり　かつ　ビデオをを最後まで見れたら
 				_result = Result.WIN;
 				_videoController.FinishVideo ();
 			}

@@ -92,6 +92,12 @@ public class VideoController : MonoBehaviour {
 	public bool IsPlaying() {
 		return _videoPlayer.isPlaying;
 	}
+
+
+	//--ビデオを一時停止した地点から再生する関数(ボタンで呼ぶため)
+	public void PlayVideoFromPausePoint() {
+		_videoPlayer.Play ();
+	}
 	//======================================================================================
 	//======================================================================================
 
