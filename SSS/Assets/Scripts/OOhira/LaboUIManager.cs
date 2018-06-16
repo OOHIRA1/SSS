@@ -21,6 +21,7 @@ public class LaboUIManager : MonoBehaviour {
 	[SerializeField] UnityEngine.UI.Button _evidenceButton = null;				//証拠品ファイルボタン(UnityEngine.UI.Buttonで宣言しないとinteractableが使えない)
 	[SerializeField] UnityEngine.UI.Button _crimeSceneButton = null;			//事件現場遷移ボタン
 	[SerializeField] UnityEngine.UI.Button _mapButton = null;					//マップボタン
+	UnityEngine.UI.Button[] _laboUIButtons = null;								//ラボUIのボタン
 
 	//=================================================
 	//ゲッター
@@ -42,6 +43,7 @@ public class LaboUIManager : MonoBehaviour {
 		_judged = Judge.OTHERWISE;
 		_criminalChoiseButton.gameObject.SetActive (false);
 		_crimimalChoiseFlag = false;
+		_laboUIButtons = GetComponentsInChildren<UnityEngine.UI.Button> ();
 	}
 	
 	// Update is called once per frame
@@ -104,6 +106,15 @@ public class LaboUIManager : MonoBehaviour {
 		ChangeEvidenceButtonIntaractive (x);
 		ChangeCrimeSceneButtonIntaractive (x);
 		ChangeMapButtonIntaractive (x);
+	}
+
+
+	//--ラボUIのボタンを反応しないようにする関数
+	public void ChangeAllButtonIntaractive( bool x ) {
+		_laboUIButtons = GetComponentsInChildren<UnityEngine.UI.Button> ();
+		for (int i = 0; i < _laboUIButtons.Length; i++) {
+			_laboUIButtons [i].interactable = x;
+		}
 	}
 	//===========================================
 	//===========================================
