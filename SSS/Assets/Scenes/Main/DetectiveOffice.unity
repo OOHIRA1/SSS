@@ -458,6 +458,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _testimonyBalloon: {fileID: 177905800}
+--- !u!61 &294243142 stripped
+BoxCollider2D:
+  m_PrefabParentObject: {fileID: 61960543744110362, guid: d74e9698607e42541baaa85f337db764,
+    type: 2}
+  m_PrefabInternal: {fileID: 1331433817}
 --- !u!114 &294639707 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114643917121715560, guid: f4b5447e7f5965f4b9d0618052f04048,
@@ -1532,6 +1537,11 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 38971322}
   m_Script: {fileID: 11500000, guid: cc832f959b291a046abf0a35a752e9ce, type: 3}
+--- !u!61 &960401980 stripped
+BoxCollider2D:
+  m_PrefabParentObject: {fileID: 61129163097354990, guid: d74e9698607e42541baaa85f337db764,
+    type: 2}
+  m_PrefabInternal: {fileID: 1331433817}
 --- !u!114 &1006373454 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114612142620690104, guid: 517f78c5dc5529a4b835580cfe252dea,
@@ -2356,6 +2366,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 58d70a7c1303b6b46bc95e1887d781fa, type: 2}
   m_IsPrefabParent: 0
+--- !u!61 &1550847712 stripped
+BoxCollider2D:
+  m_PrefabParentObject: {fileID: 61107220656954994, guid: d74e9698607e42541baaa85f337db764,
+    type: 2}
+  m_PrefabInternal: {fileID: 1331433817}
 --- !u!1001 &1563449704
 Prefab:
   m_ObjectHideFlags: 0
@@ -3794,6 +3809,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 517f78c5dc5529a4b835580cfe252dea, type: 2}
   m_IsPrefabParent: 0
+--- !u!61 &1709467304 stripped
+BoxCollider2D:
+  m_PrefabParentObject: {fileID: 61915597332105062, guid: d74e9698607e42541baaa85f337db764,
+    type: 2}
+  m_PrefabInternal: {fileID: 1331433817}
 --- !u!1 &1711661462
 GameObject:
   m_ObjectHideFlags: 0
@@ -3825,6 +3845,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1714601396 stripped
+BoxCollider2D:
+  m_PrefabParentObject: {fileID: 61576797159955900, guid: d74e9698607e42541baaa85f337db764,
+    type: 2}
+  m_PrefabInternal: {fileID: 1331433817}
 --- !u!1 &1754515963 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1021456757742270, guid: ba1aee309ec8f4145afe8ad41e7c9a2a,
@@ -3921,6 +3946,11 @@ Prefab:
         type: 2}
       propertyPath: _npcCharacters.Array.size
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114831756376500476, guid: d3206f9827c783e448661d89d102df91,
+        type: 2}
+      propertyPath: _dangerousWeaponCollider.Array.size
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4995802563858924, guid: d3206f9827c783e448661d89d102df91, type: 2}
       propertyPath: m_LocalPosition.x
@@ -4119,6 +4149,36 @@ Prefab:
       propertyPath: _clockUIs.Array.data[3]
       value: 
       objectReference: {fileID: 2124314718}
+    - target: {fileID: 114831756376500476, guid: d3206f9827c783e448661d89d102df91,
+        type: 2}
+      propertyPath: _dangerousWeaponCollider.Array.data[0]
+      value: 
+      objectReference: {fileID: 1714601396}
+    - target: {fileID: 114831756376500476, guid: d3206f9827c783e448661d89d102df91,
+        type: 2}
+      propertyPath: _dangerousWeaponCollider.Array.data[1]
+      value: 
+      objectReference: {fileID: 960401980}
+    - target: {fileID: 114831756376500476, guid: d3206f9827c783e448661d89d102df91,
+        type: 2}
+      propertyPath: _dangerousWeaponCollider.Array.data[2]
+      value: 
+      objectReference: {fileID: 1709467304}
+    - target: {fileID: 114831756376500476, guid: d3206f9827c783e448661d89d102df91,
+        type: 2}
+      propertyPath: _dangerousWeaponCollider.Array.data[3]
+      value: 
+      objectReference: {fileID: 2082273382}
+    - target: {fileID: 114831756376500476, guid: d3206f9827c783e448661d89d102df91,
+        type: 2}
+      propertyPath: _dangerousWeaponCollider.Array.data[4]
+      value: 
+      objectReference: {fileID: 294243142}
+    - target: {fileID: 114831756376500476, guid: d3206f9827c783e448661d89d102df91,
+        type: 2}
+      propertyPath: _dangerousWeaponCollider.Array.data[5]
+      value: 
+      objectReference: {fileID: 1550847712}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d3206f9827c783e448661d89d102df91, type: 2}
   m_IsPrefabParent: 0
@@ -4704,6 +4764,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ba1aee309ec8f4145afe8ad41e7c9a2a, type: 2}
   m_IsPrefabParent: 0
+--- !u!61 &2082273382 stripped
+BoxCollider2D:
+  m_PrefabParentObject: {fileID: 61705636587086924, guid: d74e9698607e42541baaa85f337db764,
+    type: 2}
+  m_PrefabInternal: {fileID: 1331433817}
 --- !u!4 &2083902014 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4284305078344144, guid: 58d70a7c1303b6b46bc95e1887d781fa,

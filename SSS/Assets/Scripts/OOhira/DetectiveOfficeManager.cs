@@ -40,6 +40,7 @@ public class DetectiveOfficeManager : MonoBehaviour {
 	[SerializeField] ScenesManager _scenesManager = null;
 	[SerializeField] Vector3 _exitPos = new Vector3(0, 0, 0);					//探偵が退場後の座標
 	[SerializeField] GameObject[] _clockUIs = null;								//時計UI
+	[SerializeField] BoxCollider2D[] _dangerousWeaponCollider = null;			//凶器UIのコライダー
 
 
 	//===================================================================================
@@ -71,6 +72,7 @@ public class DetectiveOfficeManager : MonoBehaviour {
 			_state = State.DETECTIVE_TALKING;
 		}
 		if (Input.GetKeyDown(KeyCode.E)) {
+			_detective.DesignationMove (_detective.GetInitialPos ());//探偵を初期位置に移動
 			_state = State.CRIMINAL_CHOISE;
 		}
 		if (Input.GetKeyDown(KeyCode.R)) {
@@ -106,8 +108,8 @@ public class DetectiveOfficeManager : MonoBehaviour {
 
 		//各UIのオンオフを処理---------------------------------------------------------------------------------------------------------------
 		ChangeActive (_detectiveTalkingUI, State.DETECTIVE_TALKING);
-		ChangeActive (_criminalChoiseUI, State.CRIMINAL_CHOISE, /*_curtainClosedStateCriminalChose*/false, _cursorForCriminalChoise.GetSelectedFlag());
-		ChangeActive (_dangerousWeaponChoiseUI, State.DANGEROUS_WEAPON_CHOISE, false, _cursorForDangerousWeaponChoise.GetSelectedFlag());
+		ChangeActive (_criminalChoiseUI, State.CRIMINAL_CHOISE, /*false*/!_detective.GetCheckPos(), _cursorForCriminalChoise.GetSelectedFlag());//探偵が初期位置に戻るまで強制非表示＆犯人選択をしたら強制表示
+		ChangeActive (_dangerousWeaponChoiseUI, State.DANGEROUS_WEAPON_CHOISE, false, _cursorForDangerousWeaponChoise.GetSelectedFlag());//凶器選択をしたら強制表示
 		//----------------------------------------------------------------------------------------------------------------------------------
 		Debug.Log (_state);
 
@@ -202,7 +204,8 @@ public class DetectiveOfficeManager : MonoBehaviour {
 	void InvestigateAction() {
 		//犯人指摘のフラグが立っていたら犯人指摘ステートへ--------
 		if (_laboUIManager.GetCriminalChoiseFlag ()) {
-			_state = State.CRIMINAL_CHOISE;
+				_detective.DesignationMove (_detective.GetInitialPos ());//探偵を初期位置に移動
+				_state = State.CRIMINAL_CHOISE;
 		}
 		//-----------------------------------------------------
 	}
@@ -296,6 +299,9 @@ public class DetectiveOfficeManager : MonoBehaviour {
 	//--DANGEROUS_WEAPON_CHOISE時の処理をする関数
 	void DangerousWeaponChoiseAction() {
 		if (_cursorForDangerousWeaponChoise.GetSelectedFlag ()) {
+			for (int i = 0; i < _dangerousWeaponCollider.Length; i++) {
+				_dangerousWeaponCollider [i].enabled = false;
+			}
 			_detectiveTalkIndex = 4;
 			_state = State.DETECTIVE_TALKING;
 			_cursorForDangerousWeaponChoise.gameObject.SetActive (false);	//「これでいいんだな？」で「いいえ」を選んだらカーソルをアクティブに戻す！
@@ -345,6 +351,9 @@ public class DetectiveOfficeManager : MonoBehaviour {
 					} else {
 						_npcCharacters [i].transform.position = _selectedNpcPosition;	//Npcを元の位置に戻す
 					}
+				}
+				for (int i = 0; i < _dangerousWeaponCollider.Length; i++) {
+					_dangerousWeaponCollider [i].enabled = true;	//凶器UIのコライダーを元に戻す
 				}
 				_cursorForCriminalChoise.SetSelectedFlag (false);//犯人選択カーソルのSelectedFlagをfalseに
 				_cursorForDangerousWeaponChoise.SetSelectedFlag (false);//凶器選択カーソルのSelectedFlagをfalseに
