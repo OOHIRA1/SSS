@@ -11,10 +11,14 @@ public class StartButton : MonoBehaviour {
 
 	bool _playing;
 
+	public AudioClip tap_playback;
+	public AudioClip tap_pause;
+    AudioSource audioSource;
 
     // Use this for initialization
     void Start( ) {
         _buttonImage = GetComponent< Image >( );
+		audioSource = GetComponent<AudioSource>();
         _playing = true;
     }
     // Update is called once per frame
@@ -26,10 +30,12 @@ public class StartButton : MonoBehaviour {
         if ( !_playing ) {
 			_playing = true;
 			_buttonImage.sprite = _stopSprite;
+			audioSource.PlayOneShot(tap_playback, 0.7F);
         }
         else {
 			_playing = false;
 			_buttonImage.sprite = _startSprite;
+			audioSource.PlayOneShot(tap_pause, 0.7F);
         }
 
     }

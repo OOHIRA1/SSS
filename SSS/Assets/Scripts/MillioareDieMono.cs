@@ -11,6 +11,10 @@ public class MillioareDieMono : MonoBehaviour {
 	[SerializeField]Curtain _curtain = null;
     Animator _animator;
     const float SPEED = 0.01f;
+
+	public AudioClip mystery3;
+	public AudioClip down1;
+    AudioSource audioSource;
     
 	// Use this for initialization
 	void Start () {
@@ -19,6 +23,7 @@ public class MillioareDieMono : MonoBehaviour {
 
         _time = 0;
         _animator = GetComponentInChildren<Animator>( );
+		audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -74,6 +79,14 @@ public class MillioareDieMono : MonoBehaviour {
 		if( _curtain.IsStateOpen () && _curtain.ResearchStatePlayTime () >= 1f ) {
 			_animator.SetTrigger( "DieStart" );
 		}
+	}
+
+	public void OnMusic() {
+		audioSource.PlayOneShot(mystery3, 0.7F);
+	}
+
+	public void Down1() {
+		audioSource.PlayOneShot(down1, 0.7F);
 	}
 
 

@@ -25,13 +25,17 @@ public class SiteManager : MonoBehaviour {
 	[ SerializeField ] RayShooter _camera = null;
 
 	EvidenceManager _evidenceManager;
+    GameObject[] _evidenceTrigger;
 
 	int _talkIndex;						//どのトークを表示させるか
 	bool _onlyOne;						//一回だけ処理したいとき
 	bool _remark;                       //発言したかどうか
 	bool _pushLaboTransitionUI;         //ラボ遷移UIが押されたかどうか
 
-	public static bool _endStory = false;
+    public static bool _conditions1 = false;     //証拠品４を表示する条件を満たしたかどうか(台詞が全部言ったかどうか)
+    public static bool _conditions2 = false;     //証拠品４を表示する条件を満たしたかどうか(台詞が全部言ったかどうか)
+    public static bool _endStory = false;       //現場捜査での最後のチェックポイントにいったかどうか
+    
 
 	enum PartStatus {
 		INVESTIGATION_PART,
@@ -51,6 +55,8 @@ public class SiteManager : MonoBehaviour {
 		_onlyOne = true;
 		_remark = false;
 		_pushLaboTransitionUI = false;
+        _evidenceTrigger = GameObject.FindGameObjectsWithTag( "EvidenceTrigger" );
+        
 	}
 
 	// Update is called once per frame
@@ -95,6 +101,7 @@ public class SiteManager : MonoBehaviour {
 		_moviePlaySystem.SetOperation( true );
 		AllButtonInteractable( true );
 		RayShooterEnabled( true );
+        SiteMoveNow( );
 		RegurateByCurtainState( );
 		IsRopeActionAndForcedMove( );
 		ClockUIScenesTransitionWithAnim( );
@@ -124,6 +131,7 @@ public class SiteManager : MonoBehaviour {
 		_moviePlaySystem.SetOperation( true );
 		AllButtonInteractable( true );
 		RayShooterEnabled( true );
+        SiteMoveNow( );
 		RegurateByCurtainState( );
 		IsRopeActionAndForcedMove( );
 		ClockUIScenesTransitionWithAnim( );
@@ -148,6 +156,8 @@ public class SiteManager : MonoBehaviour {
 		if ( _detectiveTalk[ _talkIndex ].GetTalkFinishedFlag( ) ) {
 			if ( Input.GetMouseButtonDown( 0 ) ) {
 				_detectiveTalk[ _talkIndex ].gameObject.SetActive( false );
+                if ( _talkIndex == 10 ) _conditions1 = true;
+                if ( _talkIndex == 11 ) _conditions2 = true;
 				_status = PartStatus.INVESTIGATION_PART;
 			}
 		}
@@ -159,17 +169,6 @@ public class SiteManager : MonoBehaviour {
 	//ストーリの進行状況によって操作に縛りをかける関数--------------------------------------------------------------------------------------------------------------------------------------------------------------
 	void  StoryBound( ) {
 
-		//bool[,] site = {							//どの部屋を閉じる状態にするかの配列。false：閉じない true：閉じる
-		//	{ false, false, false, true },			//右から寝室、キッチン、給仕室、庭。（部屋番号に対応）
-		//	{ false, false, false, false },			//上から昼、夕方、夜。
-		//	{ false, false, false, false }
-		//};
-
-		//if ( _siteMove.GetCheckTiming( ) ) {
-		//	_storyBoundManeger.CutainCloseBound( site );
-		//}
-
-		//どこかに順番にではなく、すぐに満たしてしまう条件があるかも
 		if ( !_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_MILLIONARE_MURDER_ANIM ) ) {
 
 			if ( _progressConditionManager.ShowMillionareMurderAnimProgress( ) ) {								//モノクロアニメーションを見終わったら
@@ -398,8 +397,8 @@ public class SiteManager : MonoBehaviour {
 		}
 
 
-		if ( ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_BUTLER_PUT_SILVER_BOX ) && _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_COOK_PUT_YELLOW_BOX ) ) &&	
-			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE4 ) ) {		//二つの箱を見ていて、証拠品４を入手していなかったら
+		if ( ( _conditions1 && _conditions2 ) &&	
+			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE4 ) ) {		//箱を見たときの台詞が二つとも終わっていて、証拠品４を入手していなかったら
 
 			if ( !_remark ) {               //一回発言したら処理しない
 				_talkIndex = 12;            //なんか気付いたよテキスト  //ここだけ会話の特別処理
@@ -564,6 +563,24 @@ public class SiteManager : MonoBehaviour {
 	void RayShooterEnabled( bool value ) { _camera.SetRayShootable( value ); }
 	//----------------------------------------------------------------------------------------------
 
+    //現場が動いていたら処理---------------------
+    void SiteMoveNow( ) {
+        if ( _siteMove.GetMoveNow( ) ) {
+            EvidenceTriggerDisplay( false );
+        } else {
+            EvidenceTriggerDisplay( true );
+        }
+    }
+    //--------------------------------------------
+
+    //EvideneTriggerのコライダーを外す処理---------------------------------------------------------
+    void EvidenceTriggerDisplay( bool value ) {
+        for ( int i = 0; i < _evidenceTrigger.Length; i++ ) {
+            BoxCollider2D boxCollider = _evidenceTrigger[ i ].GetComponent< BoxCollider2D >( );
+            boxCollider.enabled = value;
+        }
+    }
+    //----------------------------------------------------------------------------------------------
 
 	//ラボ遷移UIが押されたらフラグを立てる関数--
 	public void LaboTransitionUIButton( ) {

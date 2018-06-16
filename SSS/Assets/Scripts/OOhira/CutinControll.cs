@@ -27,7 +27,9 @@ public class CutinControll : MonoBehaviour {
 	bool _finishFlag;							//カットイン演出を終了したかどうかのフラグ
 	[SerializeField] Vector3 _finishSpeedPerSecond = new Vector3(0, 0.1f, 0);	//終了演出時の画像の縮小速度
 	bool _cutinMoveFinishedFlag;				//カットインの動きを終了したかどうかのフラグ
-
+	
+	public AudioClip shakin1;
+    AudioSource audioSource;
 
 	//========================================
 	//ゲッター
@@ -50,6 +52,8 @@ public class CutinControll : MonoBehaviour {
 		_cutinImageFirstAnchoredPosition = _cutinImageRectTransform.anchoredPosition;
 		_finishFlag = false;
 		_cutinMoveFinishedFlag = false;
+
+		audioSource = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -72,11 +76,13 @@ public class CutinControll : MonoBehaviour {
 	//--カットインをする関数
 	public void StartCutin() {
 		StartCoroutine ("Cutin");
+		audioSource.PlayOneShot(shakin1, 0.7F);
 	}
 
 	//--カットインをする関数Part2
 	public void StartCutinPart2() {
 		StartCoroutine ("CutinPart2");
+		audioSource.PlayOneShot(shakin1, 0.7F);
 	}
 
 	//--カットイン演出を終了する関数

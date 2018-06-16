@@ -1,67 +1,59 @@
 fileFormatVersion: 2
-guid: 5e02cf9ec68f6704fb20b934ae961ce6
-timeCreated: 1529141763
+guid: d1a11e9f5c72e3a40828edf6df61fea2
+timeCreated: 1529151939
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: "boilding_effect&prop_512\xD7512_50_0"
-    21300002: "boilding_effect&prop_512\xD7512_50_1"
-    21300004: "boilding_effect&prop_512\xD7512_50_2"
-    21300006: "boilding_effect&prop_512\xD7512_50_3"
-    21300008: "boilding_effect&prop_512\xD7512_50_4"
-    21300010: "boilding_effect&prop_512\xD7512_50_5"
-    21300012: "boilding_effect&prop_512\xD7512_50_6"
-    21300014: "boilding_effect&prop_512\xD7512_50_7"
-    21300016: "boilding_effect&prop_512\xD7512_50_8"
-    21300018: "boilding_effect&prop_512\xD7512_50_9"
-    21300020: "boilding_effect&prop_512\xD7512_50_10"
-    21300022: "boilding_effect&prop_512\xD7512_50_11"
-    21300024: "boilding_effect&prop_512\xD7512_50_12"
-    21300026: "boilding_effect&prop_512\xD7512_50_13"
-    21300028: "boilding_effect&prop_512\xD7512_50_14"
-    21300030: "boilding_effect&prop_512\xD7512_50_15"
-    21300032: "boilding_effect&prop_512\xD7512_50_16"
-    21300034: "boilding_effect&prop_512\xD7512_50_17"
-    21300036: "boilding_effect&prop_512\xD7512_50_18"
-    21300038: "boilding_effect&prop_512\xD7512_50_19"
-    21300040: "boilding_effect&prop_512\xD7512_50_20"
-    21300042: "boilding_effect&prop_512\xD7512_50_21"
-    21300044: "boilding_effect&prop_512\xD7512_50_22"
-    21300046: "boilding_effect&prop_512\xD7512_50_23"
-    21300048: "boilding_effect&prop_512\xD7512_50_24"
-    21300050: "boilding_effect&prop_512\xD7512_50_25"
-    21300052: "boilding_effect&prop_512\xD7512_50_26"
-    21300054: "boilding_effect&prop_512\xD7512_50_27"
-    21300056: "boilding_effect&prop_512\xD7512_50_28"
-    21300058: "boilding_effect&prop_512\xD7512_50_29"
-    21300060: "boilding_effect&prop_512\xD7512_50_30"
-    21300062: "boilding_effect&prop_512\xD7512_50_31"
-    21300064: "boilding_effect&prop_512\xD7512_50_32"
-    21300066: "boilding_effect&prop_512\xD7512_50_33"
-    21300068: "boilding_effect&prop_512\xD7512_50_34"
-    21300070: "boilding_effect&prop_512\xD7512_50_35"
-    21300072: "boilding_effect&prop_512\xD7512_50_36"
-    21300074: "boilding_effect&prop_512\xD7512_50_37"
-    21300076: "boilding_effect&prop_512\xD7512_50_38"
-    21300078: "boilding_effect&prop_512\xD7512_50_39"
-    21300080: "boilding_effect&prop_512\xD7512_50_40"
-    21300082: "boilding_effect&prop_512\xD7512_50_41"
-    21300084: "boilding_effect&prop_512\xD7512_50_42"
-    21300086: "boilding_effect&prop_512\xD7512_50_43"
-    21300088: "boilding_effect&prop_512\xD7512_50_44"
-    21300090: "boilding_effect&prop_512\xD7512_50_45"
-    21300092: "boilding_effect&prop_512\xD7512_50_46"
-    21300094: "boilding_effect&prop_512\xD7512_50_47"
-    21300096: "boilding_effect&prop_512\xD7512_50_48"
-    21300098: "boilding_effect&prop_512\xD7512_50_49"
-    21300100: "boilding_effect&prop_512\xD7512_50_50"
-    21300102: "boilding_effect&prop_512\xD7512_50_51"
-    21300104: "boilding_effect&prop_512\xD7512_50_52"
-    21300106: "boilding_effect&prop_512\xD7512_50_53"
-    21300108: "boilding_effect&prop_512\xD7512_50_54"
-    21300110: "boilding_effect&prop_512\xD7512_50_55"
-    21300112: "boilding_effect&prop_512\xD7512_50_56"
-    21300114: "boilding_effect&prop_512\xD7512_50_57"
+    21300000: "maid_work_roop_512\xD7512_50_0"
+    21300002: "maid_work_roop_512\xD7512_50_1"
+    21300004: "maid_work_roop_512\xD7512_50_2"
+    21300006: "maid_work_roop_512\xD7512_50_3"
+    21300008: "maid_work_roop_512\xD7512_50_4"
+    21300010: "maid_work_roop_512\xD7512_50_5"
+    21300012: "maid_work_roop_512\xD7512_50_6"
+    21300014: "maid_work_roop_512\xD7512_50_7"
+    21300016: "maid_work_roop_512\xD7512_50_8"
+    21300018: "maid_work_roop_512\xD7512_50_9"
+    21300020: "maid_work_roop_512\xD7512_50_10"
+    21300022: "maid_work_roop_512\xD7512_50_11"
+    21300024: "maid_work_roop_512\xD7512_50_12"
+    21300026: "maid_work_roop_512\xD7512_50_13"
+    21300028: "maid_work_roop_512\xD7512_50_14"
+    21300030: "maid_work_roop_512\xD7512_50_15"
+    21300032: "maid_work_roop_512\xD7512_50_16"
+    21300034: "maid_work_roop_512\xD7512_50_17"
+    21300036: "maid_work_roop_512\xD7512_50_18"
+    21300038: "maid_work_roop_512\xD7512_50_19"
+    21300040: "maid_work_roop_512\xD7512_50_20"
+    21300042: "maid_work_roop_512\xD7512_50_21"
+    21300044: "maid_work_roop_512\xD7512_50_22"
+    21300046: "maid_work_roop_512\xD7512_50_23"
+    21300048: "maid_work_roop_512\xD7512_50_24"
+    21300050: "maid_work_roop_512\xD7512_50_25"
+    21300052: "maid_work_roop_512\xD7512_50_26"
+    21300054: "maid_work_roop_512\xD7512_50_27"
+    21300056: "maid_work_roop_512\xD7512_50_28"
+    21300058: "maid_work_roop_512\xD7512_50_29"
+    21300060: "maid_work_roop_512\xD7512_50_30"
+    21300062: "maid_work_roop_512\xD7512_50_31"
+    21300064: "maid_work_roop_512\xD7512_50_32"
+    21300066: "maid_work_roop_512\xD7512_50_33"
+    21300068: "maid_work_roop_512\xD7512_50_34"
+    21300070: "maid_work_roop_512\xD7512_50_35"
+    21300072: "maid_work_roop_512\xD7512_50_36"
+    21300074: "maid_work_roop_512\xD7512_50_37"
+    21300076: "maid_work_roop_512\xD7512_50_38"
+    21300078: "maid_work_roop_512\xD7512_50_39"
+    21300080: "maid_work_roop_512\xD7512_50_40"
+    21300082: "maid_work_roop_512\xD7512_50_41"
+    21300084: "maid_work_roop_512\xD7512_50_42"
+    21300086: "maid_work_roop_512\xD7512_50_43"
+    21300088: "maid_work_roop_512\xD7512_50_44"
+    21300090: "maid_work_roop_512\xD7512_50_45"
+    21300092: "maid_work_roop_512\xD7512_50_46"
+    21300094: "maid_work_roop_512\xD7512_50_47"
+    21300096: "maid_work_roop_512\xD7512_50_48"
+    21300098: "maid_work_roop_512\xD7512_50_49"
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -152,7 +144,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_0"
+      name: "maid_work_roop_512\xD7512_50_0"
       rect:
         serializedVersion: 2
         x: 0
@@ -165,7 +157,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_1"
+      name: "maid_work_roop_512\xD7512_50_1"
       rect:
         serializedVersion: 2
         x: 512
@@ -178,7 +170,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_2"
+      name: "maid_work_roop_512\xD7512_50_2"
       rect:
         serializedVersion: 2
         x: 1024
@@ -191,7 +183,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_3"
+      name: "maid_work_roop_512\xD7512_50_3"
       rect:
         serializedVersion: 2
         x: 1536
@@ -204,7 +196,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_4"
+      name: "maid_work_roop_512\xD7512_50_4"
       rect:
         serializedVersion: 2
         x: 2048
@@ -217,7 +209,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_5"
+      name: "maid_work_roop_512\xD7512_50_5"
       rect:
         serializedVersion: 2
         x: 2560
@@ -230,7 +222,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_6"
+      name: "maid_work_roop_512\xD7512_50_6"
       rect:
         serializedVersion: 2
         x: 3072
@@ -243,7 +235,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_7"
+      name: "maid_work_roop_512\xD7512_50_7"
       rect:
         serializedVersion: 2
         x: 3584
@@ -256,7 +248,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_8"
+      name: "maid_work_roop_512\xD7512_50_8"
       rect:
         serializedVersion: 2
         x: 0
@@ -269,7 +261,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_9"
+      name: "maid_work_roop_512\xD7512_50_9"
       rect:
         serializedVersion: 2
         x: 512
@@ -282,7 +274,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_10"
+      name: "maid_work_roop_512\xD7512_50_10"
       rect:
         serializedVersion: 2
         x: 1024
@@ -295,7 +287,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_11"
+      name: "maid_work_roop_512\xD7512_50_11"
       rect:
         serializedVersion: 2
         x: 1536
@@ -308,7 +300,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_12"
+      name: "maid_work_roop_512\xD7512_50_12"
       rect:
         serializedVersion: 2
         x: 2048
@@ -321,7 +313,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_13"
+      name: "maid_work_roop_512\xD7512_50_13"
       rect:
         serializedVersion: 2
         x: 2560
@@ -334,7 +326,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_14"
+      name: "maid_work_roop_512\xD7512_50_14"
       rect:
         serializedVersion: 2
         x: 3072
@@ -347,7 +339,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_15"
+      name: "maid_work_roop_512\xD7512_50_15"
       rect:
         serializedVersion: 2
         x: 3584
@@ -360,7 +352,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_16"
+      name: "maid_work_roop_512\xD7512_50_16"
       rect:
         serializedVersion: 2
         x: 0
@@ -373,7 +365,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_17"
+      name: "maid_work_roop_512\xD7512_50_17"
       rect:
         serializedVersion: 2
         x: 512
@@ -386,7 +378,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_18"
+      name: "maid_work_roop_512\xD7512_50_18"
       rect:
         serializedVersion: 2
         x: 1024
@@ -399,7 +391,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_19"
+      name: "maid_work_roop_512\xD7512_50_19"
       rect:
         serializedVersion: 2
         x: 1536
@@ -412,7 +404,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_20"
+      name: "maid_work_roop_512\xD7512_50_20"
       rect:
         serializedVersion: 2
         x: 2048
@@ -425,7 +417,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_21"
+      name: "maid_work_roop_512\xD7512_50_21"
       rect:
         serializedVersion: 2
         x: 2560
@@ -438,7 +430,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_22"
+      name: "maid_work_roop_512\xD7512_50_22"
       rect:
         serializedVersion: 2
         x: 3072
@@ -451,7 +443,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_23"
+      name: "maid_work_roop_512\xD7512_50_23"
       rect:
         serializedVersion: 2
         x: 3584
@@ -464,7 +456,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_24"
+      name: "maid_work_roop_512\xD7512_50_24"
       rect:
         serializedVersion: 2
         x: 0
@@ -477,7 +469,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_25"
+      name: "maid_work_roop_512\xD7512_50_25"
       rect:
         serializedVersion: 2
         x: 512
@@ -490,7 +482,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_26"
+      name: "maid_work_roop_512\xD7512_50_26"
       rect:
         serializedVersion: 2
         x: 1024
@@ -503,7 +495,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_27"
+      name: "maid_work_roop_512\xD7512_50_27"
       rect:
         serializedVersion: 2
         x: 1536
@@ -516,7 +508,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_28"
+      name: "maid_work_roop_512\xD7512_50_28"
       rect:
         serializedVersion: 2
         x: 2048
@@ -529,7 +521,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_29"
+      name: "maid_work_roop_512\xD7512_50_29"
       rect:
         serializedVersion: 2
         x: 2560
@@ -542,7 +534,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_30"
+      name: "maid_work_roop_512\xD7512_50_30"
       rect:
         serializedVersion: 2
         x: 3072
@@ -555,7 +547,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_31"
+      name: "maid_work_roop_512\xD7512_50_31"
       rect:
         serializedVersion: 2
         x: 3584
@@ -568,7 +560,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_32"
+      name: "maid_work_roop_512\xD7512_50_32"
       rect:
         serializedVersion: 2
         x: 0
@@ -581,7 +573,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_33"
+      name: "maid_work_roop_512\xD7512_50_33"
       rect:
         serializedVersion: 2
         x: 512
@@ -594,7 +586,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_34"
+      name: "maid_work_roop_512\xD7512_50_34"
       rect:
         serializedVersion: 2
         x: 1024
@@ -607,7 +599,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_35"
+      name: "maid_work_roop_512\xD7512_50_35"
       rect:
         serializedVersion: 2
         x: 1536
@@ -620,7 +612,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_36"
+      name: "maid_work_roop_512\xD7512_50_36"
       rect:
         serializedVersion: 2
         x: 2048
@@ -633,7 +625,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_37"
+      name: "maid_work_roop_512\xD7512_50_37"
       rect:
         serializedVersion: 2
         x: 2560
@@ -646,7 +638,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_38"
+      name: "maid_work_roop_512\xD7512_50_38"
       rect:
         serializedVersion: 2
         x: 3072
@@ -659,7 +651,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_39"
+      name: "maid_work_roop_512\xD7512_50_39"
       rect:
         serializedVersion: 2
         x: 3584
@@ -672,7 +664,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_40"
+      name: "maid_work_roop_512\xD7512_50_40"
       rect:
         serializedVersion: 2
         x: 0
@@ -685,7 +677,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_41"
+      name: "maid_work_roop_512\xD7512_50_41"
       rect:
         serializedVersion: 2
         x: 512
@@ -698,7 +690,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_42"
+      name: "maid_work_roop_512\xD7512_50_42"
       rect:
         serializedVersion: 2
         x: 1024
@@ -711,7 +703,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_43"
+      name: "maid_work_roop_512\xD7512_50_43"
       rect:
         serializedVersion: 2
         x: 1536
@@ -724,7 +716,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_44"
+      name: "maid_work_roop_512\xD7512_50_44"
       rect:
         serializedVersion: 2
         x: 2048
@@ -737,7 +729,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_45"
+      name: "maid_work_roop_512\xD7512_50_45"
       rect:
         serializedVersion: 2
         x: 2560
@@ -750,7 +742,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_46"
+      name: "maid_work_roop_512\xD7512_50_46"
       rect:
         serializedVersion: 2
         x: 3072
@@ -763,7 +755,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_47"
+      name: "maid_work_roop_512\xD7512_50_47"
       rect:
         serializedVersion: 2
         x: 3584
@@ -776,7 +768,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_48"
+      name: "maid_work_roop_512\xD7512_50_48"
       rect:
         serializedVersion: 2
         x: 0
@@ -789,115 +781,11 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_49"
+      name: "maid_work_roop_512\xD7512_50_49"
       rect:
         serializedVersion: 2
         x: 512
         y: 512
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_50"
-      rect:
-        serializedVersion: 2
-        x: 1024
-        y: 512
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_51"
-      rect:
-        serializedVersion: 2
-        x: 1536
-        y: 512
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_52"
-      rect:
-        serializedVersion: 2
-        x: 2048
-        y: 512
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_53"
-      rect:
-        serializedVersion: 2
-        x: 2560
-        y: 512
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_54"
-      rect:
-        serializedVersion: 2
-        x: 3072
-        y: 512
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_55"
-      rect:
-        serializedVersion: 2
-        x: 3584
-        y: 512
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_56"
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: "boilding_effect&prop_512\xD7512_50_57"
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 0
         width: 512
         height: 512
       alignment: 0

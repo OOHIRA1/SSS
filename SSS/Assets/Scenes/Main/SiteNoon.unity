@@ -7343,6 +7343,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1158299055248268, guid: eff87639698002f449412326517d0f03, type: 2}
       propertyPath: m_Name
+      value: EvidenceTrigger5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1158299055248268, guid: eff87639698002f449412326517d0f03, type: 2}
+      propertyPath: m_TagString
       value: EvidenceTrigger
       objectReference: {fileID: 0}
     m_RemovedComponents: []
