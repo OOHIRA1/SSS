@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 //==クライマックスバトルを管理するクラス
 //
@@ -37,6 +38,7 @@ public class ClimaxBattleSystem : MonoBehaviour {
 	GameObject _playerChoice;									//プレイヤーが選んだ選択肢
 	bool _playVideo;	//再生したかどうかのフラグ　※何度も再生しないように(再生する関数を呼んでも再生するまでのラグがある模様…)
 	bool _showChoicesFlag;										//選択肢を見せるかどうかのフラグ
+	[SerializeField] Image _brightingPanel = null;				//明転処理で使うパネル
 
 	//================================================================
 	//ゲッター
@@ -127,7 +129,10 @@ public class ClimaxBattleSystem : MonoBehaviour {
 				_battleTurnArrayIndex++;
 			} else {//不正解or未選択処理
 				_playerLife.Damege ();
-				_videoController.PlayVideo (_battleTurn [_battleTurnArrayIndex]._checkPointTime);//チェックポイントとなる時間に戻す
+				//_videoController.PlayVideo (_battleTurn [_battleTurnArrayIndex]._checkPointTime);//チェックポイントとなる時間に戻す
+				if (!_playerLife.GetDead ()) {
+					StartCoroutine (ReverseTime ());
+				}
 			}
 			_moviePlaySystem.FastBackword ();	//バーを5秒巻き戻し
 			_moviePlaySystem.SetOperation (false);
@@ -175,5 +180,21 @@ public class ClimaxBattleSystem : MonoBehaviour {
 			yield return new WaitForSeconds (Time.deltaTime);
 		}
 		_showChoicesFlag = true;
+	}
+
+
+	//--明転処理後に時間をチェックポイントの時間に戻す関数(コルーチン)
+	IEnumerator ReverseTime( ) {
+		_videoController.PauseVideo ();
+		//明転処理----------------------------------------------------------------------
+		float fadeInSpeed = 2f;
+		while (_brightingPanel.color.a < 1) {
+			_brightingPanel.color += new Color (0, 0, 0, fadeInSpeed * Time.deltaTime);
+			yield return new WaitForSeconds (Time.deltaTime);
+		}
+		yield return new WaitForSeconds(1f);//画面白の状態で一時待機
+		//------------------------------------------------------------------------------
+		_brightingPanel.color = new Color(1, 1, 1, 0);//色を元に戻す
+		_videoController.PlayVideo (_battleTurn [_battleTurnArrayIndex]._checkPointTime);//チェックポイントとなる時間に戻す
 	}
 }
