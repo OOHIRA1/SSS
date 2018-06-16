@@ -5236,6 +5236,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e3f3556fd52ec924a8553cfbca63cce0, type: 3}
   - {fileID: 21300000, guid: 9b22c97b874e69c4897bc32473c76084, type: 3}
   _siteMove: {fileID: 638796016}
+  _speed: 0.01
 --- !u!1001 &1231717570
 Prefab:
   m_ObjectHideFlags: 0

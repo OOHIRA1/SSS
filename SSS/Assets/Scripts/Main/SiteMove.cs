@@ -10,7 +10,7 @@ public class SiteMove : MonoBehaviour {
     bool _leftSitemove;                                                     //左に移動する場合
     bool _rightSitemove;                                                    //右に移動する場合
     bool _oneTimeOnly;                                                      //移動するときの一回だけの処理
-	bool _checkTiming;														//移動したそのシーンが縛りをかける場所かチェックしてもらうタイミング
+	bool _checkTiming;														//現場が移動し終わった１フレームのタイミング
     public static int _nowSiteNum = 0;                                      //現在のシーン(別シーンから現場シーンに移動するときはこれを変えてから遷移すること) 0:Bedroom 1:Graden 2:Kitchen 3:ServingRoom
     int[ ] _nextNextSiteNum;                                                //現在のシーンから1つ先と2つ先と3つ先のシーン
 
@@ -46,7 +46,7 @@ public class SiteMove : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update( ) {
-        
+        if ( _checkTiming ) _checkTiming = false;                                       //1フレームたったらtrueだったらfalseに戻す
 
         //左移動が選択されたとき一回だけの処理--------------------------------
         if ( _oneTimeOnly && _leftSitemove ) {
@@ -201,12 +201,8 @@ public class SiteMove : MonoBehaviour {
     }
 
 
-	public bool GetCheckTiming( ) {
-		bool relay = _checkTiming;
-
-		if ( _checkTiming ) _checkTiming = false;
-
-		return relay;
+	public bool GetCheckTiming( ) { 
+		return _checkTiming;
 	}
 
     

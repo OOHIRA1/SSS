@@ -101,7 +101,7 @@ public class StoryBoundManeger : MonoBehaviour {
 			able = true;
 		}
 
-		_detective.SetIsMove( able );
+		//_detective.SetIsMove( able );
 		_clockUI.gameObject.SetActive( able );
 		_moviePlaySystem.SetMouseMove( able );
 		//_moviePlaySystem.SetFixed( application );
@@ -119,7 +119,7 @@ public class StoryBoundManeger : MonoBehaviour {
 			able = true;
 		}
 
-		_detective.SetIsMove( able );
+		//_detective.SetIsMove( able );
 		_clockUI.gameObject.SetActive( able );
 		_moviePlaySystem.SetMouseMove( able );
 		//_moviePlaySystem.SetFixed( application );
@@ -139,7 +139,7 @@ public class StoryBoundManeger : MonoBehaviour {
 			able = true;
 		}
 
-		_detective.SetIsMove( able );
+		//_detective.SetIsMove( able );
 		_clockUI.gameObject.SetActive( able );
 		_moviePlaySystem.SetMouseMove( able );
 		//_moviePlaySystem.SetFixed( application );
@@ -344,7 +344,6 @@ public class StoryBoundManeger : MonoBehaviour {
 	//縛りがかかる場所だったらカーテンを閉じてそうでなかったらカーテンを開ける関数--------
 	//カーテンのフラグがトリガーのためやりずらい。ブールならやりやすいかも
 	public void CutainCloseBound( bool[,] site ) {
-		Debug.Log( true );
 		int iSite = 0;								//事件現場
 		string sTimeZone = "none";					//時間帯
 

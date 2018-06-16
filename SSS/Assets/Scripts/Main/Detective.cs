@@ -11,6 +11,7 @@ public class Detective : MonoBehaviour {
     [ SerializeField ] float _forcedSpeed = 0.1f;       //強制移動スピード
 
     Animator _anim;
+    SpriteRenderer _renderer;
 
     //仮実装
     bool _isAnimWalk;                                   //歩くモーションをするかどうか
@@ -31,9 +32,6 @@ public class Detective : MonoBehaviour {
     Vector3 _initialPos;                                //探偵の初期位置
     Vector3 _move;                                      //探偵の移動
 
-    Vector3 _flip;                                      //反転する
-    Vector3 _notFlip;                                   //反転しない
-
 	Vector3 _forcedDestination;						    //強制移動場所
 
     Vector3 _forcedMoveX;                               //強制移動ｘ座標
@@ -44,6 +42,7 @@ public class Detective : MonoBehaviour {
 	// Use this for initialization
 	void Start( ) {
 		_anim = GetComponent< Animator >( );
+        _renderer = GetComponent< SpriteRenderer >( );
         _isAnimWalk = false;
 		_isAnimShocked = false;        
         _isFlip = true;
@@ -56,8 +55,6 @@ public class Detective : MonoBehaviour {
         _destination = transform.position;
         _initialPos = transform.position;
         _move = new Vector3( _speed ,0, 0 );
-        _flip = new Vector3( -1, 1, 1 );
-        _notFlip = new Vector3( 1, 1, 1 );
 		_forcedDestination = Vector3.zero;
         _forcedMoveX = new Vector3( _forcedSpeed, 0, 0 );
         _forcedMoveY = new Vector3( 0, _forcedSpeed, 0 );
@@ -145,9 +142,9 @@ public class Detective : MonoBehaviour {
     //反転するかどうか----------------------------------------
     void Flip( ) {
         if ( _isFlip ) { 
-            transform.localScale = _flip;
+            _renderer.flipX = true;
         } else {
-            transform.localScale = _notFlip;
+            _renderer.flipX = false;
         }
     }
 	//---------------------------------------------------------
