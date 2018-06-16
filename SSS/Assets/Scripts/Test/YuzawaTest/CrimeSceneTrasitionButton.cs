@@ -20,8 +20,14 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
     bool Disapper = true;
     bool ClockDisapper = true;
 
+	public AudioClip crimescene_button2_appear;
+	public AudioClip crimescene_button2_disappear2;
+    AudioSource audioSource;
+
 	// Use this for initialization
 	void Start () {
+
+		audioSource = GetComponent<AudioSource>();
 		_num = -1;
 		_time[ 0 ] = 0;
 
@@ -118,10 +124,12 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 	public void scroll( ){
 		bool value = true;
 		if (!_animator.GetBool( "scrollFlag" ) ) {
+			audioSource.PlayOneShot(crimescene_button2_appear, 0.7F);
 			value = true;
 		} else {
 			value = false;
 		}
+		audioSource.PlayOneShot(crimescene_button2_disappear2, 0.7F);
 		_animator.SetBool ("scrollFlag", value);
 	}
 
