@@ -39,6 +39,7 @@ public class ClimaxBattleSystem : MonoBehaviour {
 	bool _playVideo;	//再生したかどうかのフラグ　※何度も再生しないように(再生する関数を呼んでも再生するまでのラグがある模様…)
 	bool _showChoicesFlag;										//選択肢を見せるかどうかのフラグ
 	[SerializeField] Image _brightingPanel = null;				//明転処理で使うパネル
+	[SerializeField] AudioSource _reverseTimeSE = null;			//巻き戻しSE
 
 	//================================================================
 	//ゲッター
@@ -186,14 +187,16 @@ public class ClimaxBattleSystem : MonoBehaviour {
 	//--明転処理後に時間をチェックポイントの時間に戻す関数(コルーチン)
 	IEnumerator ReverseTime( ) {
 		_videoController.PauseVideo ();
+		_reverseTimeSE.PlayOneShot (_reverseTimeSE.clip);
 		//明転処理----------------------------------------------------------------------
 		float fadeInSpeed = 2f;
 		while (_brightingPanel.color.a < 1) {
 			_brightingPanel.color += new Color (0, 0, 0, fadeInSpeed * Time.deltaTime);
 			yield return new WaitForSeconds (Time.deltaTime);
 		}
-		yield return new WaitForSeconds(1f);//画面白の状態で一時待機
+		yield return new WaitForSeconds(2f);//画面白の状態で一時待機
 		//------------------------------------------------------------------------------
+		_reverseTimeSE.Stop();
 		_brightingPanel.color = new Color(1, 1, 1, 0);//色を元に戻す
 		_videoController.PlayVideo (_battleTurn [_battleTurnArrayIndex]._checkPointTime);//チェックポイントとなる時間に戻す
 	}
