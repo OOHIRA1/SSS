@@ -22,7 +22,7 @@ public class SiteManager : MonoBehaviour {
 	[ SerializeField ] GameObject _evidenceFile = null;
 	[ SerializeField ] Catcher _catcher = null;
 	[ SerializeField ] DetectiveTalk[ ] _detectiveTalk = null;
-	[ SerializeField ] GameObject _camera = null;
+	[ SerializeField ] RayShooter _camera = null;
 
 	EvidenceManager _evidenceManager;
 
@@ -561,7 +561,7 @@ public class SiteManager : MonoBehaviour {
 
 
 	//RayShooterのスクリプトを外すかどうかの関数----------------------------------------------------
-	void RayShooterEnabled( bool value ) { _camera.GetComponent< RayShooter >( ).enabled = value; }
+	void RayShooterEnabled( bool value ) { _camera.SetRayShootable( value ); }
 	//----------------------------------------------------------------------------------------------
 
 
