@@ -175,27 +175,27 @@ public class CutinControll : MonoBehaviour {
 
 		do {
 			//背景画像の演出------------------------------------------------------------------------
+			bool condition = true;//条件
+			float diffX = destination.x - _backgroundImagesRectTransform [_movingImageIndex].anchoredPosition.x;//目的地と現在のx座標の差
+			int lastMoveImageIndex = (_movingImageIndex + _backgroundImagesRectTransform.Length - 1) % _backgroundImagesRectTransform.Length;//最右端or最左端で動いている背景画像の配列番号
+			Vector2 vec = Vector2.zero;
 			switch(_reverseFlag) {
 			case true:
-				if (destination.x - _backgroundImagesRectTransform [_movingImageIndex].anchoredPosition.x < -0.5f) {
-					for (int i = 0; i < _backgroundImagesRectTransform.Length; i++) {
-						_backgroundImagesRectTransform [i].anchoredPosition += backgroundVelocity * Time.deltaTime;
-					}
-				} else {
-					_backgroundImagesRectTransform [_movingImageIndex].anchoredPosition = _backgroundImagesRectTransform [(_movingImageIndex + 1) % _backgroundImagesRectTransform.Length].anchoredPosition + new Vector2 (_backgroundImagesRectTransform[_movingImageIndex].sizeDelta.x, 0);
-					_movingImageIndex = ++_movingImageIndex % _backgroundImagesRectTransform.Length;
-				}
+				condition = diffX < -0.5f;
+				vec.x = _backgroundImagesRectTransform[_movingImageIndex].sizeDelta.x;
 				break;
 			case false:
-				if (-_backgroundFirstAnchoredPosition.x - _backgroundImagesRectTransform [_movingImageIndex].anchoredPosition.x > 0.5f) {
-					for (int i = 0; i < _backgroundImagesRectTransform.Length; i++) {
-						_backgroundImagesRectTransform [i].anchoredPosition += backgroundVelocity * Time.deltaTime;
-					}
-				} else {
-					_backgroundImagesRectTransform [_movingImageIndex].anchoredPosition = _backgroundImagesRectTransform [(_movingImageIndex + 1) % _backgroundImagesRectTransform.Length].anchoredPosition + new Vector2 (-_backgroundImagesRectTransform[_movingImageIndex].sizeDelta.x, 0);
-					_movingImageIndex = ++_movingImageIndex % _backgroundImagesRectTransform.Length;
-				}
+				condition = diffX > 0.5f;
+				vec.x = -_backgroundImagesRectTransform[_movingImageIndex].sizeDelta.x;
 				break;
+			}
+			if (condition) {
+				for (int i = 0; i < _backgroundImagesRectTransform.Length; i++) {
+					_backgroundImagesRectTransform [i].anchoredPosition += backgroundVelocity * Time.deltaTime;
+				}
+			} else {
+				_backgroundImagesRectTransform [_movingImageIndex].anchoredPosition = _backgroundImagesRectTransform [lastMoveImageIndex].anchoredPosition + vec;
+				_movingImageIndex = ++_movingImageIndex % _backgroundImagesRectTransform.Length;
 			}
 			//-------------------------------------------------------------------------------------
 
