@@ -158,15 +158,11 @@ public class DetectiveOfficeManager : MonoBehaviour {
 				if (i == _clockUIs.Length - 1) _detective.SetIsMove (true);
 			}
 			//---------------------------------------------------------------
-			_laboUIManager.ChangeEvidenceButtonIntaractive (true);
-			_laboUIManager.ChangeCrimeSceneButtonIntaractive (true);
-			_laboUIManager.ChangeCriminalChoiseButtonIntaractive (true);
+			_laboUIManager.ChangeLaboButtonIntaractive(true);
 		} else {
 			//_detective.enabled = false;
 			_detective.SetIsMove(false);//タッチで反応しなくなる関数
-			_laboUIManager.ChangeEvidenceButtonIntaractive(false);
-			_laboUIManager.ChangeCrimeSceneButtonIntaractive (false);
-			_laboUIManager.ChangeCriminalChoiseButtonIntaractive (false);
+			_laboUIManager.ChangeLaboButtonIntaractive(false);
 		}
 		//---------------------------------------------------------------------------------------------------------------
 

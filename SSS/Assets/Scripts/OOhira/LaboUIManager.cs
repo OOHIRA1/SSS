@@ -20,6 +20,7 @@ public class LaboUIManager : MonoBehaviour {
 	[SerializeField] UnityEngine.UI.Button _criminalChoiseButton = null;	//犯人指摘ボタン
 	[SerializeField] UnityEngine.UI.Button _evidenceButton = null;				//証拠品ファイルボタン(UnityEngine.UI.Buttonで宣言しないとinteractableが使えない)
 	[SerializeField] UnityEngine.UI.Button _crimeSceneButton = null;			//事件現場遷移ボタン
+	[SerializeField] UnityEngine.UI.Button _mapButton = null;					//マップボタン
 
 	//=================================================
 	//ゲッター
@@ -88,6 +89,21 @@ public class LaboUIManager : MonoBehaviour {
 	//--事件現場遷移ボタンを反応しないようにする関数
 	public void ChangeCrimeSceneButtonIntaractive( bool x ) {
 		_crimeSceneButton.interactable = x;
+	}
+
+
+	//--マップボタンを反応しないようにする関数
+	public void ChangeMapButtonIntaractive( bool x ) {
+		_mapButton.interactable = x;
+	}
+
+
+	//--ラボシーンボタンを反応しないようにする関数
+	public void ChangeLaboButtonIntaractive( bool x ) {
+		ChangeCriminalChoiseButtonIntaractive (x);
+		ChangeEvidenceButtonIntaractive (x);
+		ChangeCrimeSceneButtonIntaractive (x);
+		ChangeMapButtonIntaractive (x);
 	}
 	//===========================================
 	//===========================================

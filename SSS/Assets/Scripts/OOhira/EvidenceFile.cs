@@ -45,7 +45,7 @@ public class EvidenceFile : MonoBehaviour {
 				if (instantiateFlag) {
 					GameObject.Instantiate (_evidenceBannar [i], _content.transform.position, Quaternion.identity, _content.transform);
 					Vector2 sizeDelta = _evidenceBannar [i].GetComponent<RectTransform> ().sizeDelta;
-					contentRectTransform.sizeDelta += new Vector2 (0, sizeDelta.y);
+					//contentRectTransform.sizeDelta += new Vector2 (0, sizeDelta.y);
 				}
 			}
 		}
