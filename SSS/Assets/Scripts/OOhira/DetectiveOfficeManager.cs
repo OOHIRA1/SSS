@@ -41,6 +41,7 @@ public class DetectiveOfficeManager : MonoBehaviour {
 	[SerializeField] Vector3 _exitPos = new Vector3(0, 0, 0);					//探偵が退場後の座標
 	[SerializeField] GameObject[] _clockUIs = null;								//時計UI
 	[SerializeField] BoxCollider2D[] _dangerousWeaponCollider = null;			//凶器UIのコライダー
+	bool _startDisappearingWindowFlag;												//探偵によるテキストを非表示し始めたかどうかのフラグ
 
 
 	//===================================================================================
@@ -60,6 +61,7 @@ public class DetectiveOfficeManager : MonoBehaviour {
 		_cookBoxCollider2D.enabled = false;
 		_cutinPlayedFlag = false;
 		_curtainClosedStateFinalJudge = false;
+		_startDisappearingWindowFlag = false;
 	}
 	
 	// Update is called once per frame
@@ -215,28 +217,33 @@ public class DetectiveOfficeManager : MonoBehaviour {
 		if (Input.GetMouseButtonDown (0)) {
 			//次の文を表示するか次のStateに移動する処理-------------------------------
 			if (_detectiveTalk[_detectiveTalkIndex].GetTalkFinishedFlag ()) {
-				_detectiveTalk [_detectiveTalkIndex].gameObject.SetActive (false);
-				_laboUIManager.ChangeEvidenceButtonIntaractive (true);
-				switch (_detectiveTalkIndex) {
-				case 1://証拠品3取得後の発言
-					_state = State.INVESTIGATE;
-					_cookBoxCollider2D.enabled = true;
-					break;
-				case 2://犯人指摘前の発言
-					_state = State.INVESTIGATE;
-					_laboUIManager.DisplayCriminalChoiseButton ();
-					break;
-				case 3://凶器選択前の発音
-					_state = State.DANGEROUS_WEAPON_CHOISE;
-					break;
-				case 4://最終確認前の発言
-					_laboUIManager.DisplayJudgeUI ();
-					_state = State.FINAL_JUDGE;
-					break;
-				default :
-					_state = State.INVESTIGATE;
-					break;
+				if (!_startDisappearingWindowFlag) {
+					StartCoroutine (DisappearWindowAndChangeState ());
 				}
+//				_detectiveTalk [_detectiveTalkIndex].FinishTalk ();
+//				//_detectiveTalk [_detectiveTalkIndex].gameObject.SetActive (false);
+//				if (_detectiveTalk [_detectiveTalkIndex].GetDingSESounded()) {
+//					switch (_detectiveTalkIndex) {
+//					case 1://証拠品3取得後の発言
+//						_state = State.INVESTIGATE;
+//						_cookBoxCollider2D.enabled = true;
+//						break;
+//					case 2://犯人指摘前の発言
+//						_state = State.INVESTIGATE;
+//						_laboUIManager.DisplayCriminalChoiseButton ();
+//						break;
+//					case 3://凶器選択前の発音
+//						_state = State.DANGEROUS_WEAPON_CHOISE;
+//						break;
+//					case 4://最終確認前の発言
+//						_laboUIManager.DisplayJudgeUI ();
+//						_state = State.FINAL_JUDGE;
+//						break;
+//					default :
+//						_state = State.INVESTIGATE;
+//						break;
+//					}
+//				}
 			} else {
 				_detectiveTalk[_detectiveTalkIndex].Talk ();
 			}
@@ -380,5 +387,37 @@ public class DetectiveOfficeManager : MonoBehaviour {
 			yield return new WaitForSeconds (Time.deltaTime);
 		}
 		_scenesManager.ScenesTransition ("ClimaxBattle");
+	}
+
+
+	//--探偵のテキストを消してステートを変更する関数(コルーチン)
+	IEnumerator DisappearWindowAndChangeState() {
+		_startDisappearingWindowFlag = true;
+		_detectiveTalk [_detectiveTalkIndex].FinishTalk ();
+		//_detectiveTalk [_detectiveTalkIndex].gameObject.SetActive (false);
+		while (!_detectiveTalk [_detectiveTalkIndex].GetDingSESounded ()) {
+			yield return new WaitForSeconds (Time.deltaTime);
+		}
+		switch (_detectiveTalkIndex) {
+		case 1://証拠品3取得後の発言
+			_state = State.INVESTIGATE;
+			_cookBoxCollider2D.enabled = true;
+			break;
+		case 2://犯人指摘前の発言
+			_state = State.INVESTIGATE;
+			_laboUIManager.DisplayCriminalChoiseButton ();
+			break;
+		case 3://凶器選択前の発音
+			_state = State.DANGEROUS_WEAPON_CHOISE;
+			break;
+		case 4://最終確認前の発言
+			_laboUIManager.DisplayJudgeUI ();
+			_state = State.FINAL_JUDGE;
+			break;
+		default :
+			_state = State.INVESTIGATE;
+			break;
+		}
+		_startDisappearingWindowFlag = false;
 	}
 }

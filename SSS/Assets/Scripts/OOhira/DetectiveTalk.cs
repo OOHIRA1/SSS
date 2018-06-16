@@ -8,6 +8,13 @@ using UnityEngine.UI;
 //使用方法：テキストを表示する全てのImageの親オブジェクトにアタッチ
 public class DetectiveTalk : MonoBehaviour {
 	const int STOP_SPRITE_INDEX = 34;					//_stopSpriteを表示する_imagesの配列番号
+	enum AudioClips {//AudioClipの列挙体
+		TYPING1,
+		TYPING2,
+		TYPING3,
+		NEW_LINE,
+		DING
+	};
 
 	[SerializeField] string[] _filePaths = null;		//取得するファイルのパス
 	Sprite[][] _sprites;								//取得するスプライトを格納する変数
@@ -22,6 +29,9 @@ public class DetectiveTalk : MonoBehaviour {
 	[SerializeField] RuntimeAnimatorController _runtimeAnimatorController = null;	//文章終わりのマークのアニメーション
 	bool _moreFast;										//文章を一気に表示するかどうかのフラグ
 	[SerializeField] bool _talkFinishedFlag;			//話し終わったかどうかのフラグ
+	SoundLibrary _soundLibrary;
+	bool _newLineSESoundable;							//改行音を鳴らすかどうかのフラグ
+	bool _dingSESounded;								//チーン音を鳴らしたかどうかのフラグ
 
 
 	//===========================================================
@@ -32,6 +42,10 @@ public class DetectiveTalk : MonoBehaviour {
 
 	public int GetStateMentNumber() {
 		return _statementNumber;
+	}
+
+	public bool GetDingSESounded() {
+		return _dingSESounded;
 	}
 	//===========================================================
 	//===========================================================
@@ -60,6 +74,10 @@ public class DetectiveTalk : MonoBehaviour {
 
 		_moreFast = false;
 		_talkFinishedFlag = false;
+		_newLineSESoundable = false;
+		_dingSESounded = false;
+
+		_soundLibrary = GetComponent<SoundLibrary> ();
 
 		Talk ();
 	}
@@ -97,20 +115,46 @@ public class DetectiveTalk : MonoBehaviour {
 	IEnumerator DisplayText() {
 		if (_index != 0) {
 			for (int i = 0; i < _sprites [_statementNumber].Length; i++) {
-				_images [i].color = new Color (1f, 1f, 1f, 1f);	//透明をリセット
+				_images [i].color = new Color (1f, 1f, 1f, 1f);	//透明をリセット	※文章を一気に表示させるため
 			}
 			_moreFast = true;
 		} else {
+			//シュッ音を鳴らす処理--------------------------------------------------------------
+			if(_statementNumber >= 1 && _newLineSESoundable) {
+				int se = (int)AudioClips.NEW_LINE;
+				_soundLibrary.PlaySound(se);
+				_newLineSESoundable = false;
+				yield return new WaitForSeconds( _soundLibrary.CheckSoundLength(se) );
+			}
+			//---------------------------------------------------------------------------------
+			//前文をリセットして次の文を入れる処理--------------------------------------------------------------------------------
 			for (int i = 0; i < _images.Length; i++) {
-				_images [i].color = new Color (1f, 1f, 1f, 0);
-				if (i < _sprites [_statementNumber].Length) _images [i].sprite = _sprites [_statementNumber] [i];
+				_images [i].color = new Color (1f, 1f, 1f, 0);//透明化
+				if (i < _sprites [_statementNumber].Length) _images [i].sprite = _sprites [_statementNumber] [i];//文字を入れる
 				if (_images [i].GetComponent<Animator> ()) {
 					Destroy (_images [i].GetComponent<Animator> ());
 				}
 			}
+			//------------------------------------------------------------------------------------------------------------------
 			do {
 				//_images [_index].sprite = _sprites [_statementNumber] [_index];
 				_images [_index].color = new Color (1f, 1f, 1f, 1f);	//透明をリセット
+				//タイプ音を鳴らす処理---------------------------------------------------
+				if (_index % 3 == 2) {
+					int typeSE = Random.Range((int)AudioClips.TYPING1, (int)AudioClips.TYPING3 + 1);
+					_soundLibrary.PlaySound(typeSE);
+				}
+				//----------------------------------------------------------------------
+//				//改行音を鳴らす処理----------------------------------------------------------------------
+//				if (_index + 1 == _characterPerRow) {
+//					int se = (int)AudioClips.NEW_LINE;
+//					_soundLibrary.PlaySound(se);
+//					yield return new WaitForSeconds( _soundLibrary.CheckSoundLength(se) );
+//					se = (int)AudioClips.DING;
+//					_soundLibrary.PlaySound(se);
+//					yield return new WaitForSeconds( _soundLibrary.CheckSoundLength(se) );
+//				}
+//				//---------------------------------------------------------------------------------------
 				_index++;
 				yield return new WaitForSeconds (_speed);
 			} while(_index != _sprites [_statementNumber].Length && !_moreFast);
@@ -121,6 +165,9 @@ public class DetectiveTalk : MonoBehaviour {
 			_images [STOP_SPRITE_INDEX].color = new Color (1f, 1f, 1f, 1f);	//透明をリセット
 			//-------------------------------------------------------------------------------------------------------------------------------
 			_index = 0;
+			if (!_moreFast) {
+				_newLineSESoundable = true;
+			}
 			_moreFast = false;
 			_statementNumber = ++_statementNumber % _sprites.Length;
 			if (_statementNumber == 0) {
@@ -130,11 +177,23 @@ public class DetectiveTalk : MonoBehaviour {
 	}
 
 
+	//--チーン音を鳴らしてウィンドウを閉じる関数(文章を読み終わった後に読んで下さい)※文章全部表示後のクリックで鳴らすため(コルーチン)
+	IEnumerator FinishTalkCoroutine() {
+		_soundLibrary.PlaySound ( (int)AudioClips.DING );
+		while (_soundLibrary.IsPlaying ((int)AudioClips.DING)) {
+			yield return new WaitForSeconds (/*_soundLibrary.CheckSoundLength((int)AudioClips.DING)*/Time.deltaTime);
+		}
+		_dingSESounded = true;
+		//gameObject.SetActive (false);
+	}
+
+
 	//================================================================================
 	//public関数
 
 	//--テキストを表示する関数
 	public void Talk() {
+		if ( _statementNumber >= 1 && _soundLibrary.IsPlaying ( (int)AudioClips.NEW_LINE ) ) return;
 		if (_talkFinishedFlag) {
 			for (int i = 0; i < _images.Length; i++) {
 				_images [i].color = new Color (1f, 1f, 1f, 0);
@@ -146,6 +205,14 @@ public class DetectiveTalk : MonoBehaviour {
 		}
 		StartCoroutine ("DisplayText");
 	}
+
+
+	//--チーン音を鳴らしてウィンドウを閉じる関数(文章を読み終わった後に読んで下さい)※文章全部表示後のクリックで鳴らすため
+	public void FinishTalk() {
+		StartCoroutine ( FinishTalkCoroutine() );
+	}
+
+
 	//================================================================================
 	//================================================================================
 }
