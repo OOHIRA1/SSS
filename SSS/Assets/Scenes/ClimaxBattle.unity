@@ -234,6 +234,78 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 127975658}
+--- !u!1 &140782458
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1874782575243026, guid: 517f78c5dc5529a4b835580cfe252dea,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 140782459}
+  - component: {fileID: 140782461}
+  - component: {fileID: 140782460}
+  m_Layer: 5
+  m_Name: BackgroundForButler3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &140782459
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 224048303423929454, guid: 517f78c5dc5529a4b835580cfe252dea,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 140782458}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2092332869}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 6144, y: 100}
+  m_SizeDelta: {x: 2048, y: 300}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &140782460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114493163697957046, guid: 517f78c5dc5529a4b835580cfe252dea,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 140782458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: cc3353e01a651234796f8751b4ef09f3, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &140782461
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 222276519802019876, guid: 517f78c5dc5529a4b835580cfe252dea,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 140782458}
 --- !u!1 &144613943
 GameObject:
   m_ObjectHideFlags: 0
@@ -919,6 +991,7 @@ RectTransform:
   m_Children:
   - {fileID: 1868271574}
   - {fileID: 230781835}
+  - {fileID: 1607281776}
   - {fileID: 1668760274}
   m_Father: {fileID: 2040559158}
   m_RootOrder: 0
@@ -944,6 +1017,7 @@ MonoBehaviour:
   _backgroundImagesRectTransform:
   - {fileID: 1868271574}
   - {fileID: 230781835}
+  - {fileID: 1607281776}
   _backgroundMovingTime: 0.5
   _cutinImageRectTransform: {fileID: 1668760274}
   _cutinImageMovingTime:
@@ -955,6 +1029,7 @@ MonoBehaviour:
   - {x: -128, y: -267}
   - {x: 1792, y: -267}
   _finishSpeedPerSecond: {x: 0, y: 5, z: 0}
+  shakin1: {fileID: 0}
 --- !u!114 &538495280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3184,6 +3259,78 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1591182834}
+--- !u!1 &1607281775
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1612344074831534, guid: 517f78c5dc5529a4b835580cfe252dea,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1607281776}
+  - component: {fileID: 1607281778}
+  - component: {fileID: 1607281777}
+  m_Layer: 5
+  m_Name: BackgroundForDetectiveCutin3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1607281776
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 224230408704818238, guid: 517f78c5dc5529a4b835580cfe252dea,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1607281775}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 538495278}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -6144, y: -267}
+  m_SizeDelta: {x: 2048, y: 300}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1607281777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 114458936309123006, guid: 517f78c5dc5529a4b835580cfe252dea,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1607281775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 5d0a8aed65e3e074ea15bb22232ba87a, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &1607281778
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 222568668725582716, guid: 517f78c5dc5529a4b835580cfe252dea,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1607281775}
 --- !u!1 &1608307324
 GameObject:
   m_ObjectHideFlags: 0
@@ -3449,7 +3596,7 @@ RectTransform:
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 538495278}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3575,6 +3722,7 @@ MonoBehaviour:
   _fadeOutSpeed: 0.5
   _climaxBattleSystem: {fileID: 2115214288}
   _timeControllUI: {fileID: 1979554654}
+  _audioSourceClap: {fileID: 1903104526}
 --- !u!4 &1699993572
 Transform:
   m_ObjectHideFlags: 0
@@ -4246,7 +4394,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2092332869}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -1, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4298,7 +4446,7 @@ GameObject:
   - component: {fileID: 1903104527}
   - component: {fileID: 1903104526}
   m_Layer: 0
-  m_Name: ReverseTimeSE
+  m_Name: ClapSE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4313,7 +4461,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 1568e3b83789ddb43884d0de4ac010a3, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f26795415d621c44f9535e9ee4178240, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -5292,7 +5440,7 @@ GameObject:
   - component: {fileID: 2037572947}
   - component: {fileID: 2037572946}
   m_Layer: 5
-  m_Name: BackgroundForButler
+  m_Name: BackgroundForButler2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5689,6 +5837,7 @@ RectTransform:
   m_Children:
   - {fileID: 1591182835}
   - {fileID: 2037572945}
+  - {fileID: 140782459}
   - {fileID: 1899875448}
   m_Father: {fileID: 2040559158}
   m_RootOrder: 1
@@ -5714,6 +5863,7 @@ MonoBehaviour:
   _backgroundImagesRectTransform:
   - {fileID: 1591182835}
   - {fileID: 2037572945}
+  - {fileID: 140782459}
   _backgroundMovingTime: 0.2
   _cutinImageRectTransform: {fileID: 1899875448}
   _cutinImageMovingTime:
@@ -5725,6 +5875,7 @@ MonoBehaviour:
   - {x: 128, y: 100}
   - {x: -1792, y: 100}
   _finishSpeedPerSecond: {x: 0, y: 5, z: 0}
+  shakin1: {fileID: 0}
 --- !u!114 &2092332871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5890,6 +6041,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2115214289}
   - component: {fileID: 2115214288}
+  - component: {fileID: 2115214290}
   m_Layer: 0
   m_Name: ClimaxBattleSystem
   m_TagString: Untagged
@@ -5927,7 +6079,6 @@ MonoBehaviour:
     _choices: {fileID: 1500271267}
     _correctchoice: {fileID: 1608307324}
   _brightingPanel: {fileID: 203189313}
-  _reverseTimeSE: {fileID: 1903104526}
   _evidenceButton: {fileID: 726377256}
 --- !u!4 &2115214289
 Transform:
@@ -5942,3 +6093,83 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &2115214290
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2115214287}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 478e71ec50c5e2c4f9e051b31225f584, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0

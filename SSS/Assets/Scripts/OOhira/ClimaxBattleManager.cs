@@ -41,6 +41,7 @@ public class ClimaxBattleManager : MonoBehaviour {
 	[SerializeField] float _fadeOutSpeed = 0;	//暗転処理のスピード(alpha/second)
 	[SerializeField] ClimaxBattleSystem _climaxBattleSystem = null;
 	[SerializeField] GameObject _timeControllUI = null;		//シークバーUI
+	[SerializeField] AudioSource _audioSourceClap = null;	//拍手音
 
 
 
@@ -153,6 +154,7 @@ public class ClimaxBattleManager : MonoBehaviour {
 					}
 					_detective.DesignationMove ( _detectiveMovePos );
 					_butler.MoveToPos ( _butlerMovePos );
+					_audioSourceClap.Play ();//拍手音再生
 					_cutinFlag = true;
 				}
 //				if (_detective.GetIsM ()) {//拡大処理（後で）
@@ -166,6 +168,7 @@ public class ClimaxBattleManager : MonoBehaviour {
 				}
 				if (_cutinControlls[0].GetFinishFlag ()) {
 					_state = State.BATTLE;
+					_audioSourceClap.Stop ();//拍手音停止
 				}
 			}
 		}

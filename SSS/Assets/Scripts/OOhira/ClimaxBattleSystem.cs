@@ -39,7 +39,7 @@ public class ClimaxBattleSystem : MonoBehaviour {
 	bool _playVideo;	//再生したかどうかのフラグ　※何度も再生しないように(再生する関数を呼んでも再生するまでのラグがある模様…)
 	bool _showChoicesFlag;										//選択肢を見せるかどうかのフラグ
 	[SerializeField] Image _brightingPanel = null;				//明転処理で使うパネル
-	[SerializeField] AudioSource _reverseTimeSE = null;			//巻き戻しSE
+	AudioSource _reverseTimeSE;									//巻き戻しSE
 	[SerializeField] UnityEngine.UI.Button _evidenceButton = null;	//証拠品ファイルボタン
 
 	//================================================================
@@ -66,6 +66,7 @@ public class ClimaxBattleSystem : MonoBehaviour {
 		_playerChoice = null;
 		_playVideo = false;
 		_showChoicesFlag = true;
+		_reverseTimeSE = GetComponent<AudioSource> ();
 	}
 	
 	// Update is called once per frame

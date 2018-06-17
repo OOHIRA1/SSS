@@ -27,7 +27,9 @@ public class CutinControll : MonoBehaviour {
 	bool _finishFlag;							//カットイン演出を終了したかどうかのフラグ
 	[SerializeField] Vector3 _finishSpeedPerSecond = new Vector3(0, 0.1f, 0);	//終了演出時の画像の縮小速度
 	bool _cutinMoveFinishedFlag;				//カットインの動きを終了したかどうかのフラグ
-
+	
+	public AudioClip shakin1;
+    AudioSource audioSource;
 
 	//========================================
 	//ゲッター
@@ -50,6 +52,8 @@ public class CutinControll : MonoBehaviour {
 		_cutinImageFirstAnchoredPosition = _cutinImageRectTransform.anchoredPosition;
 		_finishFlag = false;
 		_cutinMoveFinishedFlag = false;
+
+		audioSource = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -72,11 +76,13 @@ public class CutinControll : MonoBehaviour {
 	//--カットインをする関数
 	public void StartCutin() {
 		StartCoroutine ("Cutin");
+		audioSource.PlayOneShot(shakin1, 0.7F);
 	}
 
 	//--カットインをする関数Part2
 	public void StartCutinPart2() {
 		StartCoroutine ("CutinPart2");
+		audioSource.PlayOneShot(shakin1, 0.7F);
 	}
 
 	//--カットイン演出を終了する関数
@@ -171,31 +177,31 @@ public class CutinControll : MonoBehaviour {
 		for( int i = 0; i < _cutinImageMovingTime.Length; i++ ) {
 			cutinImageMaxMovingTime += _cutinImageMovingTime [i];
 		}
-		float movingTime = ( cutinImageMaxMovingTime > _backgroundMovingTime ) ? cutinImageMaxMovingTime : _backgroundMovingTime;	//カットインの時間
+		//float movingTime = ( cutinImageMaxMovingTime > _backgroundMovingTime ) ? cutinImageMaxMovingTime : _backgroundMovingTime;	//カットインの時間
 
 		do {
 			//背景画像の演出------------------------------------------------------------------------
+			bool condition = true;//条件
+			float diffX = destination.x - _backgroundImagesRectTransform [_movingImageIndex].anchoredPosition.x;//目的地と現在のx座標の差
+			int lastMoveImageIndex = (_movingImageIndex + _backgroundImagesRectTransform.Length - 1) % _backgroundImagesRectTransform.Length;//最右端or最左端で動いている背景画像の配列番号
+			Vector2 vec = Vector2.zero;
 			switch(_reverseFlag) {
 			case true:
-				if (destination.x - _backgroundImagesRectTransform [_movingImageIndex].anchoredPosition.x < -0.5f) {
-					for (int i = 0; i < _backgroundImagesRectTransform.Length; i++) {
-						_backgroundImagesRectTransform [i].anchoredPosition += backgroundVelocity * Time.deltaTime;
-					}
-				} else {
-					_backgroundImagesRectTransform [_movingImageIndex].anchoredPosition = _backgroundImagesRectTransform [(_movingImageIndex + 1) % _backgroundImagesRectTransform.Length].anchoredPosition + new Vector2 (_backgroundImagesRectTransform[_movingImageIndex].sizeDelta.x, 0);
-					_movingImageIndex = ++_movingImageIndex % _backgroundImagesRectTransform.Length;
-				}
+				condition = diffX < -0.5f;
+				vec.x = _backgroundImagesRectTransform[_movingImageIndex].sizeDelta.x;
 				break;
 			case false:
-				if (-_backgroundFirstAnchoredPosition.x - _backgroundImagesRectTransform [_movingImageIndex].anchoredPosition.x > 0.5f) {
-					for (int i = 0; i < _backgroundImagesRectTransform.Length; i++) {
-						_backgroundImagesRectTransform [i].anchoredPosition += backgroundVelocity * Time.deltaTime;
-					}
-				} else {
-					_backgroundImagesRectTransform [_movingImageIndex].anchoredPosition = _backgroundImagesRectTransform [(_movingImageIndex + 1) % _backgroundImagesRectTransform.Length].anchoredPosition + new Vector2 (-_backgroundImagesRectTransform[_movingImageIndex].sizeDelta.x, 0);
-					_movingImageIndex = ++_movingImageIndex % _backgroundImagesRectTransform.Length;
-				}
+				condition = diffX > 0.5f;
+				vec.x = -_backgroundImagesRectTransform[_movingImageIndex].sizeDelta.x;
 				break;
+			}
+			if (condition) {
+				for (int i = 0; i < _backgroundImagesRectTransform.Length; i++) {
+					_backgroundImagesRectTransform [i].anchoredPosition += backgroundVelocity * Time.deltaTime;
+				}
+			} else {
+				_backgroundImagesRectTransform [_movingImageIndex].anchoredPosition = _backgroundImagesRectTransform [lastMoveImageIndex].anchoredPosition + vec;
+				_movingImageIndex = ++_movingImageIndex % _backgroundImagesRectTransform.Length;
 			}
 			//-------------------------------------------------------------------------------------
 

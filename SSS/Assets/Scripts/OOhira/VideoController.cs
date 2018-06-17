@@ -12,7 +12,7 @@ public class VideoController : MonoBehaviour {
 //	[SerializeField] double[] _checkPointTime = null;	//途中再生時の時間の秒数(チェックポイントとなる時間の秒数)
 	[SerializeField] double _maxTime = 0;				//動画の最大時間(単位：second) 読み取り専用(正直、無くてもよいが開発しやすくするため)
 	[SerializeField] double _time = 0;					//現在の再生時間(単位：second) 読み取り専用(正直、無くてもよいが開発しやすくするため)
-	[SerializeField] VideoClip[] _videoClips = null;
+	[SerializeField] VideoClip[] _videoClips = null;	//複数のビデオクリップでクライマックスシーンをやる場合を想定
 
 
 	//========================================================

@@ -25,7 +25,24 @@ public class SoundLibrary : MonoBehaviour {
 	//--_audioClipsにある音を鳴らす関数
 	public void PlaySound( int index ) {
 		//_audioSource.clip = _audioClips [index];
-		_audioSource.PlayOneShot(_audioClips[index]);
+		_audioSource.clip = _audioClips[index];
+		_audioSource.Play ();
+	}
+
+
+	//--_audioClipsにある音の長さ(単位：secound)を返す関数
+	public float CheckSoundLength( int index ) {
+		return _audioClips [index].length;
+	}
+
+
+	//--_audioClipsにある音がなっているかどうかを確認する関数
+	public bool IsPlaying( int index ) {
+		bool x = false;
+		if (_audioSource.clip == _audioClips [index] && _audioSource.isPlaying) {
+			x = true;
+		}
+		return x;
 	}
 	//=========================================================================
 	//=========================================================================
