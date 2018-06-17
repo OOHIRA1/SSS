@@ -11,6 +11,7 @@ public class ClimaxBattleManager : MonoBehaviour {
 	enum State {
 		TRUE_OR_FALSE,	//正誤判定
 		INTRODUCTION,	//導入
+		DETECTIVE_TALK,	//探偵によるテキスト表示
 		BATTLE,			//対決
 		RESULT,			//対決の結果
 		FADE_OUT		//フェードアウト（暗転処理）
@@ -42,7 +43,7 @@ public class ClimaxBattleManager : MonoBehaviour {
 	[SerializeField] ClimaxBattleSystem _climaxBattleSystem = null;
 	[SerializeField] GameObject _timeControllUI = null;		//シークバーUI
 	[SerializeField] AudioSource _audioSourceClap = null;	//拍手音
-
+	[SerializeField] DetectiveTalk _detectiveTalk = null;
 
 
 
@@ -67,6 +68,9 @@ public class ClimaxBattleManager : MonoBehaviour {
 			break;
 		case State.INTRODUCTION:
 			IntroductionAction ();
+			break;
+		case State.DETECTIVE_TALK:
+			DetectiveTalkAction ();
 			break;
 		case State.BATTLE:
 			BattleAction ();
@@ -167,13 +171,30 @@ public class ClimaxBattleManager : MonoBehaviour {
 					_cutinFlag = false;	//フラグをリセット(if文に1回のみ入るようにするため)
 				}
 				if (_cutinControlls[0].GetFinishFlag ()) {
-					_state = State.BATTLE;
+					_state = State.DETECTIVE_TALK;
 					_audioSourceClap.Stop ();//拍手音停止
 				}
 			}
 		}
 	}
 
+
+	//--DETECTIVE_TALKのステートの時の処理をする関数
+	void DetectiveTalkAction() {
+		if (!_detectiveTalk.gameObject.activeInHierarchy) {
+			_detectiveTalk.gameObject.SetActive (true);
+		}
+		if (Input.GetMouseButtonDown (0)) {
+			//次の文を表示するか次のStateに移動する処理-------------------------------
+			if (_detectiveTalk.GetTalkFinishedFlag ()) {
+				_detectiveTalk.gameObject.SetActive (false);
+				_state = State.BATTLE;
+			} else {
+				_detectiveTalk.Talk ();
+			}
+			//-----------------------------------------------------------------------	
+		}
+	}
 
 	//--BATTLEのステートの時の処理をする関数
 	void BattleAction() {
