@@ -58,7 +58,11 @@ public class DetectiveOfficeManager : MonoBehaviour {
 		_evidenceManager = GameObject.FindWithTag ("EvidenceManager").GetComponent<EvidenceManager> ();
 		_curtainClosedStateCriminalChose = false;
 		_curtainOpenedStateCriminalChose = false;
-		_cookBoxCollider2D.enabled = false;
+		if (!_evidenceManager.CheckEvidence (EvidenceManager.Evidence.STORY1_EVIDENCE3)) {//証拠品3を取っていなかったらコライダーを外す
+			_cookBoxCollider2D.enabled = false;
+		} else {
+			_cookBoxCollider2D.enabled = true;
+		}
 		_cutinPlayedFlag = false;
 		_curtainClosedStateFinalJudge = false;
 		_startDisappearingWindowFlag = false;

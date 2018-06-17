@@ -17,6 +17,9 @@ public class Evidence : MonoBehaviour {
 	public void Start () {
 		_evidenceManager = GameObject.FindGameObjectWithTag ("EvidenceManager").GetComponent<EvidenceManager>();
 		_stayEvidenceTriggerFlag = false;
+		if (_evidenceManager.CheckEvidence (_enum)) {//証拠品を取得済なら非アクティブにする(別シーンから戻ってきた時にまた取らないようにするため)
+			this.gameObject.SetActive (false);
+		}
 	}
 	
 	// Update is called once per frame
