@@ -16,7 +16,8 @@ public class StoryBoundManeger : MonoBehaviour {
 	//[ SerializeField ] MillioareDieMono _millioareDieMono = null;
 	[ SerializeField ] SiteMove _siteMove = null;
 
-	GameObject _evidenceTrigger4 = null;
+    GameObject _evidenceTrigger2;
+	GameObject _evidenceTrigger4;
 
 	public enum ButtonNum {
 		START_AND_STOP_BUTTON,
@@ -33,6 +34,7 @@ public class StoryBoundManeger : MonoBehaviour {
 	// Use this for initialization
 	void Start( ) {
 		_onlyOnce = true;
+        _evidenceTrigger2 = GameObject.Find( "EvidenceTrigger2" );
 		_evidenceTrigger4 = GameObject.Find( "EvidenceTrigger4" );
 	}
 	
@@ -193,6 +195,11 @@ public class StoryBoundManeger : MonoBehaviour {
 			able = true;
 		}
 
+        _evidenceTrigger2 = GameObject.Find( "EvidenceTrigger2" );		//条件を満たすまでは表示されないようにする
+		if ( _evidenceTrigger2 != null ) {
+			_evidenceTrigger2.GetComponent< BoxCollider2D >( ).enabled = able;
+		}
+
 		_clockUI.gameObject.SetActive( able );
 		_button[ ( int )ButtonNum.LABO_TRANSITION_UI ].gameObject.SetActive( able );
 		_button[ ( int )ButtonNum.TIRANGLE_LEFT ].gameObject.SetActive( able );
@@ -206,6 +213,11 @@ public class StoryBoundManeger : MonoBehaviour {
 			able = false;
 		} else {
 			able = true;
+		}
+
+        _evidenceTrigger2 = GameObject.Find( "EvidenceTrigger2" );		//条件を満たすまでは表示されないようにする
+		if ( _evidenceTrigger2 != null ) {
+			_evidenceTrigger2.GetComponent< BoxCollider2D >( ).enabled = able;
 		}
 
 		_clockUI.gameObject.SetActive( able );
@@ -222,6 +234,11 @@ public class StoryBoundManeger : MonoBehaviour {
 			able = false;
 		} else {
 			able = true;
+		}
+
+        _evidenceTrigger2 = GameObject.Find( "EvidenceTrigger2" );		//条件を満たすまでは表示されないようにする
+		if ( _evidenceTrigger2 != null ) {
+			_evidenceTrigger2.GetComponent< BoxCollider2D >( ).enabled = able;
 		}
 
 		_clockUI.gameObject.SetActive( able );

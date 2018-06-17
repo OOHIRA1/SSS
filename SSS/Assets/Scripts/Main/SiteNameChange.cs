@@ -68,7 +68,7 @@ public class SiteNameChange : MonoBehaviour {
     //画像を透明にしていく関数------------------------------
     void TransparencyChange( ) {
 
-        _transparency -= _speed;
+        _transparency -= _speed * Time.deltaTime;
         if ( _transparency < 0 ) _transparency = 0;
 
         _textColor.a = _transparency;

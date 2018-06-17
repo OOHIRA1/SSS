@@ -45,6 +45,25 @@ public class SiteManager : MonoBehaviour {
 
 	PartStatus _status;     //現場のステータス
 
+    enum Text {
+        SATISFY_DETECTIVE_FIRST_TALK,
+        SATISFY_FIND_POISONED_DISH,
+        SATISFY_GET_EVIDENCE1,
+        SATISFY_FIRST_CLOSE_EVIDENCE_FILE,
+        SATISFY_FIRST_COME_TO_KITCHEN,
+        SATISFY_FIRST_COME_TO_SERVING_ROOM,
+        SATISFY_FIRST_COME_TO_BACKYARD,
+        SATISFY_SHOW_BACKYARD_MOVIE,
+        SATISFY_STOP_MOVIE_WHICH_GAEDENAR_ATE_CAKE,
+        SATISFY_GET_EVIDENCE2,
+        SATISFY_FIRST_COME_TO_KITCHEN_AT_NOON_OR_NIGHT,
+        SATISFY_SHOW_BUTLER_PUT_SILVER_BOX,
+        SATISFY_SHOW_COOK_PUT_YELLOW_BOX,
+        SATISFY_CONDITIONS1_AND_CONDITIONS2,
+        SATISFY_GET_EVIDENCE5,
+        SATISFY_END_STORY
+    }
+
 	//[ SerializeField ] MillioareDieMono _millioareDieMono = null;
 
 	// Use this for initialization
@@ -152,12 +171,12 @@ public class SiteManager : MonoBehaviour {
 			_detectiveTalk[ _talkIndex ].Talk( );
 		}
 
-		//トークを消す
+		//トークが終わったら
 		if ( _detectiveTalk[ _talkIndex ].GetTalkFinishedFlag( ) ) {
 			if ( Input.GetMouseButtonDown( 0 ) ) {
 				_detectiveTalk[ _talkIndex ].gameObject.SetActive( false );
-                if ( _talkIndex == 10 ) _conditions1 = true;
-                if ( _talkIndex == 11 ) _conditions2 = true;
+                if ( _talkIndex == ( int )Text.SATISFY_SHOW_BUTLER_PUT_SILVER_BOX ) _conditions1 = true;                    //この台詞が終わったらフラグを立てる
+                if ( _talkIndex == ( int )Text.SATISFY_SHOW_COOK_PUT_YELLOW_BOX ) _conditions2 = true;                    //この台詞が終わったらフラグを立てる
 				_status = PartStatus.INVESTIGATION_PART;
 			}
 		}
@@ -185,7 +204,7 @@ public class SiteManager : MonoBehaviour {
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.DETECTIVE_FIRST_TALK )  ) {
 
 			if ( _progressConditionManager.DetectiveFirstTalkProgress ( ) ) {
-				_talkIndex = 0;				//最初の解説テキストと近づいてみようテキストまで
+				_talkIndex = ( int )Text.SATISFY_DETECTIVE_FIRST_TALK;				//最初の解説テキストと近づいてみようテキストまで
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData ( GameDataManager.CheckPoint.DETECTIVE_FIRST_TALK );
 				_storyBoundManeger.DetectiveFirstTalkBound ( false );
@@ -201,7 +220,7 @@ public class SiteManager : MonoBehaviour {
 
 			if (_progressConditionManager.FindPoisonedDishProgress ()) {
 
-				_talkIndex = 1;			//近づけたテキストと証拠品タップしてみようテキスト
+				_talkIndex = ( int )Text.SATISFY_FIND_POISONED_DISH;			//近づけたテキストと証拠品タップしてみようテキスト
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.FIND_POISONED_DISH );
 				_storyBoundManeger.FindPoisonedDishBound( false );
@@ -216,7 +235,7 @@ public class SiteManager : MonoBehaviour {
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE1 ) ) {
 
 			if ( _progressConditionManager.GetEvidence1Progress( ) ) {
-				_talkIndex = 2;			//証拠品タップできたテキストと証拠品ファイルタップしてみようテキスト
+				_talkIndex = ( int )Text.SATISFY_GET_EVIDENCE1;			//証拠品タップできたテキストと証拠品ファイルタップしてみようテキスト
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE1 );
 				_storyBoundManeger.GetEvidence1Bound( false );
@@ -244,7 +263,7 @@ public class SiteManager : MonoBehaviour {
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_CLOSE_EVIDENCE_FILE ) ) {
 
 			if (_progressConditionManager.FirstCloseEvidenceFileProgress ()) {
-				_talkIndex = 3;			//説明まとめテキストと検死結果テキストと移動してみようテキスト
+				_talkIndex = ( int )Text.SATISFY_FIRST_CLOSE_EVIDENCE_FILE;			//説明まとめテキストと検死結果テキストと移動してみようテキスト
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData (GameDataManager.CheckPoint.FIRST_CLOSE_EVIDENCE_FILE);
 				_storyBoundManeger.FirstCloseEvidenceFileBound( false );
@@ -259,7 +278,7 @@ public class SiteManager : MonoBehaviour {
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_KITCHEN ) ) {
 			//庭に現場を移動できないようにする
 			if (_progressConditionManager.FirstComeToKitchenProgress ()) {
-				_talkIndex = 4;			//厨房きたよテキストとシークバー説明テキスト
+				_talkIndex = ( int )Text.SATISFY_FIRST_COME_TO_KITCHEN;			//厨房きたよテキストとシークバー説明テキスト
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData (GameDataManager.CheckPoint.FIRST_COME_TO_KITCHEN);
 				_storyBoundManeger.FirstComeToKitchenBound( false );
@@ -274,7 +293,7 @@ public class SiteManager : MonoBehaviour {
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_SERVING_ROOM ) ) {
 			//シークバー解禁
 			if ( _progressConditionManager.FirstComeToServingRoomProgress( ) ) {
-				_talkIndex = 5;			//給仕室きたよテキスト
+				_talkIndex = ( int )Text.SATISFY_FIRST_COME_TO_SERVING_ROOM;			//給仕室きたよテキスト
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData (GameDataManager.CheckPoint.FIRST_COME_TO_SERVING_ROOM);
 				_storyBoundManeger.FirstComeToServingRoomBound( false );
@@ -289,7 +308,7 @@ public class SiteManager : MonoBehaviour {
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_BACKYARD ) ) {	
 
 			if (_progressConditionManager.FirstComeToBackyardProgress( ) ) {
-				_talkIndex = 6;			//庭きたよテキスト
+				_talkIndex = ( int )Text.SATISFY_FIRST_COME_TO_BACKYARD;			//庭きたよテキスト
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_BACKYARD );
 				_storyBoundManeger.FirstComeToBackyardBound( false );
@@ -304,8 +323,8 @@ public class SiteManager : MonoBehaviour {
 		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_BACKYARD ) &&	//庭に移動していて、庭（夜）の動画をみていなかったら
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_BACKYARD_MOVIE ) ) {	
 
-			if ( _progressConditionManager.ShowBackYardMovieProgress( ) ) {	//クリックとボタンの操作を制限するかも
-				_talkIndex = 7;			//動画最後まで見たテキストとそこで止めてみようテキスト
+			if ( _progressConditionManager.ShowBackYardMovieProgress( ) ) {	
+				_talkIndex = ( int )Text.SATISFY_SHOW_BACKYARD_MOVIE;			//動画最後まで見たテキストとそこで止めてみようテキスト
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData (GameDataManager.CheckPoint.SHOW_BACKYARD_MOVIE);
 				_storyBoundManeger.ShowBackYardMovieBound( false );
@@ -320,7 +339,7 @@ public class SiteManager : MonoBehaviour {
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.STOP_MOVIE_WHICH_GAEDENAR_ATE_CAKE ) ) {	
 
 			if ( _progressConditionManager.StopMovieWhichGaedenarAteCakeProgress( ) ) {	//クリックとボタンの操作を制限するかも
-				_talkIndex = 8;			//そこに行ってみようテキスト
+				_talkIndex = ( int )Text.SATISFY_STOP_MOVIE_WHICH_GAEDENAR_ATE_CAKE;			//そこに行ってみようテキスト
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData (GameDataManager.CheckPoint.STOP_MOVIE_WHICH_GAEDENAR_ATE_CAKE);
 				_storyBoundManeger.StopMovieWhichGaedenarAteCakeBound( false );
@@ -335,7 +354,7 @@ public class SiteManager : MonoBehaviour {
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE2 ) ) {	
 
 			if ( _progressConditionManager.GetEvidence2Progress( ) ) {	
-				_talkIndex = 9;			//矛盾あったねテキストとラボに行ってみようテキスト
+				_talkIndex = ( int )Text.SATISFY_GET_EVIDENCE2;			//矛盾あったねテキストとラボに行ってみようテキスト
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE2 );
 				_storyBoundManeger.GetEvidence2Bound( false );
@@ -352,26 +371,23 @@ public class SiteManager : MonoBehaviour {
 
 		}
 
-		/*if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE3 ) &&
-			!_gameDateManager.CheckAdvancedData( 初めて昼か夜に遷移してきたら ) ) {
+		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE3 ) &&
+			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_KITCHEN_AT_NOON_OR_NIGHT ) ) {
 
-			if ( _progressConditionManager.初めて昼か夜に遷移してきた条件() ) {
-				_talkIndex = 1111;		//初めて違う時間帯に遷移したテキスト
+			if ( _progressConditionManager.FirstComeToKitchenAtNoonOrNightProgress( ) ) {
+				_talkIndex = ( int )Text.SATISFY_FIRST_COME_TO_KITCHEN_AT_NOON_OR_NIGHT;		//初めて違う時間帯に遷移したテキスト
 				_status = PartStatus.TALK_PART;
-				_gameDateManager.UpdateAdvancedData( 初めて昼か夜に遷移した );
-				_storyBoundManeger.初めて昼か夜に遷移していなかったらかかる縛り(false);
-			} else {
-				_storyBoundManeger.初めて昼か夜に遷移していなかったらかかる縛り(true);
-			}
+				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_KITCHEN_AT_NOON_OR_NIGHT );
+			}                                                                                                                   //昼か夕方の厨房に移動しかできなくて移動したら条件を満たすため縛りがいらない
 
-		}*/
+		}
 
 
-		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE3 ) &&	//証拠品３を入手していて、執事が箱をしまったところで停止してなかったら
+		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_KITCHEN_AT_NOON_OR_NIGHT ) &&	//証拠品３を入手していて、執事が箱をしまったところで停止してなかったら
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_BUTLER_PUT_SILVER_BOX ) ) {	
 
 			if ( _progressConditionManager.ShowButlerPutSilverBoxProgress( ) ) {	
-				_talkIndex = 10;			//執事が箱しまってたテキスト
+				_talkIndex = ( int )Text.SATISFY_SHOW_BUTLER_PUT_SILVER_BOX;			//執事が箱しまってたテキスト
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.SHOW_BUTLER_PUT_SILVER_BOX );
 				_storyBoundManeger.SilverAndYellowBoxBound( false );
@@ -382,11 +398,11 @@ public class SiteManager : MonoBehaviour {
 		}
 
 
-		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE3 ) &&	//証拠品３を入手していて、料理長が箱をしまったところで停止してなかったら
+		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_KITCHEN_AT_NOON_OR_NIGHT ) &&	//証拠品３を入手していて、料理長が箱をしまったところで停止してなかったら
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_COOK_PUT_YELLOW_BOX ) ) {
 
 			if ( _progressConditionManager.ShowCookPutYellowBoxProgress( ) ) {
-				_talkIndex = 11;            //料理長が箱しまってたテキスト
+				_talkIndex = ( int )Text.SATISFY_SHOW_COOK_PUT_YELLOW_BOX;            //料理長が箱しまってたテキスト
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.SHOW_COOK_PUT_YELLOW_BOX );
 				_storyBoundManeger.SilverAndYellowBoxBound( false );
@@ -401,7 +417,7 @@ public class SiteManager : MonoBehaviour {
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE4 ) ) {		//箱を見たときの台詞が二つとも終わっていて、証拠品４を入手していなかったら
 
 			if ( !_remark ) {               //一回発言したら処理しない
-				_talkIndex = 12;            //なんか気付いたよテキスト  //ここだけ会話の特別処理
+				_talkIndex = ( int )Text.SATISFY_CONDITIONS1_AND_CONDITIONS2;            //なんか気付いたよテキスト  //ここだけ会話の特別処理
 				_status = PartStatus.TALK_PART;
 				_remark = true;
 			}
@@ -421,7 +437,7 @@ public class SiteManager : MonoBehaviour {
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE5 ) ) {	
 
 			if ( _progressConditionManager.GetEvidence5Progress( ) ) {
-				_talkIndex = 13;			//なんかわかったテキストと次が最後テキスト
+				_talkIndex = ( int )Text.SATISFY_GET_EVIDENCE5;			//なんかわかったテキストと次が最後テキスト
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE5 );
 				_storyBoundManeger.GetEvidence5Bound( false );
@@ -435,7 +451,7 @@ public class SiteManager : MonoBehaviour {
 		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE5 ) &&	!_endStory ) {		//証拠品５を入手してendStoryがtrueじゃなかったら	
 
 			if ( _progressConditionManager.GetEvidence6Progress( )  ) {
-				_talkIndex = 14;			//全貌見えてきたテキスト
+				_talkIndex = ( int )Text.SATISFY_END_STORY;			//全貌見えてきたテキスト
 				_status = PartStatus.TALK_PART;
 				_endStory = true;
 			}
@@ -559,8 +575,8 @@ public class SiteManager : MonoBehaviour {
 	//-------------------------------------------------------------------------------------------
 
 
-	//RayShooterのスクリプトを外すかどうかの関数----------------------------------------------------
-	void RayShooterEnabled( bool value ) { _camera.SetRayShootable( value ); }
+	//証拠品押せなくなる関数----------------------------------------------------
+	void RayShooterEnabled( bool value ) { Debug.Log( value ); _camera.SetRayShootable( value ); }
 	//----------------------------------------------------------------------------------------------
 
     //現場が動いていたら処理---------------------

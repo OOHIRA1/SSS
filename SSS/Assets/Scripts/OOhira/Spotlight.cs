@@ -20,7 +20,7 @@ public class Spotlight : MonoBehaviour {
 		SpotLight();
 
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		Vector3 pos = transform.position;
@@ -30,7 +30,7 @@ public class Spotlight : MonoBehaviour {
 
 	public void SpotLight() {
 		if( _spotLight.activeInHierarchy ) {
-			audioSource.PlayOneShot(Spotlight1, 0.7F);
+			audioSource.PlayOneShot (Spotlight1, 0.7f);
 		}
 	}
 }

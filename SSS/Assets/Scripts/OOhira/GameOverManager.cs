@@ -30,10 +30,13 @@ public class GameOverManager : MonoBehaviour {
 	[SerializeField] DetectiveTalk _detectiveTalk = null;
 	[SerializeField] GameObject _continuePanel = null;		//コンティニュー確認UI
 	[SerializeField] ScenesManager _scenesManager = null;
+	[SerializeField] ClockUI _clockUI = null;
 
 	// Use this for initialization
 	void Start () {
 		_state = State.FADE_IN;
+		_clockUI.SetRewind (true);
+		_clockUI.gameObject.SetActive (false);
 	}
 	
 	// Update is called once per frame

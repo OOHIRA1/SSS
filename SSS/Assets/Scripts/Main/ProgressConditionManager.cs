@@ -139,6 +139,14 @@ public class ProgressConditionManager : MonoBehaviour {
 	}
 
 
+    public bool FirstComeToKitchenAtNoonOrNightProgress( ) {
+        if ( _scenesManager.GetNowScenes( ) == "SiteNoon" && SiteMove._nowSiteNum == 1 )    return true;
+
+        if ( _scenesManager.GetNowScenes( ) == "SiteEvening" && SiteMove._nowSiteNum == 1 ) return true;
+
+        return false;
+    }
+
 	
 	public bool ShowButlerPutSilverBoxProgress( ) {
 		if ( _scenesManager.GetNowScenes( ) == "SiteEvening" && SiteMove._nowSiteNum == 1 ) {
