@@ -32,7 +32,7 @@ public class ClockUI : MonoBehaviour {
 
 	Vector3 _initialMinutesHandRota;                        //長針の角度をゼロにする
     Vector3 _initialHourHandRota;                           //短針の角度をゼロにする
-	bool _isRewind;											//バイツァ・ダストをするかどうか
+	[ SerializeField ] bool _isRewind;						//バイツァ・ダストをするかどうか
 	[ SerializeField ] float _speed = 0;					//バイツァ・ダストのスピード
 
 	[ SerializeField ] GameObject[] _TimeZoneColor = new GameObject[ 1 ];
@@ -53,7 +53,7 @@ public class ClockUI : MonoBehaviour {
 
 		_initialMinutesHandRota = Vector3.zero;
 		_initialHourHandRota = Vector3.zero;   
-		_isRewind = false;
+		//_isRewind = false;
 	}
 
 	// Update is called once per frame

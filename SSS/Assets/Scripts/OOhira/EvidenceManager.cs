@@ -60,6 +60,12 @@ public class EvidenceManager : MonoBehaviour {
 	public bool CheckEvidence( Evidence evidence ) {
 		return ( _evidenceData & (int)evidence ) == (int)evidence;
 	}
+
+
+	//--データを全てリセットする関数
+	public void AllResetEvidenceData( ) {
+		_evidenceData = 0;
+	}
 	//===============================================================================================
 	//===============================================================================================
 }
