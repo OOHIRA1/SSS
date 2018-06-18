@@ -6,6 +6,14 @@ using UnityEngine;
 //
 //使用方法：常にアクティブなゲームオブジェクトにアタッチ
 public class BGMManager : MonoBehaviour {
+	public enum BGMClip {
+		TITLE,
+		CRIME_SCENE,
+		DETECTIVE_OFFICE,
+		CHOOSE
+	}
+
+	SoundLibrary _soundLibrary;
 
 	// Use this for initialization
 	void Start () {
@@ -21,10 +29,69 @@ public class BGMManager : MonoBehaviour {
 			GameObject.DontDestroyOnLoad (this.gameObject);
 		}
 		//-------------------------------------------------------------------------------------------
+
+		_soundLibrary = GetComponent<SoundLibrary> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		Debug.Log (Camera.main.gameObject.scene.name);
+		UpdateBGM ();
 	}
+
+
+	//======================================================================
+	//public関数
+
+	//--BGMをアップデートする関数
+	public void UpdateBGM() {
+		switch (Camera.main.gameObject.scene.name) {
+		case "Title":
+
+		case "StageSelect":
+			if (!_soundLibrary.IsPlaying ((int)BGMClip.TITLE)) {
+				_soundLibrary.PlaySound ((int)BGMClip.TITLE);
+			}
+			break;
+		case "SiteNight":
+
+		case "SiteNoon":
+
+		case "SiteEvening"://音を入れたくない部分は上手く制御してください
+			if (!_soundLibrary.IsPlaying ((int)BGMClip.CRIME_SCENE)) {
+				_soundLibrary.PlaySound ((int)BGMClip.CRIME_SCENE);
+			}
+			break;
+		case "DetectiveOffice":
+			DetectiveOfficeManager detectiveOfficeManager = GameObject.Find ("DetectiveOfficeManager").GetComponent<DetectiveOfficeManager> ();
+			switch (detectiveOfficeManager.GetState ()) {
+			case DetectiveOfficeManager.State.CRIMINAL_CHOISE:
+
+			case DetectiveOfficeManager.State.DANGEROUS_WEAPON_CHOISE:
+
+			case DetectiveOfficeManager.State.FINAL_JUDGE:
+				if (!_soundLibrary.IsPlaying ((int)BGMClip.CHOOSE)) {
+					_soundLibrary.PlaySound ((int)BGMClip.CHOOSE);
+				}
+				break;
+			default:
+				if (detectiveOfficeManager.GetDetectiveTalkIndex () >= 3) {//犯人指摘中の会話のBGM
+					if (!_soundLibrary.IsPlaying ((int)BGMClip.CHOOSE)) {
+						_soundLibrary.PlaySound ((int)BGMClip.CHOOSE);
+					}
+				} else {
+					if (!_soundLibrary.IsPlaying ((int)BGMClip.DETECTIVE_OFFICE)) {
+						_soundLibrary.PlaySound ((int)BGMClip.DETECTIVE_OFFICE);
+					}
+				}
+				break;
+			}
+			break;
+		default:
+			_soundLibrary.StopSound ();
+			break;
+		}
+	}
+	//======================================================================
+	//======================================================================
 }

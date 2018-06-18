@@ -18,7 +18,7 @@ public class DetectiveOfficeManager : MonoBehaviour {
 	[SerializeField] GameObject _detectiveTalkingUI = null;			//探偵によるテキストで使用するUI
 	[SerializeField] GameObject _criminalChoiseUI = null;			//犯人指摘で使用するUI
 	[SerializeField] GameObject _dangerousWeaponChoiseUI = null;	//凶器選択で使用するUI
-	[SerializeField] DetectiveTalk[] _detectiveTalk = new DetectiveTalk[3];			//探偵によるテキスト
+	[SerializeField] DetectiveTalk[] _detectiveTalk = null;			//探偵によるテキスト
 	int _detectiveTalkIndex;														//探偵によるテキストの配列番号
 	GameDataManager _gameDataManager;
 	EvidenceManager _evidenceManager;
@@ -46,6 +46,7 @@ public class DetectiveOfficeManager : MonoBehaviour {
 	//===================================================================================
 	//ゲッター
 	public State GetState() { return _state; }
+	public int GetDetectiveTalkIndex() { return _detectiveTalkIndex;}//※BGMManagerで使用
 	//===================================================================================
 	//===================================================================================
 
@@ -369,6 +370,7 @@ public class DetectiveOfficeManager : MonoBehaviour {
 				_cursorForCriminalChoise.gameObject.SetActive (true);
 				_cursorForDangerousWeaponChoise.gameObject.SetActive (true);
 				_laboUIManager.SetJudgeFlag ((int)LaboUIManager.Judge.OTHERWISE);
+				_detectiveTalkIndex = 0;//0に戻す(3,4はBGMが異なるため)
 				_state = State.INVESTIGATE;
 			}
 			break;

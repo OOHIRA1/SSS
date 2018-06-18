@@ -44,7 +44,7 @@ public class StageSelectManager : MonoBehaviour {
 		//--------------------------------------------------------------------------
 
 		if (_curtain.IsStateClose () && _curtain.ResearchStatePlayTime () >= 1f) {
-			Destroy (_bgmManager.gameObject);
+			//Destroy (_bgmManager.gameObject);
 			if (!_gameDataManager.CheckAdvancedData (GameDataManager.CheckPoint.SHOW_MILLIONARE_MURDER_ANIM)) {
 				_scenesManager.ScenesTransition ("SiteNight_Bedroom");
 			} else {

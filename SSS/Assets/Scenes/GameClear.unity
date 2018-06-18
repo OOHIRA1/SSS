@@ -333,6 +333,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _drawRayDistance: 100
+  _rayShootable: 1
 --- !u!81 &422620748
 AudioListener:
   m_ObjectHideFlags: 0
@@ -4511,25 +4512,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1761185771}
   - component: {fileID: 1761185770}
-  - component: {fileID: 1761185769}
   m_Layer: 0
-  m_Name: BGM
-  m_TagString: BGMManager
+  m_Name: FanfareBGM
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1761185769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1761185768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40b752a092919a645b4bbc07fe8d2204, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!82 &1761185770
 AudioSource:
   m_ObjectHideFlags: 0
