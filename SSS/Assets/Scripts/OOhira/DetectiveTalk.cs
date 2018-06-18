@@ -31,7 +31,8 @@ public class DetectiveTalk : MonoBehaviour {
 	[SerializeField] bool _talkFinishedFlag;			//話し終わったかどうかのフラグ
 	SoundLibrary _soundLibrary;
 	bool _newLineSESoundable;							//改行音を鳴らすかどうかのフラグ
-	bool _dingSESounded;								//チーン音を鳴らしたかどうかのフラグ
+	bool _dingSESounding;								//チーン音を鳴っているかどうかのフラグ
+	bool _dingSESoundable;								//チーン音を鳴らすかどうかのフラグ
 
 
 	//===========================================================
@@ -44,8 +45,8 @@ public class DetectiveTalk : MonoBehaviour {
 		return _statementNumber;
 	}
 
-	public bool GetDingSESounded() {
-		return _dingSESounded;
+	public bool GetDingSESounding() {
+		return _dingSESounding;
 	}
 	//===========================================================
 	//===========================================================
@@ -75,7 +76,8 @@ public class DetectiveTalk : MonoBehaviour {
 		_moreFast = false;
 		_talkFinishedFlag = false;
 		_newLineSESoundable = false;
-		_dingSESounded = false;
+		_dingSESounding = false;
+		_dingSESoundable = false;
 
 		_soundLibrary = GetComponent<SoundLibrary> ();
 
@@ -113,6 +115,18 @@ public class DetectiveTalk : MonoBehaviour {
 
 	//--テキストを表示する関数(コルーチン)
 	IEnumerator DisplayText() {
+		if (_dingSESounding) yield break;//チーン音が鳴りだしたらもう処理を受け付けない
+		//チーン音を鳴らす処理-----------------------------------------
+		if (_dingSESoundable) {
+			_soundLibrary.PlaySound ( (int)AudioClips.DING );
+			_dingSESounding = true;
+			while (_soundLibrary.IsPlaying ((int)AudioClips.DING)) {
+				yield return new WaitForSeconds (Time.deltaTime);
+			}
+			_talkFinishedFlag = true;//なり終わったらフラグを立てる
+			yield break;
+		}
+		//-------------------------------------------------------------
 		if (_index != 0) {
 			for (int i = 0; i < _sprites [_statementNumber].Length; i++) {
 				_images [i].color = new Color (1f, 1f, 1f, 1f);	//透明をリセット	※文章を一気に表示させるため
@@ -171,20 +185,10 @@ public class DetectiveTalk : MonoBehaviour {
 			_moreFast = false;
 			_statementNumber = ++_statementNumber % _sprites.Length;
 			if (_statementNumber == 0) {
-				_talkFinishedFlag = true;
+				//_talkFinishedFlag = true;
+				_dingSESoundable = true;
 			}
 		}
-	}
-
-
-	//--チーン音を鳴らしてウィンドウを閉じる関数(文章を読み終わった後に読んで下さい)※文章全部表示後のクリックで鳴らすため(コルーチン)
-	IEnumerator FinishTalkCoroutine() {
-		_soundLibrary.PlaySound ( (int)AudioClips.DING );
-		while (_soundLibrary.IsPlaying ((int)AudioClips.DING)) {
-			yield return new WaitForSeconds (/*_soundLibrary.CheckSoundLength((int)AudioClips.DING)*/Time.deltaTime);
-		}
-		_dingSESounded = true;
-		//gameObject.SetActive (false);
 	}
 
 
@@ -207,11 +211,12 @@ public class DetectiveTalk : MonoBehaviour {
 	}
 
 
-	//--チーン音を鳴らしてウィンドウを閉じる関数(文章を読み終わった後に読んで下さい)※文章全部表示後のクリックで鳴らすため
-	public void FinishTalk() {
-		StartCoroutine ( FinishTalkCoroutine() );
+	//--テキスト表示をリセットし再び読めるようにする関数
+	public void ResetTalkedInfo() {
+		_talkFinishedFlag = false;
+		_dingSESounding = false;
+		_dingSESoundable = true;
 	}
-
 
 	//================================================================================
 	//================================================================================
