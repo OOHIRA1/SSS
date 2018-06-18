@@ -41,6 +41,7 @@ public class DetectiveOfficeManager : MonoBehaviour {
 	[SerializeField] Vector3 _exitPos = new Vector3(0, 0, 0);					//探偵が退場後の座標
 	[SerializeField] GameObject[] _clockUIs = null;								//時計UI
 	[SerializeField] BoxCollider2D[] _dangerousWeaponCollider = null;			//凶器UIのコライダー
+	BGMManager _bgmManager;
 
 
 	//===================================================================================
@@ -65,6 +66,8 @@ public class DetectiveOfficeManager : MonoBehaviour {
 		}
 		_cutinPlayedFlag = false;
 		_curtainClosedStateFinalJudge = false;
+		_bgmManager = GameObject.FindWithTag ("BGMManager").GetComponent<BGMManager> ();
+		_bgmManager.UpdateBGM ();
 	}
 	
 	// Update is called once per frame
@@ -205,8 +208,9 @@ public class DetectiveOfficeManager : MonoBehaviour {
 	void InvestigateAction() {
 		//犯人指摘のフラグが立っていたら犯人指摘ステートへ--------
 		if (_laboUIManager.GetCriminalChoiseFlag ()) {
-				_detective.DesignationMove (_detective.GetInitialPos ());//探偵を初期位置に移動
-				_state = State.CRIMINAL_CHOISE;
+			_detective.DesignationMove (_detective.GetInitialPos ());//探偵を初期位置に移動
+			_state = State.CRIMINAL_CHOISE;
+			_bgmManager.UpdateBGM ();
 		}
 		//-----------------------------------------------------
 	}
@@ -362,6 +366,7 @@ public class DetectiveOfficeManager : MonoBehaviour {
 				_cursorForDangerousWeaponChoise.SetSelectedFlag (false);//凶器選択カーソルのSelectedFlagをfalseに
 
 				_curtain.Open ();
+				StartCoroutine(FadeOutAndUpdateBGM (BGMManager.BGMClip.CHOOSE));
 				_curtainOpenedStateCriminalChose = true;
 			}
 			if (_curtain.IsStateOpen () && _curtain.ResearchStatePlayTime () >= 1f && _curtainOpenedStateCriminalChose) {
@@ -387,6 +392,20 @@ public class DetectiveOfficeManager : MonoBehaviour {
 		while (_detective.GetIsForcedMove ()) {
 			yield return new WaitForSeconds (Time.deltaTime);
 		}
+		_bgmManager.StopBGMWithFadeOut ();
+		while(_bgmManager.IsPlaying(BGMManager.BGMClip.CHOOSE)) {
+			yield return new WaitForSeconds(Time.deltaTime);
+		}
 		_scenesManager.ScenesTransition ("ClimaxBattle");
+	}
+
+
+	//--BGMをフェードアウトさせBGMをアップデートする関数
+	IEnumerator FadeOutAndUpdateBGM( BGMManager.BGMClip bgmClip ) {
+		_bgmManager.StopBGMWithFadeOut ();
+		while (_bgmManager.IsPlaying (bgmClip)) {
+			yield return new WaitForSeconds (Time.deltaTime);
+		}
+		_bgmManager.UpdateBGM ();
 	}
 }

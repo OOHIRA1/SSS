@@ -15,6 +15,7 @@ public class BGMManager : MonoBehaviour {
 
 	SoundLibrary _soundLibrary;
 
+
 	// Use this for initialization
 	void Start () {
 		//2つ以上存在しないようにする処理-------------------------------------------------------------
@@ -36,7 +37,7 @@ public class BGMManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Debug.Log (Camera.main.gameObject.scene.name);
-		UpdateBGM ();
+		//UpdateBGM ();
 	}
 
 
@@ -91,6 +92,18 @@ public class BGMManager : MonoBehaviour {
 			_soundLibrary.StopSound ();
 			break;
 		}
+	}
+
+
+	//--音をフェードアウトし止める関数
+	public void StopBGMWithFadeOut() {
+		_soundLibrary.StopSoundWithFadeOut ();
+	}
+
+
+	//--_audioClipsにある音がなっているかどうかを確認する関数
+	public bool IsPlaying( BGMClip bgmClip ) {
+		return _soundLibrary.IsPlaying ( (int)bgmClip );
 	}
 	//======================================================================
 	//======================================================================

@@ -20,6 +20,17 @@ public class SoundLibrary : MonoBehaviour {
 	}
 
 
+	IEnumerator StopSoundWithFadeOutCoroutine() {
+		float fadeOutSpeed = 0.5f;
+		while (_audioSource.volume > 0) {
+			_audioSource.volume -= fadeOutSpeed * Time.deltaTime;
+			yield return new WaitForSeconds (Time.deltaTime);
+		}
+		_audioSource.Stop ();
+		_audioSource.volume = 1f;
+	}
+
+
 	//=========================================================================
 	//public関数
 	//--_audioClipsにある音を鳴らす関数
@@ -48,6 +59,12 @@ public class SoundLibrary : MonoBehaviour {
 	//--音を止める関数
 	public void StopSound() {
 		_audioSource.Stop ();
+	}
+
+
+	//--音をフェードアウトし止める関数
+	public void StopSoundWithFadeOut() {
+		StartCoroutine (StopSoundWithFadeOutCoroutine());
 	}
 	//=========================================================================
 	//=========================================================================

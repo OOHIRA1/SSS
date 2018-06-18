@@ -9,6 +9,7 @@ public class TitleManager : MonoBehaviour {
 	[SerializeField] RayShooter _rayShooter = null;
 	[SerializeField] Curtain _curtain = null;
 	[SerializeField] ScenesManager _scenesManager = null;
+	[SerializeField] Animator _musicCreditAnimator = null;	//音楽クレジットのAnimator
 
 	// Use this for initialization
 	void Start () {
@@ -22,6 +23,7 @@ public class TitleManager : MonoBehaviour {
 			if (hit) {
 				if (hit.collider.name == "StartButton") {
 					_curtain.Close ();
+					_musicCreditAnimator.SetTrigger ("fadeOutTrigger");
 				}
 			}
 		}

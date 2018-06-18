@@ -30,6 +30,7 @@ public class StageSelectManager : MonoBehaviour {
 				if (hit.collider.name == "Stage1Button") {
 					_openingBuzzer.PlayOneShot (_openingBuzzer.clip);
 					_buzzerSounded = true;
+					hit.collider.enabled = false;//2回以上反応しないため
 					//_curtain.Close ();
 				}
 			}
@@ -40,17 +41,20 @@ public class StageSelectManager : MonoBehaviour {
 		if ( _buzzerSounded && !_openingBuzzer.isPlaying ) {
 			_curtain.Close ();
 			_buzzerSounded = false;	//_buzzerSoundedのリセット
+			_bgmManager.StopBGMWithFadeOut();
 		}
 		//--------------------------------------------------------------------------
 
-		if (_curtain.IsStateClose () && _curtain.ResearchStatePlayTime () >= 1f) {
-			//Destroy (_bgmManager.gameObject);
+		//BGMのフェードアウトが終わったらシーン遷移------------------------------------------------------------------
+		//if (_curtain.IsStateClose () && _curtain.ResearchStatePlayTime () >= 1f ) {
+		if (!_bgmManager.IsPlaying(BGMManager.BGMClip.TITLE)) {
 			if (!_gameDataManager.CheckAdvancedData (GameDataManager.CheckPoint.SHOW_MILLIONARE_MURDER_ANIM)) {
 				_scenesManager.ScenesTransition ("SiteNight_Bedroom");
 			} else {
 				_scenesManager.ScenesTransition ("DetectiveOffice");
 			}
 		}
+		//----------------------------------------------------------------------------------------------------------
 
 		//デバッグ用---------------------------------------
 		if (Input.GetKeyDown (KeyCode.Alpha0)) {
