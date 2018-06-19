@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 4920125286905576}
   - component: {fileID: 212645955459384848}
   - component: {fileID: 61081511297270576}
+  - component: {fileID: 95859787052845916}
+  - component: {fileID: 114711879050053750}
   m_Layer: 0
   m_Name: EvidenceIcon
   m_TagString: EvidenceIcon
@@ -66,6 +68,41 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.5, y: 3.3614867}
   m_EdgeRadius: 0
+--- !u!95 &95859787052845916
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1922126557451082}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ff30dac84cd861941994c9b5ed91257d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114711879050053750
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1922126557451082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8241d8996efc004ba8f7c02d9e72764, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _evidenceIconTrajectory:
+    _initPos: {x: 6.13, y: 0.08}
+    _destination: {x: 0, y: -5}
+    _a: -0.56
+    _p: 0
+    _q: 0
+    _speedX: -25
 --- !u!212 &212645955459384848
 SpriteRenderer:
   m_ObjectHideFlags: 1

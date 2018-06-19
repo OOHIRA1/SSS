@@ -12,11 +12,13 @@ public class Evidence : MonoBehaviour {
 	[SerializeField] RayShooter _rayShooter = null;
 	[SerializeField] EvidenceManager.Evidence _enum = EvidenceManager.Evidence.STORY1_EVIDENCE1;
 	bool _stayEvidenceTriggerFlag;	//トリガー内にいるかどうかのフラグ(複数の証拠品を配置した際にどの証拠品か判別するため)
+	bool _putingAwayFlag;			//証拠品をしまいだしたどうかのフラグ
 
 	// Use this for initialization
 	public void Start () {
 		_evidenceManager = GameObject.FindGameObjectWithTag ("EvidenceManager").GetComponent<EvidenceManager>();
 		_stayEvidenceTriggerFlag = false;
+		_putingAwayFlag = false;
 		if (_evidenceManager.CheckEvidence (_enum)) {//証拠品を取得済なら非アクティブにする(別シーンから戻ってきた時にまた取らないようにするため)
 			this.gameObject.SetActive (false);
 		}
@@ -29,11 +31,18 @@ public class Evidence : MonoBehaviour {
 			RaycastHit2D hit = _rayShooter.Shoot (Input.mousePosition);
 			if (hit) {
 				if ( _stayEvidenceTriggerFlag && hit.collider.tag == "EvidenceIcon") {
-					_evidenceManager.UpdateEvidence (_enum);
-					this.gameObject.SetActive (false);
-					hit.collider.gameObject.SetActive (false);
+					_evidenceIcon.GetComponent<EvidenceIcon>().PutAway();
+					_putingAwayFlag = true;
 				}
 			}
+		}
+		if (_putingAwayFlag) {
+			//しまい終わったら証拠品を更新し、自身を非アクティブにする-------
+			if (!_evidenceIcon.activeInHierarchy) {
+				_evidenceManager.UpdateEvidence (_enum);
+				this.gameObject.SetActive (false);
+			}
+			//------------------------------------------------------------
 		}
 		//-------------------------------------------------------------------
 	}
@@ -45,7 +54,9 @@ public class Evidence : MonoBehaviour {
 		if (col.tag == "Player") {
 			Detective detective = col.gameObject.GetComponent<Detective> ();
 			if (!detective.GetIsAnimWalk ()) {
-				_evidenceIcon.SetActive(true);
+				if (!_putingAwayFlag) {//しまい終わってもアクティブにしないようにする
+					_evidenceIcon.SetActive (true);
+				}
 				_stayEvidenceTriggerFlag = true;
 			}
 		}

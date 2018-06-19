@@ -46,6 +46,7 @@ public class BGMManager : MonoBehaviour {
 
 	//--BGMをアップデートする関数
 	public void UpdateBGM() {
+		if (!_soundLibrary) return;
 		switch (Camera.main.gameObject.scene.name) {
 		case "Title":
 
