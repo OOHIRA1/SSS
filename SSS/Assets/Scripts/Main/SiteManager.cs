@@ -120,6 +120,7 @@ public class SiteManager : MonoBehaviour {
 		_moviePlaySystem.SetOperation( true );
 		AllButtonInteractable( true );
 		RayShooterEnabled( true );
+
         SiteMoveNow( );
 		RegurateByCurtainState( );
 		IsRopeActionAndForcedMove( );
@@ -150,6 +151,7 @@ public class SiteManager : MonoBehaviour {
 		_moviePlaySystem.SetOperation( true );
 		AllButtonInteractable( true );
 		RayShooterEnabled( true );
+
         SiteMoveNow( );
 		RegurateByCurtainState( );
 		IsRopeActionAndForcedMove( );
@@ -586,6 +588,7 @@ public class SiteManager : MonoBehaviour {
     void SiteMoveNow( ) {
         if ( _siteMove.GetMoveNow( ) ) {
             EvidenceTriggerDisplay( false );
+			Regulation( );
         } else {
             EvidenceTriggerDisplay( true );
         }

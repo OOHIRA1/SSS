@@ -67,13 +67,14 @@ public class MoviePlaySystem : MonoBehaviour {
 
 		
 		if ( _isMouseMove ) {
-			if ( Input.GetMouseButtonDown( 0 ) ) {	//マウスを押したかどうか
+			if ( Input.GetMouseButton( 0 ) ) {	//マウスを押したかどうか
 				Vector2 mousePos = Vector2.zero;
 				mousePos = GetMouse( );
 				if ( mousePos.y >= _barTouchDown && mousePos.y <= _barTouchUp ) {
 					_pointPos.x = mousePos.x;
 				}
 			}
+
 		}
 
 		_point.MovePosition( _pointPos );
@@ -182,6 +183,7 @@ public class MoviePlaySystem : MonoBehaviour {
 
     //時間を取得する(バーの大きさを時間に変換)
     public float MoviTime( ) { return _bar.GetBarScale( ).x * _maxTime; }
+
 
     ////ムービーが終わっているか取得する（ポイントの座標が最後まで行っているか取得）------      //MoviTimeだと同一フレーム上で計算するとき不都合があるので作成
     //public bool MoviTimeMax( ) {
