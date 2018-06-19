@@ -1,0 +1,646 @@
+fileFormatVersion: 2
+guid: dad9ebd90ba52bb4cb3b71280b1b62ed
+timeCreated: 1529408177
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: "effect_touch_crimescene_512\xD7512_40_0"
+    21300002: "effect_touch_crimescene_512\xD7512_40_1"
+    21300004: "effect_touch_crimescene_512\xD7512_40_2"
+    21300006: "effect_touch_crimescene_512\xD7512_40_3"
+    21300008: "effect_touch_crimescene_512\xD7512_40_4"
+    21300010: "effect_touch_crimescene_512\xD7512_40_5"
+    21300012: "effect_touch_crimescene_512\xD7512_40_6"
+    21300014: "effect_touch_crimescene_512\xD7512_40_7"
+    21300016: "effect_touch_crimescene_512\xD7512_40_8"
+    21300018: "effect_touch_crimescene_512\xD7512_40_9"
+    21300020: "effect_touch_crimescene_512\xD7512_40_10"
+    21300022: "effect_touch_crimescene_512\xD7512_40_11"
+    21300024: "effect_touch_crimescene_512\xD7512_40_12"
+    21300026: "effect_touch_crimescene_512\xD7512_40_13"
+    21300028: "effect_touch_crimescene_512\xD7512_40_14"
+    21300030: "effect_touch_crimescene_512\xD7512_40_15"
+    21300032: "effect_touch_crimescene_512\xD7512_40_16"
+    21300034: "effect_touch_crimescene_512\xD7512_40_17"
+    21300036: "effect_touch_crimescene_512\xD7512_40_18"
+    21300038: "effect_touch_crimescene_512\xD7512_40_19"
+    21300040: "effect_touch_crimescene_512\xD7512_40_20"
+    21300042: "effect_touch_crimescene_512\xD7512_40_21"
+    21300044: "effect_touch_crimescene_512\xD7512_40_22"
+    21300046: "effect_touch_crimescene_512\xD7512_40_23"
+    21300048: "effect_touch_crimescene_512\xD7512_40_24"
+    21300050: "effect_touch_crimescene_512\xD7512_40_25"
+    21300052: "effect_touch_crimescene_512\xD7512_40_26"
+    21300054: "effect_touch_crimescene_512\xD7512_40_27"
+    21300056: "effect_touch_crimescene_512\xD7512_40_28"
+    21300058: "effect_touch_crimescene_512\xD7512_40_29"
+    21300060: "effect_touch_crimescene_512\xD7512_40_30"
+    21300062: "effect_touch_crimescene_512\xD7512_40_31"
+    21300064: "effect_touch_crimescene_512\xD7512_40_32"
+    21300066: "effect_touch_crimescene_512\xD7512_40_33"
+    21300068: "effect_touch_crimescene_512\xD7512_40_34"
+    21300070: "effect_touch_crimescene_512\xD7512_40_35"
+    21300072: "effect_touch_crimescene_512\xD7512_40_36"
+    21300074: "effect_touch_crimescene_512\xD7512_40_37"
+    21300076: "effect_touch_crimescene_512\xD7512_40_38"
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: iPhone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: WebGL
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_0"
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 3806
+        width: 66
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_1"
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 3798
+        width: 84
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_2"
+      rect:
+        serializedVersion: 2
+        x: 1231
+        y: 3782
+        width: 102
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_3"
+      rect:
+        serializedVersion: 2
+        x: 1731
+        y: 3770
+        width: 124
+        height: 129
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_4"
+      rect:
+        serializedVersion: 2
+        x: 2232
+        y: 3756
+        width: 147
+        height: 153
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_5"
+      rect:
+        serializedVersion: 2
+        x: 2734
+        y: 3740
+        width: 170
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_6"
+      rect:
+        serializedVersion: 2
+        x: 3232
+        y: 3724
+        width: 194
+        height: 207
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_7"
+      rect:
+        serializedVersion: 2
+        x: 3736
+        y: 3710
+        width: 213
+        height: 234
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_8"
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 3182
+        width: 237
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_9"
+      rect:
+        serializedVersion: 2
+        x: 643
+        y: 3170
+        width: 257
+        height: 281
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_10"
+      rect:
+        serializedVersion: 2
+        x: 1143
+        y: 3154
+        width: 282
+        height: 310
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_11"
+      rect:
+        serializedVersion: 2
+        x: 1651
+        y: 3150
+        width: 289
+        height: 315
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_12"
+      rect:
+        serializedVersion: 2
+        x: 2160
+        y: 3146
+        width: 298
+        height: 323
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_13"
+      rect:
+        serializedVersion: 2
+        x: 2668
+        y: 3140
+        width: 306
+        height: 333
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_14"
+      rect:
+        serializedVersion: 2
+        x: 3176
+        y: 3136
+        width: 314
+        height: 341
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_15"
+      rect:
+        serializedVersion: 2
+        x: 3685
+        y: 3132
+        width: 321
+        height: 349
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_16"
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 2614
+        width: 329
+        height: 359
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_17"
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 2610
+        width: 337
+        height: 366
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_18"
+      rect:
+        serializedVersion: 2
+        x: 1112
+        y: 2614
+        width: 344
+        height: 365
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_19"
+      rect:
+        serializedVersion: 2
+        x: 1621
+        y: 2610
+        width: 350
+        height: 374
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_20"
+      rect:
+        serializedVersion: 2
+        x: 2128
+        y: 2606
+        width: 360
+        height: 381
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_21"
+      rect:
+        serializedVersion: 2
+        x: 2638
+        y: 2600
+        width: 365
+        height: 391
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_22"
+      rect:
+        serializedVersion: 2
+        x: 3145
+        y: 2598
+        width: 374
+        height: 396
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_23"
+      rect:
+        serializedVersion: 2
+        x: 3654
+        y: 2592
+        width: 380
+        height: 405
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_24"
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 2076
+        width: 389
+        height: 413
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_25"
+      rect:
+        serializedVersion: 2
+        x: 575
+        y: 2072
+        width: 395
+        height: 421
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_26"
+      rect:
+        serializedVersion: 2
+        x: 1084
+        y: 2074
+        width: 401
+        height: 423
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_27"
+      rect:
+        serializedVersion: 2
+        x: 1592
+        y: 2070
+        width: 410
+        height: 430
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_28"
+      rect:
+        serializedVersion: 2
+        x: 2100
+        y: 2066
+        width: 418
+        height: 438
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_29"
+      rect:
+        serializedVersion: 2
+        x: 2610
+        y: 2066
+        width: 424
+        height: 441
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_30"
+      rect:
+        serializedVersion: 2
+        x: 3118
+        y: 2064
+        width: 430
+        height: 446
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_31"
+      rect:
+        serializedVersion: 2
+        x: 3626
+        y: 2064
+        width: 438
+        height: 450
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_32"
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 1550
+        width: 446
+        height: 455
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_33"
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 1550
+        width: 452
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_34"
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 1554
+        width: 458
+        height: 458
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_35"
+      rect:
+        serializedVersion: 2
+        x: 1566
+        y: 1550
+        width: 464
+        height: 464
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_36"
+      rect:
+        serializedVersion: 2
+        x: 2074
+        y: 1548
+        width: 470
+        height: 470
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_37"
+      rect:
+        serializedVersion: 2
+        x: 2584
+        y: 1546
+        width: 476
+        height: 474
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: "effect_touch_crimescene_512\xD7512_40_38"
+      rect:
+        serializedVersion: 2
+        x: 3094
+        y: 1542
+        width: 480
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -14,6 +14,7 @@ public class SiteManager : MonoBehaviour {
 	[ SerializeField ] ScenesManager _scenesManager = null;
 	[ SerializeField ] ProgressConditionManager _progressConditionManager = null;
 	[ SerializeField ] StoryBoundManeger _storyBoundManeger = null;
+    //[ SerializeField ] EffectLibrary _effectLibrary = null;
 	[ SerializeField ] SiteMove _siteMove = null;
 	//[ SerializeField ] GameObject _ui = null;
 	[ SerializeField ] Curtain _cutain = null;

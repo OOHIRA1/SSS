@@ -10,6 +10,8 @@ public class Detective : MonoBehaviour {
     [ SerializeField ] float _speed = 0.1f;             //歩くスピード
     [ SerializeField ] float _forcedSpeed = 0.1f;       //強制移動スピード
 
+    [ SerializeField ] EffectLibrary _effectLibrary = null;
+
     Animator _anim;
     SpriteRenderer _renderer;
 
@@ -28,7 +30,7 @@ public class Detective : MonoBehaviour {
     bool _firstStep;                                    //強制移動の第一工程
 	bool _secondStep;                                   //強制移動の第二工程
 
-	bool _checkPos;
+	//bool _checkPos;
 
     Vector3 _destination;                               //探偵が動く場所
     Vector3 _initialPos;                                //探偵の初期位置
@@ -55,7 +57,7 @@ public class Detective : MonoBehaviour {
         _isTalk = false;
         _firstStep = false; 
         _secondStep = false;
-		_checkPos = false;
+		//_checkPos = false;
         _destination = transform.position;
         _initialPos = transform.position;
         _move = new Vector3( _speed ,0, 0 );
@@ -101,6 +103,7 @@ public class Detective : MonoBehaviour {
         Vector3 mouse = Vector3.zero;
         if ( Input.GetMouseButtonDown( 0 ) ) {                                      //マウスが押されたら
             mouse = Camera.main.ScreenToWorldPoint( Input.mousePosition );
+           // _effectLibrary.EffectInstantiate( EffectLibrary.Effect.TOUCH, mouse );      //タッチエフェクト生成
 			
 			if ( mouse.y < _moveTouchUp && mouse.y > _moveTouchDown ) {             //押された場所が指定範囲内だったら
 				_destination.x = mouse.x;
