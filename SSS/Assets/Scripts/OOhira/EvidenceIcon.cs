@@ -25,6 +25,8 @@ public class EvidenceIcon : MonoBehaviour {
 	SoundLibrary _soundLibrary;
 	[SerializeField] ParabolicTrajectory _evidenceIconTrajectory = null;	//証拠品アイコンの軌跡　※uGUIで作っているため直に座標を指定
 	int _count;	//上下に動く時に使う変数(-50~50)
+	Vector3 _firstPos;	//証拠品アイコンの初期位置
+
 
 	// Use this for initialization
 	void Start () {
@@ -37,6 +39,7 @@ public class EvidenceIcon : MonoBehaviour {
 		float p = _evidenceIconTrajectory._p;
 		_evidenceIconTrajectory._q = desPos.y - a * (desPos.x - p) * (desPos.x - p);								//q = y -a(x-p)^2 より算出される
 		_count = -50;
+		_firstPos = transform.position;
 	}
 
 	// Update is called once per frame
@@ -100,6 +103,12 @@ public class EvidenceIcon : MonoBehaviour {
 		int layer = _animator.GetLayerIndex ("Base Layer");
 		AnimatorStateInfo animatorStateInfo = _animator.GetCurrentAnimatorStateInfo (layer);
 		return animatorStateInfo.IsName ("into_evidence_file");
+	}
+
+
+	//--証拠品アイコンを初期位置に戻す関数
+	public void ResetPos() {
+		transform.position = _firstPos;
 	}
 	//======================================================================
 	//======================================================================

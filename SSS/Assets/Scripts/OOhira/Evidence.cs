@@ -65,6 +65,7 @@ public class Evidence : MonoBehaviour {
 
 	public void OnTriggerExit2D( Collider2D col ) {
 		if (col.tag == "Player") {
+			_evidenceIcon.GetComponent<EvidenceIcon> ().ResetPos ();
 			_evidenceIcon.SetActive(false);
 			_stayEvidenceTriggerFlag = false;
 		}
