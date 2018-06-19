@@ -10,6 +10,7 @@ public class EvidenceIcon : MonoBehaviour {
 		TAP_OR_APPEAR,
 		PUT_AWAY
 	}
+	const int COUNT_INIT_VALUE = -50;	//_countの初期値
 
 	[System.Serializable]
 	class ParabolicTrajectory {//放物軌跡を表現するクラス()
@@ -38,7 +39,7 @@ public class EvidenceIcon : MonoBehaviour {
 		_evidenceIconTrajectory._p = -(pos.y - desPos.y) / ((pos.x - desPos.x) * 2 * a) + (pos.x + desPos.x) / 2;	//p = -(1/2a)*(平均変化率) + (x座標の相加平均) より算出される
 		float p = _evidenceIconTrajectory._p;
 		_evidenceIconTrajectory._q = desPos.y - a * (desPos.x - p) * (desPos.x - p);								//q = y -a(x-p)^2 より算出される
-		_count = -50;
+		_count = COUNT_INIT_VALUE;
 		_firstPos = transform.position;
 	}
 
@@ -56,8 +57,8 @@ public class EvidenceIcon : MonoBehaviour {
 			if (_count >= 0) {
 				transform.Translate (0, 0.005f, 0);
 				_count++;
-				if (_count == 50) {
-					_count = -50;
+				if (_count == COUNT_INIT_VALUE) {
+					_count = COUNT_INIT_VALUE;
 				}
 			}
 			//-----------------------------------------
@@ -106,8 +107,9 @@ public class EvidenceIcon : MonoBehaviour {
 	}
 
 
-	//--証拠品アイコンを初期位置に戻す関数
+	//--証拠品アイコンを初期位置に戻す関数(_countも初期化する)
 	public void ResetPos() {
+		_count = COUNT_INIT_VALUE;
 		transform.position = _firstPos;
 	}
 	//======================================================================
