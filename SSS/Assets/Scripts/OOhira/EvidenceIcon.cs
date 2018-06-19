@@ -6,6 +6,11 @@ using UnityEngine;
 //
 //使用方法：証拠品アイコンにアタッチ
 public class EvidenceIcon : MonoBehaviour {
+	public enum SEClip {
+		TAP_OR_APPEAR,
+		PUT_AWAY
+	}
+
 	[System.Serializable]
 	class ParabolicTrajectory {//放物軌跡を表現するクラス()
 		public Vector2 _initPos = Vector2.zero;		//初期位置(実行前に軌跡を確認する用)
@@ -40,20 +45,19 @@ public class EvidenceIcon : MonoBehaviour {
 			transform.Translate ( 0, 0.01f, 0 );
 		}
 		if (IsStateWait()) {
+			//上下に動く処理--------------------------
 			if (_count < 0) {
 				transform.Translate (0, -0.005f, 0);
 				_count++;
-				if (_count == 0) {
-					_count = 1;
-				}
 			}
-			if (_count >= 1) {
+			if (_count >= 0) {
 				transform.Translate (0, 0.005f, 0);
 				_count++;
 				if (_count == 50) {
 					_count = -50;
 				}
 			}
+			//-----------------------------------------
 		}
 	}
 
@@ -115,6 +119,10 @@ public class EvidenceIcon : MonoBehaviour {
 			float q = _evidenceIconTrajectory._q;
 			transform.position = new Vector2 ( vec.x, a * ( vec.x - p ) * ( vec.x - p ) + q );//y座標の移動
 			yield return new WaitForSeconds (Time.deltaTime);
+		}
+		while (_soundLibrary.IsPlaying ((int)SEClip.PUT_AWAY)) {//音が鳴りやむまで待機(音はアニメーション中に再生しています)
+			yield return new WaitForSeconds (/*Time.deltaTime*/1.5f);//音が長いので調整
+			_soundLibrary.StopSound();
 		}
 		this.gameObject.SetActive (false);
 	}
