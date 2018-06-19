@@ -173,12 +173,12 @@ public class SiteManager : MonoBehaviour {
 
 		//トークが終わったら
 		if ( _detectiveTalk[ _talkIndex ].GetTalkFinishedFlag( ) ) {
-			if ( Input.GetMouseButtonDown( 0 ) ) {
+			//if ( Input.GetMouseButtonDown( 0 ) ) {
 				_detectiveTalk[ _talkIndex ].gameObject.SetActive( false );
                 if ( _talkIndex == ( int )Text.SATISFY_SHOW_BUTLER_PUT_SILVER_BOX ) _conditions1 = true;                    //この台詞が終わったらフラグを立てる
                 if ( _talkIndex == ( int )Text.SATISFY_SHOW_COOK_PUT_YELLOW_BOX ) _conditions2 = true;                    //この台詞が終わったらフラグを立てる
 				_status = PartStatus.INVESTIGATION_PART;
-			}
+			//}
 		}
 
 		RayShooterEnabled( false );
