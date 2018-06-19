@@ -220,6 +220,7 @@ public class DetectiveOfficeManager : MonoBehaviour {
 	void DetectiveTalkingAction() {
 		if (!_detectiveTalk [_detectiveTalkIndex].gameObject.activeInHierarchy) {
 			_detectiveTalk [_detectiveTalkIndex].gameObject.SetActive (true);
+			_detective.SetIsTalk (true);//話すアニメーション開始
 		}
 		//次の文を表示する処理------------------------------
 		if (Input.GetMouseButtonDown (0) ) {
@@ -250,6 +251,7 @@ public class DetectiveOfficeManager : MonoBehaviour {
 				_state = State.INVESTIGATE;
 				break;
 			}
+			_detective.SetIsTalk (false);//話すアニメーション終了
 			_detectiveTalk [_detectiveTalkIndex].gameObject.SetActive (false);
 		}
 		//----------------------------------------------------------------------------
