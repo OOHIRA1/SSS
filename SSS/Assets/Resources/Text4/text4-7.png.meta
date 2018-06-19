@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: f938ea196786a3f43a36059b2a76c4f9
-timeCreated: 1526358255
+guid: e74cdb93a51ca13409d1a8fda70ec361
+timeCreated: 1529406690
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -23,6 +23,7 @@ TextureImporter:
     21300032: text4-7_16
     21300034: text4-7_17
     21300036: text4-7_18
+    21300038: text4-7_19
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -226,8 +227,8 @@ TextureImporter:
       name: text4-7_6
       rect:
         serializedVersion: 2
-        x: 600
-        y: 100
+        x: 0
+        y: 0
         width: 100
         height: 100
       alignment: 0
@@ -239,8 +240,8 @@ TextureImporter:
       name: text4-7_7
       rect:
         serializedVersion: 2
-        x: 700
-        y: 100
+        x: 100
+        y: 0
         width: 100
         height: 100
       alignment: 0
@@ -252,8 +253,8 @@ TextureImporter:
       name: text4-7_8
       rect:
         serializedVersion: 2
-        x: 800
-        y: 100
+        x: 200
+        y: 0
         width: 100
         height: 100
       alignment: 0
@@ -265,8 +266,8 @@ TextureImporter:
       name: text4-7_9
       rect:
         serializedVersion: 2
-        x: 900
-        y: 100
+        x: 300
+        y: 0
         width: 100
         height: 100
       alignment: 0
@@ -278,8 +279,8 @@ TextureImporter:
       name: text4-7_10
       rect:
         serializedVersion: 2
-        x: 1000
-        y: 100
+        x: 400
+        y: 0
         width: 100
         height: 100
       alignment: 0
@@ -291,8 +292,8 @@ TextureImporter:
       name: text4-7_11
       rect:
         serializedVersion: 2
-        x: 1100
-        y: 100
+        x: 500
+        y: 0
         width: 100
         height: 100
       alignment: 0
@@ -304,8 +305,8 @@ TextureImporter:
       name: text4-7_12
       rect:
         serializedVersion: 2
-        x: 1200
-        y: 100
+        x: 600
+        y: 0
         width: 100
         height: 100
       alignment: 0
@@ -317,8 +318,8 @@ TextureImporter:
       name: text4-7_13
       rect:
         serializedVersion: 2
-        x: 1300
-        y: 100
+        x: 700
+        y: 0
         width: 100
         height: 100
       alignment: 0
@@ -330,8 +331,8 @@ TextureImporter:
       name: text4-7_14
       rect:
         serializedVersion: 2
-        x: 1400
-        y: 100
+        x: 800
+        y: 0
         width: 100
         height: 100
       alignment: 0
@@ -343,8 +344,8 @@ TextureImporter:
       name: text4-7_15
       rect:
         serializedVersion: 2
-        x: 1500
-        y: 100
+        x: 900
+        y: 0
         width: 100
         height: 100
       alignment: 0
@@ -356,8 +357,8 @@ TextureImporter:
       name: text4-7_16
       rect:
         serializedVersion: 2
-        x: 1600
-        y: 100
+        x: 1000
+        y: 0
         width: 100
         height: 100
       alignment: 0
@@ -369,7 +370,7 @@ TextureImporter:
       name: text4-7_17
       rect:
         serializedVersion: 2
-        x: 0
+        x: 1100
         y: 0
         width: 100
         height: 100
@@ -382,7 +383,20 @@ TextureImporter:
       name: text4-7_18
       rect:
         serializedVersion: 2
-        x: 100
+        x: 1200
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: text4-7_19
+      rect:
+        serializedVersion: 2
+        x: 1300
         y: 0
         width: 100
         height: 100

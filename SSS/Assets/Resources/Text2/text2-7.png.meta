@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 6514f864559b61e42bd06293658a4e42
-timeCreated: 1526350454
+guid: a1d6c47f13ab4e34b94f334d50f733cf
+timeCreated: 1529405245
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -33,11 +33,6 @@ TextureImporter:
     21300052: text2-7_26
     21300054: text2-7_27
     21300056: text2-7_28
-    21300058: text2-7_29
-    21300060: text2-7_30
-    21300062: text2-7_31
-    21300064: text2-7_32
-    21300066: text2-7_33
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -358,32 +353,6 @@ TextureImporter:
       name: text2-7_15
       rect:
         serializedVersion: 2
-        x: 1500
-        y: 100
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: text2-7_16
-      rect:
-        serializedVersion: 2
-        x: 1600
-        y: 100
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: text2-7_17
-      rect:
-        serializedVersion: 2
         x: 0
         y: 0
         width: 100
@@ -394,7 +363,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text2-7_18
+      name: text2-7_16
       rect:
         serializedVersion: 2
         x: 100
@@ -407,7 +376,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text2-7_19
+      name: text2-7_17
       rect:
         serializedVersion: 2
         x: 200
@@ -420,7 +389,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text2-7_20
+      name: text2-7_18
       rect:
         serializedVersion: 2
         x: 300
@@ -433,7 +402,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text2-7_21
+      name: text2-7_19
       rect:
         serializedVersion: 2
         x: 400
@@ -446,7 +415,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text2-7_22
+      name: text2-7_20
       rect:
         serializedVersion: 2
         x: 500
@@ -459,7 +428,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text2-7_23
+      name: text2-7_21
       rect:
         serializedVersion: 2
         x: 600
@@ -472,7 +441,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text2-7_24
+      name: text2-7_22
       rect:
         serializedVersion: 2
         x: 700
@@ -485,7 +454,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text2-7_25
+      name: text2-7_23
       rect:
         serializedVersion: 2
         x: 800
@@ -498,7 +467,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text2-7_26
+      name: text2-7_24
       rect:
         serializedVersion: 2
         x: 900
@@ -511,7 +480,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text2-7_27
+      name: text2-7_25
       rect:
         serializedVersion: 2
         x: 1000
@@ -524,7 +493,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text2-7_28
+      name: text2-7_26
       rect:
         serializedVersion: 2
         x: 1100
@@ -537,7 +506,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text2-7_29
+      name: text2-7_27
       rect:
         serializedVersion: 2
         x: 1200
@@ -550,49 +519,10 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text2-7_30
+      name: text2-7_28
       rect:
         serializedVersion: 2
         x: 1300
-        y: 0
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: text2-7_31
-      rect:
-        serializedVersion: 2
-        x: 1400
-        y: 0
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: text2-7_32
-      rect:
-        serializedVersion: 2
-        x: 1500
-        y: 0
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: text2-7_33
-      rect:
-        serializedVersion: 2
-        x: 1600
         y: 0
         width: 100
         height: 100

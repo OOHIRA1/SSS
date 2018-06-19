@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: b51829efe8ab73b4eb87daafdbcd87d3
-timeCreated: 1526298407
+guid: 8e58f1aa6f70fc84e80da5033c105852
+timeCreated: 1529404596
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -34,6 +34,8 @@ TextureImporter:
     21300054: text1-5_27
     21300056: text1-5_28
     21300058: text1-5_29
+    21300060: text1-5_30
+    21300062: text1-5_31
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -367,19 +369,6 @@ TextureImporter:
       name: text1-5_16
       rect:
         serializedVersion: 2
-        x: 1600
-        y: 100
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: text1-5_17
-      rect:
-        serializedVersion: 2
         x: 0
         y: 0
         width: 100
@@ -390,7 +379,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text1-5_18
+      name: text1-5_17
       rect:
         serializedVersion: 2
         x: 100
@@ -403,7 +392,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text1-5_19
+      name: text1-5_18
       rect:
         serializedVersion: 2
         x: 200
@@ -416,7 +405,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text1-5_20
+      name: text1-5_19
       rect:
         serializedVersion: 2
         x: 300
@@ -429,7 +418,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text1-5_21
+      name: text1-5_20
       rect:
         serializedVersion: 2
         x: 400
@@ -442,7 +431,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text1-5_22
+      name: text1-5_21
       rect:
         serializedVersion: 2
         x: 500
@@ -455,7 +444,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text1-5_23
+      name: text1-5_22
       rect:
         serializedVersion: 2
         x: 600
@@ -468,7 +457,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text1-5_24
+      name: text1-5_23
       rect:
         serializedVersion: 2
         x: 700
@@ -481,7 +470,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text1-5_25
+      name: text1-5_24
       rect:
         serializedVersion: 2
         x: 800
@@ -494,7 +483,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text1-5_26
+      name: text1-5_25
       rect:
         serializedVersion: 2
         x: 900
@@ -507,7 +496,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text1-5_27
+      name: text1-5_26
       rect:
         serializedVersion: 2
         x: 1000
@@ -520,7 +509,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text1-5_28
+      name: text1-5_27
       rect:
         serializedVersion: 2
         x: 1100
@@ -533,10 +522,49 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text1-5_29
+      name: text1-5_28
       rect:
         serializedVersion: 2
         x: 1200
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: text1-5_29
+      rect:
+        serializedVersion: 2
+        x: 1300
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: text1-5_30
+      rect:
+        serializedVersion: 2
+        x: 1400
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: text1-5_31
+      rect:
+        serializedVersion: 2
+        x: 1500
         y: 0
         width: 100
         height: 100
