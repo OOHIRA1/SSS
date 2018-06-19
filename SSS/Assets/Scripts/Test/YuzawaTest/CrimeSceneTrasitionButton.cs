@@ -15,6 +15,7 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 	[SerializeField]ScenesManager _scenesManager = null;
 	[SerializeField]Curtain _curtain = null;
 	[SerializeField]bool[] _clicked = new bool[12];
+	[SerializeField]Detective _detective = null;
 
 	int _num;
     bool Disapper = true;
@@ -219,54 +220,66 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 
 	public void ButtonJudgement0(){
 		_clicked[0] = true;
+		_detective.DesignationMove( _detective.GetInitialPos() );
 	}
 
 	public void ButtonJudgement1(){
 		_clicked[1] = true;
+		_detective.DesignationMove( _detective.GetInitialPos() );
 	}
 
 	public void ButtonJudgement2(){
 		_clicked[2] = true;
+		_detective.DesignationMove( _detective.GetInitialPos() );
 	}
 
 	public void ButtonJudgement3(){
 		_clicked[3] = true;
+		_detective.DesignationMove( _detective.GetInitialPos() );
 	}
 
 	public void ButtonJudgement4(){
 		_clicked[4] = true;
+		_detective.DesignationMove( _detective.GetInitialPos() );
 	}
 
 	public void ButtonJudgement5(){
 		_clicked[5] = true;
+		_detective.DesignationMove( _detective.GetInitialPos() );
 	}
 
 	public void ButtonJudgement6(){
 		_clicked[6] = true;
+		_detective.DesignationMove( _detective.GetInitialPos() );
 	}
 
 	public void ButtonJudgement7(){
 		_clicked[7] = true;
+		_detective.DesignationMove( _detective.GetInitialPos() );
 	}
 
 	public void ButtonJudgement8(){
 		_clicked[8] = true;
+		_detective.DesignationMove( _detective.GetInitialPos() );
 	}
 
 	public void ButtonJudgement9(){
 		_clicked[9] = true;
+		_detective.DesignationMove( _detective.GetInitialPos() );
 	}
 
 	public void ButtonJudgement10(){
 		_clicked[10] = true;
+		_detective.DesignationMove( _detective.GetInitialPos() );
 	}
 
 	public void ButtonJudgement11(){
 		_clicked[11] = true;
+		_detective.DesignationMove( _detective.GetInitialPos() );
 	}
 
 	public void NightGarden(){
-		if (_clicked[0] && _curtain.IsStateWait () ) {
+		if (_detective.GetCheckPos( ) && _clicked[0] && _curtain.IsStateWait () ) {
 			_scenesManager.ScenesTransition ("SiteNight_Garden");
 		}
 	}
