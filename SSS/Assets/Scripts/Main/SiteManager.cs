@@ -177,12 +177,15 @@ public class SiteManager : MonoBehaviour {
 				_detectiveTalk[ _talkIndex ].gameObject.SetActive( false );
                 if ( _talkIndex == ( int )Text.SATISFY_SHOW_BUTLER_PUT_SILVER_BOX ) _conditions1 = true;                    //この台詞が終わったらフラグを立てる
                 if ( _talkIndex == ( int )Text.SATISFY_SHOW_COOK_PUT_YELLOW_BOX ) _conditions2 = true;                    //この台詞が終わったらフラグを立てる
+                _detective.SetIsTalk( false );
 				_status = PartStatus.INVESTIGATION_PART;
+                return;
 			//}
 		}
 
 		RayShooterEnabled( false );
 		Regulation( );
+        _detective.SetIsTalk( true );           //探偵をトーク状態にする
 	}
 
 	//ストーリの進行状況によって操作に縛りをかける関数--------------------------------------------------------------------------------------------------------------------------------------------------------------

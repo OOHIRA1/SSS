@@ -16,12 +16,14 @@ public class Detective : MonoBehaviour {
     //仮実装
     bool _isAnimWalk;                                   //歩くモーションをするかどうか
 	bool _isAnimShocked;								//ショックモーションをするかどうか
+    bool _isAnimThink;                                  //トークモーションをするかどうか
 
 
     bool _isFlip;                                       //反転するかどうか
 	bool _isMove;                              //動けるかどうか
     bool _isRopeTouch;                                  //ロープが触れているかどうか
 	bool _isForcedMove;								    //強制移動するかどうか
+    bool _isTalk;                                       //トーク状態になるかどうか
 
     bool _firstStep;                                    //強制移動の第一工程
 	bool _secondStep;                                   //強制移動の第二工程
@@ -44,11 +46,13 @@ public class Detective : MonoBehaviour {
 		_anim = GetComponent< Animator >( );
         _renderer = GetComponent< SpriteRenderer >( );
         _isAnimWalk = false;
-		_isAnimShocked = false;        
+		_isAnimShocked = false;
+        _isAnimThink = false;        
         _isFlip = true;
 		_isMove = true;
         _isRopeTouch = false;
 		_isForcedMove = false;
+        _isTalk = false;
         _firstStep = false; 
         _secondStep = false;
 		_checkPos = false;
@@ -70,6 +74,9 @@ public class Detective : MonoBehaviour {
         Flip( );
 
 		if ( _isForcedMove ) ForcedMove( );	//マウス以外のところが指定されたら
+
+        Talk( );
+        
 	}
 
     void OnTriggerEnter2D( Collider2D collision ) {
@@ -134,6 +141,12 @@ public class Detective : MonoBehaviour {
             _anim.SetBool( "ShockedFlag", true );
         } else {
             _anim.SetBool( "ShockedFlag", false );
+        }
+
+        if ( _isAnimThink ) {
+            _anim.SetBool( "ThinkFlag", true );
+        } else {
+            _anim.SetBool( "ThinkFlag", false );
         }
 
     }
@@ -230,15 +243,32 @@ public class Detective : MonoBehaviour {
         _firstStep = false;
         _secondStep = false;
 		_isMove = true;
+        _isFlip = true;                             //強制移動が終わったら探偵が右を向くようにしている
     }
     //------------------------------
+
+
+    //トーク状態を見て処理する関数----------
+    public void Talk( ) {
+
+        if ( _isTalk ) { 
+            _isAnimThink = true;
+            InitialMove( );
+        } else {
+            _isAnimThink = false;
+        }
+
+    }
+    //-------------------------------------
+
+
 
 	//動き状態をリセットする-----------------------
     public void  InitialMove( ) {
         _destination = transform.position;                //移動場所をリセット
         //_destination = _initialPos;
         _isAnimWalk = false;        
-        _isFlip = true;                 
+        //_isFlip = true;                 
     }
     //-----------------------------------------------
 
@@ -252,6 +282,8 @@ public class Detective : MonoBehaviour {
 	public void SetIsAnimShocked( bool x ) { _isAnimShocked = x; }
 
     public void SetIsMove( bool isMove ) { _isMove = isMove; }
+
+    public void SetIsTalk( bool isTalk ) { _isTalk = isTalk; }
     //-------------------------------------------------------------------
 
 	//マウス以外の指定された場所に移動する場所を決めて、その場所に動くようにする--

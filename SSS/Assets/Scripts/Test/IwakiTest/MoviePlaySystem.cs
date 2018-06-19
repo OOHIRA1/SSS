@@ -44,18 +44,13 @@ public class MoviePlaySystem : MonoBehaviour {
 	
 		Fixed( );
 
-		if ( _isOperation ) {
-
-			PointUpdate( );
-
+		if ( _isOperation ) PointUpdate( );     //操作不能だったらポイントを更新しない
+			
 			BarUpdate( );
 
 			MovieUpdate( );
 
 			StopTime( );
-
-		}
-			
 
 
 	}

@@ -14,14 +14,13 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
     [SerializeField]BGMManager _bgmManeger = null;
 	[SerializeField]Curtain _curtain = null;
 	[SerializeField]Detective _detective = null;
-    [SerializeField]SoundLibrary _soundLibrary = null;
     [SerializeField]float[] _time = new float[4];
 	[SerializeField]float _animTime = 500;
 	[SerializeField]bool[] _clicked = new bool[12];
     [SerializeField]bool[] _clickedClose = new bool[12];
 
     int _num;
-    bool Disapper = true;
+    bool Disapper = false;
     bool ClockDisapper = true;
 
 	public AudioClip crimescene_button2_appear;
@@ -148,7 +147,7 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 	//	}
 	//}
 
-	public void scroll( ){
+    public void scroll( ){
 		bool value = true;
 		if (!_animator.GetBool( "scrollFlag" ) ) {
 			audioSource.PlayOneShot(crimescene_button2_appear, 0.7F);
@@ -161,6 +160,13 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 	}
 
     public void SpeechBalloon( int arrayNumber ) {              //吹き出しの表示　　他のボタン押したとき表示されてるものを非表示
+        //ボタンを押したときに表示されていたら非表示にする-----------
+        if ( _speechBalloon[arrayNumber].activeInHierarchy ) {
+                _speechBalloon[arrayNumber].SetActive(false);
+                return;
+        }
+        //-----------------------------------------------------------
+        //配列番号がarrayNumberの_speechBalloonのみ表示させる-----------------------------------
 		for (int i = 0; i < _speechBalloon.Length; i++){        
 			if (i == arrayNumber){                              //iとArrayNumberの変数が同じ時
 				_speechBalloon[i].SetActive(true);              //
@@ -169,12 +175,12 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 				_time[i] = 0;
 			}
 		}
+        //-----------------------------------------------------------------------------------
 	}
 
 
 
 	 void OnClickedClock( int ArrayNumber ) {   //時計ＵＩの表示　　　他のボタン押したとき表示されてるものを非表示
-		bool value = true;
 		for ( int i = 0; i < 4; i++ ) {
 			if ( i == ArrayNumber ) {
 				if( _time[ i ] > _animTime ) {
@@ -187,49 +193,55 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 		}
 
 
-    public void OnClickedAgainBalloon( ) {           //もう一度押されたとき吹き出しを非表示
-        bool value = false;
-        if ( Disapper == true ) {
-            Disapper = false;
-        } else {
-            Disapper = true;
-        }
-        if ( Disapper ) {
-            for ( int i = 0; i < _speechBalloon.Length; i++ ) {
-                _speechBalloon [ i ].SetActive( value );
-            }
-        }
-    }
+    //public void OnClickedAgainBalloon( ) {  //もう一度押されたとき吹き出しを非表示
+    //for( int i = 0; i < _speechBalloon.Length; i++ ) {
+    //    if ( _speechBalloon[i].activeInHierarchy ) {
+    //        Disapper = true;
+    //    }
+    //}
+    //    if ( Disapper ) {
+    //        for ( int i = 0; i < _speechBalloon.Length; i++ ) {
+    //            _speechBalloon [ i ].SetActive( false );
+    //        }
+    //         Disapper = false;
+    //    }
+    //}
 
-    public void OnClickedAgainCLock( ) {             //もう一度押されたとき時計ＵＩを非表示
-        bool value = false;
-        if ( ClockDisapper == true ) {
-            ClockDisapper = false;
-        } else {
-            ClockDisapper = true;
-        }
-        if ( ClockDisapper ) {
-            for ( int i = 0; i < _clockApper.Length; i++ ) {
-                _clockApper [ i ].SetActive( value );
-                _time [ i ] = 0;
-                _num = -1;
-            }
-        }
-    }
+    //public void OnClickedAgainCLock( ) {             //もう一度押されたとき時計ＵＩを非表示
+    //    bool value = false;
+    //    if ( ClockDisapper == true ) {
+    //        ClockDisapper = false;
+    //    } else {
+    //        ClockDisapper = true;
+    //    }
+    //    if ( ClockDisapper ) {
+    //        for ( int i = 0; i < _clockApper.Length; i++ ) {
+    //            _clockApper [ i ].SetActive( value );
+    //            _time [ i ] = 0;
+    //            _num = -1;
+    //        }
+    //    }
+    //}
+
+
     public void OnClickedButtonNum( int ArrayNumber ) {
+        if (  _clockApper [ ArrayNumber ].activeInHierarchy ) {
+            _num = -1;
+            _time[ ArrayNumber ] = 0;
+             _clockApper [ ArrayNumber ].SetActive(false);
+            return;
+        }
 		_num = ArrayNumber;
 	}
 
     public void OnClickedSpeech() {
-        bool value = false;
         for( int i = 0; i < _speechBalloon.Length; i++ ) {
-            _speechBalloon[ i ].SetActive( value );
+            _speechBalloon[ i ].SetActive( false );
     	}
     }
     public void OnClickedClockDisappare() {                 
-        bool value = false;
         for( int i = 0; i < _clockApper.Length; i++ ) {
-            _clockApper[ i ].SetActive( value );
+            _clockApper[ i ].SetActive( false );
             _time[i] = 0;
             _num = -1;
     	}

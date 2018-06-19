@@ -22,10 +22,12 @@ public class Movie : MonoBehaviour {
 	//public関数
 	//--ムービーの再生位置を変更する関数
 	public void ChangeMovieStartTime( float startTime ) {
-		if ( startTime > 1.0f ) startTime = 1f;
-		if ( startTime < 0 ) startTime = 0;
-		AnimatorStateInfo animatorStateInfo = _animator.GetNextAnimatorStateInfo (0);
-		_animator.Play ( animatorStateInfo.shortNameHash, 0, startTime );
+       
+		    if ( startTime > 1.0f ) startTime = 1f;
+		    if ( startTime < 0 ) startTime = 0;
+		    AnimatorStateInfo animatorStateInfo = _animator.GetNextAnimatorStateInfo (0);
+		    _animator.Play ( animatorStateInfo.shortNameHash, 0, startTime );
+       
 	}
 	//================================================
 	//================================================

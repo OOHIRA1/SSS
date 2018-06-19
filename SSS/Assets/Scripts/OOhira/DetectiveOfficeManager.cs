@@ -210,7 +210,7 @@ public class DetectiveOfficeManager : MonoBehaviour {
 		if (_laboUIManager.GetCriminalChoiseFlag ()) {
 			_detective.DesignationMove (_detective.GetInitialPos ());//探偵を初期位置に移動
 			_state = State.CRIMINAL_CHOISE;
-			_bgmManager.UpdateBGM ();
+			_bgmManager.UpdateBGM ();//音を変える処理
 		}
 		//-----------------------------------------------------
 	}
