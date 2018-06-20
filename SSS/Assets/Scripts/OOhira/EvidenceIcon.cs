@@ -57,7 +57,7 @@ public class EvidenceIcon : MonoBehaviour {
 			if (_count >= 0) {
 				transform.Translate (0, 0.005f, 0);
 				_count++;
-				if (_count == COUNT_INIT_VALUE) {
+				if (_count == -COUNT_INIT_VALUE) {
 					_count = COUNT_INIT_VALUE;
 				}
 			}
