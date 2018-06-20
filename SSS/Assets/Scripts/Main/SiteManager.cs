@@ -27,10 +27,12 @@ public class SiteManager : MonoBehaviour {
 
 	EvidenceManager _evidenceManager;
     GameObject[] _evidenceTrigger;
+    BGMManager _bgmManager;
 
 	int _talkIndex;						//どのトークを表示させるか
 	bool _onlyOne;						//一回だけ処理したいとき
 	bool _remark;                       //発言したかどうか
+    bool _bgm;                          //BGMを鳴らしたかどうか
 	bool _pushLaboTransitionUI;         //ラボ遷移UIが押されたかどうか
 
     public static bool _conditions1 = false;     //証拠品４を表示する条件を満たしたかどうか(台詞が全部言ったかどうか)
@@ -70,7 +72,8 @@ public class SiteManager : MonoBehaviour {
 	// Use this for initialization
 	void Start( ) {
 		_gameDateManager = GameObject.FindGameObjectWithTag( "GameDataManager" ).GetComponent< GameDataManager >( );
-		_evidenceManager = GameObject.FindGameObjectWithTag ( "EvidenceManager" ).GetComponent< EvidenceManager > ( );
+		_evidenceManager = GameObject.FindGameObjectWithTag ( "EvidenceManager" ).GetComponent< EvidenceManager >( );
+        _bgmManager = GameObject.FindGameObjectWithTag ( "BGMManager" ).GetComponent< BGMManager >( );
 		_talkIndex = -1;
 		_onlyOne = true;
 		_remark = false;
@@ -81,6 +84,12 @@ public class SiteManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update( ) {
+        //モノクロアニメーションを見ていてBGMを一回鳴らしてなかったら-----------------------------------------------------
+        if ( !_bgm && _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_MILLIONARE_MURDER_ANIM ) ) {
+            _bgmManager.UpdateBGM( );
+            _bgm = true;
+        }
+        //----------------------------------------------------------------------------------------------------------------
 
 		switch ( _status ) {
 			case PartStatus.INVESTIGATION_PART:
@@ -318,7 +327,7 @@ public class SiteManager : MonoBehaviour {
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_BACKYARD );
 				_storyBoundManeger.FirstComeToBackyardBound( false );
-				_moviePlaySystem.MoviReset( );							//ここだけ動画をリセットする
+				_moviePlaySystem.MovieReset( );							//ここだけ動画をリセットする
 			} else {
 				_storyBoundManeger.FirstComeToBackyardBound( true );
 			}

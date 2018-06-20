@@ -46,7 +46,7 @@ public class StoryBoundManeger : MonoBehaviour {
 		if ( application ) {
 			_ui.SetActive( false );
 			_clockUI.gameObject.SetActive( false );
-			_detective.transform.position = new Vector3( -20, _detective.transform.position.y, 0 );
+			_detective.transform.position = new Vector3( -18, _detective.transform.position.y, 0 );
 		} else {
 			_ui.SetActive( true );
 			_clockUI.gameObject.SetActive( true );

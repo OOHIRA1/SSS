@@ -125,7 +125,7 @@ public class MoviePlaySystem : MonoBehaviour {
 
 	//60秒を超えたら一時停止する----------------------
 	void StopTime( ) {
-		if ( MoviTime( ) >= 60f ) {
+		if ( MovieTime( ) >= 60f ) {
 			_stop = true;
 			_startAndStopButton.StartImageChange( );	//再生一時停止ボタンを画像を切り替える
 		} 
@@ -175,18 +175,18 @@ public class MoviePlaySystem : MonoBehaviour {
 	}
 
 	//最初の再生位置に戻す
-	public void MoviReset( ) {
+	public void MovieReset( ) {
         _point.MovePosition( _point.GetInitialPos( ) );
-        BarUpdate( );                                           //MoviTimeと同一フレーム上で比較したいためにここでUpdateしている
+        BarUpdate( );                                           //MovieTimeと同一フレーム上で比較したいためにここでUpdateしている
         MovieUpdate( );
     }
 
     //時間を取得する(バーの大きさを時間に変換)
-    public float MoviTime( ) { return _bar.GetBarScale( ).x * _maxTime; }
+    public float MovieTime( ) { return _bar.GetBarScale( ).x * _maxTime; }
 
 
-    ////ムービーが終わっているか取得する（ポイントの座標が最後まで行っているか取得）------      //MoviTimeだと同一フレーム上で計算するとき不都合があるので作成
-    //public bool MoviTimeMax( ) {
+    ////ムービーが終わっているか取得する（ポイントの座標が最後まで行っているか取得）------      //MovieTimeだと同一フレーム上で計算するとき不都合があるので作成
+    //public bool MovieTimeMax( ) {
     //    if ( _point.GetTransform( ).x >= _point.GetMaxRange( ) ) return true;
 
     //    return false;

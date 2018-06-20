@@ -27,10 +27,6 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 	public AudioClip crimescene_button2_disappear2;
     AudioSource audioSource;
 
-    public enum BGMClip {
-        DETECTIVE_OFFICE
-    }
-
     // Use this for initialization
     void Start () {
 
@@ -150,18 +146,19 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
     public void scroll( ){
 		bool value = true;
 		if (!_animator.GetBool( "scrollFlag" ) ) {
-			audioSource.PlayOneShot(crimescene_button2_appear, 0.7F);
+			audioSource.PlayOneShot(crimescene_button2_appear, 0.2F);
 			value = true;
 		} else {
 			value = false;
 		}
-		audioSource.PlayOneShot(crimescene_button2_disappear2, 0.7F);
+		audioSource.PlayOneShot(crimescene_button2_disappear2, 0.2F);
 		_animator.SetBool ("scrollFlag", value);
 	}
 
     public void SpeechBalloon( int arrayNumber ) {              //吹き出しの表示　　他のボタン押したとき表示されてるものを非表示
         //ボタンを押したときに表示されていたら非表示にする-----------
         if ( _speechBalloon[arrayNumber].activeInHierarchy ) {
+            _time[arrayNumber] = 0;
                 _speechBalloon[arrayNumber].SetActive(false);
                 return;
         }
@@ -169,7 +166,7 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
         //配列番号がarrayNumberの_speechBalloonのみ表示させる-----------------------------------
 		for (int i = 0; i < _speechBalloon.Length; i++){        
 			if (i == arrayNumber){                              //iとArrayNumberの変数が同じ時
-				_speechBalloon[i].SetActive(true);              //
+				_speechBalloon[i].SetActive(true);
 			} else {
 				_speechBalloon[i].SetActive(false);
 				_time[i] = 0;
@@ -182,12 +179,13 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 
 	 void OnClickedClock( int ArrayNumber ) {   //時計ＵＩの表示　　　他のボタン押したとき表示されてるものを非表示
 		for ( int i = 0; i < 4; i++ ) {
-			if ( i == ArrayNumber ) {
+			if ( i == ArrayNumber && _speechBalloon[i].activeInHierarchy) {
 				if( _time[ i ] > _animTime ) {
 					_clockApper[ i ].SetActive( true );
 					}
 				} else {
 					_clockApper[ i ].SetActive( false );
+                    _time[i] = 0;
 					}
 			}
 		}

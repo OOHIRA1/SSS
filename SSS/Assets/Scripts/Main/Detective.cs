@@ -103,10 +103,11 @@ public class Detective : MonoBehaviour {
         Vector3 mouse = Vector3.zero;
         if ( Input.GetMouseButtonDown( 0 ) ) {                                      //マウスが押されたら
             mouse = Camera.main.ScreenToWorldPoint( Input.mousePosition );
-           // _effectLibrary.EffectInstantiate( EffectLibrary.Effect.TOUCH, mouse );      //タッチエフェクト生成
 			
 			if ( mouse.y < _moveTouchUp && mouse.y > _moveTouchDown ) {             //押された場所が指定範囲内だったら
 				_destination.x = mouse.x;
+                mouse.z = 0;                                                        //エフェクトを表示するのに０にする必要がある
+                 _effectLibrary.EffectInstantiate( EffectLibrary.Effect.TOUCH, mouse );      //タッチエフェクト生成
 			}
         }
 

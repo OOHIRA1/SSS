@@ -15,6 +15,9 @@ public class Cursor : MonoBehaviour {
 	[SerializeField] bool _selectedFlag = false;			//選び終わったかどうかのフラグ
 
 
+	public AudioClip cursor_SE;
+    AudioSource audioSource;
+
 	//=========================================================================
 	//ゲッター
 	public bool GetSelectedFlag() { return _selectedFlag; }
@@ -36,6 +39,7 @@ public class Cursor : MonoBehaviour {
 		_firstPosition = transform.position;
 		_downFlag = true;
 		_selectedFlag = false;
+		audioSource = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -75,6 +79,7 @@ public class Cursor : MonoBehaviour {
 					Vector3 pos = hit.transform.position;
 					transform.position = new Vector3 (pos.x, _firstPosition.y, pos.z);
 					_selectedGameObject = hit.collider.gameObject;
+					audioSource.PlayOneShot(cursor_SE, 0.7F);
 				}
 				//--------------------------------------------------------------------
 
@@ -84,7 +89,7 @@ public class Cursor : MonoBehaviour {
 					transform.position = new Vector3 (pos.x, pos.y + 2, pos.z);
 					_firstPosition.y = pos.y + 2;
 					_selectedGameObject = hit.collider.gameObject;
-
+					audioSource.PlayOneShot(cursor_SE, 0.7F);
 				}
 				//--------------------------------------------------------------------
 			}

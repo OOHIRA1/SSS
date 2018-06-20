@@ -15,6 +15,7 @@ TagManager:
   - Rope
   - BGMManager
   - EvidenceTrigger
+  - TouchEffect
   layers:
   - Default
   - TransparentFX

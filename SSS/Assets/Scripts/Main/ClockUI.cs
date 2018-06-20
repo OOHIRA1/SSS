@@ -130,7 +130,7 @@ public class ClockUI : MonoBehaviour {
 	//動画にあわせて針を動かす------------------------------------------------------------------------------------------
 	void ClockNeedleMove( ) {
 		//長針の動き---------------------------------------------------------------------
-        _minutesHandRota.z = _RotaParSecondMinutes * _moviPlaySystem.MoviTime( );
+        _minutesHandRota.z = _RotaParSecondMinutes * _moviPlaySystem.MovieTime( );
 		
 		if ( ( _minutesHand.transform.localEulerAngles.z < MINUTES_HAND_STOP_LEFT ) &&		//長針を止めたい範囲だったら
 			 ( _minutesHand.transform.localEulerAngles.z > MINUTES_HAND_STOP_RIGHT ) ) {
@@ -142,7 +142,7 @@ public class ClockUI : MonoBehaviour {
 		//-------------------------------------------------------------------------------
 
 		//短針の動き------------------------------------------------------------------------------------
-         _hourHandRota.z = _hourHandInitialRota - _RotaParSecondHour * _moviPlaySystem.MoviTime( );
+         _hourHandRota.z = _hourHandInitialRota - _RotaParSecondHour * _moviPlaySystem.MovieTime( );
 		
 		if ( _hourHand.transform.localEulerAngles.z <= _hourHandInitialRota - ONE_HOUR ) {	//短針が動いてほしい角度を超えたら
 			_hourHand.transform.localEulerAngles = _hourHandStopPos;
