@@ -106,6 +106,16 @@ public class GameDataManager : MonoBehaviour {
 	public void AllResetAdvencedData( ) {
 		_advancedData = 0;
 	}
+
+
+	//--checkPointまでの全てのチェックポイントを立てる関数(再帰)
+	public void UpdateAdvanceDataUntil( CheckPoint checkPoint ) {
+		UpdateAdvancedData (checkPoint);
+		int num = (int)checkPoint >> 1;
+		if (num != 0) {
+			UpdateAdvanceDataUntil ((CheckPoint)num);
+		}
+	}
 	//===============================================================================================
 	//===============================================================================================
 

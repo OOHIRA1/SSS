@@ -77,6 +77,8 @@ public class ContinueUIController : MonoBehaviour {
 		for ( int i = 0; i < _buttons.Length; i++ ) {
 			_buttons [i].enabled = false;
 		}
+		_gameDataManager.AllResetAdvencedData ();
+		_gameDataManager.UpdateAdvanceDataUntil (GameDataManager.CheckPoint.GET_EVIDENCE5);
 		StartCoroutine (SceneTransitionWithAnim("DetectiveOffice"));
 	}
 
