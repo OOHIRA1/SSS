@@ -41,6 +41,7 @@ public class EvidenceIcon : MonoBehaviour {
 		_evidenceIconTrajectory._q = desPos.y - a * (desPos.x - p) * (desPos.x - p);								//q = y -a(x-p)^2 より算出される
 		_count = COUNT_INIT_VALUE;
 		_firstPos = transform.position;
+		this.gameObject.SetActive (false);//ResetPos()がStart()を入る前に呼ばれて_firstPosが証拠品アイコンの初期位置を上手く取れないバグ対策に先にStartを呼んで非アクティブ化
 	}
 
 	// Update is called once per frame
