@@ -66,6 +66,12 @@ public class SoundLibrary : MonoBehaviour {
 	public void StopSoundWithFadeOut() {
 		StartCoroutine (StopSoundWithFadeOutCoroutine());
 	}
+
+
+	//--音を一時停止する関数
+	public void PauseSound() {
+		_audioSource.Pause ();
+	}
 	//=========================================================================
 	//=========================================================================
 }

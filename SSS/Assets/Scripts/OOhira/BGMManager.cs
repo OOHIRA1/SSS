@@ -10,7 +10,8 @@ public class BGMManager : MonoBehaviour {
 		TITLE,
 		CRIME_SCENE,
 		DETECTIVE_OFFICE,
-		CHOOSE
+		CHOOSE,
+		SIXTY_ANIMATION
 	}
 
 	SoundLibrary _soundLibrary;
@@ -105,6 +106,18 @@ public class BGMManager : MonoBehaviour {
 	//--_audioClipsにある音がなっているかどうかを確認する関数
 	public bool IsPlaying( BGMClip bgmClip ) {
 		return _soundLibrary.IsPlaying ( (int)bgmClip );
+	}
+
+
+	//--音を止める関数
+	public void StopBGM() {
+		_soundLibrary.StopSound ();
+	}
+
+
+	//--音を一時停止する関数
+	public void PauseBGM() {
+		_soundLibrary.PauseSound ();
 	}
 	//======================================================================
 	//======================================================================
