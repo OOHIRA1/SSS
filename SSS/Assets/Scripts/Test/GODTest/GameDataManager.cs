@@ -27,7 +27,7 @@ public class GameDataManager : MonoBehaviour {
 		GET_EVIDENCE4 								= 1 << 17,	//131072,	//証拠品4を入手する
 		GET_EVIDENCE5 							   	= 1 << 18,	//262144,	//証拠品5を入手する
 		GET_EVIDENCE6 							   	= 1 << 19,	//524288,	//証拠品6を入手する
-		COME_TO_DETECTIVE_OFFICE_WITH_ALL_EVIDENCE 	= 1 << 20,	//1048576,	//証拠品を全て揃えて探偵ラボに来る
+		CLEAR_EPISODE1							 	= 1 << 20,	//1048576,	//エピソード1をクリアする
 	}
 
 	[SerializeField] int _advancedData;	                //進行状況を格納する変数
@@ -105,6 +105,8 @@ public class GameDataManager : MonoBehaviour {
 	//--データを全てリセットする関数
 	public void AllResetAdvencedData( ) {
 		_advancedData = 0;
+		_criminal = null;
+		_dangerousWeapon = null;
 	}
 
 

@@ -13,12 +13,16 @@ public class StageSelectManager : MonoBehaviour {
 	BGMManager _bgmManager;
 	[SerializeField] AudioSource _openingBuzzer = null;
 	bool _buzzerSounded; //ブザー音が鳴ったかどうかのフラグ
+	[SerializeField] GameObject _clearStamp = null;	//クリアスタンプ
 
 	// Use this for initialization
 	void Start () {
 		_gameDataManager = GameObject.FindWithTag ("GameDataManager").GetComponent<GameDataManager>();
 		_bgmManager = GameObject.FindWithTag ("BGMManager").GetComponent<BGMManager> ();
 		_buzzerSounded = false;
+		if (!_gameDataManager.CheckAdvancedData (GameDataManager.CheckPoint.CLEAR_EPISODE1)) {
+			_clearStamp.SetActive (false);//エピソード1をクリアしていないとスタンプが押されない
+		}
 	}
 	
 	// Update is called once per frame

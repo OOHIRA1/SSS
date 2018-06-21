@@ -25,12 +25,14 @@ public class GameClearManager : MonoBehaviour {
 	[SerializeField] GameObject _confettiParticles = null;	//紙吹雪
 	[SerializeField] DetectiveTalk _detectiveTalk = null;
 	[SerializeField] ScenesManager _scenesManager = null;
+	GameDataManager _gameDataManager;
 
 
 	// Use this for initialization
 	void Start () {
 		_state = State.FADE_IN;
 		_fanfareStarted = false;
+		_gameDataManager = GameObject.FindWithTag ("GameDataManager").GetComponent<GameDataManager>();
 	}
 	
 	// Update is called once per frame
@@ -94,6 +96,7 @@ public class GameClearManager : MonoBehaviour {
 					_detectiveTalk.Talk ();
 				} else {
 					_detectiveTalk.gameObject.SetActive (false);
+					_gameDataManager.UpdateAdvancedData (GameDataManager.CheckPoint.CLEAR_EPISODE1);
 					_scenesManager.ScenesTransition ("StageSelect");
 				}
 			}
