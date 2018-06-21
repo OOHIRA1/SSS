@@ -218,7 +218,7 @@ VideoPlayer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1670657274}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 2cdf39605747cbd4294a9f2537db58a3, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: b83fd146dcb395e46a6fc264e4f253ad, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 1887433464}
@@ -296,7 +296,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.98823535, g: 0.98823535, b: 0.98823535, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
