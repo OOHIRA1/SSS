@@ -52,11 +52,20 @@ public class StageSelectManager : MonoBehaviour {
 		//BGMのフェードアウトが終わったらシーン遷移------------------------------------------------------------------
 		//if (_curtain.IsStateClose () && _curtain.ResearchStatePlayTime () >= 1f ) {
 		if (!_bgmManager.IsPlaying(BGMManager.BGMClip.TITLE)) {
+			//エピソード1をクリアしていたらクリアデータのみを残し、データをリセットしてシーン遷移--------------------
+			if (_gameDataManager.CheckAdvancedData (GameDataManager.CheckPoint.CLEAR_EPISODE1)) {
+				_gameDataManager.AllResetAdvencedData ();
+				_gameDataManager.UpdateAdvancedData (GameDataManager.CheckPoint.CLEAR_EPISODE1);
+				_scenesManager.ScenesTransition ("SiteNight_Bedroom");
+			}
+			//---------------------------------------------------------------------------------------------------
+			//富豪の殺人アニメーションを見ているかで遷移先を変える--------------------------------------------------
 			if (!_gameDataManager.CheckAdvancedData (GameDataManager.CheckPoint.SHOW_MILLIONARE_MURDER_ANIM)) {
 				_scenesManager.ScenesTransition ("SiteNight_Bedroom");
 			} else {
 				_scenesManager.ScenesTransition ("DetectiveOffice");
 			}
+			//----------------------------------------------------------------------------------------------------
 		}
 		//----------------------------------------------------------------------------------------------------------
 
