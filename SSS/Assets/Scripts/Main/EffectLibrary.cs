@@ -15,7 +15,6 @@ public class EffectLibrary : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        AnimEndDestroy( );
 	}
 
     public void EffectInstantiate ( Effect effect, Vector3 pos ) {
@@ -29,13 +28,5 @@ public class EffectLibrary : MonoBehaviour {
         Destroy( _gameObject[ ( int )effect ] );
     }
 
-    void AnimEndDestroy( ) {
-        Animator animator = _gameObject[ ( int )Effect.TOUCH ].GetComponent< Animator >( );
-        int layer = animator.GetLayerIndex( "Base Layer" );
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo( layer );
-
-        if ( stateInfo.normalizedTime >= 1f ) Destroy( _gameObject[ ( int )Effect.TOUCH ] );
-
-    }
 
 }

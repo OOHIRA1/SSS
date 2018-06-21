@@ -1,32 +1,34 @@
 fileFormatVersion: 2
-guid: 15207825ca79041478545c7d44bcd764
-timeCreated: 1526362897
+guid: 452a9bc7c58dc5e47964b692b3371463
+timeCreated: 1529569531
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: text13-3_0
-    21300002: text13-3_1
-    21300004: text13-3_2
-    21300006: text13-3_3
-    21300008: text13-3_4
-    21300010: text13-3_5
-    21300012: text13-3_6
-    21300014: text13-3_7
-    21300016: text13-3_8
-    21300018: text13-3_9
-    21300020: text13-3_10
-    21300022: text13-3_11
-    21300024: text13-3_12
-    21300026: text13-3_13
-    21300028: text13-3_14
-    21300030: text13-3_15
-    21300032: text13-3_16
-    21300034: text13-3_17
-    21300036: text13-3_18
-    21300038: text13-3_19
-    21300040: text13-3_20
-    21300042: text13-3_21
-    21300044: text13-3_22
+    21300000: text12-5_0
+    21300002: text12-5_1
+    21300004: text12-5_2
+    21300006: text12-5_3
+    21300008: text12-5_4
+    21300010: text12-5_5
+    21300012: text12-5_6
+    21300014: text12-5_7
+    21300016: text12-5_8
+    21300018: text12-5_9
+    21300020: text12-5_10
+    21300022: text12-5_11
+    21300024: text12-5_12
+    21300026: text12-5_13
+    21300028: text12-5_14
+    21300030: text12-5_15
+    21300032: text12-5_16
+    21300034: text12-5_17
+    21300036: text12-5_18
+    21300038: text12-5_19
+    21300040: text12-5_20
+    21300042: text12-5_21
+    21300044: text12-5_22
+    21300046: text12-5_23
+    21300048: text12-5_24
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -97,31 +99,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-  - buildTarget: tvOS
-    maxTextureSize: 2048
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
   - buildTarget: Android
-    maxTextureSize: 2048
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-  - buildTarget: Tizen
-    maxTextureSize: 2048
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-  - buildTarget: Windows Store Apps
     maxTextureSize: 2048
     textureFormat: -1
     textureCompression: 1
@@ -137,19 +115,11 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-  - buildTarget: Samsung TV
-    maxTextureSize: 2048
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: text13-3_0
+      name: text12-5_0
       rect:
         serializedVersion: 2
         x: 0
@@ -162,7 +132,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text13-3_1
+      name: text12-5_1
       rect:
         serializedVersion: 2
         x: 100
@@ -175,7 +145,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text13-3_2
+      name: text12-5_2
       rect:
         serializedVersion: 2
         x: 200
@@ -188,7 +158,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text13-3_3
+      name: text12-5_3
       rect:
         serializedVersion: 2
         x: 300
@@ -201,7 +171,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text13-3_4
+      name: text12-5_4
       rect:
         serializedVersion: 2
         x: 400
@@ -214,7 +184,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text13-3_5
+      name: text12-5_5
       rect:
         serializedVersion: 2
         x: 500
@@ -227,7 +197,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text13-3_6
+      name: text12-5_6
       rect:
         serializedVersion: 2
         x: 600
@@ -240,7 +210,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text13-3_7
+      name: text12-5_7
       rect:
         serializedVersion: 2
         x: 700
@@ -253,7 +223,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text13-3_8
+      name: text12-5_8
       rect:
         serializedVersion: 2
         x: 800
@@ -266,7 +236,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text13-3_9
+      name: text12-5_9
       rect:
         serializedVersion: 2
         x: 900
@@ -279,20 +249,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text13-3_10
-      rect:
-        serializedVersion: 2
-        x: 1000
-        y: 100
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: text13-3_11
+      name: text12-5_10
       rect:
         serializedVersion: 2
         x: 0
@@ -305,7 +262,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text13-3_12
+      name: text12-5_11
       rect:
         serializedVersion: 2
         x: 100
@@ -318,7 +275,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text13-3_13
+      name: text12-5_12
       rect:
         serializedVersion: 2
         x: 200
@@ -331,7 +288,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text13-3_14
+      name: text12-5_13
       rect:
         serializedVersion: 2
         x: 300
@@ -344,7 +301,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text13-3_15
+      name: text12-5_14
       rect:
         serializedVersion: 2
         x: 400
@@ -357,7 +314,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text13-3_16
+      name: text12-5_15
       rect:
         serializedVersion: 2
         x: 500
@@ -370,7 +327,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text13-3_17
+      name: text12-5_16
       rect:
         serializedVersion: 2
         x: 600
@@ -383,7 +340,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text13-3_18
+      name: text12-5_17
       rect:
         serializedVersion: 2
         x: 700
@@ -396,7 +353,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text13-3_19
+      name: text12-5_18
       rect:
         serializedVersion: 2
         x: 800
@@ -409,7 +366,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text13-3_20
+      name: text12-5_19
       rect:
         serializedVersion: 2
         x: 900
@@ -422,7 +379,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text13-3_21
+      name: text12-5_20
       rect:
         serializedVersion: 2
         x: 1000
@@ -435,10 +392,49 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text13-3_22
+      name: text12-5_21
       rect:
         serializedVersion: 2
         x: 1100
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: text12-5_22
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: text12-5_23
+      rect:
+        serializedVersion: 2
+        x: 1300
+        y: 0
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: text12-5_24
+      rect:
+        serializedVersion: 2
+        x: 1400
         y: 0
         width: 100
         height: 100

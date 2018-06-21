@@ -1,39 +1,87 @@
 fileFormatVersion: 2
-guid: c05f193b23e645047a770f56346c5d95
-timeCreated: 1526358289
+guid: 345bd81b18a389846a12c75f62b362a9
+timeCreated: 1529405972
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: text4-9_0
-    21300002: text4-9_1
-    21300004: text4-9_2
-    21300006: text4-9_3
-    21300008: text4-9_4
-    21300010: text4-9_5
-    21300012: text4-9_6
-    21300014: text4-9_7
-    21300016: text4-9_8
-    21300018: text4-9_9
-    21300020: text4-9_10
-    21300022: text4-9_11
-    21300024: text4-9_12
-    21300026: text4-9_13
-    21300028: text4-9_14
-    21300030: text4-9_15
-    21300032: text4-9_16
-    21300034: text4-9_17
-    21300036: text4-9_18
-    21300038: text4-9_19
-    21300040: text4-9_20
-    21300042: text4-9_21
-    21300044: text4-9_22
-    21300046: text4-9_23
-    21300048: text4-9_24
-    21300050: text4-9_25
-    21300052: text4-9_26
-    21300054: text4-9_27
-    21300056: text4-9_28
-    21300058: text4-9_29
+    21300000: text2-4_0
+    21300002: text2-4_1
+    21300004: text2-4_2
+    21300006: text2-4_3
+    21300008: text2-4_4
+    21300010: text2-4_5
+    21300012: text2-4_6
+    21300014: text2-4_7
+    21300016: text2-4_8
+    21300018: text2-4_9
+    21300020: text2-4_10
+    21300022: text2-4_11
+    21300024: text2-4_12
+    21300026: text2-4_13
+    21300028: text2-4_14
+    21300030: text2-4_15
+    21300032: text2-4_16
+    21300034: text2-4_17
+    21300036: text2-4_18
+    21300038: text2-4_19
+    21300040: text2-4_20
+    21300042: text2-4_21
+    21300044: text2-4_22
+    21300046: text2-4_23
+    21300048: text2-4_24
+    21300050: text2-4_25
+    21300052: text3-5_0
+    21300054: text3-5_1
+    21300056: text3-5_2
+    21300058: text3-5_3
+    21300060: text3-5_4
+    21300062: text3-5_5
+    21300064: text3-5_6
+    21300066: text3-5_7
+    21300068: text3-5_8
+    21300070: text3-5_9
+    21300072: text3-5_10
+    21300074: text3-5_11
+    21300076: text3-5_12
+    21300078: text3-5_13
+    21300080: text3-5_14
+    21300082: text3-5_15
+    21300084: text3-5_16
+    21300086: text3-5_17
+    21300088: text3-5_18
+    21300090: text3-5_19
+    21300092: text3-5_20
+    21300094: text3-5_21
+    21300096: text3-5_22
+    21300098: text3-5_23
+    21300100: text3-5_24
+    21300102: text3-5_25
+    21300104: text3-6_0
+    21300106: text3-6_1
+    21300108: text3-6_2
+    21300110: text3-6_3
+    21300112: text3-6_4
+    21300114: text3-6_5
+    21300116: text3-6_6
+    21300118: text3-6_7
+    21300120: text3-6_8
+    21300122: text3-6_9
+    21300124: text3-6_10
+    21300126: text3-6_11
+    21300128: text3-6_12
+    21300130: text3-6_13
+    21300132: text3-6_14
+    21300134: text3-6_15
+    21300136: text3-6_16
+    21300138: text3-6_17
+    21300140: text3-6_18
+    21300142: text3-6_19
+    21300144: text3-6_20
+    21300146: text3-6_21
+    21300148: text3-6_22
+    21300150: text3-6_23
+    21300152: text3-6_24
+    21300154: text3-6_25
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -156,7 +204,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: text4-9_0
+      name: text3-6_0
       rect:
         serializedVersion: 2
         x: 0
@@ -169,7 +217,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text4-9_1
+      name: text3-6_1
       rect:
         serializedVersion: 2
         x: 100
@@ -182,7 +230,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text4-9_2
+      name: text3-6_2
       rect:
         serializedVersion: 2
         x: 200
@@ -195,7 +243,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text4-9_3
+      name: text3-6_3
       rect:
         serializedVersion: 2
         x: 300
@@ -208,7 +256,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text4-9_4
+      name: text3-6_4
       rect:
         serializedVersion: 2
         x: 400
@@ -221,7 +269,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text4-9_5
+      name: text3-6_5
       rect:
         serializedVersion: 2
         x: 500
@@ -234,7 +282,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text4-9_6
+      name: text3-6_6
       rect:
         serializedVersion: 2
         x: 600
@@ -247,7 +295,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text4-9_7
+      name: text3-6_7
       rect:
         serializedVersion: 2
         x: 700
@@ -260,7 +308,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text4-9_8
+      name: text3-6_8
       rect:
         serializedVersion: 2
         x: 800
@@ -273,7 +321,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text4-9_9
+      name: text3-6_9
       rect:
         serializedVersion: 2
         x: 900
@@ -286,7 +334,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text4-9_10
+      name: text3-6_10
       rect:
         serializedVersion: 2
         x: 1000
@@ -299,7 +347,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text4-9_11
+      name: text3-6_11
       rect:
         serializedVersion: 2
         x: 1100
@@ -312,7 +360,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text4-9_12
+      name: text3-6_12
       rect:
         serializedVersion: 2
         x: 1200
@@ -325,7 +373,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text4-9_13
+      name: text3-6_13
       rect:
         serializedVersion: 2
         x: 1300
@@ -338,7 +386,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text4-9_14
+      name: text3-6_14
       rect:
         serializedVersion: 2
         x: 1400
@@ -351,7 +399,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text4-9_15
+      name: text3-6_15
       rect:
         serializedVersion: 2
         x: 1500
@@ -364,7 +412,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text4-9_16
+      name: text3-6_16
       rect:
         serializedVersion: 2
         x: 1600
@@ -377,7 +425,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text4-9_17
+      name: text3-6_17
       rect:
         serializedVersion: 2
         x: 0
@@ -390,7 +438,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text4-9_18
+      name: text3-6_18
       rect:
         serializedVersion: 2
         x: 100
@@ -403,7 +451,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text4-9_19
+      name: text3-6_19
       rect:
         serializedVersion: 2
         x: 200
@@ -416,7 +464,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text4-9_20
+      name: text3-6_20
       rect:
         serializedVersion: 2
         x: 300
@@ -429,7 +477,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text4-9_21
+      name: text3-6_21
       rect:
         serializedVersion: 2
         x: 400
@@ -442,7 +490,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text4-9_22
+      name: text3-6_22
       rect:
         serializedVersion: 2
         x: 500
@@ -455,7 +503,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text4-9_23
+      name: text3-6_23
       rect:
         serializedVersion: 2
         x: 600
@@ -468,7 +516,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text4-9_24
+      name: text3-6_24
       rect:
         serializedVersion: 2
         x: 700
@@ -481,62 +529,10 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text4-9_25
+      name: text3-6_25
       rect:
         serializedVersion: 2
         x: 800
-        y: 0
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: text4-9_26
-      rect:
-        serializedVersion: 2
-        x: 900
-        y: 0
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: text4-9_27
-      rect:
-        serializedVersion: 2
-        x: 1000
-        y: 0
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: text4-9_28
-      rect:
-        serializedVersion: 2
-        x: 1100
-        y: 0
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: text4-9_29
-      rect:
-        serializedVersion: 2
-        x: 1200
         y: 0
         width: 100
         height: 100

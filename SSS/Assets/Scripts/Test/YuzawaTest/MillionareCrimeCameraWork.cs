@@ -11,7 +11,7 @@ public class MillionareCrimeCameraWork : MonoBehaviour {
     [SerializeField]int _count;
 	[SerializeField]float _distance;
 
-    int Number_of_times = 365;
+    int Number_of_times = 320;
 	Vector3 _nowPos;
     float SPEED = -0.01f;
 	float a;
@@ -22,7 +22,7 @@ public class MillionareCrimeCameraWork : MonoBehaviour {
         _time = 0; 
 		//pos = new Vector3 (1, 1, 1);
 		_nowPos = _camera.transform.position; 
-		_distance = _nowPos.y - (-5.3f);	//移動距離の算出
+		_distance = _nowPos.y - (-5.5f);	//移動距離の算出
 		//Vector3 _nowPos
 		//pos.y = _nowPos + a;
 	}
@@ -31,7 +31,7 @@ public class MillionareCrimeCameraWork : MonoBehaviour {
 	void Update ( ) {
 
         if (_time == 0) {
-			_millionareCamera.LookTarget(new Vector3(0f, -5.3f, _camera.transform.position.z));
+			_millionareCamera.LookTarget(new Vector3(0f, -5.5f, _camera.transform.position.z));
 			_millionareCamera.ChangeOrthographicSize(_defaultOrthgraphicSize);
         }
 

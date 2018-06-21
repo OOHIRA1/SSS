@@ -5,6 +5,7 @@ using UnityEngine;
 public class DangerousWeaponCheckers : MonoBehaviour {
 
 	[SerializeField]Cursor _cursor = null;
+	[SerializeField]GameObject _dengerWwaponUI = null;
 	bool _cheker = true;
 
 
@@ -16,13 +17,15 @@ public class DangerousWeaponCheckers : MonoBehaviour {
 		
 		audioSource = GetComponent<AudioSource>();
 
-
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (_cheker == true) {
+		if (_cheker) {
 			Check ();
+		}
+		if (!_dengerWwaponUI.activeInHierarchy) {
+			Checking ();
 		}
 	}
 
@@ -31,5 +34,9 @@ public class DangerousWeaponCheckers : MonoBehaviour {
 		audioSource.PlayOneShot(Accent44, 0.7F);
 			_cheker = false;
 		}
+	}
+		
+	public void Checking(){
+			_cheker = true;
 	}
 }
