@@ -24,23 +24,22 @@ public class EvidenceIcon : MonoBehaviour {
 
 	Animator _animator;
 	SoundLibrary _soundLibrary;
+	Vector3 _firstPos;	//証拠品アイコンの初期位置
 	[SerializeField] ParabolicTrajectory _evidenceIconTrajectory = null;	//証拠品アイコンの軌跡　※uGUIで作っているため直に座標を指定
 	int _count;	//上下に動く時に使う変数(-50~50)
-	Vector3 _firstPos;	//証拠品アイコンの初期位置
 
 
 	// Use this for initialization
 	void Start () {
 		_animator = GetComponent<Animator> ();
 		_soundLibrary = GetComponent<SoundLibrary> ();
-		Vector2 pos = transform.position;
+		_firstPos = transform.localPosition;//事件現場はスライド形式で座標が移動するのでローカル座標にして座標を固定する
 		Vector2 desPos = _evidenceIconTrajectory._destination;
 		float a = _evidenceIconTrajectory._a;
-		_evidenceIconTrajectory._p = -(pos.y - desPos.y) / ((pos.x - desPos.x) * 2 * a) + (pos.x + desPos.x) / 2;	//p = -(1/2a)*(平均変化率) + (x座標の相加平均) より算出される
+		_evidenceIconTrajectory._p = -(_firstPos.y - desPos.y) / ((_firstPos.x - desPos.x) * 2 * a) + (_firstPos.x + desPos.x) / 2;	//p = -(1/2a)*(平均変化率) + (x座標の相加平均) より算出される
 		float p = _evidenceIconTrajectory._p;
 		_evidenceIconTrajectory._q = desPos.y - a * (desPos.x - p) * (desPos.x - p);								//q = y -a(x-p)^2 より算出される
 		_count = COUNT_INIT_VALUE;
-		_firstPos = transform.position;
 		this.gameObject.SetActive (false);//ResetPos()がStart()を入る前に呼ばれて_firstPosが証拠品アイコンの初期位置を上手く取れないバグ対策に先にStartを呼んで非アクティブ化
 	}
 

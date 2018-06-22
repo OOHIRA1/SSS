@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class StartButton : MonoBehaviour {
+    [SerializeField] AudioProjector _audioProjector = null;
+    [SerializeField] AgainBGM _againBGM = null;
 	Image _buttonImage;
 
     public Sprite _stopSprite;
@@ -31,11 +33,15 @@ public class StartButton : MonoBehaviour {
 			_playing = true;
 			_buttonImage.sprite = _stopSprite;
 			audioSource.PlayOneShot(tap_playback, 0.7F);
+            _audioProjector.ProjectorPause();
+            _againBGM.AgainPlayBGM();
         }
         else {
 			_playing = false;
 			_buttonImage.sprite = _startSprite;
 			audioSource.PlayOneShot(tap_pause, 0.7F);
+            _audioProjector.ProjectorPlay();
+            _againBGM.StopBGM();
         }
 
     }

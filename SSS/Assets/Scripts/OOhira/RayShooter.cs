@@ -30,7 +30,7 @@ public class RayShooter : MonoBehaviour {
 	//============================================================================
 	//--RayをscreenPointへ飛ばし検出した2Dコライダーの情報(RaycastHit2D)を返す関数
 	public RaycastHit2D Shoot( Vector3 screenPoint ){
-		if (!_rayShootable) return Physics2D.Raycast(Vector2.zero, Vector2.zero);
+		if (!_rayShootable) return new RaycastHit2D();//nullを返すようにする
 		Ray ray = Camera.main.ScreenPointToRay ( screenPoint );
 		RaycastHit2D hit = Physics2D.Raycast (ray.origin, ray.direction);
 		Debug.DrawRay (ray.origin, ray.direction * _drawRayDistance, Color.red);
