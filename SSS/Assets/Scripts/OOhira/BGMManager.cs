@@ -11,7 +11,8 @@ public class BGMManager : MonoBehaviour {
 		CRIME_SCENE,
 		DETECTIVE_OFFICE,
 		CHOOSE,
-		SIXTY_ANIMATION
+		SIXTY_ANIMATION,
+		CLIMAX_BGM
 	}
 
 	SoundLibrary _soundLibrary;
@@ -90,6 +91,11 @@ public class BGMManager : MonoBehaviour {
 				break;
 			}
 			break;
+		case "ClimaxBattle":
+			if (!_soundLibrary.IsPlaying ((int)BGMClip.CLIMAX_BGM)) {
+				_soundLibrary.PlaySound ((int)BGMClip.CLIMAX_BGM);
+			}
+			break;
 		default:
 			_soundLibrary.StopSound ();
 			break;
@@ -118,6 +124,12 @@ public class BGMManager : MonoBehaviour {
 	//--音を一時停止する関数
 	public void PauseBGM() {
 		_soundLibrary.PauseSound ();
+	}
+
+
+	//--音量調整をする関数
+	public void ChangeVolume( float volume ) {
+		_soundLibrary.ChangeVolume (volume);
 	}
 	//======================================================================
 	//======================================================================

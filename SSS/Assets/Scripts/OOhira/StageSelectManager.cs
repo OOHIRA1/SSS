@@ -23,6 +23,7 @@ public class StageSelectManager : MonoBehaviour {
 		if (!_gameDataManager.CheckAdvancedData (GameDataManager.CheckPoint.CLEAR_EPISODE1)) {
 			_clearStamp.SetActive (false);//エピソード1をクリアしていないとスタンプが押されない
 		}
+		_bgmManager.UpdateBGM ();//ゲームリザルトシーンから遷移した後に音を流すため
 	}
 	
 	// Update is called once per frame

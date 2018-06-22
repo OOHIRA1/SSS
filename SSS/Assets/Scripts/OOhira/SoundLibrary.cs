@@ -72,6 +72,12 @@ public class SoundLibrary : MonoBehaviour {
 	public void PauseSound() {
 		_audioSource.Pause ();
 	}
+
+
+	//--音量調整をする関数
+	public void ChangeVolume( float volume ) {
+		_audioSource.volume = volume;
+	}
 	//=========================================================================
 	//=========================================================================
 }
