@@ -88,8 +88,8 @@ public class ClimaxBattleManager : MonoBehaviour {
 		}
 		Debug.Log (_state);
 
-		ChangeActive ( _playerLifeUI, State.BATTLE, _bgmManager.IsPlaying(BGMManager.BGMClip.TITLE) );
-		ChangeActive ( _timeControllUI, State.BATTLE, _bgmManager.IsPlaying(BGMManager.BGMClip.TITLE) );
+		ChangeActive ( _playerLifeUI, State.BATTLE, _bgmManager.IsPlaying(BGMManager.BGMClip.CLIMAX_BGM) );
+		ChangeActive ( _timeControllUI, State.BATTLE, _bgmManager.IsPlaying(BGMManager.BGMClip.CLIMAX_BGM) );
 		_detective.SetIsMove (false);//探偵のタップ操作不可
 	}
 
@@ -175,7 +175,7 @@ public class ClimaxBattleManager : MonoBehaviour {
 				if (_cutinControlls[0].GetFinishFlag ()) {
 					_state = State.DETECTIVE_TALK;
 					_audioSourceClap.Stop ();//拍手音停止
-					//_bgmManager.UpdateBGM();//BGMを流す
+					_bgmManager.UpdateBGM();//BGMを流す
 				}
 			}
 		}
@@ -201,7 +201,7 @@ public class ClimaxBattleManager : MonoBehaviour {
 
 	//--BATTLEのステートの時の処理をする関数
 	void BattleAction() {
-		if (_bgmManager.IsPlaying (BGMManager.BGMClip.TITLE)) return;//音が鳴りやむまで操作を受け付けない
+		if (_bgmManager.IsPlaying (BGMManager.BGMClip.CLIMAX_BGM)) return;//音が鳴りやむまで操作を受け付けない
 		if (!_climaxBattleSystem.gameObject.activeInHierarchy) {
 			_detective.SetIsMove (false);
 			_climaxBattleSystem.gameObject.SetActive (true);//バトルシステム始動！
