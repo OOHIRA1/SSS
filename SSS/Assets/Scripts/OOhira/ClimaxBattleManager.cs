@@ -24,7 +24,6 @@ public class ClimaxBattleManager : MonoBehaviour {
 	[SerializeField] Sprite _detectiveOffice = null;	//探偵ラボの背景画像
 	[SerializeField] Hanamichi _hanamichi = null;
 	[SerializeField] Detective _detective = null;
-	[SerializeField] RayShooter _rayshooter = null;
 	[SerializeField] GameObject _playerLifeUI = null;	//プレイヤーのライフUI
 	[SerializeField] Vector3 _detectiveMovePos = new Vector3(0, 0, 0);
 	[SerializeField] CutinControll[] _cutinControlls = new CutinControll[2];
@@ -44,6 +43,7 @@ public class ClimaxBattleManager : MonoBehaviour {
 	[SerializeField] GameObject _timeControllUI = null;		//シークバーUI
 	[SerializeField] AudioSource _audioSourceClap = null;	//拍手音
 	[SerializeField] DetectiveTalk _detectiveTalk = null;
+	BGMManager _bgmManager;
 
 
 
@@ -58,6 +58,7 @@ public class ClimaxBattleManager : MonoBehaviour {
 		//-------------------------------------------------------------------------------------------
 		_questionEffectAppearFlag = false;
 		_startfallingFlag = false;
+		_bgmManager = GameObject.FindWithTag ("BGMManager").GetComponent<BGMManager> ();
 	}
 	
 	// Update is called once per frame
@@ -86,8 +87,8 @@ public class ClimaxBattleManager : MonoBehaviour {
 		}
 		Debug.Log (_state);
 
-		ChangeActive ( _playerLifeUI, State.BATTLE );
-		ChangeActive ( _timeControllUI, State.BATTLE );
+		ChangeActive ( _playerLifeUI, State.BATTLE, _bgmManager.IsPlaying(BGMManager.BGMClip.TITLE) );
+		ChangeActive ( _timeControllUI, State.BATTLE, _bgmManager.IsPlaying(BGMManager.BGMClip.TITLE) );
 
 	}
 
@@ -173,6 +174,7 @@ public class ClimaxBattleManager : MonoBehaviour {
 				if (_cutinControlls[0].GetFinishFlag ()) {
 					_state = State.DETECTIVE_TALK;
 					_audioSourceClap.Stop ();//拍手音停止
+					//_bgmManager.UpdateBGM();//BGMを流す
 				}
 			}
 		}
@@ -184,20 +186,21 @@ public class ClimaxBattleManager : MonoBehaviour {
 		if (!_detectiveTalk.gameObject.activeInHierarchy) {
 			_detectiveTalk.gameObject.SetActive (true);
 		}
+		//次の文を表示するか次のStateに移動する処理-------------------------------
 		if (Input.GetMouseButtonDown (0)) {
-			//次の文を表示するか次のStateに移動する処理-------------------------------
-			if (_detectiveTalk.GetTalkFinishedFlag ()) {
-				_detectiveTalk.gameObject.SetActive (false);
-				_state = State.BATTLE;
-			} else {
-				_detectiveTalk.Talk ();
-			}
-			//-----------------------------------------------------------------------	
+			_detectiveTalk.Talk ();
 		}
+		if (_detectiveTalk.GetTalkFinishedFlag ()) {
+			_detectiveTalk.gameObject.SetActive (false);
+			_bgmManager.StopBGMWithFadeOut ();
+			_state = State.BATTLE;
+		}
+		//-----------------------------------------------------------------------	
 	}
 
 	//--BATTLEのステートの時の処理をする関数
 	void BattleAction() {
+		if (_bgmManager.IsPlaying (BGMManager.BGMClip.TITLE)) return;//音が鳴りやむまで操作を受け付けない
 		if (!_climaxBattleSystem.gameObject.activeInHierarchy) {
 			_detective.SetIsMove (false);
 			_climaxBattleSystem.gameObject.SetActive (true);//バトルシステム始動！
