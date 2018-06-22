@@ -59,6 +59,7 @@ public class ClimaxBattleManager : MonoBehaviour {
 		_questionEffectAppearFlag = false;
 		_startfallingFlag = false;
 		_bgmManager = GameObject.FindWithTag ("BGMManager").GetComponent<BGMManager> ();
+		_detective.SetIsMove (false);//探偵のタップ操作不可
 	}
 	
 	// Update is called once per frame
@@ -89,7 +90,7 @@ public class ClimaxBattleManager : MonoBehaviour {
 
 		ChangeActive ( _playerLifeUI, State.BATTLE, _bgmManager.IsPlaying(BGMManager.BGMClip.TITLE) );
 		ChangeActive ( _timeControllUI, State.BATTLE, _bgmManager.IsPlaying(BGMManager.BGMClip.TITLE) );
-
+		_detective.SetIsMove (false);//探偵のタップ操作不可
 	}
 
 
