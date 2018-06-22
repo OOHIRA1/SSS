@@ -57,6 +57,30 @@ public class Butler : MonoBehaviour {
 	public void MoveToPos( Vector3 pos ) {
 		StartCoroutine (MoveToPosCoroutine (pos));
 	}
+
+
+	//--執事を落下させる関数(クライマックスシーンで使用)
+	public void Fall() {
+		StartCoroutine ("FallCoroutine");
+	}
+
+
 	//=================================================================
 	//=================================================================
+
+
+	//--執事を落下させる関数(コルーチン)
+	IEnumerator FallCoroutine() {
+		_animManager.ButlerShock01 ();
+		Rigidbody2D rb = (Rigidbody2D)this.gameObject.AddComponent (typeof(Rigidbody2D));
+		rb.constraints = RigidbodyConstraints2D.None;
+		rb.velocity = new Vector3 (2,0,0);
+		float time = 0;
+		const float ROTATE_TIME = 3f;//回転時間
+		while(time < ROTATE_TIME) {
+			transform.Rotate (0, 0, -1f);
+			time += Time.deltaTime;
+			yield return new WaitForSeconds (Time.deltaTime);
+		}
+	}
 }

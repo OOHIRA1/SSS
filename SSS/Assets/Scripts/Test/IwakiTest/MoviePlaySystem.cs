@@ -213,13 +213,13 @@ public class MoviePlaySystem : MonoBehaviour {
     public float MovieTime( ) { return _bar.GetBarScale( ).x * _maxTime; }
 
 
-    ////ムービーが終わっているか取得する（ポイントの座標が最後まで行っているか取得）------      //MovieTimeだと同一フレーム上で計算するとき不都合があるので作成
-    //public bool MovieTimeMax( ) {
-    //    if ( _point.GetTransform( ).x >= _point.GetMaxRange( ) ) return true;
+    //ムービーが終わっているか取得する（ポイントの座標が最後まで行っているか取得）------      //MovieTimeだと同一フレーム上で計算するとき不都合があるので作成
+    public bool MovieTimeMax( ) {
+        if ( _point.GetTransform( ).x >= _point.GetMaxRange( ) ) return true;
 
-    //    return false;
+        return false;
 
-    //}
+    }
     //---------------------------------------------------------------------------------
 
 	//=======================================================================
