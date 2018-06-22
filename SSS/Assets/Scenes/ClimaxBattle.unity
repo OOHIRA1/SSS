@@ -2657,6 +2657,7 @@ MonoBehaviour:
   _moveTouchDown: -6
   _speed: 6
   _forcedSpeed: 1.15
+  _effectLibrary: {fileID: 0}
 --- !u!1 &1297585622
 GameObject:
   m_ObjectHideFlags: 0
@@ -3024,7 +3025,7 @@ Prefab:
     - target: {fileID: 114335205626546814, guid: 16aaee5ceb6cca14a97334cf8584b458,
         type: 2}
       propertyPath: _filePaths.Array.size
-      value: 13
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 224040744649365492, guid: 16aaee5ceb6cca14a97334cf8584b458,
         type: 2}
@@ -3119,67 +3120,87 @@ Prefab:
     - target: {fileID: 114335205626546814, guid: 16aaee5ceb6cca14a97334cf8584b458,
         type: 2}
       propertyPath: _filePaths.Array.data[1]
-      value: Text18/text18-2
+      value: Text24/text24-2
       objectReference: {fileID: 0}
     - target: {fileID: 114335205626546814, guid: 16aaee5ceb6cca14a97334cf8584b458,
         type: 2}
       propertyPath: _filePaths.Array.data[2]
-      value: Text18/text18-3
+      value: Text24/text24-3
       objectReference: {fileID: 0}
     - target: {fileID: 114335205626546814, guid: 16aaee5ceb6cca14a97334cf8584b458,
         type: 2}
       propertyPath: _filePaths.Array.data[3]
-      value: Text18/text18-4
+      value: Text24/text24-4
       objectReference: {fileID: 0}
     - target: {fileID: 114335205626546814, guid: 16aaee5ceb6cca14a97334cf8584b458,
         type: 2}
       propertyPath: _filePaths.Array.data[4]
-      value: Text18/text18-5
+      value: Text24/text24-5
       objectReference: {fileID: 0}
     - target: {fileID: 114335205626546814, guid: 16aaee5ceb6cca14a97334cf8584b458,
         type: 2}
       propertyPath: _filePaths.Array.data[5]
-      value: Text18/text18-6
+      value: Text24/text24-6
       objectReference: {fileID: 0}
     - target: {fileID: 114335205626546814, guid: 16aaee5ceb6cca14a97334cf8584b458,
         type: 2}
       propertyPath: _filePaths.Array.data[6]
-      value: Text18/text18-7
+      value: Text24/text24-7
       objectReference: {fileID: 0}
     - target: {fileID: 114335205626546814, guid: 16aaee5ceb6cca14a97334cf8584b458,
         type: 2}
       propertyPath: _filePaths.Array.data[7]
-      value: Text18/text18-8
+      value: Text24/text24-8
       objectReference: {fileID: 0}
     - target: {fileID: 114335205626546814, guid: 16aaee5ceb6cca14a97334cf8584b458,
         type: 2}
       propertyPath: _filePaths.Array.data[8]
-      value: Text18/text18-9
+      value: Text24/text24-9
       objectReference: {fileID: 0}
     - target: {fileID: 114335205626546814, guid: 16aaee5ceb6cca14a97334cf8584b458,
         type: 2}
       propertyPath: _filePaths.Array.data[9]
-      value: Text18/text18-10
+      value: Text24/text24-10
       objectReference: {fileID: 0}
     - target: {fileID: 114335205626546814, guid: 16aaee5ceb6cca14a97334cf8584b458,
         type: 2}
       propertyPath: _filePaths.Array.data[0]
-      value: Text18/text18-1
+      value: Text24/text24-1
       objectReference: {fileID: 0}
     - target: {fileID: 114335205626546814, guid: 16aaee5ceb6cca14a97334cf8584b458,
         type: 2}
       propertyPath: _filePaths.Array.data[10]
-      value: Text18/text18-11
+      value: Text24/text24-11
       objectReference: {fileID: 0}
     - target: {fileID: 114335205626546814, guid: 16aaee5ceb6cca14a97334cf8584b458,
         type: 2}
       propertyPath: _filePaths.Array.data[11]
-      value: Text18/text18-12
+      value: Text24/text24-12
       objectReference: {fileID: 0}
     - target: {fileID: 114335205626546814, guid: 16aaee5ceb6cca14a97334cf8584b458,
         type: 2}
       propertyPath: _filePaths.Array.data[12]
-      value: Text18/text18-13
+      value: Text24/text24-13
+      objectReference: {fileID: 0}
+    - target: {fileID: 114335205626546814, guid: 16aaee5ceb6cca14a97334cf8584b458,
+        type: 2}
+      propertyPath: _filePaths.Array.data[13]
+      value: Text24/text24-14
+      objectReference: {fileID: 0}
+    - target: {fileID: 114335205626546814, guid: 16aaee5ceb6cca14a97334cf8584b458,
+        type: 2}
+      propertyPath: _filePaths.Array.data[14]
+      value: Text24/text24-15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114335205626546814, guid: 16aaee5ceb6cca14a97334cf8584b458,
+        type: 2}
+      propertyPath: _filePaths.Array.data[15]
+      value: Text24/text24-16
+      objectReference: {fileID: 0}
+    - target: {fileID: 114335205626546814, guid: 16aaee5ceb6cca14a97334cf8584b458,
+        type: 2}
+      propertyPath: _filePaths.Array.data[16]
+      value: Text24/text24-17
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 16aaee5ceb6cca14a97334cf8584b458, type: 2}
@@ -4060,6 +4081,7 @@ MonoBehaviour:
   _point: {fileID: 455776089}
   _bar: {fileID: 2080489865}
   _movie: []
+  _startAndStopButton: {fileID: 0}
   _maxTime: 4
   _barTouchDown: 0
   _barTouchUp: 0
@@ -6001,6 +6023,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _drawRayDistance: 100
+  _rayShootable: 1
 --- !u!114 &2066571480
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,36 +1,29 @@
 fileFormatVersion: 2
-guid: 99d2ac64a7d1ce748837ff3645ece80b
-timeCreated: 1529241499
+guid: bc4914e2b465eca4997bd90d7c7d00c8
+timeCreated: 1529641199
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: text18-7_0
-    21300002: text18-7_1
-    21300004: text18-7_2
-    21300006: text18-7_3
-    21300008: text18-7_4
-    21300010: text18-7_5
-    21300012: text18-7_6
-    21300014: text18-7_7
-    21300016: text18-7_8
-    21300018: text18-7_9
-    21300020: text18-7_10
-    21300022: text18-7_11
-    21300024: text18-7_12
-    21300026: text18-7_13
-    21300028: text18-7_14
-    21300030: text18-7_15
-    21300032: text18-7_16
-    21300034: text18-7_17
-    21300036: text18-7_18
-    21300038: text18-7_19
-    21300040: text18-7_20
-    21300042: text18-7_21
-    21300044: text18-7_22
-    21300046: text18-7_23
-    21300048: text18-7_24
-    21300050: text18-7_25
-    21300052: text18-7_26
+    21300000: text24-16_0
+    21300002: text24-16_1
+    21300004: text24-16_2
+    21300006: text24-16_3
+    21300008: text24-16_4
+    21300010: text24-16_5
+    21300012: text24-16_6
+    21300014: text24-16_7
+    21300016: text24-16_8
+    21300018: text24-16_9
+    21300020: text24-16_10
+    21300022: text24-16_11
+    21300024: text24-16_12
+    21300026: text24-16_13
+    21300028: text24-16_14
+    21300030: text24-16_15
+    21300032: text24-16_16
+    21300034: text24-16_17
+    21300036: text24-16_18
+    21300038: text24-16_19
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -157,7 +150,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: text18-7_0
+      name: text24-16_0
       rect:
         serializedVersion: 2
         x: 0
@@ -171,7 +164,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text18-7_1
+      name: text24-16_1
       rect:
         serializedVersion: 2
         x: 100
@@ -185,7 +178,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text18-7_2
+      name: text24-16_2
       rect:
         serializedVersion: 2
         x: 200
@@ -199,7 +192,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text18-7_3
+      name: text24-16_3
       rect:
         serializedVersion: 2
         x: 300
@@ -213,7 +206,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text18-7_4
+      name: text24-16_4
       rect:
         serializedVersion: 2
         x: 400
@@ -227,7 +220,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text18-7_5
+      name: text24-16_5
       rect:
         serializedVersion: 2
         x: 500
@@ -241,7 +234,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text18-7_6
+      name: text24-16_6
       rect:
         serializedVersion: 2
         x: 600
@@ -255,7 +248,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text18-7_7
+      name: text24-16_7
       rect:
         serializedVersion: 2
         x: 700
@@ -269,7 +262,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text18-7_8
+      name: text24-16_8
       rect:
         serializedVersion: 2
         x: 800
@@ -283,7 +276,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text18-7_9
+      name: text24-16_9
       rect:
         serializedVersion: 2
         x: 900
@@ -297,7 +290,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text18-7_10
+      name: text24-16_10
       rect:
         serializedVersion: 2
         x: 1000
@@ -311,7 +304,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text18-7_11
+      name: text24-16_11
       rect:
         serializedVersion: 2
         x: 1100
@@ -325,7 +318,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text18-7_12
+      name: text24-16_12
       rect:
         serializedVersion: 2
         x: 1200
@@ -339,7 +332,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text18-7_13
+      name: text24-16_13
       rect:
         serializedVersion: 2
         x: 1300
@@ -353,49 +346,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text18-7_14
-      rect:
-        serializedVersion: 2
-        x: 1400
-        y: 100
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: text18-7_15
-      rect:
-        serializedVersion: 2
-        x: 1500
-        y: 100
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: text18-7_16
-      rect:
-        serializedVersion: 2
-        x: 1600
-        y: 100
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: text18-7_17
+      name: text24-16_14
       rect:
         serializedVersion: 2
         x: 0
@@ -409,7 +360,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text18-7_18
+      name: text24-16_15
       rect:
         serializedVersion: 2
         x: 100
@@ -423,7 +374,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text18-7_19
+      name: text24-16_16
       rect:
         serializedVersion: 2
         x: 200
@@ -437,7 +388,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text18-7_20
+      name: text24-16_17
       rect:
         serializedVersion: 2
         x: 300
@@ -451,7 +402,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text18-7_21
+      name: text24-16_18
       rect:
         serializedVersion: 2
         x: 400
@@ -465,66 +416,10 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text18-7_22
+      name: text24-16_19
       rect:
         serializedVersion: 2
         x: 500
-        y: 0
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: text18-7_23
-      rect:
-        serializedVersion: 2
-        x: 600
-        y: 0
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: text18-7_24
-      rect:
-        serializedVersion: 2
-        x: 700
-        y: 0
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: text18-7_25
-      rect:
-        serializedVersion: 2
-        x: 800
-        y: 0
-        width: 100
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: text18-7_26
-      rect:
-        serializedVersion: 2
-        x: 900
         y: 0
         width: 100
         height: 100
