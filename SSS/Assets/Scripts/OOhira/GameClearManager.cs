@@ -92,13 +92,12 @@ public class GameClearManager : MonoBehaviour {
 			_detectiveTalk.gameObject.SetActive (true);
 		} else {
 			if (Input.GetMouseButtonDown (0)) {
-				if (!_detectiveTalk.GetTalkFinishedFlag ()) {
-					_detectiveTalk.Talk ();
-				} else {
-					_detectiveTalk.gameObject.SetActive (false);
-					_gameDataManager.UpdateAdvancedData (GameDataManager.CheckPoint.CLEAR_EPISODE1);
-					_scenesManager.ScenesTransition ("StageSelect");
-				}
+				_detectiveTalk.Talk ();
+			}
+			if (_detectiveTalk.GetTalkFinishedFlag ()) {
+				_detectiveTalk.gameObject.SetActive (false);
+				_gameDataManager.UpdateAdvancedData (GameDataManager.CheckPoint.CLEAR_EPISODE1);
+				_scenesManager.ScenesTransition ("StageSelect");
 			}
 		}
 

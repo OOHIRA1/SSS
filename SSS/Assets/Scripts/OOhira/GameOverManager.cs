@@ -95,17 +95,16 @@ public class GameOverManager : MonoBehaviour {
 			_detectiveTalk.gameObject.SetActive (true);
 		} else {
 			if (Input.GetMouseButtonDown (0)) {
-				if (!_detectiveTalk.GetTalkFinishedFlag ()) {
-					_detectiveTalk.Talk ();
-				} else {
-					_detectiveTalk.gameObject.SetActive (false);
-					_curtain.Close ();
-					_confettiParticles.SetActive (false);
-					_spotLight.SetActive (false);
-					_gameOverText.SetActive (false);
-					_gabeges.SetActive (false);
-					_state = State.CONTINUE;
-				}
+				_detectiveTalk.Talk ();
+			}
+			if (_detectiveTalk.GetTalkFinishedFlag ()) {
+				_detectiveTalk.gameObject.SetActive (false);
+				_curtain.Close ();
+				_confettiParticles.SetActive (false);
+				_spotLight.SetActive (false);
+				_gameOverText.SetActive (false);
+				_gabeges.SetActive (false);
+				_state = State.CONTINUE;
 			}
 		}
 	}
