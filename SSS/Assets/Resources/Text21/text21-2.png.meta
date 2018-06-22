@@ -1,43 +1,43 @@
 fileFormatVersion: 2
-guid: 27046a5f11cac4f4085ae919ca356b82
-timeCreated: 1528538708
+guid: 08a5a3341cce6894aaea8c3d4979d85e
+timeCreated: 1526708785
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: text17-2_0
-    21300002: text17-2_1
-    21300004: text17-2_2
-    21300006: text17-2_3
-    21300008: text17-2_4
-    21300010: text17-2_5
-    21300012: text17-2_6
-    21300014: text17-2_7
-    21300016: text17-2_8
-    21300018: text17-2_9
-    21300020: text17-2_10
-    21300022: text17-2_11
-    21300024: text17-2_12
-    21300026: text17-2_13
-    21300028: text17-2_14
-    21300030: text17-2_15
-    21300032: text17-2_16
-    21300034: text17-2_17
-    21300036: text17-2_18
-    21300038: text17-2_19
-    21300040: text17-2_20
-    21300042: text17-2_21
-    21300044: text17-2_22
-    21300046: text17-2_23
-    21300048: text17-2_24
-    21300050: text17-2_25
-    21300052: text17-2_26
-    21300054: text17-2_27
-    21300056: text17-2_28
-    21300058: text17-2_29
-    21300060: text17-2_30
-    21300062: text17-2_31
-    21300064: text17-2_32
-    21300066: text17-2_33
+    21300000: text15-6_0
+    21300002: text15-6_1
+    21300004: text15-6_2
+    21300006: text15-6_3
+    21300008: text15-6_4
+    21300010: text15-6_5
+    21300012: text15-6_6
+    21300014: text15-6_7
+    21300016: text15-6_8
+    21300018: text15-6_9
+    21300020: text15-6_10
+    21300022: text15-6_11
+    21300024: text15-6_12
+    21300026: text15-6_13
+    21300028: text15-6_14
+    21300030: text15-6_15
+    21300032: text15-6_16
+    21300034: text15-6_17
+    21300036: text15-6_18
+    21300038: text15-6_19
+    21300040: text15-6_20
+    21300042: text15-6_21
+    21300044: text15-6_22
+    21300046: text15-6_23
+    21300048: text15-6_24
+    21300050: text15-6_25
+    21300052: text15-6_26
+    21300054: text15-6_27
+    21300056: text15-6_28
+    21300058: text15-6_29
+    21300060: text15-6_30
+    21300062: text15-6_31
+    21300064: text15-6_32
+    21300066: text15-6_33
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -160,7 +160,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: text17-2_0
+      name: text15-6_0
       rect:
         serializedVersion: 2
         x: 0
@@ -173,7 +173,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text17-2_1
+      name: text15-6_1
       rect:
         serializedVersion: 2
         x: 100
@@ -186,7 +186,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text17-2_2
+      name: text15-6_2
       rect:
         serializedVersion: 2
         x: 200
@@ -199,7 +199,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text17-2_3
+      name: text15-6_3
       rect:
         serializedVersion: 2
         x: 300
@@ -212,7 +212,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text17-2_4
+      name: text15-6_4
       rect:
         serializedVersion: 2
         x: 400
@@ -225,7 +225,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text17-2_5
+      name: text15-6_5
       rect:
         serializedVersion: 2
         x: 500
@@ -238,7 +238,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text17-2_6
+      name: text15-6_6
       rect:
         serializedVersion: 2
         x: 600
@@ -251,7 +251,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text17-2_7
+      name: text15-6_7
       rect:
         serializedVersion: 2
         x: 700
@@ -264,7 +264,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text17-2_8
+      name: text15-6_8
       rect:
         serializedVersion: 2
         x: 800
@@ -277,7 +277,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text17-2_9
+      name: text15-6_9
       rect:
         serializedVersion: 2
         x: 900
@@ -290,7 +290,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text17-2_10
+      name: text15-6_10
       rect:
         serializedVersion: 2
         x: 1000
@@ -303,7 +303,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text17-2_11
+      name: text15-6_11
       rect:
         serializedVersion: 2
         x: 1100
@@ -316,7 +316,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text17-2_12
+      name: text15-6_12
       rect:
         serializedVersion: 2
         x: 1200
@@ -329,7 +329,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text17-2_13
+      name: text15-6_13
       rect:
         serializedVersion: 2
         x: 1300
@@ -342,7 +342,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text17-2_14
+      name: text15-6_14
       rect:
         serializedVersion: 2
         x: 1400
@@ -355,7 +355,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text17-2_15
+      name: text15-6_15
       rect:
         serializedVersion: 2
         x: 1500
@@ -368,7 +368,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text17-2_16
+      name: text15-6_16
       rect:
         serializedVersion: 2
         x: 1600
@@ -381,7 +381,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text17-2_17
+      name: text15-6_17
       rect:
         serializedVersion: 2
         x: 0
@@ -394,7 +394,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text17-2_18
+      name: text15-6_18
       rect:
         serializedVersion: 2
         x: 100
@@ -407,7 +407,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text17-2_19
+      name: text15-6_19
       rect:
         serializedVersion: 2
         x: 200
@@ -420,7 +420,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text17-2_20
+      name: text15-6_20
       rect:
         serializedVersion: 2
         x: 300
@@ -433,7 +433,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text17-2_21
+      name: text15-6_21
       rect:
         serializedVersion: 2
         x: 400
@@ -446,7 +446,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text17-2_22
+      name: text15-6_22
       rect:
         serializedVersion: 2
         x: 500
@@ -459,7 +459,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text17-2_23
+      name: text15-6_23
       rect:
         serializedVersion: 2
         x: 600
@@ -472,7 +472,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text17-2_24
+      name: text15-6_24
       rect:
         serializedVersion: 2
         x: 700
@@ -485,7 +485,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text17-2_25
+      name: text15-6_25
       rect:
         serializedVersion: 2
         x: 800
@@ -498,7 +498,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text17-2_26
+      name: text15-6_26
       rect:
         serializedVersion: 2
         x: 900
@@ -511,7 +511,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text17-2_27
+      name: text15-6_27
       rect:
         serializedVersion: 2
         x: 1000
@@ -524,7 +524,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text17-2_28
+      name: text15-6_28
       rect:
         serializedVersion: 2
         x: 1100
@@ -537,7 +537,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text17-2_29
+      name: text15-6_29
       rect:
         serializedVersion: 2
         x: 1200
@@ -550,7 +550,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text17-2_30
+      name: text15-6_30
       rect:
         serializedVersion: 2
         x: 1300
@@ -563,7 +563,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text17-2_31
+      name: text15-6_31
       rect:
         serializedVersion: 2
         x: 1400
@@ -576,7 +576,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text17-2_32
+      name: text15-6_32
       rect:
         serializedVersion: 2
         x: 1500
@@ -589,7 +589,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text17-2_33
+      name: text15-6_33
       rect:
         serializedVersion: 2
         x: 1600

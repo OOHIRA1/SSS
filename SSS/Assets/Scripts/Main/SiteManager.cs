@@ -24,7 +24,6 @@ public class SiteManager : MonoBehaviour {
 	[ SerializeField ] Catcher _catcher = null;
 	[ SerializeField ] DetectiveTalk[ ] _detectiveTalk = null;
 	[ SerializeField ] RayShooter _camera = null;
-
 	EvidenceManager _evidenceManager;
     GameObject[] _evidenceTrigger;
     BGMManager _bgmManager;

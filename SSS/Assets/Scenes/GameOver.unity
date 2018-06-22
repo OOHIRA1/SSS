@@ -2041,17 +2041,17 @@ Prefab:
     - target: {fileID: 114335205626546814, guid: 16aaee5ceb6cca14a97334cf8584b458,
         type: 2}
       propertyPath: _filePaths.Array.data[1]
-      value: Text17/text17-2
+      value: Text23/text23-2
       objectReference: {fileID: 0}
     - target: {fileID: 114335205626546814, guid: 16aaee5ceb6cca14a97334cf8584b458,
         type: 2}
       propertyPath: _filePaths.Array.data[2]
-      value: Text17/text17-3
+      value: Text23/text23-3
       objectReference: {fileID: 0}
     - target: {fileID: 114335205626546814, guid: 16aaee5ceb6cca14a97334cf8584b458,
         type: 2}
       propertyPath: _filePaths.Array.data[3]
-      value: Text17/text17-4
+      value: Text23/text23-4
       objectReference: {fileID: 0}
     - target: {fileID: 114335205626546814, guid: 16aaee5ceb6cca14a97334cf8584b458,
         type: 2}
@@ -2086,7 +2086,7 @@ Prefab:
     - target: {fileID: 114335205626546814, guid: 16aaee5ceb6cca14a97334cf8584b458,
         type: 2}
       propertyPath: _filePaths.Array.data[0]
-      value: Text17/text17-1
+      value: Text23/text23-1
       objectReference: {fileID: 0}
     - target: {fileID: 114335205626546814, guid: 16aaee5ceb6cca14a97334cf8584b458,
         type: 2}

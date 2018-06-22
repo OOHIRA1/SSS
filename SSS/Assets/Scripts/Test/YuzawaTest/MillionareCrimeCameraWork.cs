@@ -11,7 +11,7 @@ public class MillionareCrimeCameraWork : MonoBehaviour {
     [SerializeField]int _count;
 	[SerializeField]float _distance;
 
-    int Number_of_times = 320;
+    int Number_of_times = 365;
 	Vector3 _nowPos;
     float SPEED = -0.01f;
 	float a;

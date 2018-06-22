@@ -42,6 +42,8 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
             _clickedClose[i] = false;
         }
 
+		_bgmManeger = GameObject.FindWithTag ("BGMManager").GetComponent<BGMManager> ();
+
     }
 	
 	// Update is called once per frame

@@ -1,23 +1,24 @@
 fileFormatVersion: 2
-guid: 5f8cfeaba1fb8ba44bc66cd2156ce38e
-timeCreated: 1528512846
+guid: 19674c5239d90dc45bba8d234c1b5062
+timeCreated: 1528538697
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: text19-1_0
-    21300002: text19-1_1
-    21300004: text19-1_2
-    21300006: text19-1_3
-    21300008: text19-1_4
-    21300010: text19-1_5
-    21300012: text19-1_6
-    21300014: text19-1_7
-    21300016: text19-1_8
-    21300018: text19-1_9
-    21300020: text19-1_10
-    21300022: text19-1_11
-    21300024: text19-1_12
-    21300026: text19-1_13
+    21300000: text17-1_0
+    21300002: text17-1_1
+    21300004: text17-1_2
+    21300006: text17-1_3
+    21300008: text17-1_4
+    21300010: text17-1_5
+    21300012: text17-1_6
+    21300014: text17-1_7
+    21300016: text17-1_8
+    21300018: text17-1_9
+    21300020: text17-1_10
+    21300022: text17-1_11
+    21300024: text17-1_12
+    21300026: text17-1_13
+    21300028: text17-1_14
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -140,7 +141,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: text19-1_0
+      name: text17-1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -153,7 +154,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text19-1_1
+      name: text17-1_1
       rect:
         serializedVersion: 2
         x: 100
@@ -166,7 +167,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text19-1_2
+      name: text17-1_2
       rect:
         serializedVersion: 2
         x: 200
@@ -179,7 +180,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text19-1_3
+      name: text17-1_3
       rect:
         serializedVersion: 2
         x: 300
@@ -192,7 +193,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text19-1_4
+      name: text17-1_4
       rect:
         serializedVersion: 2
         x: 400
@@ -205,7 +206,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text19-1_5
+      name: text17-1_5
       rect:
         serializedVersion: 2
         x: 500
@@ -218,7 +219,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text19-1_6
+      name: text17-1_6
       rect:
         serializedVersion: 2
         x: 600
@@ -231,7 +232,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text19-1_7
+      name: text17-1_7
       rect:
         serializedVersion: 2
         x: 700
@@ -244,7 +245,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text19-1_8
+      name: text17-1_8
       rect:
         serializedVersion: 2
         x: 800
@@ -257,7 +258,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text19-1_9
+      name: text17-1_9
       rect:
         serializedVersion: 2
         x: 900
@@ -270,7 +271,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text19-1_10
+      name: text17-1_10
       rect:
         serializedVersion: 2
         x: 1000
@@ -283,7 +284,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text19-1_11
+      name: text17-1_11
       rect:
         serializedVersion: 2
         x: 1100
@@ -296,7 +297,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text19-1_12
+      name: text17-1_12
       rect:
         serializedVersion: 2
         x: 1200
@@ -309,10 +310,23 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: text19-1_13
+      name: text17-1_13
       rect:
         serializedVersion: 2
         x: 1300
+        y: 100
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: text17-1_14
+      rect:
+        serializedVersion: 2
+        x: 1400
         y: 100
         width: 100
         height: 100

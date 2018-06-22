@@ -12,31 +12,35 @@ public class MoviePlaySystem : MonoBehaviour {
 	[ SerializeField ] StartButton _startAndStopButton = null;
 								
 	[SerializeField] float _maxTime  = 60.0f;		//最大再生時間
-
-	float _forcedPosParSecond;					    //pointの1秒当たりに進む座標
-	bool _stop;										//再生されているか
-
 	[SerializeField] int _barTouchDown = 180;		//バーのタッチできる領域
 	[SerializeField] int _barTouchUp = 240;
 
+	float _forcedPosParSecond;					    //pointの1秒当たりに進む座標
+
+	bool _stop;										//再生されているか
 	bool _isOperation;								//操作可能かどうか
 	bool _isFixed;									//固定するかどうか
 	bool _isReturn;									//場所を戻すかどうか
 	bool _isMouseMove;								//マウス操作が出来るかどうか
 
+    bool _onlyFlame;                                  //一フレームだけしたい処理
+
 	Vector2 _pointPos;
 	Vector2 _prePointPos;
+    Vector2 _FastTouchPos;                            //タッチした最初のpos
 
 	// Use this for initialization
 	void Start( ) {
 		_pointPos    = Vector2.zero;
 		_prePointPos = Vector2.zero;
+        _FastTouchPos = Vector2.zero;
 		_forcedPosParSecond = _point.GetMaxRange( ) / _maxTime;
 		_stop = true;
 		_isOperation = true;
 		_isFixed = false;
 		_isReturn = false;
 		_isMouseMove = true;
+        _onlyFlame = false; 
 	}
 	
 	// Update is called once per frame
@@ -55,30 +59,54 @@ public class MoviePlaySystem : MonoBehaviour {
 
 	}
 
-	//--ポイントの座標を更新する関数
+	//--ポイントの座標を更新する関数----------------------------------------------------------------------------------
 	void PointUpdate( ) {
 		 _pointPos = _point.GetTransform( );
-
-		
 			
-		if ( !_stop ) {
+
+		if ( !_stop ) {             //動画が再生されていたら
 			_pointPos.x = _point.GetTransform( ).x + ( _forcedPosParSecond * Time.deltaTime );
 		}
 
 		
-		if ( _isMouseMove ) {
+		if ( _isMouseMove ) {       //マウス操作が可能だったら
+
+            //マウスを押したら--------------------------------------------------------------------------------------------------------
 			if ( Input.GetMouseButton( 0 ) ) {	//マウスを押したかどうか
+
 				Vector2 mousePos = Vector2.zero;
 				mousePos = GetMouse( );
-				if ( mousePos.y >= _barTouchDown && mousePos.y <= _barTouchUp ) {
-					_pointPos.x = mousePos.x;
+                
+                //ボタンが押されたときの最初のフレームの座標を取得する-----------------------
+                if ( !_onlyFlame ) {
+                    _FastTouchPos = mousePos;
+                    _onlyFlame = true;      //１フレームだけ取得したら処理できないようにする
+                }
+                //----------------------------------------------------------------------------
+
+                //タッチ操作処理--------------------------------------------------------------
+                if ( _FastTouchPos.y >= _barTouchDown && _FastTouchPos.y <= _barTouchUp ) {     //押したときの最初の位置がタッチ領域内だったら処理する(ホールド対応)
+				    if ( mousePos.y >= _barTouchDown && mousePos.y <= _barTouchUp ) {           //押している場所がタッチ領域だったら処理(ホールド対応)
+				    	_pointPos.x = mousePos.x;
+                    }
 				}
+                //-----------------------------------------------------------------------------
 			}
+            //---------------------------------------------------------------------------------------------
+
+
+            //マウスを放したら処理-----------------
+            if ( Input.GetMouseButtonUp( 0 ) ) {
+                _FastTouchPos = Vector2.zero;
+                _onlyFlame = false;
+            }
+            //--------------------------------------
 
 		}
 
 		_point.MovePosition( _pointPos );
 	}
+    //----------------------------------------------------------------------------------------------------------------------------------
 
 	//--バーのスケールを更新する関数
 	void BarUpdate( ) {
