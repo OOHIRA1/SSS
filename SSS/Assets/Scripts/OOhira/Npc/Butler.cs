@@ -52,6 +52,29 @@ public class Butler : MonoBehaviour {
 
 
 	//=================================================================
+	//コライダー検出系
+	void OnTriggerStay2D( Collider2D col ) {
+		if (col.gameObject.scene.name != "DetectiveOffice") return;//ラボシーン以外受け付けない
+		if (col.tag == "Player") {
+			Detective detective = col.gameObject.GetComponent<Detective> ();
+			if (!detective.GetIsAnimWalk ()) {
+				_animManager.ButlerTalk01 ();//話すアニメーション
+			}
+		}
+	}
+
+
+	void OnTriggerExit2D( Collider2D col ) {
+		if (col.gameObject.scene.name != "DetectiveOffice") return;//ラボシーン以外受け付けない
+		if (col.tag == "Player") {
+			_animManager.ButlerTalk02 ();//話すアニメーション終了
+		}
+	}
+	//=================================================================
+	//=================================================================
+
+
+	//=================================================================
 	//public関数
 	//--posに移動させる関数(x座標→y座標)
 	public void MoveToPos( Vector3 pos ) {
@@ -63,8 +86,6 @@ public class Butler : MonoBehaviour {
 	public void Fall() {
 		StartCoroutine ("FallCoroutine");
 	}
-
-
 	//=================================================================
 	//=================================================================
 

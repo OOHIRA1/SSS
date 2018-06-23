@@ -27,4 +27,12 @@ public class DetectiveOfficeMcsScript : MonoBehaviour {
             _animator.SetBool( "MrsWalk", false );
         }
     }
+
+
+	public void Talk01() {
+		_animator.SetBool( "MrsTalk", true );
+	}
+	public void Talk02() {
+		_animator.SetBool( "MrsTalk", false );
+	}
 }
