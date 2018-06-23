@@ -60,7 +60,7 @@ public class StartButton : MonoBehaviour {
 		if ( _playing ) {
 			_playing = false;
 			_buttonImage.sprite = _startSprite;
-		}
+        }
 	}
 	//--------------------------------------------
 }

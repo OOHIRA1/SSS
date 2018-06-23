@@ -13,6 +13,7 @@ public class AgainBGM : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        _bgmManeger = GameObject.FindWithTag("BGMManager").GetComponent<BGMManager>();
         _check = false;
     }
 
@@ -32,7 +33,7 @@ public class AgainBGM : MonoBehaviour
 
     public void StopBGM()
     {
-        audioSource.Stop();
+        _bgmManeger.StopBGM();
         _check = true;
     }
 }
