@@ -76,7 +76,7 @@ public class MoviePlaySystem : MonoBehaviour {
 
 				Vector2 mousePos = Vector2.zero;
 				mousePos = GetMouse( );
-                
+              
                 //ボタンが押されたときの最初のフレームの座標を取得する-----------------------
                 if ( !_onlyFlame ) {
                     _FastTouchPos = mousePos;
@@ -86,9 +86,9 @@ public class MoviePlaySystem : MonoBehaviour {
 
                 //タッチ操作処理--------------------------------------------------------------
                 if ( _FastTouchPos.y >= _barTouchDown && _FastTouchPos.y <= _barTouchUp ) {     //押したときの最初の位置がタッチ領域内だったら処理する(ホールド対応)
-				    if ( mousePos.y >= _barTouchDown && mousePos.y <= _barTouchUp ) {           //押している場所がタッチ領域だったら処理(ホールド対応)
+				    //if ( mousePos.y >= _barTouchDown && mousePos.y <= _barTouchUp ) {           //押している場所がタッチ領域だったら処理(ホールド対応)
 				    	_pointPos.x = mousePos.x;
-                    }
+                    //}
 				}
                 //-----------------------------------------------------------------------------
 			}

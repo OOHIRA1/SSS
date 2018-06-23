@@ -590,7 +590,7 @@ public class SiteManager : MonoBehaviour {
 
 
 	//証拠品押せなくなる関数----------------------------------------------------
-	void RayShooterEnabled( bool value ) { Debug.Log( value ); _camera.SetRayShootable( value ); }
+	void RayShooterEnabled( bool value ) { _camera.SetRayShootable( value ); }
 	//----------------------------------------------------------------------------------------------
 
     //現場が動いていたら処理---------------------

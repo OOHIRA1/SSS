@@ -38,7 +38,7 @@ public class BGMManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log (Camera.main.gameObject.scene.name);
+		//Debug.Log (Camera.main.gameObject.scene.name);
 		//UpdateBGM ();
 	}
 
