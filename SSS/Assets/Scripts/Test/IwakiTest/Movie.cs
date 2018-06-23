@@ -25,8 +25,11 @@ public class Movie : MonoBehaviour {
        
 		    if ( startTime > 1.0f ) startTime = 1f;
 		    if ( startTime < 0 ) startTime = 0;
-		    AnimatorStateInfo animatorStateInfo = _animator.GetNextAnimatorStateInfo (0);
-		    _animator.Play ( animatorStateInfo.shortNameHash, 0, startTime );
+			GameObject movie = _animator.gameObject;
+			if ( movie.activeInHierarchy ) {		//表示されていたら
+				AnimatorStateInfo animatorStateInfo = _animator.GetNextAnimatorStateInfo (0);
+				_animator.Play ( animatorStateInfo.shortNameHash, 0, startTime );
+			}
        
 	}
 	//================================================

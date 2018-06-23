@@ -7,7 +7,8 @@ using UnityEngine.UI;
 //なぜかラボ遷移UIを押しても動かない
 
 public class SiteManager : MonoBehaviour {
-	GameDataManager _gameDateManager = null;
+	 Vector3 a = new Vector3( 0,0,0 );
+
 
 	[ SerializeField ] Detective _detective = null;
 	[ SerializeField ] MoviePlaySystem _moviePlaySystem = null;
@@ -24,15 +25,22 @@ public class SiteManager : MonoBehaviour {
 	[ SerializeField ] Catcher _catcher = null;
 	[ SerializeField ] DetectiveTalk[ ] _detectiveTalk = null;
 	[ SerializeField ] RayShooter _camera = null;
+
+	[ SerializeField ] Vector3[ ] _cursorPos = new Vector3[ 1 ];		//注目カーソルのpos
+
 	EvidenceManager _evidenceManager;
-    GameObject[] _evidenceTrigger;
     BGMManager _bgmManager;
+    GameObject[] _evidenceTrigger;
+	GameDataManager _gameDateManager = null;
+	GameObject _cursorForAttention;
 
 	int _talkIndex;						//どのトークを表示させるか
 	bool _onlyOne;						//一回だけ処理したいとき
 	bool _remark;                       //発言したかどうか
     bool _bgm;                          //BGMを鳴らしたかどうか
 	bool _pushLaboTransitionUI;         //ラボ遷移UIが押されたかどうか
+	bool _talkNow;						//トーク中かどうか
+
 
     public static bool _conditions1 = false;     //証拠品４を表示する条件を満たしたかどうか(台詞が全部言ったかどうか)
     public static bool _conditions2 = false;     //証拠品４を表示する条件を満たしたかどうか(台詞が全部言ったかどうか)
@@ -78,7 +86,9 @@ public class SiteManager : MonoBehaviour {
 		_remark = false;
 		_pushLaboTransitionUI = false;
         _evidenceTrigger = GameObject.FindGameObjectsWithTag( "EvidenceTrigger" );
+		_cursorForAttention = GameObject.FindGameObjectWithTag( "CursorForAttention" );
         
+		if ( _cursorForAttention != null )	_cursorForAttention.SetActive( false );		//参照を取ったあとに非表示にする
 	}
 
 	// Update is called once per frame
@@ -104,7 +114,7 @@ public class SiteManager : MonoBehaviour {
 				break;
 		}
 
-		StoryBound( );
+		Story( );
 	}
 
 	//調査パート
@@ -190,17 +200,19 @@ public class SiteManager : MonoBehaviour {
                 if ( _talkIndex == ( int )Text.SATISFY_SHOW_COOK_PUT_YELLOW_BOX ) _conditions2 = true;                    //この台詞が終わったらフラグを立てる
                 _detective.SetIsTalk( false );
 				_status = PartStatus.INVESTIGATION_PART;
+				_talkNow = false;
                 return;
 			//}
 		}
 
+		_talkNow = true;
 		RayShooterEnabled( false );
 		Regulation( );
         _detective.SetIsTalk( true );           //探偵をトーク状態にする
 	}
 
-	//ストーリの進行状況によって操作に縛りをかける関数--------------------------------------------------------------------------------------------------------------------------------------------------------------
-	void  StoryBound( ) {
+	//ストーリに関する処理をまとめる関数--------------------------------------------------------------------------------------------------------------------------------------------------------------
+	void  Story( ) {
 
 		if ( !_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_MILLIONARE_MURDER_ANIM ) ) {
 
@@ -238,8 +250,10 @@ public class SiteManager : MonoBehaviour {
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.FIND_POISONED_DISH );
 				_storyBoundManeger.FindPoisonedDishBound( false );
+				CursorForAttentionPrint( false );										//カーソル非表示
 			} else {
 				_storyBoundManeger.FindPoisonedDishBound( true );
+				if ( !_talkNow ) CursorForAttentionPrint( true, _cursorPos[ 0 ] );		//注目カーソルを表示される
 			}
 
 		}
@@ -253,8 +267,10 @@ public class SiteManager : MonoBehaviour {
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE1 );
 				_storyBoundManeger.GetEvidence1Bound( false );
+				//CursorForAttentionPrint( false );
 			} else {
 				_storyBoundManeger.GetEvidence1Bound( true );
+				//if ( !_talkNow ) CursorForAttentionPrint( true, _cursorPos[ 1 ] );		//注目カーソルを表示される
 			}
 
 		}
@@ -612,6 +628,27 @@ public class SiteManager : MonoBehaviour {
         }
     }
     //----------------------------------------------------------------------------------------------
+
+	//注目カーソルを表示・非表示する----------------------------------------------------------------------
+	void CursorForAttentionPrint( bool active, Vector3? pos = null ) {	//?をつけるとVectorにnullでデフォルト引数をいれられる
+		if ( _cursorForAttention == null ) return;
+
+		if ( active ) {																				
+			//表示するのであれば---------------------------------------------------------------------
+			if ( pos == null ) pos = Vector3.zero;					//引数がnullだったら０を入れる			
+			if ( !_cursorForAttention.activeInHierarchy ) {			//非表示状態だったら
+				_cursorForAttention.SetActive( true );
+				_cursorForAttention.transform.position = ( Vector3 )pos;
+			}
+			//-------------------------------------------------------------------------------------
+		} else {													
+			//非表示するのであれば-----------------------------------------------------------------
+			if ( _cursorForAttention.activeInHierarchy ) _cursorForAttention.SetActive( false );	//表示状態だったら
+			//-------------------------------------------------------------------------------------
+		}
+
+	}
+	//---------------------------------------------------------------------------------------------------
 
 	//ラボ遷移UIが押されたらフラグを立てる関数--
 	public void LaboTransitionUIButton( ) {

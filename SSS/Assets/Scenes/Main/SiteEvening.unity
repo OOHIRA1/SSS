@@ -1942,16 +1942,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f90656b77fc551418781ec0ccd83f7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameObject:
-  - {fileID: 528862850}
-  - {fileID: 877894013}
-  - {fileID: 1880975057}
-  - {fileID: 1773360950}
-  - {fileID: 1415570521}
-  - {fileID: 1188059988}
-  - {fileID: 1936546650}
-  - {fileID: 362088588}
-  - {fileID: 1687081581}
+  _movie:
+  - {fileID: 528862852}
+  - {fileID: 877894015}
+  - {fileID: 1880975059}
+  - {fileID: 1773360952}
+  - {fileID: 1415570523}
+  - {fileID: 1188059990}
+  - {fileID: 1936546652}
+  - {fileID: 362088590}
   _siteMove: {fileID: 535007419}
   _siteNum: 2
 --- !u!1 &728166083
@@ -2349,14 +2348,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f90656b77fc551418781ec0ccd83f7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameObject:
-  - {fileID: 1111278287}
-  - {fileID: 31286744}
-  - {fileID: 2111120611}
-  - {fileID: 1408982016}
-  - {fileID: 1537780841}
-  - {fileID: 1935794875}
-  - {fileID: 907219582}
+  _movie:
+  - {fileID: 370806487}
+  - {fileID: 520637042}
+  - {fileID: 2111120615}
+  - {fileID: 1408982020}
+  - {fileID: 1537780845}
+  - {fileID: 1935794879}
+  - {fileID: 907219586}
   _siteMove: {fileID: 535007419}
   _siteNum: 1
 --- !u!1 &893108178
@@ -3361,12 +3360,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f90656b77fc551418781ec0ccd83f7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameObject:
-  - {fileID: 33543288}
-  - {fileID: 1449336846}
-  - {fileID: 1281801052}
-  - {fileID: 1043594061}
-  - {fileID: 1227083023}
+  _movie:
+  - {fileID: 33543292}
+  - {fileID: 1449336850}
   _siteMove: {fileID: 535007419}
   _siteNum: 0
 --- !u!1 &1281801052
@@ -5308,15 +5304,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f90656b77fc551418781ec0ccd83f7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameObject:
-  - {fileID: 327533298}
-  - {fileID: 260650294}
-  - {fileID: 178292108}
-  - {fileID: 1137377618}
-  - {fileID: 728166083}
-  - {fileID: 428049907}
-  - {fileID: 1578296841}
-  - {fileID: 893108178}
+  _movie:
+  - {fileID: 327533300}
+  - {fileID: 1137377620}
+  - {fileID: 728166085}
+  - {fileID: 428049909}
+  - {fileID: 1578296843}
+  - {fileID: 893108180}
   _siteMove: {fileID: 535007419}
   _siteNum: 3
 --- !u!1 &2111120611

@@ -18,12 +18,15 @@ public class AudioProjector : MonoBehaviour {
         
 	}
 
-
+    //映写機音の再生---------------
     public void ProjectorPlay(){
         audioSource.Play();
     }
+    //-----------------------------
 
+    //映写機音の一時停止-----------
     public void ProjectorPause() {
         audioSource.Pause();
     }
+    //-----------------------------
 }

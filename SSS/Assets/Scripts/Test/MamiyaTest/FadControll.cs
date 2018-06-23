@@ -5,14 +5,19 @@ using UnityEngine.UI;
 
 public class FadControll : MonoBehaviour {
 
-	[SerializeField] GameObject [] _gameObject = new GameObject [1];
+	[SerializeField] Movie [] _movie = new Movie[ 1 ];
     [SerializeField] SiteMove _siteMove = null;
     [SerializeField] int _siteNum = 0;
-	//float x;
-
+	
+	GameObject[] _gameObject;
 	// Use this for initialization
 	void Start () {
 
+		_gameObject = new GameObject[ _movie.Length ];
+
+		for ( int i = 0; i < _movie.Length; i++ ) {
+			_gameObject[ i ] = _movie[ i ].gameObject;
+		}
 
 	}
 	

@@ -17,6 +17,7 @@ TagManager:
   - EvidenceTrigger
   - TouchEffect
   - MillioareMonoDie
+  - CursorForAttention
   layers:
   - Default
   - TransparentFX

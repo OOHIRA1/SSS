@@ -29,17 +29,22 @@ public class StartButton : MonoBehaviour {
     }
     // Update is called once per frame
     void Update( ) {
+
+        //アニメーション再生が止まっていれば映写機音を一時停止、BGMを再生---------
         if( _moviePlaySystem.GetStop() && _checker ) {
             _audioProjector.ProjectorPause();
             _againBGM.AgainPlayBGM();
             _checker = false;
         }
+        //-------------------------------------------------------------------------
 
+        //アニメーション再生中であれば映写機音を再生、BGMを止める------------------
         if( !_moviePlaySystem.GetStop() && !_checker ) {
             _audioProjector.ProjectorPlay();
             _againBGM.StopBGM();
             _checker = true;
         }
+        //-------------------------------------------------------------------------
 
     }
 

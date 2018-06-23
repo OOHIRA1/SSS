@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class MillionareCrimeCameraWork : MonoBehaviour {
     [SerializeField]float _time;
-    [SerializeField]float _zoomTime;
 	[SerializeField]CameraControll _millionareCamera = null;
-    [SerializeField]float _defaultOrthgraphicSize = 4f;
+    [SerializeField]float _defaultOrthgraphicSize = 4f;    //カメラ拡大した時のカメラサイズ
 	[SerializeField]Camera _camera = null;
     [SerializeField]int _count;
 	[SerializeField]float _distance;
 
-    int Number_of_times = 365;
+    int Number_of_times = 365; //何回ズーム処理を行うか
 	Vector3 _nowPos;
     float SPEED = -0.01f;
-	float a;
+
     // Use this for initialization
     void Start ( ) {
         _count = 0;
@@ -30,11 +29,15 @@ public class MillionareCrimeCameraWork : MonoBehaviour {
 	// Update is called once per frame
 	void Update ( ) {
 
+        //時間が0の時、初期位置と初期サイズを決めてる------------------------------------------
         if (_time == 0) {
 			_millionareCamera.LookTarget(new Vector3(0f, -5.5f, _camera.transform.position.z));
 			_millionareCamera.ChangeOrthographicSize(_defaultOrthgraphicSize);
         }
 
+        //--------------------------------------------------------------------------------------
+
+        //365回カメラの拡大処理を行いながらカメラのPositionを変更-------------------------------
         if ( _count < Number_of_times ) {
             _millionareCamera.Zoom( SPEED );
 			//transform.Translate(0f, , 0f);
@@ -46,7 +49,7 @@ public class MillionareCrimeCameraWork : MonoBehaviour {
         _camera.transform.position = _nowPos;
     }
 
-
+        //--------------------------------------------------------------------------------------
         _count++;
         _time += Time.deltaTime;
 

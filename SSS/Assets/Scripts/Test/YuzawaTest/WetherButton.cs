@@ -15,6 +15,8 @@ public class WetherButton : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    //ClockUiの画像切り替え---------------------------
 	public void ClockUiButton(int ArrayNumber) {
 		bool value = true;
 		for( int i = 0; i <= _clockUi.Length; i++ )
@@ -24,4 +26,5 @@ public class WetherButton : MonoBehaviour {
 				}
 			}
 		}
+    //------------------------------------------------
 	}
