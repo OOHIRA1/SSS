@@ -50,9 +50,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_audioClip: {fileID: 8300000, guid: fe6ba347ed69055409a059e9f0128746, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -132,5 +132,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ff8c5a35c7fe7a428a68843a2569304, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bgmManeger: {fileID: 0}
-  movie_1minutes: {fileID: 8300000, guid: fe6ba347ed69055409a059e9f0128746, type: 3}

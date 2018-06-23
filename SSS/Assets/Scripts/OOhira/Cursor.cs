@@ -13,6 +13,7 @@ public class Cursor : MonoBehaviour {
 	[SerializeField] RayShooter _rayShooter = null;			//Rayを発射するものを格納する変数
 	[SerializeField] GameObject _selectedGameObject =null;	//選んだGameObject
 	[SerializeField] bool _selectedFlag = false;			//選び終わったかどうかのフラグ
+	[SerializeField] bool _useSelectedCursor = true;		//選択カーソルとして使用するかどうかのフラグ
 
 
 	public AudioClip cursor_SE;
@@ -44,6 +45,16 @@ public class Cursor : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		CurSorAnim ();//カーソルのアニメーション
+
+		if (_useSelectedCursor) {
+			CursorSelectMove ();//カーソルの選んでいる動き
+		}
+	}
+
+
+	//--カーソルのアニメーションを処理する関数
+	void CurSorAnim() {
 		//カーソルのアニメーション------------------------------------------------------
 		float posY = transform.position.y;
 		if (_downFlag) {
@@ -58,7 +69,11 @@ public class Cursor : MonoBehaviour {
 			}
 		}
 		//-----------------------------------------------------------------------------
+	}
 
+
+	//--カーソルの選んでいる動きを処理する関数
+	void CursorSelectMove() {
 		//_selectedFlagが立っていたら常に_selectedGameObjectを指し続ける--------
 		if ( _selectedFlag ) {
 			Vector3 pos = _selectedGameObject.transform.position;
@@ -95,5 +110,4 @@ public class Cursor : MonoBehaviour {
 			}
 		}
 	}
-
 }

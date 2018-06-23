@@ -6,12 +6,14 @@ using UnityEngine.UI;
 public class StartButton : MonoBehaviour {
     [SerializeField] AudioProjector _audioProjector = null;
     [SerializeField] AgainBGM _againBGM = null;
+    [SerializeField] MoviePlaySystem _moviePlaySystem = null;
 	Image _buttonImage;
 
     public Sprite _stopSprite;
     public Sprite _startSprite;
 
 	bool _playing;
+    bool _checker;
 
 	public AudioClip tap_playback;
 	public AudioClip tap_pause;
@@ -22,9 +24,23 @@ public class StartButton : MonoBehaviour {
         _buttonImage = GetComponent< Image >( );
 		audioSource = GetComponent<AudioSource>();
         _playing = true;
+        _checker = true;
+
     }
     // Update is called once per frame
     void Update( ) {
+        if( _moviePlaySystem.GetStop() && _checker ) {
+            _audioProjector.ProjectorPause();
+            _againBGM.AgainPlayBGM();
+            _checker = false;
+        }
+
+        if( !_moviePlaySystem.GetStop() && !_checker ) {
+            _audioProjector.ProjectorPlay();
+            _againBGM.StopBGM();
+            _checker = true;
+        }
+
     }
 
     public void Click( ) {
@@ -33,15 +49,11 @@ public class StartButton : MonoBehaviour {
 			_playing = true;
 			_buttonImage.sprite = _stopSprite;
 			audioSource.PlayOneShot(tap_playback, 0.7F);
-            _audioProjector.ProjectorPause();
-            _againBGM.AgainPlayBGM();
         }
         else {
 			_playing = false;
 			_buttonImage.sprite = _startSprite;
 			audioSource.PlayOneShot(tap_pause, 0.7F);
-            _audioProjector.ProjectorPlay();
-            _againBGM.StopBGM();
         }
 
     }

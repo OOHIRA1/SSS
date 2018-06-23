@@ -64,6 +64,7 @@ public class BGMManager : MonoBehaviour {
 		case "SiteEvening"://音を入れたくない部分は上手く制御してください
 			if (!_soundLibrary.IsPlaying ((int)BGMClip.CRIME_SCENE)) {
 				_soundLibrary.PlaySound ((int)BGMClip.CRIME_SCENE);
+                    ChangeVolume(0.5f);
 			}
 			break;
 		case "DetectiveOffice":
