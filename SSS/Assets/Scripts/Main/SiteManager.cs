@@ -526,19 +526,19 @@ public class SiteManager : MonoBehaviour {
 			RopeActionOrForcedMove( );
 
 			if ( _onlyOne &&  !( _catcher.GetIsCatch( ) || _detective.GetIsForcedMove( ) ) ) {								//毎フレームだと間に合わないのかカーテンがOpenのステートのときかつアニメーションが終わっている時にしても複数呼ばれてしまう	//強制移動かロープアクションをしていなかったら
-				_cutain.Close( );							//カーテンを閉める
+				if ( _cutain.IsStateOpen( ) ) _cutain.Close( );							//閉まってなかったらカーテンを閉める
 				_onlyOne = false;
 			}
 			//----------------------------------------------------------------------------------
 
-			if ( _cutain.IsStateClose( ) && _cutain.ResearchStatePlayTime( ) >= 1f )    //カーテンが閉まりきったらシーン遷移する
-				_scenesManager.SiteScenesTransition( _clockUI.GetPushed( ) );		
+			if ( _cutain.IsStateWait( ) && !( _catcher.GetIsCatch( ) || _detective.GetIsForcedMove( ) ) ) {		//カーテンが閉まりきったらシーン遷移する	//ロープアクションか強制移動をしていなかったら(すでにカーテンが閉まっていた場合対応)    
+				_scenesManager.SiteScenesTransition( _clockUI.GetPushed( ) );
+			}	
 
 		}
 
 	}
 	//-------------------------------------------------------------------------------------------------------------------------------------------
-
 
 	//ラボ遷移UIが押されたらする処理-----------------------------------------------------------------
 	void LaboTransitionUIScenesTransitionWithAnim( ) {
@@ -549,13 +549,14 @@ public class SiteManager : MonoBehaviour {
 			RopeActionOrForcedMove( );
 
 			if ( _onlyOne &&  !( _catcher.GetIsCatch( ) || _detective.GetIsForcedMove( ) ) ) {								//毎フレームだと間に合わないのかカーテンがOpenのステートのときかつアニメーションが終わっている時にしても複数呼ばれてしまう	//強制移動かロープアクションをしていなかったら
-				_cutain.Close( );							//カーテンを閉める
+				if ( _cutain.IsStateOpen( ) ) _cutain.Close( );							//閉まってなかったらカーテンを閉める
 				_onlyOne = false;
 			}
 			//----------------------------------------------------------------------------------
 
-			if ( _cutain.IsStateClose( ) && _cutain.ResearchStatePlayTime( ) >= 1f )    //カーテンが閉まりきったらシーン遷移する
+			if ( _cutain.IsStateWait( ) && !( _catcher.GetIsCatch( ) || _detective.GetIsForcedMove( ) ) ) {		//カーテンが閉まりきったらシーン遷移する	//ロープアクションか強制移動をしていなかったら(すでにカーテンが閉まっていた場合対応)    
 				_scenesManager.ScenesTransition( "DetectiveOffice" );
+			}	
 
 		}
 	}
@@ -590,7 +591,7 @@ public class SiteManager : MonoBehaviour {
 
 	//初期地にいなかったらロープアクションをするか強制移動にするかの判定---
 	void RopeActionOrForcedMove( ) {
-		if (  !_detective.GetCheckPos( ) ) {   								 //動画が再生されていて探偵が初期値にいなかったら
+		if (  !_detective.GetCheckPos( ) ) {   								 //探偵が初期値にいなかったら
 			if ( _detective.transform.position.x < 0 ) {						//探偵が指定位置より左側にいたら歩いて戻る。右側にいたらロープアクションで戻る
 
 				if ( !_catcher.GetIsCatch( ) ) {									//探偵がロープアクションをしていなかったら(毎フレーム呼んでいるためこの処理がないと境目を越えたときにバグる)

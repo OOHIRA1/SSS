@@ -250,6 +250,13 @@ AnimationClip:
   m_GenerateMotionCurves: 0
   m_IsEmpty: 0
   m_Events:
+  - time: 0
+    functionName: BoxLayer
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: -3
+    messageOptions: 0
   - time: 1.3333334
     functionName: OnMusic
     data: 
