@@ -220,16 +220,6 @@ Prefab:
       propertyPath: _startAndStopButton
       value: 
       objectReference: {fileID: 910879618}
-    - target: {fileID: 114487181235006474, guid: 9d15ef4c4c6664e47a816534f3520e5e,
-        type: 2}
-      propertyPath: _barTouchDown
-      value: 240
-      objectReference: {fileID: 0}
-    - target: {fileID: 114487181235006474, guid: 9d15ef4c4c6664e47a816534f3520e5e,
-        type: 2}
-      propertyPath: _barTouchUp
-      value: 270
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9d15ef4c4c6664e47a816534f3520e5e, type: 2}
   m_IsPrefabParent: 0
@@ -1388,7 +1378,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 6
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: d10f35928905b6a478a6095d1208762a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1638,7 +1628,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4862397405389664, guid: eff87639698002f449412326517d0f03, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -2.8899994
+      value: -6.65
       objectReference: {fileID: 0}
     - target: {fileID: 4862397405389664, guid: eff87639698002f449412326517d0f03, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1671,17 +1661,17 @@ Prefab:
     - target: {fileID: 61566907293607818, guid: eff87639698002f449412326517d0f03,
         type: 2}
       propertyPath: m_Offset.x
-      value: 0.543633
+      value: 0.6497197
       objectReference: {fileID: 0}
     - target: {fileID: 61566907293607818, guid: eff87639698002f449412326517d0f03,
         type: 2}
       propertyPath: m_Size.x
-      value: 4.4329977
+      value: 4.92807
       objectReference: {fileID: 0}
     - target: {fileID: 61566907293607818, guid: eff87639698002f449412326517d0f03,
         type: 2}
       propertyPath: m_Offset.y
-      value: -0.40711868
+      value: -0.4071188
       objectReference: {fileID: 0}
     - target: {fileID: 61566907293607818, guid: eff87639698002f449412326517d0f03,
         type: 2}
@@ -3156,6 +3146,16 @@ Prefab:
     - target: {fileID: 1822347251133536, guid: ecfb0d71899d307409a086166dc38474, type: 2}
       propertyPath: m_Name
       value: Curtain
+      objectReference: {fileID: 0}
+    - target: {fileID: 212937766000826926, guid: ecfb0d71899d307409a086166dc38474,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 212638439268064112, guid: ecfb0d71899d307409a086166dc38474,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ecfb0d71899d307409a086166dc38474, type: 2}
@@ -4866,6 +4866,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114289392966437614, guid: 39b6c024fd075054e9e6966d809f87d0,
+        type: 2}
+      propertyPath: _keyTimes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4839211819504486, guid: 39b6c024fd075054e9e6966d809f87d0, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5088,6 +5093,26 @@ Prefab:
       propertyPath: _moviePlaySystem
       value: 
       objectReference: {fileID: 672827924}
+    - target: {fileID: 114289392966437614, guid: 39b6c024fd075054e9e6966d809f87d0,
+        type: 2}
+      propertyPath: _keyTimes.Array.data[0]._start
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 114289392966437614, guid: 39b6c024fd075054e9e6966d809f87d0,
+        type: 2}
+      propertyPath: _keyTimes.Array.data[0]._end
+      value: 59
+      objectReference: {fileID: 0}
+    - target: {fileID: 114404262896179880, guid: 39b6c024fd075054e9e6966d809f87d0,
+        type: 2}
+      propertyPath: _activeTimes.Array.data[0]._timeStart
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 114404262896179880, guid: 39b6c024fd075054e9e6966d809f87d0,
+        type: 2}
+      propertyPath: _activeTimes.Array.data[0]._timeEnd
+      value: 59.9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 39b6c024fd075054e9e6966d809f87d0, type: 2}
   m_IsPrefabParent: 0

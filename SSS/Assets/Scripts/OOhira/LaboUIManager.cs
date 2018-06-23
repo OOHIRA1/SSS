@@ -12,6 +12,13 @@ public class LaboUIManager : MonoBehaviour {
 		NO,
 		OTHERWISE
 	}
+	public enum ClockUIKind {//時計UIの種類
+		BEDROOM,
+		KITCHEN,
+		SERVING_ROOM,
+		GARDEN,
+		CLOCKUI_MAX
+	}
 		
 	//[SerializeField] GameObject _controllUI = null;
 	[SerializeField] GameObject _judgeUI = null;
@@ -22,6 +29,7 @@ public class LaboUIManager : MonoBehaviour {
 	[SerializeField] UnityEngine.UI.Button _crimeSceneButton = null;			//事件現場遷移ボタン
 	[SerializeField] UnityEngine.UI.Button _mapButton = null;					//マップボタン
 	UnityEngine.UI.Button[] _laboUIButtons = null;								//ラボUIのボタン
+	[SerializeField] GameObject[] _clockUIs = new GameObject[(int)ClockUIKind.CLOCKUI_MAX];	//時計UI 
 
 	//=================================================
 	//ゲッター
@@ -94,6 +102,18 @@ public class LaboUIManager : MonoBehaviour {
 	}
 
 
+	//--事件現場遷移ボタンを表示する関数
+	public void DisplayCrimeSceneButton( ) {
+		_crimeSceneButton.gameObject.SetActive (true);
+	}
+
+
+	//--事件現場遷移ボタンを非表示にする関数
+	public void DisappearCrimeSceneButton( ) {
+		_crimeSceneButton.gameObject.SetActive (false);
+	}
+
+
 	//--マップボタンを反応しないようにする関数
 	public void ChangeMapButtonIntaractive( bool x ) {
 		_mapButton.interactable = x;
@@ -114,6 +134,23 @@ public class LaboUIManager : MonoBehaviour {
 		_laboUIButtons = GetComponentsInChildren<UnityEngine.UI.Button> ();
 		for (int i = 0; i < _laboUIButtons.Length; i++) {
 			_laboUIButtons [i].interactable = x;
+		}
+	}
+
+
+	//--厨房の昼と夕方しか反応しなくする関数(現状この状況しか使わない可能性が高いのでピンポイントで作成)
+	public void ClockUIButtonIntaractive( ) {
+		for (int i = 0; i < _clockUIs.Length; i++) {
+			if (_clockUIs [i].activeInHierarchy) {//時計UIが表示されていたら
+				Button[] _buttons = _clockUIs [i].GetComponentsInChildren<Button>();
+				for (int j = 0; j < _buttons.Length; j++) {
+					//厨房でない　または　（厨房だとしても）NoonButtonでもAfterNoonButtonでもない時-------------------------------------------------------------------
+					if (i != (int)ClockUIKind.KITCHEN || (_buttons [j].gameObject.name != "NoonButton" && _buttons [j].gameObject.name != "AfterNoonButton") ) {
+						_buttons [j].interactable = false;
+					}
+					//-----------------------------------------------------------------------------------------------------------------------------------------------
+				}
+			}
 		}
 	}
 	//===========================================

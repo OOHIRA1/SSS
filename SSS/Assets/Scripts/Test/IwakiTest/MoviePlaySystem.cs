@@ -48,7 +48,11 @@ public class MoviePlaySystem : MonoBehaviour {
 	
 		Fixed( );
 
-		if ( _isOperation ) PointUpdate( );     //操作不能だったらポイントを更新しない
+		if ( _isOperation ) {
+			PointUpdate( );     //操作不能だったらポイントを更新しない
+		} else {
+			TouchStateReset( );	//タッチ状態をリセット（タッチ状態のまま更新しなくなったとき用）
+		}
 			
 			BarUpdate( );
 
@@ -76,10 +80,11 @@ public class MoviePlaySystem : MonoBehaviour {
 
 				Vector2 mousePos = Vector2.zero;
 				mousePos = GetMouse( );
-              
+
                 //ボタンが押されたときの最初のフレームの座標を取得する-----------------------
                 if ( !_onlyFlame ) {
                     _FastTouchPos = mousePos;
+					
                     _onlyFlame = true;      //１フレームだけ取得したら処理できないようにする
                 }
                 //----------------------------------------------------------------------------
@@ -88,21 +93,20 @@ public class MoviePlaySystem : MonoBehaviour {
                 if ( _FastTouchPos.y >= _barTouchDown && _FastTouchPos.y <= _barTouchUp ) {     //押したときの最初の位置がタッチ領域内だったら処理する(ホールド対応)
 				    //if ( mousePos.y >= _barTouchDown && mousePos.y <= _barTouchUp ) {           //押している場所がタッチ領域だったら処理(ホールド対応)
 				    	_pointPos.x = mousePos.x;
+						
                     //}
 				}
                 //-----------------------------------------------------------------------------
 			}
             //---------------------------------------------------------------------------------------------
 
-
-            //マウスを放したら処理-----------------
-            if ( Input.GetMouseButtonUp( 0 ) ) {
-                _FastTouchPos = Vector2.zero;
-                _onlyFlame = false;
-            }
-            //--------------------------------------
-
 		}
+
+		 //マウスを放したら処理-----------------
+            if ( Input.GetMouseButtonUp( 0 ) ) {
+                TouchStateReset( );
+            }
+         //--------------------------------------
 
 		_point.MovePosition( _pointPos );
 	}
@@ -160,6 +164,14 @@ public class MoviePlaySystem : MonoBehaviour {
 	}
 	//--------------------------------------------------
 
+	//タッチ状態をリセットする-----------------------
+	void TouchStateReset( ) {
+		_FastTouchPos = Vector2.zero;
+        _onlyFlame = false;
+	}
+	//------------------------------------------------
+
+
 	Vector2 GetMouse( ) { return Input.mousePosition; }
 
 	//=======================================================================
@@ -169,7 +181,9 @@ public class MoviePlaySystem : MonoBehaviour {
     public bool GetStop( ) { return _stop; }
 
 	//操作可能にするか不可にするかを切り替える
-	public void SetOperation( bool value ) { _isOperation = value; }
+	public void SetOperation( bool value ) {
+		_isOperation = value;
+	}
 
 	//動画を最後のほうで固定するかどうか
 	public void SetFixed( bool value ) { _isFixed = value; }

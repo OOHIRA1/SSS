@@ -139,6 +139,7 @@ public class DetectiveOfficeManager : MonoBehaviour {
 			_detectiveTalkIndex = 1;
 			_state = State.DETECTIVE_TALKING;
 			_gameDataManager.UpdateAdvancedData (GameDataManager.CheckPoint.GET_EVIDENCE3);
+			_laboUIManager.DisplayCrimeSceneButton ();//事件現場ボタンを表示させる
 		}
 		//---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -174,6 +175,11 @@ public class DetectiveOfficeManager : MonoBehaviour {
 		}
 		//---------------------------------------------------------------------------------------------------------------
 
+		//証拠品3を取っていなかったら遷移ボタンを押せなくする処理--------------------------------------------------
+		if (!_gameDataManager.CheckAdvancedData (GameDataManager.CheckPoint.GET_EVIDENCE3)) {
+			_laboUIManager.DisappearCrimeSceneButton ();
+		}
+		//------------------------------------------------------------------------------------------------------
 
 
 		Debug.Log (_laboUIManager.GetJudge());
@@ -213,6 +219,11 @@ public class DetectiveOfficeManager : MonoBehaviour {
 			_bgmManager.UpdateBGM ();//音を変える処理
 		}
 		//-----------------------------------------------------
+		//初めて昼か夕方の厨房に来るチェックポイントが立っていなかったら厨房の昼と夕方しか反応しなくする処理--------
+		if(!_gameDataManager.CheckAdvancedData(GameDataManager.CheckPoint.FIRST_COME_TO_KITCHEN_AT_NOON_OR_NIGHT)) {
+			_laboUIManager.ClockUIButtonIntaractive ();
+		}
+		//-----------------------------------------------------------------------------------------------------
 	}
 
 

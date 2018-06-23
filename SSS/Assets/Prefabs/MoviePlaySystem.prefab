@@ -71,5 +71,5 @@ MonoBehaviour:
   - {fileID: 0}
   _startAndStopButton: {fileID: 0}
   _maxTime: 60
-  _barTouchDown: 180
-  _barTouchUp: 240
+  _barTouchDown: 240
+  _barTouchUp: 270

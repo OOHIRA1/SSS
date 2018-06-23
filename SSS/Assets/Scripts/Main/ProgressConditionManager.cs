@@ -19,10 +19,10 @@ public class ProgressConditionManager : MonoBehaviour {
 	[ SerializeField ] Detective _detective = null;
 	[ SerializeField ] EvidenceFile _evidenceFile = null;
 	[ SerializeField ] MoviePlaySystem _moviePlaySystem = null;
+	[ SerializeField ] MillioareDieMono _millioareDieMono = null;
 	[ SerializeField ] KeyTimes[] _keyTimes = new KeyTimes[ 1 ];
 	[ SerializeField ] KeyPos[] _keyPos = new KeyPos[ 1 ];
 
-	MillioareDieMono _millioareDieMono = null;
 	EvidenceManager _evidenceManager;
 	GameObject _evidenceIcon1 = null;
 	//MillioareDieMono _millioareDieMono;
@@ -31,7 +31,7 @@ public class ProgressConditionManager : MonoBehaviour {
 	void Start () {
 		_evidenceManager = GameObject.FindGameObjectWithTag( "EvidenceManager" ).GetComponent< EvidenceManager >( );
 		_evidenceIcon1 = GameObject.Find( "EvidenceIcon1" );
-		_millioareDieMono = GameObject.FindGameObjectWithTag( "MillioareMonoDie" ).GetComponent< MillioareDieMono >( );
+		//_millioareDieMono = GameObject.FindGameObjectWithTag( "MillioareMonoDie" ).GetComponent< MillioareDieMono >( );
 	}
 	
 	// Update is called once per frame
@@ -41,9 +41,13 @@ public class ProgressConditionManager : MonoBehaviour {
 
 	public bool ShowMillionareMurderAnimProgress( ) {
 		if ( _scenesManager.GetNowScenes( ) == "SiteNight"  ) {	//夜だったら
-			if ( !( _millioareDieMono.IsStateMillionaireDieMiddle2( ) && _millioareDieMono.ResearchStatePlayTime( ) > 1f ) ) {   //モノクロアニメーションが終わっていなかったら
-				return false;
+
+			if ( _millioareDieMono != null ) {
+				if ( !( _millioareDieMono.IsStateMillionaireDieMiddle2( ) && _millioareDieMono.ResearchStatePlayTime( ) > 1f ) ) {   //モノクロアニメーションが終わっていなかったら
+					return false;
+				}
 			}
+
 		}
 		return true;
 	}

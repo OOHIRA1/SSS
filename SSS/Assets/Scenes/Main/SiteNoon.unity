@@ -3587,6 +3587,16 @@ Prefab:
       propertyPath: _moviePlaySystem
       value: 
       objectReference: {fileID: 899185071}
+    - target: {fileID: 114404262896179880, guid: 39b6c024fd075054e9e6966d809f87d0,
+        type: 2}
+      propertyPath: _activeTimes.Array.data[0]._timeStart
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114404262896179880, guid: 39b6c024fd075054e9e6966d809f87d0,
+        type: 2}
+      propertyPath: _activeTimes.Array.data[0]._timeEnd
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 39b6c024fd075054e9e6966d809f87d0, type: 2}
   m_IsPrefabParent: 0

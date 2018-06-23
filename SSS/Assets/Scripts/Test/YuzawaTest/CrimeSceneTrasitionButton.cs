@@ -18,6 +18,7 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 	[SerializeField]float _animTime = 500;
 	[SerializeField]bool[] _clicked = new bool[12];
     [SerializeField]bool[] _clickedClose = new bool[12];
+    [SerializeField]string[] _sceneTrasition = new string[12];
 
     int _num;
     bool Disapper = false;
@@ -51,73 +52,23 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 
         OnClickedClock( _num );
 
-		if ( _num == 0 )
-		{
-			_time[0] += Time.deltaTime;
-		}
-		if ( _num == 1 )
-		{
-			_time[1] += Time.deltaTime;
-		}
-		if ( _num == 2 )
-		{
-			_time[2] += Time.deltaTime;
-		}
-		if ( _num == 3 )
-		{
-			_time[3] += Time.deltaTime;
+
+        for( int i = 0; i < _time.Length; i++ ) {
+		if ( _num == i ) {
+			_time[i] += Time.deltaTime;
+            }
 		}
 
 		_curtain.ResearchStatePlayTime ();
 
         //--各シーン遷移--
-		if (_clicked[0]) {
-			NightGarden ();
+        for( int i = 0; i < _clicked.Length; i++ ) {
+		if (_clicked[i]) {
+			CrimeSceneTrasition(i, _sceneTrasition[i]);
+            }
 		}
 
-		if (_clicked[1]) {
-			NoonGarden ();
-		}
-
-		if (_clicked[2]) {
-			EveningGarden ();
-		}
-
-		if (_clicked[3]) {
-			NightKitchen ();
-		}
-
-		if (_clicked[4]) {
-			NoonKitchen ();
-		}
-
-		if (_clicked[5]) {
-			EveningKitchen ();
-		}
-
-		if (_clicked[6]) {
-			NightServingRoom ();
-		}
-
-		if (_clicked[7]) {
-			NoonServingRoom ();
-		}
-
-		if (_clicked[8]) {
-			EveningServingRoom ();
-		}
-
-		if (_clicked[9]) {
-			NightBedRoom ();
-		}
-
-		if (_clicked[10]) {
-			NoonBedRoom ();
-		}
-
-		if (_clicked[11]) {
-			EveningBedRoom ();
-		}
+		
 
         //-------------------------------
 
@@ -179,9 +130,9 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 
 
 
-	 void OnClickedClock( int ArrayNumber ) {   //時計ＵＩの表示　　　他のボタン押したとき表示されてるものを非表示
+	 void OnClickedClock( int arrayNumber ) {   //時計ＵＩの表示　　　他のボタン押したとき表示されてるものを非表示
 		for ( int i = 0; i < 4; i++ ) {
-			if ( i == ArrayNumber && _speechBalloon[i].activeInHierarchy) {
+			if ( i == arrayNumber && _speechBalloon[i].activeInHierarchy) {
 				if( _time[ i ] > _animTime ) {
 					_clockApper[ i ].SetActive( true );
 					}
@@ -224,14 +175,14 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
     //}
 
 
-    public void OnClickedButtonNum( int ArrayNumber ) {
-        if (  _clockApper [ ArrayNumber ].activeInHierarchy ) {
+    public void OnClickedButtonNum( int arrayNumber ) {
+        if (  _clockApper [ arrayNumber ].activeInHierarchy ) {
             _num = -1;
-            _time[ ArrayNumber ] = 0;
-             _clockApper [ ArrayNumber ].SetActive(false);
+            _time[ arrayNumber ] = 0;
+             _clockApper [ arrayNumber ].SetActive(false);
             return;
         }
-		_num = ArrayNumber;
+		_num = arrayNumber;
 	}
 
     public void OnClickedSpeech() {
@@ -258,199 +209,25 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 
 
     //--------------------ClockUiのボタンが押された時の処理--------------------------------------------------------------------
-	public void ButtonJudgement0(){
+	public void ButtonJudgement( int arrayNumber ){
         _detective.DesignationMove( _detective.GetInitialPos() );
-        _clickedClose[0] = true;
+        _clickedClose[arrayNumber] = true;
         _bgmManeger.StopBGMWithFadeOut();
     }
 
-	public void ButtonJudgement1(){
-		_detective.DesignationMove( _detective.GetInitialPos() );
-        _clickedClose[1] = true;
-        _bgmManeger.StopBGMWithFadeOut();
-    }
-
-	public void ButtonJudgement2(){
-		_detective.DesignationMove( _detective.GetInitialPos() );
-        _clickedClose[2] = true;
-        _bgmManeger.StopBGMWithFadeOut();
-    }
-
-	public void ButtonJudgement3(){
-		_detective.DesignationMove( _detective.GetInitialPos() );
-        _clickedClose[3] = true;
-        _bgmManeger.StopBGMWithFadeOut();
-    }
-
-	public void ButtonJudgement4(){
-		_detective.DesignationMove( _detective.GetInitialPos() );
-        _clickedClose[4] = true;
-        _bgmManeger.StopBGMWithFadeOut();
-    }
-
-	public void ButtonJudgement5(){
-		_detective.DesignationMove( _detective.GetInitialPos() );
-        _clickedClose[5] = true;
-        _bgmManeger.StopBGMWithFadeOut();
-    }
-
-	public void ButtonJudgement6(){
-		_detective.DesignationMove( _detective.GetInitialPos() );
-        _clickedClose[6] = true;
-        _bgmManeger.StopBGMWithFadeOut();
-    }
-
-	public void ButtonJudgement7(){
-		_detective.DesignationMove( _detective.GetInitialPos() );
-        _clickedClose[7] = true;
-        _bgmManeger.StopBGMWithFadeOut();
-    }
-
-	public void ButtonJudgement8(){
-		_detective.DesignationMove( _detective.GetInitialPos() );
-        _clickedClose[8] = true;
-        _bgmManeger.StopBGMWithFadeOut();
-    }
-
-	public void ButtonJudgement9(){
-		_detective.DesignationMove( _detective.GetInitialPos() );
-        _clickedClose[9] = true;
-        _bgmManeger.StopBGMWithFadeOut();
-    }
-
-	public void ButtonJudgement10(){
-		_detective.DesignationMove( _detective.GetInitialPos() );
-        _clickedClose[10] = true;
-        _bgmManeger.StopBGMWithFadeOut();
-    }
-
-	public void ButtonJudgement11(){
-		_detective.DesignationMove( _detective.GetInitialPos() );
-        _clickedClose[11] = true;
-        _bgmManeger.StopBGMWithFadeOut();
-    }
+	
     //---------------------------------------------------------------------
 
     //----------------各シーン遷移するための条件----------------------------
 
-	public void NightGarden(){
+	public void CrimeSceneTrasition( int arrayNumber, string sceneTrasition  ){
 		if (!_bgmManeger.IsPlaying(BGMManager.BGMClip.DETECTIVE_OFFICE) &&
             _detective.GetCheckPos( ) &&
-            _clicked[0] &&
+            _clicked[arrayNumber] &&
             _curtain.IsStateWait () ) {
 
-			_scenesManager.ScenesTransition ("SiteNight_Garden");
+			_scenesManager.ScenesTransition (sceneTrasition);
 		}
-	}
-
-	public void NoonGarden(){
-		if (!_bgmManeger.IsPlaying(BGMManager.BGMClip.DETECTIVE_OFFICE) &&
-            _detective.GetCheckPos() &&
-            _clicked[1] &&
-            _curtain.IsStateWait ()) {
-
-			_scenesManager.ScenesTransition ("SiteNoon_Garden");
-		}
-	}
-
-	public void EveningGarden(){
-		if (!_bgmManeger.IsPlaying(BGMManager.BGMClip.DETECTIVE_OFFICE) &&
-            _detective.GetCheckPos() &&
-            _clicked[2] &&
-            _curtain.IsStateWait()) {
-
-			_scenesManager.ScenesTransition ("SiteEvening_Garden");
-		}
-	}
-
-	public void NightKitchen(){
-		if (!_bgmManeger.IsPlaying(BGMManager.BGMClip.DETECTIVE_OFFICE) &&
-            _detective.GetCheckPos() &&
-            _clicked[3] &&
-            _curtain.IsStateWait()) {
-
-			_scenesManager.ScenesTransition ("SiteNight_Kitchen");
-		}
-	}
-
-	public void NoonKitchen(){
-		if (!_bgmManeger.IsPlaying(BGMManager.BGMClip.DETECTIVE_OFFICE) &&
-            _detective.GetCheckPos() &&
-            _clicked[4] &&
-            _curtain.IsStateWait()) {
-
-			_scenesManager.ScenesTransition ("SiteNoon_Kitchen");
-		}
-	}
-
-	public void EveningKitchen(){
-		if (!_bgmManeger.IsPlaying(BGMManager.BGMClip.DETECTIVE_OFFICE) &&
-            _detective.GetCheckPos() &&
-            _clicked[5] &&
-            _curtain.IsStateWait()) {
-
-			_scenesManager.ScenesTransition ("SiteEvening_Kitchen");
-		}
-	}
-
-	public void NightServingRoom(){
-		if (!_bgmManeger.IsPlaying(BGMManager.BGMClip.DETECTIVE_OFFICE) &&
-            _detective.GetCheckPos() &&
-            _clicked[6] &&
-            _curtain.IsStateWait()) {
-
-			_scenesManager.ScenesTransition ("SiteNight_ServingRoom");
-		}
-	}
-
-	public void NoonServingRoom(){
-		if (!_bgmManeger.IsPlaying(BGMManager.BGMClip.DETECTIVE_OFFICE) &&
-            _detective.GetCheckPos() &&
-            _clicked[7] &&
-            _curtain.IsStateWait()) {
-
-			_scenesManager.ScenesTransition ("SiteNoon_ServingRoom");
-		}
-	}
-
-	public void EveningServingRoom(){
-		if (!_bgmManeger.IsPlaying(BGMManager.BGMClip.DETECTIVE_OFFICE) &&
-            _detective.GetCheckPos() &&
-            _clicked[8] &&
-            _curtain.IsStateWait()) {
-
-			_scenesManager.ScenesTransition ("SiteEvening_ServingRoom");
-		}
-	}
-
-	public void NightBedRoom(){
-		if (!_bgmManeger.IsPlaying(BGMManager.BGMClip.DETECTIVE_OFFICE) &&
-            _detective.GetCheckPos() &&
-            _clicked[9] &&
-            _curtain.IsStateWait()) {
-
-			_scenesManager.ScenesTransition ("SiteNight_Bedroom");
-		}
-	}
-
-	public void NoonBedRoom(){
-		if (!_bgmManeger.IsPlaying(BGMManager.BGMClip.DETECTIVE_OFFICE) &&
-            _detective.GetCheckPos() &&
-            _clicked[10] &&
-            _curtain.IsStateWait()) {
-
-			_scenesManager.ScenesTransition ("SiteNoon_Bedroom");
-
-		}
-	}
-
-	public void EveningBedRoom(){
-		if (!_bgmManeger.IsPlaying(BGMManager.BGMClip.DETECTIVE_OFFICE) &&
-            _detective.GetCheckPos() &&
-            _clicked[11] &&
-            _curtain.IsStateWait()) {
-			_scenesManager.ScenesTransition ("SiteEvening_Bedroom");
-		}
-	}
+    }
     //-----------------------------------------------------------------------
 }
