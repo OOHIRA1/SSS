@@ -165,10 +165,21 @@ public class ProgressConditionManager : MonoBehaviour {
         return false;
     }
 
+    public bool ShowCookPutYellowBoxProgress( ) {
+        if ( _scenesManager.GetNowScenes( ) == "SiteEvening" && SiteMove._nowSiteNum == 1 ) {
+			if ( _moviePlaySystem.MovieTime( ) >= _keyTimes[ 1 ]._start && _moviePlaySystem.MovieTime( ) <= _keyTimes[ 1 ]._end ) {	//特定の時間内だったら
+				if ( !_detective.GetIsAnimWalk( ) &&
+					( _detective.GetPos( ).x >= _keyPos[ 0 ]._posLeft && _detective.GetPos( ).x <= _keyPos[ 0 ]._posRight ) ) {		//探偵の位置が特定の範囲内で止まっていたら
+					return true;
+				}
+			}
+		}
+		return false;;
+    }
 	
 	public bool ShowButlerPutSilverBoxProgress( ) {
 		if ( _scenesManager.GetNowScenes( ) == "SiteEvening" && SiteMove._nowSiteNum == 1 ) {
-			if ( _moviePlaySystem.MovieTime( ) >= _keyTimes[ 1 ]._start && _moviePlaySystem.MovieTime( ) <= _keyTimes[ 1 ]._end ) {	//特定の時間内だったら
+			if ( _moviePlaySystem.MovieTime( ) >= _keyTimes[ 2 ]._start && _moviePlaySystem.MovieTime( ) <= _keyTimes[ 2 ]._end ) {	//特定の時間内だったら
 				if ( !_detective.GetIsAnimWalk( ) &&
 					( _detective.GetPos( ).x >= _keyPos[ 0 ]._posLeft && _detective.GetPos( ).x <= _keyPos[ 0 ]._posRight ) ) {		//探偵の位置が特定の範囲内で止まっていたら
 					return true;
@@ -179,17 +190,6 @@ public class ProgressConditionManager : MonoBehaviour {
 	}
 
   
-    public bool ShowCookPutYellowBoxProgress( ) {
-        if ( _scenesManager.GetNowScenes( ) == "SiteEvening" && SiteMove._nowSiteNum == 1 ) {
-			if ( _moviePlaySystem.MovieTime( ) >= _keyTimes[ 2 ]._start && _moviePlaySystem.MovieTime( ) <= _keyTimes[ 2 ]._end ) {	//特定の時間内だったら
-				if ( !_detective.GetIsAnimWalk( ) &&
-					( _detective.GetPos( ).x >= _keyPos[ 0 ]._posLeft && _detective.GetPos( ).x <= _keyPos[ 0 ]._posRight ) ) {		//探偵の位置が特定の範囲内で止まっていたら
-					return true;
-				}
-			}
-		}
-		return false;;
-    }
 
 
     public bool GetEvidence4Progress( ) {
