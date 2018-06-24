@@ -21,6 +21,7 @@ public class ProgressConditionManager : MonoBehaviour {
 	[ SerializeField ] MoviePlaySystem _moviePlaySystem = null;
 	[ SerializeField ] KeyTimes[] _keyTimes = new KeyTimes[ 1 ];
 	[ SerializeField ] KeyPos[] _keyPos = new KeyPos[ 1 ];
+    [ SerializeField ] Curtain _curtain = null;
 
 	MillioareDieMono _millioareDieMono;
 	EvidenceManager _evidenceManager;
@@ -35,8 +36,7 @@ public class ProgressConditionManager : MonoBehaviour {
 		_evidenceIcon1 = GameObject.Find( "EvidenceIcon1" );
 
 		GameObject millioareDieMono = GameObject.FindGameObjectWithTag( "MillioareMonoDie" );
-		if ( millioareDieMono != null )
-			_millioareDieMono = millioareDieMono.GetComponent< MillioareDieMono >( );
+		if ( millioareDieMono != null ) _millioareDieMono = millioareDieMono.GetComponent< MillioareDieMono >( );
 	}
 	
 	// Update is called once per frame
@@ -149,9 +149,18 @@ public class ProgressConditionManager : MonoBehaviour {
 
 
     public bool FirstComeToKitchenAtNoonOrNightProgress( ) {
-        if ( _scenesManager.GetNowScenes( ) == "SiteNoon" && SiteMove._nowSiteNum == 1 )    return true;
 
-        if ( _scenesManager.GetNowScenes( ) == "SiteEvening" && SiteMove._nowSiteNum == 1 ) return true;
+        if( _scenesManager.GetNowScenes( ) == "SiteNoon" && SiteMove._nowSiteNum == 1 ) {
+            if ( _curtain.IsStateOpen( ) && _curtain.ResearchStatePlayTime( ) >= 1f ) {
+                return true;
+            }
+        }
+
+        if ( _scenesManager.GetNowScenes( ) == "SiteEvening" && SiteMove._nowSiteNum == 1 ) {
+            if ( _curtain.IsStateOpen( ) && _curtain.ResearchStatePlayTime( ) >= 1f ) {
+                return true;
+            }
+        }
 
         return false;
     }

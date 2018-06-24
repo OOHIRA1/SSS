@@ -99,6 +99,7 @@ public class SiteManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update( ) {
+        Debug.Log( _talkIndex );
         //モノクロアニメーションを見ていてBGMを一回鳴らしてなかったら-----------------------------------------------------
         if ( !_bgm && _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_MILLIONARE_MURDER_ANIM ) ) {
             _bgmManager.UpdateBGM( );
