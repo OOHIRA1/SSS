@@ -19,19 +19,24 @@ public class ProgressConditionManager : MonoBehaviour {
 	[ SerializeField ] Detective _detective = null;
 	[ SerializeField ] EvidenceFile _evidenceFile = null;
 	[ SerializeField ] MoviePlaySystem _moviePlaySystem = null;
-	[ SerializeField ] MillioareDieMono _millioareDieMono = null;
 	[ SerializeField ] KeyTimes[] _keyTimes = new KeyTimes[ 1 ];
 	[ SerializeField ] KeyPos[] _keyPos = new KeyPos[ 1 ];
 
+	MillioareDieMono _millioareDieMono;
 	EvidenceManager _evidenceManager;
 	GameObject _evidenceIcon1 = null;
 	//MillioareDieMono _millioareDieMono;
 
 	// Use this for initialization
 	void Start () {
-		_evidenceManager = GameObject.FindGameObjectWithTag( "EvidenceManager" ).GetComponent< EvidenceManager >( );
+		GameObject evidenceManager = GameObject.FindGameObjectWithTag( "EvidenceManager" );
+		if ( evidenceManager != null ) _evidenceManager = evidenceManager.GetComponent< EvidenceManager >( );
+
 		_evidenceIcon1 = GameObject.Find( "EvidenceIcon1" );
-		//_millioareDieMono = GameObject.FindGameObjectWithTag( "MillioareMonoDie" ).GetComponent< MillioareDieMono >( );
+
+		GameObject millioareDieMono = GameObject.FindGameObjectWithTag( "MillioareMonoDie" );
+		if ( millioareDieMono != null )
+			_millioareDieMono = millioareDieMono.GetComponent< MillioareDieMono >( );
 	}
 	
 	// Update is called once per frame

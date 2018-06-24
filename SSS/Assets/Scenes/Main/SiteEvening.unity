@@ -1410,6 +1410,21 @@ Prefab:
     m_Modifications:
     - target: {fileID: 114404262896179880, guid: 39b6c024fd075054e9e6966d809f87d0,
         type: 2}
+      propertyPath: _index.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114289392966437614, guid: 39b6c024fd075054e9e6966d809f87d0,
+        type: 2}
+      propertyPath: _keyPos.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114289392966437614, guid: 39b6c024fd075054e9e6966d809f87d0,
+        type: 2}
+      propertyPath: _keyTimes.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114404262896179880, guid: 39b6c024fd075054e9e6966d809f87d0,
+        type: 2}
       propertyPath: _activeTimes.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -1487,12 +1502,12 @@ Prefab:
     - target: {fileID: 114404262896179880, guid: 39b6c024fd075054e9e6966d809f87d0,
         type: 2}
       propertyPath: _activeTimes.Array.data[1]._timeStart
-      value: 20
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 114404262896179880, guid: 39b6c024fd075054e9e6966d809f87d0,
         type: 2}
       propertyPath: _activeTimes.Array.data[1]._timeEnd
-      value: 30
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 114289392966437614, guid: 39b6c024fd075054e9e6966d809f87d0,
         type: 2}
@@ -1725,6 +1740,74 @@ Prefab:
       propertyPath: _moviePlaySystem
       value: 
       objectReference: {fileID: 1671056813}
+    - target: {fileID: 114289392966437614, guid: 39b6c024fd075054e9e6966d809f87d0,
+        type: 2}
+      propertyPath: _keyTimes.Array.data[0]._start
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 114289392966437614, guid: 39b6c024fd075054e9e6966d809f87d0,
+        type: 2}
+      propertyPath: _keyTimes.Array.data[0]._end
+      value: 59
+      objectReference: {fileID: 0}
+    - target: {fileID: 114289392966437614, guid: 39b6c024fd075054e9e6966d809f87d0,
+        type: 2}
+      propertyPath: _keyTimes.Array.data[1]._start
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 114289392966437614, guid: 39b6c024fd075054e9e6966d809f87d0,
+        type: 2}
+      propertyPath: _keyTimes.Array.data[1]._end
+      value: 37
+      objectReference: {fileID: 0}
+    - target: {fileID: 114289392966437614, guid: 39b6c024fd075054e9e6966d809f87d0,
+        type: 2}
+      propertyPath: _keyPos.Array.data[0]._posLeft
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114289392966437614, guid: 39b6c024fd075054e9e6966d809f87d0,
+        type: 2}
+      propertyPath: _keyPos.Array.data[0]._posRight
+      value: -3.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 114404262896179880, guid: 39b6c024fd075054e9e6966d809f87d0,
+        type: 2}
+      propertyPath: _activeTimes.Array.data[0]._timeStart
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 114404262896179880, guid: 39b6c024fd075054e9e6966d809f87d0,
+        type: 2}
+      propertyPath: _activeTimes.Array.data[0]._timeEnd
+      value: 37
+      objectReference: {fileID: 0}
+    - target: {fileID: 114404262896179880, guid: 39b6c024fd075054e9e6966d809f87d0,
+        type: 2}
+      propertyPath: _addActiveTimes.Array.data[0]._timeStart
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 114404262896179880, guid: 39b6c024fd075054e9e6966d809f87d0,
+        type: 2}
+      propertyPath: _addActiveTimes.Array.data[0]._timeEnd
+      value: 58
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986188450843870, guid: 39b6c024fd075054e9e6966d809f87d0, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1651668725230406, guid: 39b6c024fd075054e9e6966d809f87d0, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114289392966437614, guid: 39b6c024fd075054e9e6966d809f87d0,
+        type: 2}
+      propertyPath: _keyTimes.Array.data[2]._start
+      value: 56
+      objectReference: {fileID: 0}
+    - target: {fileID: 114289392966437614, guid: 39b6c024fd075054e9e6966d809f87d0,
+        type: 2}
+      propertyPath: _keyTimes.Array.data[2]._end
+      value: 58
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 39b6c024fd075054e9e6966d809f87d0, type: 2}
   m_IsPrefabParent: 0

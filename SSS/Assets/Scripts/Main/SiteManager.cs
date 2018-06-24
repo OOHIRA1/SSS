@@ -78,9 +78,15 @@ public class SiteManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start( ) {
-		_gameDateManager = GameObject.FindGameObjectWithTag( "GameDataManager" ).GetComponent< GameDataManager >( );
-		_evidenceManager = GameObject.FindGameObjectWithTag ( "EvidenceManager" ).GetComponent< EvidenceManager >( );
-        _bgmManager = GameObject.FindGameObjectWithTag ( "BGMManager" ).GetComponent< BGMManager >( );
+		GameObject gameDateManager = GameObject.FindGameObjectWithTag( "GameDataManager" );
+		if ( gameDateManager != null ) _gameDateManager = gameDateManager.GetComponent< GameDataManager >( );
+
+		GameObject evidenceManager = GameObject.FindGameObjectWithTag( "EvidenceManager" );
+		if ( evidenceManager != null ) _evidenceManager = evidenceManager.GetComponent< EvidenceManager >( );
+
+		GameObject bgmManager = GameObject.FindGameObjectWithTag( "BGMManager" );
+        if ( bgmManager != null ) _bgmManager = bgmManager.GetComponent< BGMManager >( );
+
 		_talkIndex = -1;
 		_onlyOne = true;
 		_remark = false;

@@ -589,12 +589,12 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1987273318}
-        m_MethodName: ButtonJudgement
-        m_Mode: 3
+        m_MethodName: ButtonJudgement10
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 10
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -737,17 +737,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _testimonyBalloon: {fileID: 473430822}
---- !u!114 &78379343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 78379337}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d45d8ace24bc3744fa6c404cfb6ee0d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &87697667
 Prefab:
   m_ObjectHideFlags: 0
@@ -891,8 +880,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1987273318}
-        m_MethodName: ButtonJudgement
-        m_Mode: 3
+        m_MethodName: ButtonJudgement0
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1088,12 +1077,12 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1987273318}
-        m_MethodName: ButtonJudgement
-        m_Mode: 3
+        m_MethodName: ButtonJudgement4
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 4
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1248,12 +1237,12 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1987273318}
-        m_MethodName: ButtonJudgement
-        m_Mode: 3
+        m_MethodName: ButtonJudgement7
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 7
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1476,11 +1465,6 @@ MonoBehaviour:
   _evidenceButton: {fileID: 1825766521}
   _crimeSceneButton: {fileID: 610751102}
   _mapButton: {fileID: 548618868}
-  _clockUIs:
-  - {fileID: 795029611}
-  - {fileID: 999090860}
-  - {fileID: 726286839}
-  - {fileID: 1811998926}
 --- !u!114 &281741007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2247,17 +2231,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _testimonyBalloon: {fileID: 1298709473}
---- !u!114 &426573514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 426573508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 920bf0574306d1d4b970ea1b77a00f63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &455571443
 Prefab:
   m_ObjectHideFlags: 0
@@ -3024,18 +2997,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 1061690681151764, guid: 58399a294a8f76747855fcd60e6c39a7,
     type: 2}
   m_PrefabInternal: {fileID: 825238029}
---- !u!114 &567277018
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 567277017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db1f335fbf8d3d44391b252a7629edb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _moveSpeed: 0
 --- !u!114 &567277022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4276,12 +4237,12 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1987273318}
-        m_MethodName: ButtonJudgement
-        m_Mode: 3
+        m_MethodName: ButtonJudgement9
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 9
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -4613,6 +4574,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &885636019
@@ -4760,12 +4732,12 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1987273318}
-        m_MethodName: ButtonJudgement
-        m_Mode: 3
+        m_MethodName: ButtonJudgement11
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 11
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -5208,12 +5180,12 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1987273318}
-        m_MethodName: ButtonJudgement
-        m_Mode: 3
+        m_MethodName: ButtonJudgement2
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -5618,12 +5590,12 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1987273318}
-        m_MethodName: ButtonJudgement
-        m_Mode: 3
+        m_MethodName: ButtonJudgement5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 5
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -5768,12 +5740,12 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1987273318}
-        m_MethodName: ButtonJudgement
-        m_Mode: 3
+        m_MethodName: ButtonJudgement8
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 8
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -7550,7 +7522,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 24013c75134fd9349bccea3708452f13, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0e39e04c2771ea943a1937f5ec3db464, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -9022,12 +8994,12 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1987273318}
-        m_MethodName: ButtonJudgement
-        m_Mode: 3
+        m_MethodName: ButtonJudgement3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -9527,12 +9499,12 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1987273318}
-        m_MethodName: ButtonJudgement
-        m_Mode: 3
+        m_MethodName: ButtonJudgement1
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -9881,12 +9853,12 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1987273318}
-        m_MethodName: ButtonJudgement
-        m_Mode: 3
+        m_MethodName: ButtonJudgement6
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 6
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -10020,6 +9992,19 @@ MonoBehaviour:
   - {fileID: 999090860}
   - {fileID: 726286839}
   - {fileID: 795029611}
+  _sceneButton:
+  - {fileID: 108185455}
+  - {fileID: 1944769817}
+  - {fileID: 967991407}
+  - {fileID: 1833538469}
+  - {fileID: 129893949}
+  - {fileID: 1082225263}
+  - {fileID: 1980609926}
+  - {fileID: 228302828}
+  - {fileID: 1086251315}
+  - {fileID: 814500115}
+  - {fileID: 59935472}
+  - {fileID: 899690939}
   _scenesManager: {fileID: 1300662435}
   _bgmManeger: {fileID: 498011930}
   _curtain: {fileID: 294639707}
@@ -10032,22 +10017,9 @@ MonoBehaviour:
   _animTime: 0.38
   _clicked: 000000000000000000000000
   _clickedClose: 000000000000000000000000
-  _sceneTrasition:
-  - SiteNight_Garden
-  - SiteNoon_Garden
-  - SiteEvening_Garden
-  - SiteNight_Kitchen
-  - SiteNoon_Kitchen
-  - SiteEvening_Kitchen
-  - SiteNight_ServingRoom
-  - SiteNoon_ServingRoom
-  - SiteEvening_ServingRoom
-  - SiteNight_Bedroom
-  - SiteNoon_Bedroom
-  - SiteEvening_Bedroom
-  crimescene_button2_appear: {fileID: 8300000, guid: 71350c16b585d114781b9370b0b67109,
+  crimesceneButton2Appear: {fileID: 8300000, guid: 71350c16b585d114781b9370b0b67109,
     type: 3}
-  crimescene_button2_disappear2: {fileID: 8300000, guid: 12f58487c42ad3f43817783bc5da30e0,
+  crimesceneButton2Disappear2: {fileID: 8300000, guid: 12f58487c42ad3f43817783bc5da30e0,
     type: 3}
 --- !u!95 &1987273319
 Animator:
