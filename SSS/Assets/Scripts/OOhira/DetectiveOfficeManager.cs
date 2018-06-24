@@ -68,6 +68,11 @@ public class DetectiveOfficeManager : MonoBehaviour {
 		_curtainClosedStateFinalJudge = false;
 		_bgmManager = GameObject.FindWithTag ("BGMManager").GetComponent<BGMManager> ();
 		_bgmManager.UpdateBGM ();
+		//GameDataManager.CheckPoint.GET_EVIDENCE6を取得していて探偵が遷移してきた時犯人指摘UIを表示する処理----------------------------
+		if (_gameDataManager.CheckAdvancedData(GameDataManager.CheckPoint.GET_EVIDENCE6) ) {
+			_laboUIManager.DisplayCriminalChoiseButton ();//※LaboUIManagerでもStartで非アクティブしているがUnityの設定でLaboUIManagerを先に初期化するように設定
+		}
+		//---------------------------------------------------------------------------------------------------------------------------
 	}
 	
 	// Update is called once per frame
@@ -139,7 +144,6 @@ public class DetectiveOfficeManager : MonoBehaviour {
 			_detectiveTalkIndex = 1;
 			_state = State.DETECTIVE_TALKING;
 			_gameDataManager.UpdateAdvancedData (GameDataManager.CheckPoint.GET_EVIDENCE3);
-			_laboUIManager.DisplayCrimeSceneButton ();//事件現場ボタンを表示させる
 		}
 		//---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -154,6 +158,7 @@ public class DetectiveOfficeManager : MonoBehaviour {
 			//------------------------------------------------------------------------------------------------------
 		}
 		//---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 		//調査Stateでカーテンが開ききっている時のみ探偵やＵＩの操作を受け付ける処理----------------------------------------
 		if (_state == State.INVESTIGATE && _curtain.IsStateOpen() && _curtain.ResearchStatePlayTime() >= 1f) {
@@ -175,11 +180,6 @@ public class DetectiveOfficeManager : MonoBehaviour {
 		}
 		//---------------------------------------------------------------------------------------------------------------
 
-		//証拠品3を取っていなかったら遷移ボタンを押せなくする処理--------------------------------------------------
-		if (!_gameDataManager.CheckAdvancedData (GameDataManager.CheckPoint.GET_EVIDENCE3)) {
-			_laboUIManager.DisappearCrimeSceneButton ();
-		}
-		//------------------------------------------------------------------------------------------------------
 
 
 		Debug.Log (_laboUIManager.GetJudge());
@@ -219,11 +219,6 @@ public class DetectiveOfficeManager : MonoBehaviour {
 			_bgmManager.UpdateBGM ();//音を変える処理
 		}
 		//-----------------------------------------------------
-		//初めて昼か夕方の厨房に来るチェックポイントが立っていなかったら厨房の昼と夕方しか反応しなくする処理--------
-		if(!_gameDataManager.CheckAdvancedData(GameDataManager.CheckPoint.FIRST_COME_TO_KITCHEN_AT_NOON_OR_NIGHT)) {
-			_laboUIManager.ClockUIButtonIntaractive ();
-		}
-		//-----------------------------------------------------------------------------------------------------
 	}
 
 
@@ -247,7 +242,7 @@ public class DetectiveOfficeManager : MonoBehaviour {
 				break;
 			case 2://犯人指摘前の発言
 				_state = State.INVESTIGATE;
-				_laboUIManager.DisplayCriminalChoiseButton ();
+				_laboUIManager.DisplayCriminalChoiseButton ();//犯人指摘ボタン表示
 				break;
 			case 3://凶器選択前の発音
 				_state = State.DANGEROUS_WEAPON_CHOISE;
