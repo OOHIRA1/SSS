@@ -707,11 +707,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4920125286905576, guid: 104cf8e1d5d8e3e4ebcfa7d5ec788418, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 1.28
+      value: -0.14
       objectReference: {fileID: 0}
     - target: {fileID: 4920125286905576, guid: 104cf8e1d5d8e3e4ebcfa7d5ec788418, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.96
+      value: 0.76
       objectReference: {fileID: 0}
     - target: {fileID: 4920125286905576, guid: 104cf8e1d5d8e3e4ebcfa7d5ec788418, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1746,6 +1746,16 @@ Prefab:
       propertyPath: _activeTimes.Array.data[1]._timeEnd
       value: 32
       objectReference: {fileID: 0}
+    - target: {fileID: 114289392966437614, guid: 39b6c024fd075054e9e6966d809f87d0,
+        type: 2}
+      propertyPath: _keyPos.Array.data[0]._posLeft
+      value: -8.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114289392966437614, guid: 39b6c024fd075054e9e6966d809f87d0,
+        type: 2}
+      propertyPath: _keyPos.Array.data[0]._posRight
+      value: -3.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 39b6c024fd075054e9e6966d809f87d0, type: 2}
   m_IsPrefabParent: 0
@@ -1815,17 +1825,17 @@ Prefab:
     - target: {fileID: 61566907293607818, guid: eff87639698002f449412326517d0f03,
         type: 2}
       propertyPath: m_Offset.x
-      value: 0.543633
+      value: 1.2767735
       objectReference: {fileID: 0}
     - target: {fileID: 61566907293607818, guid: eff87639698002f449412326517d0f03,
         type: 2}
       propertyPath: m_Size.x
-      value: 4.4329977
+      value: 4.385699
       objectReference: {fileID: 0}
     - target: {fileID: 61566907293607818, guid: eff87639698002f449412326517d0f03,
         type: 2}
       propertyPath: m_Offset.y
-      value: -0.40711868
+      value: -0.4071188
       objectReference: {fileID: 0}
     - target: {fileID: 61566907293607818, guid: eff87639698002f449412326517d0f03,
         type: 2}
