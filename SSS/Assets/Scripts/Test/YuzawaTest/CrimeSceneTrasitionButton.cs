@@ -20,12 +20,20 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 	[SerializeField]bool[] _clicked = new bool[12];  　　　　　　　　　//各時間帯ごとのボタン押されたかどうか
     [SerializeField]bool[] _clickedClose = new bool[12];             //各時間帯ごとにボタン押したときにカーテンが閉じたかどうかみるやつ
     [SerializeField]string[] _sceneTrasition = new string[12];        //scene遷移するための変数
+	bool _crimeSceneTransitionButtonPushed;								//事件現場シーンボタンを押したかどうかのフラグ
 
     int _num;　　　//ClocUiの数分見てる
 	public AudioClip crimesceneButton2Appear;
 	public AudioClip crimesceneButton2Disappear2;
     AudioSource audioSource;
 	bool[] _checker = new bool[12];  //ボタン押されたかどうか見る
+
+
+	//========================================================================
+	//ゲッター
+	public bool GetCrimeSceneTransitionButtonPushed() {	return _crimeSceneTransitionButtonPushed; }
+	//========================================================================
+	//========================================================================
 
     // Use this for initialization
     void Start () {
@@ -46,7 +54,7 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 			_checker [i] = false;
 		}
 		_bgmManeger = GameObject.FindWithTag ("BGMManager").GetComponent<BGMManager> ();
-
+		_crimeSceneTransitionButtonPushed = false;
     }
 	
 	// Update is called once per frame
@@ -102,8 +110,10 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 		if (!_animator.GetBool( "scrollFlag" ) ) {
 			audioSource.PlayOneShot(crimesceneButton2Appear, 0.2F);
 			value = true;
+			_crimeSceneTransitionButtonPushed = true;
 		} else {
 			value = false;
+			_crimeSceneTransitionButtonPushed = false;
 		}
 		audioSource.PlayOneShot(crimesceneButton2Disappear2, 0.2F);
 		_animator.SetBool ("scrollFlag", value);
@@ -245,4 +255,24 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 		}
     }
     //-----------------------------------------------------------------------
+
+
+	//--事件現場ボタンを押したかどうか確認する関数
+	public bool CheckCrimeSceneButton( int num ) {
+		bool pushed = false;
+		if (num == _num) {
+			pushed = true;
+		}
+		return pushed;
+	}
+
+
+	//--事件現場ボタンを押せなくする関数
+	public void ChangeCrimeSceneButtonInteractive( bool x, int notChangeNum = -1 ) {
+		for (int i = 0; i < _crimeSceneButton.Length; i++) {
+			if (i != notChangeNum) {
+				_crimeSceneButton [i].GetComponent<UnityEngine.UI.Button> ().interactable = x;
+			}
+		}
+	}
 }

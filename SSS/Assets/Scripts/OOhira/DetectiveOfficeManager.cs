@@ -42,6 +42,11 @@ public class DetectiveOfficeManager : MonoBehaviour {
 	[SerializeField] GameObject[] _clockUIs = null;								//時計UI
 	[SerializeField] BoxCollider2D[] _dangerousWeaponCollider = null;			//凶器UIのコライダー
 	BGMManager _bgmManager;
+	[SerializeField] Cursor _cursorForNextAction = null;						//次の行動を示唆するカーソル
+	bool[] _showCursorForNextActionFlag = new bool[2];											//_cursorForNextActionを表示するかどうかのフラグ
+	[SerializeField] Vector3[] _cursorForNextActionPos = null;					//次の行動を示唆するカーソルが移動する移動する座標
+	[SerializeField] EvidenceFileControll _evidenceFileControll = null;
+	[SerializeField] MapScrollViewControll _mapScrollViewControll = null;
 
 
 	//===================================================================================
@@ -73,6 +78,18 @@ public class DetectiveOfficeManager : MonoBehaviour {
 			_laboUIManager.DisplayCriminalChoiseButton ();//※LaboUIManagerでもStartで非アクティブしているがUnityの設定でLaboUIManagerを先に初期化するように設定
 		}
 		//---------------------------------------------------------------------------------------------------------------------------
+		//既に証拠品3を取る下りをやっていたら_cursorForNextActionを表示にしない-------------------------------------------
+		if (_gameDataManager.CheckAdvancedData (GameDataManager.CheckPoint.GET_EVIDENCE3)) {
+			for (int i = 0; i < _showCursorForNextActionFlag.Length; i++) {
+				_showCursorForNextActionFlag[i] = false;
+			}
+		} else {
+			for (int i = 0; i < _showCursorForNextActionFlag.Length; i++) {
+				_showCursorForNextActionFlag[i] = true;
+			}
+			_laboUIManager.ChangeCrimeSceneButtonInteractive (false, 1);//事件現場ボタンの制限も付ける
+		}
+		//--------------------------------------------------------------------------------------------------------------
 	}
 	
 	// Update is called once per frame
@@ -144,6 +161,7 @@ public class DetectiveOfficeManager : MonoBehaviour {
 			_detectiveTalkIndex = 1;
 			_state = State.DETECTIVE_TALKING;
 			_gameDataManager.UpdateAdvancedData (GameDataManager.CheckPoint.GET_EVIDENCE3);
+			_laboUIManager.DisplayCrimeSceneButton ();//事件現場ボタンを表示させる
 		}
 		//---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -180,6 +198,11 @@ public class DetectiveOfficeManager : MonoBehaviour {
 		}
 		//---------------------------------------------------------------------------------------------------------------
 
+		//証拠品3を取っていなかったら遷移ボタンを押せなくする処理--------------------------------------------------
+		if (!_gameDataManager.CheckAdvancedData (GameDataManager.CheckPoint.GET_EVIDENCE3)) {
+			_laboUIManager.DisappearCrimeSceneButton ();
+		}
+		//------------------------------------------------------------------------------------------------------
 
 
 		Debug.Log (_laboUIManager.GetJudge());
@@ -219,6 +242,37 @@ public class DetectiveOfficeManager : MonoBehaviour {
 			_bgmManager.UpdateBGM ();//音を変える処理
 		}
 		//-----------------------------------------------------
+		//初めて昼か夕方の厨房に来るチェックポイントが立っていなかったら厨房の昼と夕方しか反応しなくする処理--------
+		if(!_gameDataManager.CheckAdvancedData(GameDataManager.CheckPoint.FIRST_COME_TO_KITCHEN_AT_NOON_OR_NIGHT)) {
+			_laboUIManager.ClockUIButtonIntaractive ();
+		}
+		//-----------------------------------------------------------------------------------------------------
+		//証拠品3を取って初めて各事件現場遷移ボタンを使うときカーソルを表示する処理--------------------------------
+		if (_gameDataManager.CheckAdvancedData(GameDataManager.CheckPoint.GET_EVIDENCE3)) {
+			//事件現場遷移ボタンを押したら次の地点を指す処理---------------------------------------------------
+			if (_showCursorForNextActionFlag[0] && _laboUIManager.GetCrimeSceneTransitionButtonPushed ()) {
+				_cursorForNextAction.gameObject.SetActive (false);
+				_cursorForNextAction.ChangeMovePos ( _cursorForNextActionPos[0] );
+				_cursorForNextAction.gameObject.SetActive (true);
+				_showCursorForNextActionFlag [0] = false;
+			}
+			//-----------------------------------------------------------------------------------------------
+			//事件現場ボタンを押したらカーソルを消す処理-------------------------------------------------------
+			if (_showCursorForNextActionFlag [1] && _laboUIManager.CheckCrimeSceneButton (1)) {
+				_cursorForNextAction.gameObject.SetActive (false);
+				_showCursorForNextActionFlag [1] = false;
+			}
+			//-----------------------------------------------------------------------------------------------
+			//事件現場ボタンを押さずに事件現場遷移ボタンを押したら前の地点を指す処理-----------------------------------------------------------------------------------
+			if (!_showCursorForNextActionFlag[0] && !_laboUIManager.GetCrimeSceneTransitionButtonPushed () && _cursorForNextAction.gameObject.activeInHierarchy) {
+				_cursorForNextAction.gameObject.SetActive (false);
+				_cursorForNextAction.ChangeMovePos ( _cursorForNextActionPos[1] );
+				_cursorForNextAction.gameObject.SetActive (true);
+				_showCursorForNextActionFlag [0] = true;
+			}
+			//-----------------------------------------------------------------------------------------------------------------------------------------------------
+		}
+		//-----------------------------------------------------------------------------------------------------
 	}
 
 
@@ -227,6 +281,8 @@ public class DetectiveOfficeManager : MonoBehaviour {
 		if (!_detectiveTalk [_detectiveTalkIndex].gameObject.activeInHierarchy) {
 			_detectiveTalk [_detectiveTalkIndex].gameObject.SetActive (true);
 			_detective.SetIsTalk (true);//話すアニメーション開始
+			_evidenceFileControll.DisappearEvidenceFile();//ファイルを開いていたら強制閉じる処理
+			_mapScrollViewControll.DisappearMapScrollView();//マップを開いていたら強制閉じる処理
 		}
 		//次の文を表示する処理------------------------------
 		if (Input.GetMouseButtonDown (0) ) {
@@ -239,6 +295,7 @@ public class DetectiveOfficeManager : MonoBehaviour {
 			case 1://証拠品3取得後の発言
 				_state = State.INVESTIGATE;
 				_cookBoxCollider2D.enabled = true;
+				_cursorForNextAction.gameObject.SetActive (true);
 				break;
 			case 2://犯人指摘前の発言
 				_state = State.INVESTIGATE;

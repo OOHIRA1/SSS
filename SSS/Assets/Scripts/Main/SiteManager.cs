@@ -22,24 +22,27 @@ public class SiteManager : MonoBehaviour {
 	[ SerializeField ] ClockUI _clockUI = null;
 	[ SerializeField ] UnityEngine.UI.Button[] _button = new  UnityEngine.UI.Button[ 1 ];
 	[ SerializeField ] GameObject _evidenceFile = null;
+    [ SerializeField ] GameObject _mapFile = null;
 	[ SerializeField ] Catcher _catcher = null;
 	[ SerializeField ] DetectiveTalk[ ] _detectiveTalk = null;
 	[ SerializeField ] RayShooter _camera = null;
 
 	[ SerializeField ] Vector3[ ] _cursorPos = new Vector3[ 1 ];		//注目カーソルのpos
-
+   
 	EvidenceManager _evidenceManager;
     BGMManager _bgmManager;
     GameObject[] _evidenceTrigger;
-	GameDataManager _gameDateManager = null;
+	GameDataManager _gameDateManager;
 	GameObject _cursorForAttention;
 
 	int _talkIndex;						//どのトークを表示させるか
+	bool _talkNow;						//トーク中かどうか
+  
 	bool _onlyOne;						//一回だけ処理したいとき
+    bool _cursorOneFrameWait;           //カーソルの表示を１フレームだけ待つ
 	bool _remark;                       //発言したかどうか
     bool _bgm;                          //BGMを鳴らしたかどうか
 	bool _pushLaboTransitionUI;         //ラボ遷移UIが押されたかどうか
-	bool _talkNow;						//トーク中かどうか
 
 
     public static bool _conditions1 = false;     //証拠品４を表示する条件を満たしたかどうか(台詞が全部言ったかどうか)
@@ -74,6 +77,16 @@ public class SiteManager : MonoBehaviour {
         SATISFY_END_STORY
     }
 
+    enum CursorForAttention {
+        CADAVER_ATTENTION,
+        EVIDENCE_ATTENTION,
+        EVIDENCE_FILE_ATTENTION,
+        CLOSE_EVIDENCE_FILE_ATTENTION,
+        MAP_UI_ATTENTION,
+        TIRANGLE_UI_ATTENTION,
+        LABO_TRANSITION_UI_ATTENTION
+    }
+
 	//[ SerializeField ] MillioareDieMono _millioareDieMono = null;
 
 	// Use this for initialization
@@ -88,8 +101,12 @@ public class SiteManager : MonoBehaviour {
         if ( bgmManager != null ) _bgmManager = bgmManager.GetComponent< BGMManager >( );
 
 		_talkIndex = -1;
+     
+        _talkNow = false;
 		_onlyOne = true;
+        _cursorOneFrameWait = true;
 		_remark = false;
+        _bgm = false;
 		_pushLaboTransitionUI = false;
         _evidenceTrigger = GameObject.FindGameObjectsWithTag( "EvidenceTrigger" );
 		_cursorForAttention = GameObject.FindGameObjectWithTag( "CursorForAttention" );
@@ -99,7 +116,7 @@ public class SiteManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update( ) {
-        Debug.Log( _talkIndex );
+    
         //モノクロアニメーションを見ていてBGMを一回鳴らしてなかったら-----------------------------------------------------
         if ( !_bgm && _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_MILLIONARE_MURDER_ANIM ) ) {
             _bgmManager.UpdateBGM( );
@@ -155,6 +172,7 @@ public class SiteManager : MonoBehaviour {
 		if ( !_moviePlaySystem.GetStop( ) ) RopeActionOrForcedMove( );					//ムービーが再生されていたら
 
 	}
+
 	//動画再生パート
 	void MovePlayPart( ) {
 
@@ -188,7 +206,6 @@ public class SiteManager : MonoBehaviour {
 
 	//お話パート
 	void TalkPart( ) {
-
 		if ( !_detectiveTalk[ _talkIndex ].gameObject.activeInHierarchy ) {
 			_detectiveTalk [ _talkIndex ].gameObject.SetActive( true );
 		}
@@ -212,7 +229,7 @@ public class SiteManager : MonoBehaviour {
 			//}
 		}
 
-		_talkNow = true;
+		_talkNow = true;            //まだ話し中フラグ
 		RayShooterEnabled( false );
 		Regulation( );
         _detective.SetIsTalk( true );           //探偵をトーク状態にする
@@ -257,10 +274,13 @@ public class SiteManager : MonoBehaviour {
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.FIND_POISONED_DISH );
 				_storyBoundManeger.FindPoisonedDishBound( false );
-				CursorForAttentionPrint( false );										//カーソル非表示
+				CursorForAttentionPrint( false );										//死体注目カーソル非表示
+                _cursorOneFrameWait = true;                                             //次のカーソル表示の条件を1フレーム待つ
 			} else {
 				_storyBoundManeger.FindPoisonedDishBound( true );
-				if ( !_talkNow ) CursorForAttentionPrint( true, _cursorPos[ 0 ] );		//注目カーソルを表示される
+                //トークが終わっていて1フレームだけ待っていたら(1フレーム待たないと条件を満たしたまま次の処理にいってしまう)
+				if ( !_talkNow && !_cursorOneFrameWait ) CursorForAttentionPrint( true, _cursorPos[ ( int )CursorForAttention.CADAVER_ATTENTION ] );		//死体注目カーソルを表示
+                _cursorOneFrameWait = false;
 			}
 
 		}
@@ -274,10 +294,12 @@ public class SiteManager : MonoBehaviour {
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE1 );
 				_storyBoundManeger.GetEvidence1Bound( false );
-				//CursorForAttentionPrint( false );
+				CursorForAttentionPrint( false );                                       //証拠品注目カーソルを非表示
+                _cursorOneFrameWait = true;
 			} else {
 				_storyBoundManeger.GetEvidence1Bound( true );
-				//if ( !_talkNow ) CursorForAttentionPrint( true, _cursorPos[ 1 ] );		//注目カーソルを表示される
+				if ( !_talkNow && !_cursorOneFrameWait ) CursorForAttentionPrint( true, _cursorPos[ ( int )CursorForAttention.EVIDENCE_ATTENTION ] );		//証拠品注目カーソルを表示
+                _cursorOneFrameWait = false;
 			}
 
 		}
@@ -289,8 +311,12 @@ public class SiteManager : MonoBehaviour {
 			if ( _progressConditionManager.FirstTapEvidenceFileProgress( ) ) {
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.FIRST_TAP_EVIDENCE_FILE );
 				_storyBoundManeger.FirstTapEvidenceFileBound( false );
+                CursorForAttentionPrint( false );                                      //証拠品フォルダ注目カーソルを非表示
+                _cursorOneFrameWait = true;
 			} else {
 				_storyBoundManeger.FirstTapEvidenceFileBound( true );
+                if ( !_talkNow && !_cursorOneFrameWait ) CursorForAttentionPrint( true, _cursorPos[ ( int )CursorForAttention.EVIDENCE_FILE_ATTENTION ] );      //証拠品フォルダ注目カーソルを表示
+                _cursorOneFrameWait = false;
 			}
 
 		}
@@ -304,8 +330,12 @@ public class SiteManager : MonoBehaviour {
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData (GameDataManager.CheckPoint.FIRST_CLOSE_EVIDENCE_FILE);
 				_storyBoundManeger.FirstCloseEvidenceFileBound( false );
+                CursorForAttentionPrint( false );                                       //証拠品フォルダ閉じるボタン注目カーソルを非表示                    
+                _cursorOneFrameWait = true;
 			} else {
 				_storyBoundManeger.FirstCloseEvidenceFileBound( true );
+                if ( !_talkNow && !_cursorOneFrameWait ) CursorForAttentionPrint( true, _cursorPos[ ( int )CursorForAttention.CLOSE_EVIDENCE_FILE_ATTENTION ], true );      //証拠品フォルダ閉じるボタン注目カーソルを反転表示
+                _cursorOneFrameWait = false;
 			}
 
 		}
@@ -319,8 +349,21 @@ public class SiteManager : MonoBehaviour {
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData (GameDataManager.CheckPoint.FIRST_COME_TO_KITCHEN);
 				_storyBoundManeger.FirstComeToKitchenBound( false );
+                CursorForAttentionPrint( false );                                       //三角UI注目カーソルを非表示
+                _cursorOneFrameWait = true;
 			} else {
+
 				_storyBoundManeger.FirstComeToKitchenBound( true );
+                 if ( !_talkNow && !_cursorOneFrameWait ) CursorForAttentionPrint( true, _cursorPos[ ( int )CursorForAttention.TIRANGLE_UI_ATTENTION ] );      //三角UI注目カーソルを表示
+                _cursorOneFrameWait = false;
+
+                //一定の会話をしているときにmapUIに注目UIを表示----------------------------------------------------------------------------------------------------------------------------------------------------
+                if ( _detectiveTalk[ ( int )Text.SATISFY_FIRST_CLOSE_EVIDENCE_FILE ].GetStateMentNumber( ) >= 14 && _detectiveTalk[ ( int )Text.SATISFY_FIRST_CLOSE_EVIDENCE_FILE ].GetStateMentNumber( ) <= 16 ) {
+                    CursorForAttentionPrint( true, _cursorPos[ ( int )CursorForAttention.MAP_UI_ATTENTION ] );      //mapUI注目カーソルを表示
+                } else if ( _detectiveTalk[ ( int )Text.SATISFY_FIRST_CLOSE_EVIDENCE_FILE ].GetStateMentNumber( ) == 17 ) {
+                    CursorForAttentionPrint( false );
+                }
+                //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 			}
 
 		}
@@ -403,10 +446,13 @@ public class SiteManager : MonoBehaviour {
 
 		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE2 ) &&	
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_DETECTIVE_OFFICE ) ) {	
-
+            if ( !_talkNow && !_cursorOneFrameWait ) CursorForAttentionPrint( true, _cursorPos[ ( int )CursorForAttention.LABO_TRANSITION_UI_ATTENTION ] );  //ラボ遷移UI注目カーソル表示
+            _cursorOneFrameWait = false;
 			_storyBoundManeger.FirstComeToDetectiveOfficeBound( );
 
 		}
+
+        //ここでラボをはさむ---------------------------------------------------------------------------------------------------------------------------
 
 		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE3 ) &&
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_KITCHEN_AT_NOON_OR_NIGHT ) ) {
@@ -516,6 +562,7 @@ public class SiteManager : MonoBehaviour {
 	//操作をいろいろ制限する------------------------------------------------------------
 	void Regulation( ) {
 		_evidenceFile.SetActive( false );			//証拠品ファイルを非表示
+        _mapFile.SetActive( false );                //マップを非表示
 		_detective.SetIsMove( false );				//探偵を動けないようにする
 		_clockUI.Operation( false );				//時計ＵＩを操作不可にする
 		_moviePlaySystem.SetOperation( false );		//動画(シークバー)を操作不可にする
@@ -622,6 +669,7 @@ public class SiteManager : MonoBehaviour {
         if ( _siteMove.GetMoveNow( ) ) {
             EvidenceTriggerDisplay( false );
 			Regulation( );
+            _detective.InitialMove( );
         } else {
             EvidenceTriggerDisplay( true );
         }
@@ -637,21 +685,44 @@ public class SiteManager : MonoBehaviour {
     }
     //----------------------------------------------------------------------------------------------
 
-	//注目カーソルを表示・非表示する----------------------------------------------------------------------
-	void CursorForAttentionPrint( bool active, Vector3? pos = null ) {	//?をつけるとVectorにnullでデフォルト引数をいれられる
+	//注目カーソルを表示・反転表示・非表示する----------------------------------------------------------------------
+	void CursorForAttentionPrint( bool active, Vector3? pos = null, bool flip = false ) {	//?をつけるとVectorにnullでデフォルト引数をいれられる
 		if ( _cursorForAttention == null ) return;
 
-		if ( active ) {																				
-			//表示するのであれば---------------------------------------------------------------------
+		//表示するのであれば------------------------------------------------------------------------------
+		if ( active ) {
+            //指定の位置に表示させる処理--------------------------------------------------
 			if ( pos == null ) pos = Vector3.zero;					//引数がnullだったら０を入れる			
 			if ( !_cursorForAttention.activeInHierarchy ) {			//非表示状態だったら
+                Cursor cursorPos =  _cursorForAttention.GetComponent< Cursor >( );
+                cursorPos.ChangeMovePos( ( Vector3 )pos );
+
 				_cursorForAttention.SetActive( true );
-				_cursorForAttention.transform.position = ( Vector3 )pos;
+
+				//_cursorForAttention.transform.position = ( Vector3 )pos;    //表示した瞬間の座標が中心になるため
 			}
-			//-------------------------------------------------------------------------------------
+            //----------------------------------------------------------------------------
+
+            //反転させる処理------------------------------------------------------------------------
+            if ( flip ) {
+                SpriteRenderer cursorFilp = _cursorForAttention.GetComponent< SpriteRenderer >( );
+                cursorFilp.flipY = true;
+            }
+            //----------------------------------------------------------------------------------------
+
+		//----------------------------------------------------------------------------------------------------
 		} else {													
 			//非表示するのであれば-----------------------------------------------------------------
-			if ( _cursorForAttention.activeInHierarchy ) _cursorForAttention.SetActive( false );	//表示状態だったら
+			if ( _cursorForAttention.activeInHierarchy ) {          //表示状態だったら
+                //反転を元に戻す処理--------------------------------------------------------------
+                SpriteRenderer cursorFilp = _cursorForAttention.GetComponent< SpriteRenderer >( );
+                cursorFilp.flipY = false;
+                //--------------------------------------------------------------------------------
+
+                _cursorForAttention.SetActive( false );
+
+
+            }
 			//-------------------------------------------------------------------------------------
 		}
 

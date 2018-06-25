@@ -26,7 +26,8 @@ public class StoryBoundManeger : MonoBehaviour {
 		LABO_TRANSITION_UI,
 		TIRANGLE_LEFT,
 		TIRANGLE_RIGHT,
-		EVIDENCE_UI
+		EVIDENCE_UI,
+        MAP_UI
 	};
 
 	bool _onlyOnce;					//最初の一回だけ処理したいとき
@@ -165,7 +166,7 @@ public class StoryBoundManeger : MonoBehaviour {
 			
 		_clockUI.gameObject.SetActive( able );
 		for ( int i = 0; i < _button.Length; i++ ) {
-			if ( i != ( int )ButtonNum.EVIDENCE_UI && i != ( int )ButtonNum.TIRANGLE_RIGHT ) {		//証拠品ファイルと三角UI（右）には規制をかけない
+			if ( i != ( int )ButtonNum.EVIDENCE_UI && i != ( int )ButtonNum.TIRANGLE_RIGHT && i != ( int )ButtonNum.MAP_UI ) {		//証拠品ファイルと三角UI（右）とマップには規制をかけない
 				_button[ i ].gameObject.SetActive( able );
 			}
 		}

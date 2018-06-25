@@ -6,7 +6,7 @@ using UnityEngine;
 //
 //使用方法：カーソルにアタッチ
 public class Cursor : MonoBehaviour {
-	Vector3 _firstPosition;					//カーソルの初期位置
+	Vector3 _firstPosition;					//カーソルの初期位置(動く範囲の中心)
 	[SerializeField] float _moveRange = 0;	//アニメーションで動く範囲
 	[SerializeField] float _moveSpeed = 0;	//アニメーションの速さ(unit/second)
 	bool _downFlag;							//アニメーションで下に動いているかのフラグ
@@ -31,6 +31,10 @@ public class Cursor : MonoBehaviour {
 	//=========================================================================
 	//セッター
 	public void SetSelectedFlag(bool x) { _selectedFlag = x; }
+
+	public void SetFirstPosition( Vector3 pos ) { _firstPosition = pos; }
+
+	public void SetTransformPosition( Vector3 pos ) { transform.position = pos; }//座標を変える関数
 	//=========================================================================
 	//=========================================================================
 
@@ -110,4 +114,15 @@ public class Cursor : MonoBehaviour {
 			}
 		}
 	}
+
+
+	//=================================================================
+	//public関数
+	//--カーソルの動く中心座標とカーソルのpositionを変える関数
+	public void ChangeMovePos( Vector3 pos ) {
+		SetFirstPosition (pos);
+		SetTransformPosition (pos);
+	}
+	//=================================================================
+	//=================================================================
 }

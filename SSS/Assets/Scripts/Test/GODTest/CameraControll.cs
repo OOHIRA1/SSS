@@ -6,7 +6,7 @@ using UnityEngine;
 //
 //使用方法：カメラにアタッチ
 public class CameraControll : MonoBehaviour {
-	public const float DEFAULT_ORTHOGRAPHIC_SIZE = 7.65f;	//カメラの初期orthographicSize
+	public const float DEFAULT_ORTHOGRAPHIC_SIZE = 7.6f;	//カメラの初期orthographicSize
 	Camera _camera;
 
 	// Use this for initialization

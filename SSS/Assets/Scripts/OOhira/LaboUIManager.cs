@@ -29,7 +29,8 @@ public class LaboUIManager : MonoBehaviour {
 	[SerializeField] UnityEngine.UI.Button _crimeSceneButton = null;			//事件現場遷移ボタン
 	[SerializeField] UnityEngine.UI.Button _mapButton = null;					//マップボタン
 	UnityEngine.UI.Button[] _laboUIButtons = null;								//ラボUIのボタン
-	[SerializeField] GameObject[] _clockUIs = new GameObject[(int)ClockUIKind.CLOCKUI_MAX];	//時計UI 
+	[SerializeField] GameObject[] _clockUIs = new GameObject[(int)ClockUIKind.CLOCKUI_MAX];	//時計UI
+	[SerializeField] CrimeSceneTrasitionButton _crimeSceneTransitionButton = null;
 
 	//=================================================
 	//ゲッター
@@ -152,6 +153,24 @@ public class LaboUIManager : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+
+	//--事件現場遷移ボタンを押したかどうかを返す関数
+	public bool GetCrimeSceneTransitionButtonPushed() {
+		return _crimeSceneTransitionButton.GetCrimeSceneTransitionButtonPushed ();
+	}
+
+
+	//--各事件現場ボタンを押したかどうか確認する関数
+	public bool CheckCrimeSceneButton( int num ) {
+		return _crimeSceneTransitionButton.CheckCrimeSceneButton ( num );
+	}
+
+
+	//--事件現場ボタンを押せなくする関数
+	public void ChangeCrimeSceneButtonInteractive( bool x, int notChangeNum = -1 ) {
+		_crimeSceneTransitionButton.ChangeCrimeSceneButtonInteractive (x, notChangeNum);
 	}
 	//===========================================
 	//===========================================
