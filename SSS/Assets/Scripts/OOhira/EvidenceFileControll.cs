@@ -32,6 +32,10 @@ public class EvidenceFileControll : MonoBehaviour {
 		_evidenceFile.SetActive (false);
 	}
 
+	//--証拠品ファイルを開いているかどうかを返す関数
+	public bool IsOpeningFile() {
+		return _evidenceFile.activeInHierarchy;
+	}
 	//===========================================
 	//===========================================
 }

@@ -7,7 +7,6 @@ using UnityEngine.UI;
 //なぜかラボ遷移UIを押しても動かない
 
 public class SiteManager : MonoBehaviour {
-	 Vector3 a = new Vector3( 0,0,0 );
 
 
 	[ SerializeField ] Detective _detective = null;
@@ -158,12 +157,13 @@ public class SiteManager : MonoBehaviour {
 
 		}
 
-		_detective.SetIsMove( true );
+		_detective.SetIsMove (true);
 		_clockUI.Operation( true );
 		_moviePlaySystem.SetOperation( true );
 		AllButtonInteractable( true );
 		RayShooterEnabled( true );
 
+		DetectiveRegurationWhenFileOpen ( );
         SiteMoveNow( );
 		RegurateByCurtainState( );
 		IsRopeActionAndForcedMove( );
@@ -735,6 +735,13 @@ public class SiteManager : MonoBehaviour {
 	}
 	//------------------------------------------
 
+
+	//証拠品ファイルか見取り図ファイルが開いていたら探偵を動けなくする関数------
+	void DetectiveRegurationWhenFileOpen( ) {
+		if ( _evidenceFile.activeInHierarchy || _mapFile.activeInHierarchy ) {
+			_detective.SetIsMove ( false );
+		}
+	}
 	//----------------------------------------------------------------------
 
 	//ムービーが再生状態だったらＵＩを非表示-------
@@ -750,13 +757,7 @@ public class SiteManager : MonoBehaviour {
 	//---------------------------------------------
 
 
-	public void  aaaa () {
-		_evidenceManager.UpdateEvidence( EvidenceManager.Evidence.STORY1_EVIDENCE2 );
-	}
 
-	public void bbbb( ) {
-		_evidenceManager.UpdateEvidence( EvidenceManager.Evidence.STORY1_EVIDENCE6 );
-	}
 
 }
 

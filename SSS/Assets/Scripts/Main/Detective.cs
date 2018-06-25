@@ -93,6 +93,7 @@ public class Detective : MonoBehaviour {
         if ( collision.gameObject.tag == "Rope" ) {                         //ロープから離れたら
             _isRopeTouch = false;
 			_isAnimShocked = false;											//ショックモーションをやめる
+			_isFlip = true;
             InitialMove( );													//動き状態をリセットする
         }
     }

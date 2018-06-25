@@ -180,7 +180,6 @@ public class DetectiveOfficeManager : MonoBehaviour {
 
 		//調査Stateでカーテンが開ききっている時のみ探偵やＵＩの操作を受け付ける処理----------------------------------------
 		if (_state == State.INVESTIGATE && _curtain.IsStateOpen() && _curtain.ResearchStatePlayTime() >= 1f) {
-			//_detective.enabled = true;
 			//時計ＵＩ表示時は探偵の操作を受け付けない処理----------------------
 			for ( int i = 0; i < _clockUIs.Length; i++ ) {
 				if (_clockUIs [i].activeInHierarchy) {
@@ -190,6 +189,11 @@ public class DetectiveOfficeManager : MonoBehaviour {
 				if (i == _clockUIs.Length - 1) _detective.SetIsMove (true);
 			}
 			//---------------------------------------------------------------
+			//証拠品ファイル・マップファイルが開いている時は探偵の操作を受け付けない処理----------
+			if (_evidenceFileControll.IsOpeningFile () || _mapScrollViewControll.IsOpeningFile ()) {
+				_detective.SetIsMove (false);
+			}
+			//--------------------------------------------------------------------------------
 			_laboUIManager.ChangeLaboButtonIntaractive(true);
 		} else {
 			//_detective.enabled = false;
@@ -202,7 +206,7 @@ public class DetectiveOfficeManager : MonoBehaviour {
 		if (!_gameDataManager.CheckAdvancedData (GameDataManager.CheckPoint.GET_EVIDENCE3)) {
 			_laboUIManager.DisappearCrimeSceneButton ();
 		}
-		//------------------------------------------------------------------------------------------------------
+		//----------------------------------------------------------------------------------------------------------------
 
 
 		Debug.Log (_laboUIManager.GetJudge());
@@ -281,8 +285,12 @@ public class DetectiveOfficeManager : MonoBehaviour {
 		if (!_detectiveTalk [_detectiveTalkIndex].gameObject.activeInHierarchy) {
 			_detectiveTalk [_detectiveTalkIndex].gameObject.SetActive (true);
 			_detective.SetIsTalk (true);//話すアニメーション開始
-			_evidenceFileControll.DisappearEvidenceFile();//ファイルを開いていたら強制閉じる処理
-			_mapScrollViewControll.DisappearMapScrollView();//マップを開いていたら強制閉じる処理
+			if (_evidenceFileControll.IsOpeningFile()) {
+				_evidenceFileControll.DisappearEvidenceFile();//ファイルを開いていたら強制閉じる処理
+			}
+			if (_mapScrollViewControll.IsOpeningFile()) {
+				_mapScrollViewControll.DisappearMapScrollView();//マップを開いていたら強制閉じる処理
+			}
 		}
 		//次の文を表示する処理------------------------------
 		if (Input.GetMouseButtonDown (0) ) {
