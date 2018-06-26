@@ -93,6 +93,13 @@ public class ContinueUIController : MonoBehaviour {
 		}
 		_gameDataManager.AllResetAdvencedData ();
 		_evidenceManager.AllResetEvidenceData ();
+		//static変数の初期化----------------
+		SiteManager._remark = false;
+		SiteManager._conditions1 = false;
+		SiteManager._conditions2 = false;
+		SiteManager._endStory = false;
+		SiteMove._nowSiteNum = 0;
+		//----------------------------------
 		StartCoroutine (SceneTransitionCoroutine("StageSelect"));
 	}
 	//===================================================================

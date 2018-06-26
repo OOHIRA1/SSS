@@ -93,7 +93,10 @@ public class Detective : MonoBehaviour {
         if ( collision.gameObject.tag == "Rope" ) {                         //ロープから離れたら
             _isRopeTouch = false;
 			_isAnimShocked = false;											//ショックモーションをやめる
-            InitialMove( );													//動き状態をリセットする
+			_isFlip = true;
+			//InitialMove( );													//動き状態をリセットする ※これが探偵が天井にワープする原因(ロープアクション中に呼ばれていた。ロープアクション後に呼ばれるとは限らない)
+			_destination = _initialPos;//強制的に初期位置を目的地に設定
+			_isAnimWalk = false;
         }
     }
 
@@ -115,8 +118,8 @@ public class Detective : MonoBehaviour {
 		if ( transform.position.x <= ( _destination.x + correction ) && transform.position.x >= ( _destination.x - correction ) ) {     //指定範囲内まで移動したら止まって歩くアニメーションをやめる
 			transform.position = _destination;										//目的地にピッタリ合うための処理
             _isAnimWalk = false;
-        } else {																	//指定範囲外だったらそこまで移動して歩くモーションをする
-            _move.x = Time.deltaTime * _speed;                                        
+        } else {                                                                    //指定範囲外だったらそこまで移動して歩くモーションをする
+            _move.x = Time.deltaTime * _speed;
             if ( transform.position.x < _destination.x ) {
 				transform.position += _move;
 				_isFlip = true;

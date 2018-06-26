@@ -10,6 +10,7 @@ public class StageSelectManager : MonoBehaviour {
 	[SerializeField] Curtain _curtain = null;
 	[SerializeField] ScenesManager _scenesManager = null;
 	GameDataManager _gameDataManager;
+	EvidenceManager _evidenceManager;
 	BGMManager _bgmManager;
 	[SerializeField] AudioSource _openingBuzzer = null;
 	bool _buzzerSounded; //ブザー音が鳴ったかどうかのフラグ
@@ -18,12 +19,12 @@ public class StageSelectManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		_gameDataManager = GameObject.FindWithTag ("GameDataManager").GetComponent<GameDataManager>();
+		_evidenceManager = GameObject.FindWithTag ("EvidenceManager").GetComponent<EvidenceManager> ();
 		_bgmManager = GameObject.FindWithTag ("BGMManager").GetComponent<BGMManager> ();
 		_buzzerSounded = false;
 		if (!_gameDataManager.CheckAdvancedData (GameDataManager.CheckPoint.CLEAR_EPISODE1)) {
 			_clearStamp.SetActive (false);//エピソード1をクリアしていないとスタンプが押されない
 		}
-		_bgmManager.UpdateBGM ();//ゲームリザルトシーンから遷移した後に音を流すため
 	}
 	
 	// Update is called once per frame
@@ -55,8 +56,16 @@ public class StageSelectManager : MonoBehaviour {
 		if (!_bgmManager.IsPlaying(BGMManager.BGMClip.TITLE)) {
 			//エピソード1をクリアしていたらクリアデータのみを残し、データをリセットしてシーン遷移--------------------
 			if (_gameDataManager.CheckAdvancedData (GameDataManager.CheckPoint.CLEAR_EPISODE1)) {
+				_evidenceManager.AllResetEvidenceData ();
 				_gameDataManager.AllResetAdvencedData ();
 				_gameDataManager.UpdateAdvancedData (GameDataManager.CheckPoint.CLEAR_EPISODE1);
+				//static変数の初期化----------------
+				SiteManager._remark = false;
+				SiteManager._conditions1 = false;
+				SiteManager._conditions2 = false;
+				SiteManager._endStory = false;
+				SiteMove._nowSiteNum = 0;
+				//----------------------------------
 				_scenesManager.ScenesTransition ("SiteNight_Bedroom");
 			}
 			//---------------------------------------------------------------------------------------------------
