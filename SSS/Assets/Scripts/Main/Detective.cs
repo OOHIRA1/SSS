@@ -93,7 +93,6 @@ public class Detective : MonoBehaviour {
         if ( collision.gameObject.tag == "Rope" ) {                         //ロープから離れたら
             _isRopeTouch = false;
 			_isAnimShocked = false;											//ショックモーションをやめる
-			_isFlip = true;
             InitialMove( );													//動き状態をリセットする
         }
     }
@@ -112,7 +111,8 @@ public class Detective : MonoBehaviour {
 			}
         }
 
-        if ( transform.position.x < ( _destination.x + 0.1f ) && transform.position.x > ( _destination.x - 0.1f ) ) {     //指定範囲内まで移動したら止まって歩くアニメーションをやめる
+		float correction = _speed * Time.deltaTime / 2f + 0.1f;	//補正値(1flameの移動範囲より大きく設定するため)
+		if ( transform.position.x <= ( _destination.x + correction ) && transform.position.x >= ( _destination.x - correction ) ) {     //指定範囲内まで移動したら止まって歩くアニメーションをやめる
 			transform.position = _destination;										//目的地にピッタリ合うための処理
             _isAnimWalk = false;
         } else {																	//指定範囲外だったらそこまで移動して歩くモーションをする

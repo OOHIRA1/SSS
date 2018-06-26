@@ -1756,6 +1756,16 @@ Prefab:
       propertyPath: _keyPos.Array.data[0]._posRight
       value: -3.1
       objectReference: {fileID: 0}
+    - target: {fileID: 114473906552540324, guid: 39b6c024fd075054e9e6966d809f87d0,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 8300000, guid: 19b7650479872974e8709f2233b9833f, type: 3}
+    - target: {fileID: 114478931408557630, guid: 39b6c024fd075054e9e6966d809f87d0,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 8300000, guid: 19b7650479872974e8709f2233b9833f, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 39b6c024fd075054e9e6966d809f87d0, type: 2}
   m_IsPrefabParent: 0
@@ -4474,7 +4484,7 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 8300000, guid: 3c1097268c1495d48a471ac1043f50dd, type: 3}
+      objectReference: {fileID: 8300000, guid: 19b7650479872974e8709f2233b9833f, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8aaaa0a0539f64047946516670daffc3, type: 2}
   m_IsPrefabParent: 0
@@ -4630,7 +4640,7 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 8300000, guid: 3c1097268c1495d48a471ac1043f50dd, type: 3}
+      objectReference: {fileID: 8300000, guid: 19b7650479872974e8709f2233b9833f, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1e8a89b614943e94680dc3377a771236, type: 2}
   m_IsPrefabParent: 0

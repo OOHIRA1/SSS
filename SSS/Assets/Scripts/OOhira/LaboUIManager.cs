@@ -172,6 +172,12 @@ public class LaboUIManager : MonoBehaviour {
 	public void ChangeCrimeSceneButtonInteractive( bool x, int notChangeNum = -1 ) {
 		_crimeSceneTransitionButton.ChangeCrimeSceneButtonInteractive (x, notChangeNum);
 	}
+
+
+	//--時計UIを押したかどうかを確認する関数
+	public bool CheckClockUIPushed() {
+		return _crimeSceneTransitionButton.CheckClockUIPushed ();
+	}
 	//===========================================
 	//===========================================
 }

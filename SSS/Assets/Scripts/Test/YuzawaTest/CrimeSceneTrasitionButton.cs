@@ -8,25 +8,27 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 	//[SerializeField]GameObject _crimeSceneTransitionButton;
 	[SerializeField]Animator _animator = null;
 	[SerializeField]GameObject[] _crimeSceneButton = new GameObject[4];  //各部屋ごとのボタン
-    [SerializeField]GameObject[] _speechBalloon = new GameObject[4];　　//各吹き出し
-	[SerializeField]GameObject[] _clockApper = new GameObject[4];  　　　//各ClockUi
-    [SerializeField]GameObject[] _sceneButton = new GameObject[12];  　　//各時間帯ごとのボタン
+    [SerializeField]GameObject[] _speechBalloon = new GameObject[4];    //各吹き出し
+	[SerializeField]GameObject[] _clockApper = new GameObject[4];       //各ClockUi
+    [SerializeField]GameObject[] _sceneButton = new GameObject[12];     //各時間帯ごとのボタン
+	[SerializeField]GameObject _scrollButton = null;                   //事件現場へボタン
 	[SerializeField]ScenesManager _scenesManager = null;
     [SerializeField]BGMManager _bgmManeger = null;
 	[SerializeField]Curtain _curtain = null;
 	[SerializeField]Detective _detective = null;
-    [SerializeField]float[] _time = new float[4];  　　　　　　　　　　//ClockUi表示のための時間
-	[SerializeField]float _animTime = 500;  　　　　　　　　　　　　　　//_timeが超えたか見るやつ
-	[SerializeField]bool[] _clicked = new bool[12];  　　　　　　　　　//各時間帯ごとのボタン押されたかどうか
-    [SerializeField]bool[] _clickedClose = new bool[12];             //各時間帯ごとにボタン押したときにカーテンが閉じたかどうかみるやつ
-    [SerializeField]string[] _sceneTrasition = new string[12];        //scene遷移するための変数
-	bool _crimeSceneTransitionButtonPushed;								//事件現場シーンボタンを押したかどうかのフラグ
+    [SerializeField]float[] _time = new float[4];                      //ClockUi表示のための時間
+	[SerializeField]float _animTime = 500;                             //_timeが超えたか見るやつ
+	[SerializeField]bool[] _clicked = new bool[12];                   //各時間帯ごとのボタン押されたかどうか
+    [SerializeField]bool[] _clickedClose = new bool[12];               //各時間帯ごとにボタン押したときにカーテンが閉じたかどうかみるやつ
+    [SerializeField]string[] _sceneTrasition = new string[12];         //scene遷移するための変数
+	bool _crimeSceneTransitionButtonPushed;	                          //事件現場シーンボタンを押したかどうかのフラグ
 
-    int _num;　　　//ClocUiの数分見てる
+    int _num;			//ClocUiの数分見てる
+	int _buttonNum;
 	public AudioClip crimesceneButton2Appear;
 	public AudioClip crimesceneButton2Disappear2;
     AudioSource audioSource;
-	bool[] _checker = new bool[12];  //ボタン押されたかどうか見る
+	bool[] _checker = new bool[12];  //各時間帯ごとのボタン押されたかどうか見る
 
 
 	//========================================================================
@@ -55,6 +57,8 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 		}
 		_bgmManeger = GameObject.FindWithTag ("BGMManager").GetComponent<BGMManager> ();
 		_crimeSceneTransitionButtonPushed = false;
+
+		_buttonNum = 0;
     }
 	
 	// Update is called once per frame
@@ -235,6 +239,9 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
         _clickedClose[arrayNumber] = true;
         _bgmManeger.StopBGMWithFadeOut();
 		_checker[arrayNumber] = true;
+		ChangeCrimeSceneButtonInteractive(false,-1);
+		//ChangeScrollButtonInteractive(false,-1);
+
 		for(int i = 0; i < _sceneButton.Length; i++) {//ボタンを非反応にする
 			_sceneButton [i].GetComponent<UnityEngine.UI.Button> ().interactable = false;
 		}
@@ -274,5 +281,24 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 				_crimeSceneButton [i].GetComponent<UnityEngine.UI.Button> ().interactable = x;
 			}
 		}
+	}
+	//事件現場へボタン押せなくする関数
+	//public void ChangeScrollButtonInteractive( bool x, int notChangeNum  ){
+		//if ( _buttonNum != notChangeNum ) {
+			//_scrollButton.GetComponent<UnityEngine.UI.Button> ().interactable = x;
+		//}
+	//}
+
+
+	//--時計UIを押したかどうかを確認する関数
+	public bool CheckClockUIPushed() {
+		bool x = false;
+		for (int i = 0; i < _checker.Length; i++) {
+			if (_checker [i]) {
+				x = true;
+				break;
+			}
+		}
+		return x;
 	}
 }

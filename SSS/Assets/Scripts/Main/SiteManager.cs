@@ -39,11 +39,11 @@ public class SiteManager : MonoBehaviour {
   
 	bool _onlyOne;						//一回だけ処理したいとき
     bool _cursorOneFrameWait;           //カーソルの表示を１フレームだけ待つ
-	bool _remark;                       //発言したかどうか
     bool _bgm;                          //BGMを鳴らしたかどうか
 	bool _pushLaboTransitionUI;         //ラボ遷移UIが押されたかどうか
 
 
+	public static bool _remark = false;           //発言したかどうか
     public static bool _conditions1 = false;     //証拠品４を表示する条件を満たしたかどうか(台詞が全部言ったかどうか)
     public static bool _conditions2 = false;     //証拠品４を表示する条件を満たしたかどうか(台詞が全部言ったかどうか)
     public static bool _endStory = false;       //現場捜査での最後のチェックポイントにいったかどうか
@@ -104,7 +104,6 @@ public class SiteManager : MonoBehaviour {
         _talkNow = false;
 		_onlyOne = true;
         _cursorOneFrameWait = true;
-		_remark = false;
         _bgm = false;
 		_pushLaboTransitionUI = false;
         _evidenceTrigger = GameObject.FindGameObjectsWithTag( "EvidenceTrigger" );
@@ -616,12 +615,33 @@ public class SiteManager : MonoBehaviour {
 	}
 	//-------------------------------------------------------------------------------------------------
 
+    //現場が動いていたら処理---------------------
+    void SiteMoveNow( ) {
+        if ( _siteMove.GetMoveNow( ) ) {
+            EvidenceTriggerDisplay( false );        //（ちゃんと判別できてない？）
+			Regulation( );
+            _detective.InitialMove( );
+        } else {
+            //EvidenceTriggerDisplay( true );               //RegurateByCurtainStateとの兼ね合いでコメントアウト(その関数でも同じように使っており、こっちでtrueにしてもその関数でfalseになる。やり方や構成に問題あり。修正したほうがいいか)
+        }
+    }
+    //--------------------------------------------
 
 	//カーテンがアニメーションをしてたときの処理-------------------------------
 	void RegurateByCurtainState( ) {
-		if ( _cutain.ResearchStatePlayTime( ) < 1f ) {		//カーテンが動いていたら
+		if ( _cutain.ResearchStatePlayTime( ) < 1f  ) {		//カーテンが動いていたら
 			Regulation( );
+            EvidenceTriggerDisplay( false );
+            return;
 		}
+
+        if ( _cutain.IsStateWait( ) ) {                     //カーテンが閉まっている状態だったら
+            EvidenceTriggerDisplay( false );
+            return;
+        }
+        
+        EvidenceTriggerDisplay( true );
+
 	}
 	//-------------------------------------------------------------------------
 
@@ -664,17 +684,6 @@ public class SiteManager : MonoBehaviour {
 	void RayShooterEnabled( bool value ) { _camera.SetRayShootable( value ); }
 	//----------------------------------------------------------------------------------------------
 
-    //現場が動いていたら処理---------------------
-    void SiteMoveNow( ) {
-        if ( _siteMove.GetMoveNow( ) ) {
-            EvidenceTriggerDisplay( false );
-			Regulation( );
-            _detective.InitialMove( );
-        } else {
-            EvidenceTriggerDisplay( true );
-        }
-    }
-    //--------------------------------------------
 
     //EvideneTriggerのコライダーを外す処理---------------------------------------------------------
     void EvidenceTriggerDisplay( bool value ) {

@@ -6,7 +6,7 @@ public class DangerousWeaponCheckers : MonoBehaviour {
 
 	[SerializeField]Cursor _cursor = null;
 	[SerializeField]GameObject _dengerWwaponUI = null;
-	bool _cheker = true;
+	bool _cheker = true;       //音を一回だけならすためのもの
 
 
 	public AudioClip Accent44;
@@ -24,6 +24,7 @@ public class DangerousWeaponCheckers : MonoBehaviour {
 		if (_cheker) {
 			Check ();
 		}
+
 		if (!_dengerWwaponUI.activeInHierarchy) {
 			Checking ();
 		}
@@ -38,7 +39,9 @@ public class DangerousWeaponCheckers : MonoBehaviour {
 	}
     //----------------------------------------------
 
+    //二回目以降で凶器選択で音を鳴らすためのもの---------
 	public void Checking(){
 			_cheker = true;
 	}
+    //----------------------------------------------------
 }

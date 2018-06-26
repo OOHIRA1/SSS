@@ -13,6 +13,7 @@ public class Layer : MonoBehaviour {
 	void Update () {
 		
 	}
+
     public void BoxLayer(int num) {
         var Box = GetComponent<SpriteRenderer>();
         Box.sortingOrder += num;

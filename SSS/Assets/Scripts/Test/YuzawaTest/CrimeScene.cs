@@ -14,6 +14,7 @@ public class CrimeScene : MonoBehaviour {
 	void Update () {
 
 	}
+
 	public void CrimeSceneKitchen () {
 		SceneManager.LoadScene( "Kitchen" );
 		}

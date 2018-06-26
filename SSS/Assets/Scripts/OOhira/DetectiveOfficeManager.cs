@@ -194,7 +194,11 @@ public class DetectiveOfficeManager : MonoBehaviour {
 				_detective.SetIsMove (false);
 			}
 			//--------------------------------------------------------------------------------
-			_laboUIManager.ChangeLaboButtonIntaractive(true);
+			if (!_laboUIManager.CheckClockUIPushed ()) {//時計UIボタンを押してなかったら
+				_laboUIManager.ChangeLaboButtonIntaractive (true);
+			} else {
+				_laboUIManager.ChangeLaboButtonIntaractive (false);
+			}
 		} else {
 			//_detective.enabled = false;
 			_detective.SetIsMove(false);//タッチで反応しなくなる関数
