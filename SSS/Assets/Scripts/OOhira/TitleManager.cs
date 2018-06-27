@@ -34,6 +34,7 @@ public class TitleManager : MonoBehaviour {
 				if (hit.collider.name == "StartButton") {
 					_curtain.Close ();
 					_musicCreditAnimator.SetTrigger ("fadeOutTrigger");
+					hit.collider.enabled = false;//2回以上反応しないため
 				}
 			}
 		}
