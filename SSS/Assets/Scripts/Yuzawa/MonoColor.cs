@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MonoColor : MonoBehaviour {
     [SerializeField]float _time;
-    [SerializeField]float _animtime;
+    [SerializeField]float _animtime = 0;
     Animator _animator;
 
     // Use this for initialization
