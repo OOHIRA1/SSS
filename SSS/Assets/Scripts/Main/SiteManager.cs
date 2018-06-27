@@ -15,12 +15,10 @@ public class SiteManager : MonoBehaviour {
 	[ SerializeField ] ProgressConditionManager _progressConditionManager = null;
 	[ SerializeField ] StoryBoundManeger _storyBoundManeger = null;
 	[ SerializeField ] EvidenceActiveManager _evidenceActiveManager = null;
-    //[ SerializeField ] EffectLibrary _effectLibrary = null;
 	[ SerializeField ] SiteMove _siteMove = null;
-	//[ SerializeField ] GameObject _ui = null;
 	[ SerializeField ] Curtain _cutain = null;
 	[ SerializeField ] ClockUI _clockUI = null;
-	[ SerializeField ] UnityEngine.UI.Button[] _button = new  UnityEngine.UI.Button[ 1 ];
+	[ SerializeField ] Button[] _button = new Button[ 1 ];
 	[ SerializeField ] GameObject _evidenceFile = null;
     [ SerializeField ] GameObject _mapFile = null;
 	[ SerializeField ] Catcher _catcher = null;
@@ -86,8 +84,6 @@ public class SiteManager : MonoBehaviour {
         TIRANGLE_UI_ATTENTION,
         LABO_TRANSITION_UI_ATTENTION
     }
-
-	//[ SerializeField ] MillioareDieMono _millioareDieMono = null;
 
 	// Use this for initialization
 	void Start( ) {
@@ -218,7 +214,6 @@ public class SiteManager : MonoBehaviour {
 
 		//トークが終わったら
 		if ( _detectiveTalk[ _talkIndex ].GetTalkFinishedFlag( ) ) {
-			//if ( Input.GetMouseButtonDown( 0 ) ) {
 				_detectiveTalk[ _talkIndex ].gameObject.SetActive( false );
                 if ( _talkIndex == ( int )Text.SATISFY_SHOW_BUTLER_PUT_SILVER_BOX ) _conditions1 = true;                    //この台詞が終わったらフラグを立てる
                 if ( _talkIndex == ( int )Text.SATISFY_SHOW_COOK_PUT_YELLOW_BOX ) _conditions2 = true;                    //この台詞が終わったらフラグを立てる
@@ -226,7 +221,6 @@ public class SiteManager : MonoBehaviour {
 				_status = PartStatus.INVESTIGATION_PART;
 				_talkNow = false;
                 return;
-			//}
 		}
 
 		_talkNow = true;            //まだ話し中フラグ
@@ -477,9 +471,9 @@ public class SiteManager : MonoBehaviour {
 				_talkIndex = ( int )Text.SATISFY_SHOW_BUTLER_PUT_SILVER_BOX;			//執事が箱しまってたテキスト
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.SHOW_BUTLER_PUT_SILVER_BOX );
-				_storyBoundManeger.SilverAndYellowBoxBound( false );
+				//_storyBoundManeger.SilverAndYellowBoxBound( false );
 			} else {
-				_storyBoundManeger.SilverAndYellowBoxBound( true );
+				_storyBoundManeger.SilverAndYellowBoxBound( );
 			}
 
 		}
@@ -492,9 +486,9 @@ public class SiteManager : MonoBehaviour {
 				_talkIndex = ( int )Text.SATISFY_SHOW_COOK_PUT_YELLOW_BOX;            //料理長が箱しまってたテキスト
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.SHOW_COOK_PUT_YELLOW_BOX );
-				_storyBoundManeger.SilverAndYellowBoxBound( false );
+				//_storyBoundManeger.SilverAndYellowBoxBound( false );
 			} else {
-				_storyBoundManeger.SilverAndYellowBoxBound( true );
+				_storyBoundManeger.SilverAndYellowBoxBound( );
 			}
 
 		}
@@ -511,9 +505,9 @@ public class SiteManager : MonoBehaviour {
 
 			if ( _progressConditionManager.GetEvidence4Progress( ) ) {	
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE4 );
-				_storyBoundManeger.GetEvidence4Bound( false );
+				//_storyBoundManeger.GetEvidence4Bound( false );
 			} else {
-				_storyBoundManeger.GetEvidence4Bound( true );
+				_storyBoundManeger.GetEvidence4Bound( );
 			}
 
 		}
@@ -527,9 +521,9 @@ public class SiteManager : MonoBehaviour {
 				_talkIndex = ( int )Text.SATISFY_GET_EVIDENCE5;			//なんかわかったテキストと次が最後テキスト
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE5 );
-				_storyBoundManeger.GetEvidence5Bound( false );
+				//_storyBoundManeger.GetEvidence5Bound( false );
 			} else {
-				_storyBoundManeger.GetEvidence5Bound( true );
+				_storyBoundManeger.GetEvidence5Bound( );
 			}
 
 		}
@@ -542,7 +536,7 @@ public class SiteManager : MonoBehaviour {
 				_status = PartStatus.TALK_PART;
 				_endStory = true;
 			}
-				_storyBoundManeger.GetEvidence6Bound( true );
+				_storyBoundManeger.GetEvidence6Bound( );
 		}
 
 		if ( _endStory ) {
@@ -751,23 +745,5 @@ public class SiteManager : MonoBehaviour {
 		_pushLaboTransitionUI = true;
 	}
 	//------------------------------------------
-
-
-
-	//ムービーが再生状態だったらＵＩを非表示-------
-	/*void MoviState( ) {
-		if ( !_movePlaySystem.GetStop( ) ) {
-			_ui[ 1 ].SetActive( false );	//三角ＵＩ
-			_ui[ 2 ].SetActive( false );	//ラボ遷移ＵＩ
-		} else {
-			_ui[ 1 ].SetActive( true );
-			_ui[ 2 ].SetActive( true );
-		}
-	}*/
-	//---------------------------------------------
-
-
-
-
 }
 

@@ -4,17 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class StoryBoundManeger : MonoBehaviour {
-    //[ SerializeField ] GameDataManager _gameDateManager = null;
     [ SerializeField ] EvidenceActiveManager _evidenceActiveManager = null;
     [ SerializeField ] Detective _detective = null;
     [ SerializeField ] MoviePlaySystem _moviePlaySystem = null;
     [ SerializeField ] ScenesManager _scenesManager = null;
 	[ SerializeField ] Curtain _cutain = null;
     [ SerializeField ] ClockUI _clockUI = null;
-	[ SerializeField ] UnityEngine.UI.Button[] _button = new  UnityEngine.UI.Button[ 1 ];
-	//[ SerializeField ] GameObject _evidenceFile = null;
+	[ SerializeField ] Button[] _button = new Button[ 1 ];
 	[ SerializeField ] GameObject _ui = null;
-	//[ SerializeField ] MillioareDieMono _millioareDieMono = null;
 	[ SerializeField ] SiteMove _siteMove = null;
 
     
@@ -262,14 +259,7 @@ public class StoryBoundManeger : MonoBehaviour {
     }
 
     
-    public void SilverAndYellowBoxBound( bool application ) {
-		bool able = true;
-
-		if ( application ) {		
-			able = false;
-		} else {
-			able = true;
-		}
+    public void SilverAndYellowBoxBound( ) {
 
         _evidenceActiveManager.AllEvidenceDisapearFlag( );
 		
@@ -287,7 +277,7 @@ public class StoryBoundManeger : MonoBehaviour {
 	}
 
 
-    public void GetEvidence4Bound( bool application ) {
+    public void GetEvidence4Bound( ) {
         int[ ] evidenceNum = { 5, 6 };
         _evidenceActiveManager.PartEvidenceDisapearFlag( evidenceNum );
 
@@ -304,7 +294,7 @@ public class StoryBoundManeger : MonoBehaviour {
 		}
     }
 
-    public void GetEvidence5Bound( bool application ) {
+    public void GetEvidence5Bound( ) {
         int[ ] evidenceNum = { 6 };
         _evidenceActiveManager.PartEvidenceDisapearFlag( evidenceNum );
 
@@ -321,7 +311,7 @@ public class StoryBoundManeger : MonoBehaviour {
 		}
     }
 
-    public void GetEvidence6Bound( bool application ) {
+    public void GetEvidence6Bound( ) {
 		bool[,] site = {
 			{ false, false, false, false },
 			{ false, false, false, false },

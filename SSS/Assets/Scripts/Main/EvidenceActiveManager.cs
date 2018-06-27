@@ -42,10 +42,6 @@ public class EvidenceActiveManager : MonoBehaviour {
 
         _partDisapear = false;
         _allDisapear = false;
-        //for( int i = 0; _evidenceIcom.Length; i++ ) {
-        //    if ( _evidenceIcom[i].name == "EvidenveIcon" + i )
-        //    GameObject a = GameObject.Find("Evidence");
-        //}
 	}
 	
 	// Update is called once per frame
