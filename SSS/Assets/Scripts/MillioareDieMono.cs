@@ -7,7 +7,7 @@ public class MillioareDieMono : MonoBehaviour {
 
     //Vector3 _move_dir = Vector3.right;
     [SerializeField] float _time;
-    [SerializeField] float _animatime;
+    [SerializeField] float _animatime = 0;
     [SerializeField]GameObject _effectBlood = null;
 	[SerializeField]Curtain _curtain = null;
     Animator _animator;

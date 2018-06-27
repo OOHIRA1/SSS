@@ -27,9 +27,7 @@ public class SiteManager : MonoBehaviour {
 
 	[ SerializeField ] Vector3[ ] _cursorPos = new Vector3[ 1 ];		//注目カーソルのpos
    
-	EvidenceManager _evidenceManager;
     BGMManager _bgmManager;
-    GameObject[] _evidenceTrigger;
 	GameDataManager _gameDateManager;
 	GameObject _cursorForAttention;
 
@@ -90,9 +88,6 @@ public class SiteManager : MonoBehaviour {
 		GameObject gameDateManager = GameObject.FindGameObjectWithTag( "GameDataManager" );
 		if ( gameDateManager != null ) _gameDateManager = gameDateManager.GetComponent< GameDataManager >( );
 
-		GameObject evidenceManager = GameObject.FindGameObjectWithTag( "EvidenceManager" );
-		if ( evidenceManager != null ) _evidenceManager = evidenceManager.GetComponent< EvidenceManager >( );
-
 		GameObject bgmManager = GameObject.FindGameObjectWithTag( "BGMManager" );
         if ( bgmManager != null ) _bgmManager = bgmManager.GetComponent< BGMManager >( );
 
@@ -103,7 +98,6 @@ public class SiteManager : MonoBehaviour {
         _cursorOneFrameWait = true;
         _bgm = false;
 		_pushLaboTransitionUI = false;
-        _evidenceTrigger = GameObject.FindGameObjectsWithTag( "EvidenceTrigger" );
 		_cursorForAttention = GameObject.FindGameObjectWithTag( "CursorForAttention" );
         
 		if ( _cursorForAttention != null )	_cursorForAttention.SetActive( false );		//参照を取ったあとに非表示にする
@@ -700,8 +694,6 @@ public class SiteManager : MonoBehaviour {
                 cursorPos.ChangeMovePos( ( Vector3 )pos );
 
 				_cursorForAttention.SetActive( true );
-
-				//_cursorForAttention.transform.position = ( Vector3 )pos;    //表示した瞬間の座標が中心になるため
 			}
             //----------------------------------------------------------------------------
 

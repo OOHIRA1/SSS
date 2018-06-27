@@ -29,9 +29,6 @@ public class ClockUI : MonoBehaviour {
     Vector3 _minutesHandStopPos;                            //長針の止まる角度
     Vector3 _hourHandStopPos;                               //短針の止まる角度
 
-
-	Vector3 _initialMinutesHandRota;                        //長針の角度をゼロにする
-    Vector3 _initialHourHandRota;                           //短針の角度をゼロにする
 	[ SerializeField ] bool _isRewind;						//バイツァ・ダストをするかどうか
 	[ SerializeField ] float _speed = 0;					//バイツァ・ダストのスピード
 
@@ -50,10 +47,6 @@ public class ClockUI : MonoBehaviour {
 		_RotaParSecondMinutes = 360f / _time;
 		_RotaParSecondHour = _RotaParSecondMinutes / 12f;
         _pushed = "none";
-
-		_initialMinutesHandRota = Vector3.zero;
-		_initialHourHandRota = Vector3.zero;   
-		//_isRewind = false;
 	}
 
 	// Update is called once per frame
