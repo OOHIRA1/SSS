@@ -14,6 +14,7 @@ public class SiteManager : MonoBehaviour {
 	[ SerializeField ] ScenesManager _scenesManager = null;
 	[ SerializeField ] ProgressConditionManager _progressConditionManager = null;
 	[ SerializeField ] StoryBoundManeger _storyBoundManeger = null;
+	[ SerializeField ] EvidenceActiveManager _evidenceActiveManager = null;
     //[ SerializeField ] EffectLibrary _effectLibrary = null;
 	[ SerializeField ] SiteMove _siteMove = null;
 	//[ SerializeField ] GameObject _ui = null;
@@ -240,6 +241,7 @@ public class SiteManager : MonoBehaviour {
 		if ( !_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_MILLIONARE_MURDER_ANIM ) ) {
 
 			if ( _progressConditionManager.ShowMillionareMurderAnimProgress( ) ) {								//モノクロアニメーションを見終わったら
+                 Regulation( );
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.SHOW_MILLIONARE_MURDER_ANIM );  //チェックポイントを更新する
 				_storyBoundManeger.ShowMillionareMurderAnimBound( false );
 			} else {
@@ -268,7 +270,6 @@ public class SiteManager : MonoBehaviour {
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIND_POISONED_DISH ) ) {
 
 			if (_progressConditionManager.FindPoisonedDishProgress ()) {
-
 				_talkIndex = ( int )Text.SATISFY_FIND_POISONED_DISH;			//近づけたテキストと証拠品タップしてみようテキスト
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.FIND_POISONED_DISH );
@@ -344,6 +345,7 @@ public class SiteManager : MonoBehaviour {
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_KITCHEN ) ) {
 			//庭に現場を移動できないようにする
 			if (_progressConditionManager.FirstComeToKitchenProgress ()) {
+                Regulation( );                                                  //ipadだとフレームが遅いせいか三角UIを連続で押せてしまうので条件を満たした瞬間にも縛りをかける
 				_talkIndex = ( int )Text.SATISFY_FIRST_COME_TO_KITCHEN;			//厨房きたよテキストとシークバー説明テキスト
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData (GameDataManager.CheckPoint.FIRST_COME_TO_KITCHEN);
@@ -372,6 +374,7 @@ public class SiteManager : MonoBehaviour {
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_SERVING_ROOM ) ) {
 			//シークバー解禁
 			if ( _progressConditionManager.FirstComeToServingRoomProgress( ) ) {
+                Regulation( );
 				_talkIndex = ( int )Text.SATISFY_FIRST_COME_TO_SERVING_ROOM;			//給仕室きたよテキスト
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData (GameDataManager.CheckPoint.FIRST_COME_TO_SERVING_ROOM);
@@ -387,6 +390,7 @@ public class SiteManager : MonoBehaviour {
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_BACKYARD ) ) {	
 
 			if (_progressConditionManager.FirstComeToBackyardProgress( ) ) {
+                Regulation( );
 				_talkIndex = ( int )Text.SATISFY_FIRST_COME_TO_BACKYARD;			//庭きたよテキスト
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_BACKYARD );
@@ -417,7 +421,7 @@ public class SiteManager : MonoBehaviour {
 		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_BACKYARD_MOVIE ) &&	//庭（夜）の動画を見ていて、決定的瞬間で一時停止していなかったら
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.STOP_MOVIE_WHICH_GAEDENAR_ATE_CAKE ) ) {	
 
-			if ( _progressConditionManager.StopMovieWhichGaedenarAteCakeProgress( ) ) {	//クリックとボタンの操作を制限するかも
+			if ( _progressConditionManager.StopMovieWhichGaedenarAteCakeProgress( ) ) {
 				_talkIndex = ( int )Text.SATISFY_STOP_MOVIE_WHICH_GAEDENAR_ATE_CAKE;			//そこに行ってみようテキスト
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData (GameDataManager.CheckPoint.STOP_MOVIE_WHICH_GAEDENAR_ATE_CAKE);
@@ -432,7 +436,7 @@ public class SiteManager : MonoBehaviour {
 		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.STOP_MOVIE_WHICH_GAEDENAR_ATE_CAKE ) &&	//決定的瞬間で一時停止していて、証拠品２を入手していなかったら
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE2 ) ) {	
 
-			if ( _progressConditionManager.GetEvidence2Progress( ) ) {	
+			if ( _progressConditionManager.GetEvidence2Progress( ) ) {
 				_talkIndex = ( int )Text.SATISFY_GET_EVIDENCE2;			//矛盾あったねテキストとラボに行ってみようテキスト
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.GET_EVIDENCE2 );
@@ -457,6 +461,7 @@ public class SiteManager : MonoBehaviour {
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_KITCHEN_AT_NOON_OR_NIGHT ) ) {
 
 			if ( _progressConditionManager.FirstComeToKitchenAtNoonOrNightProgress( ) ) {
+                 Regulation( );
 				_talkIndex = ( int )Text.SATISFY_FIRST_COME_TO_KITCHEN_AT_NOON_OR_NIGHT;		//初めて違う時間帯に遷移したテキスト
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_KITCHEN_AT_NOON_OR_NIGHT );
@@ -468,7 +473,7 @@ public class SiteManager : MonoBehaviour {
 		if ( _gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.FIRST_COME_TO_KITCHEN_AT_NOON_OR_NIGHT ) &&	//証拠品３を入手していて、執事が箱をしまったところで停止してなかったら
 			!_gameDateManager.CheckAdvancedData( GameDataManager.CheckPoint.SHOW_BUTLER_PUT_SILVER_BOX ) ) {	
 
-			if ( _progressConditionManager.ShowButlerPutSilverBoxProgress( ) ) {	
+			if ( _progressConditionManager.ShowButlerPutSilverBoxProgress( ) ) {
 				_talkIndex = ( int )Text.SATISFY_SHOW_BUTLER_PUT_SILVER_BOX;			//執事が箱しまってたテキスト
 				_status = PartStatus.TALK_PART;
 				_gameDateManager.UpdateAdvancedData( GameDataManager.CheckPoint.SHOW_BUTLER_PUT_SILVER_BOX );
@@ -569,6 +574,8 @@ public class SiteManager : MonoBehaviour {
 	}
 	//-----------------------------------------------------------------------------------
 
+
+
 	//押されたものが時計ＵＩの昼か夕方か夜だったらする処理------------------------------------------------------------------------------------------
 	void ClockUIScenesTransitionWithAnim( ) {
 
@@ -593,6 +600,8 @@ public class SiteManager : MonoBehaviour {
 	}
 	//-------------------------------------------------------------------------------------------------------------------------------------------
 
+
+
 	//ラボ遷移UIが押されたらする処理-----------------------------------------------------------------
 	void LaboTransitionUIScenesTransitionWithAnim( ) {
 		if ( _pushLaboTransitionUI ) {
@@ -615,14 +624,14 @@ public class SiteManager : MonoBehaviour {
 	}
 	//-------------------------------------------------------------------------------------------------
 
+
+
     //現場が動いていたら処理---------------------
     void SiteMoveNow( ) {
         if ( _siteMove.GetMoveNow( ) ) {
-            EvidenceTriggerDisplay( false );        //（ちゃんと判別できてない？）
+			_evidenceActiveManager.AllEvidenceDisapearFlag( );
 			Regulation( );
             _detective.InitialMove( );
-        } else {
-            //EvidenceTriggerDisplay( true );               //RegurateByCurtainStateとの兼ね合いでコメントアウト(その関数でも同じように使っており、こっちでtrueにしてもその関数でfalseになる。やり方や構成に問題あり。修正したほうがいいか)
         }
     }
     //--------------------------------------------
@@ -631,16 +640,14 @@ public class SiteManager : MonoBehaviour {
 	void RegurateByCurtainState( ) {
 		if ( _cutain.ResearchStatePlayTime( ) < 1f  ) {		//カーテンが動いていたら
 			Regulation( );
-            EvidenceTriggerDisplay( false );
+			_evidenceActiveManager.AllEvidenceDisapearFlag( );
             return;
 		}
 
-        if ( _cutain.IsStateWait( ) ) {                     //カーテンが閉まっている状態だったら
-            EvidenceTriggerDisplay( false );
-            return;
-        }
-        
-        EvidenceTriggerDisplay( true );
+   //     if ( _cutain.IsStateWait( ) || _cutain.IsStateClose( ) ) {                     //カーテンが閉まっている状態だったら
+			//_evidenceActiveManager.AllEvidenceDisapearFlag( );
+   //         return;
+   //     }
 
 	}
 	//-------------------------------------------------------------------------
@@ -685,14 +692,6 @@ public class SiteManager : MonoBehaviour {
 	//----------------------------------------------------------------------------------------------
 
 
-    //EvideneTriggerのコライダーを外す処理---------------------------------------------------------
-    void EvidenceTriggerDisplay( bool value ) {
-        for ( int i = 0; i < _evidenceTrigger.Length; i++ ) {
-            BoxCollider2D boxCollider = _evidenceTrigger[ i ].GetComponent< BoxCollider2D >( );
-            boxCollider.enabled = value;
-        }
-    }
-    //----------------------------------------------------------------------------------------------
 
 	//注目カーソルを表示・反転表示・非表示する----------------------------------------------------------------------
 	void CursorForAttentionPrint( bool active, Vector3? pos = null, bool flip = false ) {	//?をつけるとVectorにnullでデフォルト引数をいれられる
@@ -738,13 +737,6 @@ public class SiteManager : MonoBehaviour {
 	}
 	//---------------------------------------------------------------------------------------------------
 
-	//ラボ遷移UIが押されたらフラグを立てる関数--
-	public void LaboTransitionUIButton( ) {
-		_pushLaboTransitionUI = true;
-	}
-	//------------------------------------------
-
-
 	//証拠品ファイルか見取り図ファイルが開いていたら探偵を動けなくする関数------
 	void DetectiveRegurationWhenFileOpen( ) {
 		if ( _evidenceFile.activeInHierarchy || _mapFile.activeInHierarchy ) {
@@ -752,6 +744,15 @@ public class SiteManager : MonoBehaviour {
 		}
 	}
 	//----------------------------------------------------------------------
+
+
+	//ラボ遷移UIが押されたらフラグを立てる関数--
+	public void LaboTransitionUIButton( ) {
+		_pushLaboTransitionUI = true;
+	}
+	//------------------------------------------
+
+
 
 	//ムービーが再生状態だったらＵＩを非表示-------
 	/*void MoviState( ) {

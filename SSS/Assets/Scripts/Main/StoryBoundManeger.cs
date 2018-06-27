@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class StoryBoundManeger : MonoBehaviour {
     //[ SerializeField ] GameDataManager _gameDateManager = null;
+    [ SerializeField ] EvidenceActiveManager _evidenceActiveManager = null;
     [ SerializeField ] Detective _detective = null;
     [ SerializeField ] MoviePlaySystem _moviePlaySystem = null;
     [ SerializeField ] ScenesManager _scenesManager = null;
@@ -16,8 +17,7 @@ public class StoryBoundManeger : MonoBehaviour {
 	//[ SerializeField ] MillioareDieMono _millioareDieMono = null;
 	[ SerializeField ] SiteMove _siteMove = null;
 
-    GameObject _evidenceTrigger2;
-	GameObject _evidenceTrigger4;
+    
 
 	public enum ButtonNum {
 		START_AND_STOP_BUTTON,
@@ -35,8 +35,6 @@ public class StoryBoundManeger : MonoBehaviour {
 	// Use this for initialization
 	void Start( ) {
 		_onlyOnce = true;
-        _evidenceTrigger2 = GameObject.Find( "EvidenceTrigger2" );
-		_evidenceTrigger4 = GameObject.Find( "EvidenceTrigger4" );
 	}
 	
 	// Update is called once per frame
@@ -196,10 +194,7 @@ public class StoryBoundManeger : MonoBehaviour {
 			able = true;
 		}
 
-        _evidenceTrigger2 = GameObject.Find( "EvidenceTrigger2" );		//条件を満たすまでは表示されないようにする
-		if ( _evidenceTrigger2 != null ) {
-			_evidenceTrigger2.GetComponent< BoxCollider2D >( ).enabled = able;
-		}
+        _evidenceActiveManager.AllEvidenceDisapearFlag( );
 
 		_clockUI.gameObject.SetActive( able );
 		_button[ ( int )ButtonNum.LABO_TRANSITION_UI ].gameObject.SetActive( able );
@@ -216,10 +211,7 @@ public class StoryBoundManeger : MonoBehaviour {
 			able = true;
 		}
 
-        _evidenceTrigger2 = GameObject.Find( "EvidenceTrigger2" );		//条件を満たすまでは表示されないようにする
-		if ( _evidenceTrigger2 != null ) {
-			_evidenceTrigger2.GetComponent< BoxCollider2D >( ).enabled = able;
-		}
+        _evidenceActiveManager.AllEvidenceDisapearFlag( );
 
 		_clockUI.gameObject.SetActive( able );
 		_button[ ( int )ButtonNum.LABO_TRANSITION_UI ].gameObject.SetActive( able );
@@ -235,13 +227,10 @@ public class StoryBoundManeger : MonoBehaviour {
 			able = false;
 		} else {
 			able = true;
-		}
+        }
 
-        _evidenceTrigger2 = GameObject.Find( "EvidenceTrigger2" );		//条件を満たすまでは表示されないようにする
-		if ( _evidenceTrigger2 != null ) {
-			_evidenceTrigger2.GetComponent< BoxCollider2D >( ).enabled = able;
-		}
-
+        _evidenceActiveManager.AllEvidenceDisapearFlag( );
+		
 		_clockUI.gameObject.SetActive( able );
 		_button[ ( int )ButtonNum.LABO_TRANSITION_UI ].gameObject.SetActive( able );
 		_button[ ( int )ButtonNum.TIRANGLE_LEFT ].gameObject.SetActive( able );
@@ -282,13 +271,8 @@ public class StoryBoundManeger : MonoBehaviour {
 			able = true;
 		}
 
-
-		_evidenceTrigger4 = GameObject.Find( "EvidenceTrigger4" );		//条件を満たすまでは表示されないようにする
-		if ( _evidenceTrigger4 != null ) {
-			_evidenceTrigger4.GetComponent< BoxCollider2D >( ).enabled = able;
-		}
-
-
+        _evidenceActiveManager.AllEvidenceDisapearFlag( );
+		
 		bool[,] site = {									//どの部屋を閉じる状態にするかの配列。false：閉じない true：閉じる
 			{ true, false, true, true },					//右から寝室、キッチン、給仕室、庭。（部屋番号に対応）
 			{ true, false, true, true },					//上から昼、夕方、夜。
@@ -304,6 +288,9 @@ public class StoryBoundManeger : MonoBehaviour {
 
 
     public void GetEvidence4Bound( bool application ) {
+        int[ ] evidenceNum = { 5, 6 };
+        _evidenceActiveManager.PartEvidenceDisapearFlag( evidenceNum );
+
         bool[,] site = {
 			{ true, false, true, true },
 			{ true, false, true, true },
@@ -318,6 +305,9 @@ public class StoryBoundManeger : MonoBehaviour {
     }
 
     public void GetEvidence5Bound( bool application ) {
+        int[ ] evidenceNum = { 6 };
+        _evidenceActiveManager.PartEvidenceDisapearFlag( evidenceNum );
+
         bool[,] site = {
 			{ false, false, false, false },
 			{ true, false, true, true },
@@ -359,8 +349,7 @@ public class StoryBoundManeger : MonoBehaviour {
 		}
 	}
 
-	//縛りがかかる場所だったらカーテンを閉じてそうでなかったらカーテンを開ける関数--------
-	//カーテンのフラグがトリガーのためやりずらい。ブールならやりやすいかも
+	//縛りがかかる場所だったらカーテンを閉じてそうでなかったらカーテンを開ける関数----------------------------------------
 	public void CutainCloseBound( bool[,] site ) {
 		int iSite = 0;								//事件現場
 		string sTimeZone = "none";					//時間帯

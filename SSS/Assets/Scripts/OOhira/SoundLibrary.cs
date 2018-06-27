@@ -13,11 +13,6 @@ public class SoundLibrary : MonoBehaviour {
 	void Start () {
 		_audioSource = GetComponent<AudioSource> ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 
 	IEnumerator StopSoundWithFadeOutCoroutine() {

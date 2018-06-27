@@ -13,11 +13,6 @@ public class CameraControll : MonoBehaviour {
 	void Start () {
 		_camera = GetComponent<Camera> ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 	//===================================================
 	//public関数

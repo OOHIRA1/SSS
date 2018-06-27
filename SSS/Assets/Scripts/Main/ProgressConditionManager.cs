@@ -39,10 +39,6 @@ public class ProgressConditionManager : MonoBehaviour {
 		if ( millioareDieMono != null ) _millioareDieMono = millioareDieMono.GetComponent< MillioareDieMono >( );
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 	public bool ShowMillionareMurderAnimProgress( ) {
 		if ( _scenesManager.GetNowScenes( ) == "SiteNight"  ) {	//夜だったら

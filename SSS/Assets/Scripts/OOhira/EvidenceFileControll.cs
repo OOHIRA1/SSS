@@ -9,15 +9,10 @@ public class EvidenceFileControll : MonoBehaviour {
 	[SerializeField] GameObject _evidenceFile = null;
 
 	// Use this for initialization
-	void Start () {
+	//void Start () {
 		//_evidenceFile.SetActive (false);
-	}
+	//}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
 
 	//===========================================
 	//public関数

@@ -15,10 +15,6 @@ public class StopButton : MonoBehaviour {
         buttonImge = GetComponent< Image >( );
         stop_button = false;
     }
-    // Update is called once per frame
-    void Update( ) {
-
-    }
 
     public void Click( ) {
 

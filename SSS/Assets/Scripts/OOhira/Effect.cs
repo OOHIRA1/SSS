@@ -12,11 +12,6 @@ public class Effect : MonoBehaviour {
 	void Start () {
 		_animator = GetComponent<Animator> ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 
 	//--現在のStateの再生時間を返す関数( 返り値：0~1(開始時：0, 終了時：1) )

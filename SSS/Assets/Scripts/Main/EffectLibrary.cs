@@ -13,10 +13,6 @@ public class EffectLibrary : MonoBehaviour {
         _gameObject[ 0 ] = ( GameObject )Resources.Load( "Touch/effect_touch" );
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	}
-
     public void EffectInstantiate ( Effect effect, Vector3 pos ) {
         
         Instantiate( _gameObject[ ( int )effect ], pos, Quaternion.identity );

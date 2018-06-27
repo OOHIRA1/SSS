@@ -11,11 +11,6 @@ public class TitleButton : MonoBehaviour {
 		
 	}
 	
-	// Update is called once per frame
-	void Update () {
-
-
-	}
 	public void OnClick() {
 
 		Debug.Log( "Button Click" );

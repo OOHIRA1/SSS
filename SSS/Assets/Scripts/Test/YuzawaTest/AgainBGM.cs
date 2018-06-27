@@ -8,20 +8,15 @@ public class AgainBGM : MonoBehaviour
 
     bool _check;
 
-    AudioSource audioSource;
+    //AudioSource audioSource;
     // Use this for initialization
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        //audioSource = GetComponent<AudioSource>();
         _bgmManeger = GameObject.FindWithTag("BGMManager").GetComponent<BGMManager>();
         _check = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public void AgainPlayBGM()
     {

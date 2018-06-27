@@ -14,11 +14,6 @@ public class DoubleDoorCurtain : MonoBehaviour {
 		_animators = GetComponentsInChildren<Animator> ();
 		_audioSource = GetComponentInChildren<AudioSource> ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 
 	//----------------------------------------------

@@ -10,11 +10,6 @@ public class CupFull : MonoBehaviour {
 	void Start () {
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 	public void Cup(){
 		_cupFull.SetActive (true);

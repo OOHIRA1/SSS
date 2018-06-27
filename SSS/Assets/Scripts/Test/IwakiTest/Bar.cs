@@ -21,11 +21,6 @@ public class Bar : MonoBehaviour {
 	//=================================================
 
 
-	// Update is called once per frame
-	void Update( ) {
-		
-	}
-
 	//===================================================
 	//public関数
 	//--シークバーのスケールを変更する関数

@@ -7,12 +7,7 @@ using UnityEngine;
 //使用方法：SpotlightType2にアタッチ
 public class SpotlightType2 : MonoBehaviour {
 	[SerializeField] RayShooter _rayShooter = null;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
+    	
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetMouseButtonDown (0)) {

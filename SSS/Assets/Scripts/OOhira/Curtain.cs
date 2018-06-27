@@ -19,7 +19,7 @@ public class Curtain : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	//void Update () {
 		//音を出す処理------------------------------------------------------
 //		if (IsStateClose () && ResearchStatePlayTime () >= 0f && !_seSounded) {
 //			_audioSource.PlayOneShot ( _audioSource.clip );
@@ -36,7 +36,7 @@ public class Curtain : MonoBehaviour {
 //			_seSounded = false;
 //		}
 		//------------------------------------------------------------------
-    }
+    //}
 
 
 	//----------------------------------------------

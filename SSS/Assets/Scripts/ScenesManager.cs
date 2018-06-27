@@ -9,9 +9,6 @@ public class ScenesManager : MonoBehaviour {
 	void Start( ) {
 	}
 	
-	// Update is called once per frame
-	void Update( ) {
-	}
 
     //シーン遷移------------------------------------------------------------
 	public void ScenesTransition( string scene ) {

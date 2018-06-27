@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EvidenceTimeActiveManager : MonoBehaviour {
+public class EvidenceActiveManager : MonoBehaviour {
     [ System.Serializable ]
     public struct ActiveTimes {
         public float _timeStart;
@@ -23,7 +23,12 @@ public class EvidenceTimeActiveManager : MonoBehaviour {
 	[ SerializeField ] int[ ] _index = new int[ 1 ];		//追加で表示する時間をつけるindex;
 	[ SerializeField ] AddActiveTimes[ ] _addActiveTimes = new AddActiveTimes[ 1 ];
 
+    int[ ] _evidenceNum;
+
     bool[ ] _disapear;              //指定時間外の証拠品を非表示にする判断のための変数
+    bool _partDisapear;             //一部の証拠品を消すかどうか
+    bool _allDisapear;              //すべての証拠品を消すかどうか
+	
 
 	// Use this for initialization
 	void Start( ) {
@@ -32,19 +37,35 @@ public class EvidenceTimeActiveManager : MonoBehaviour {
         for ( int i = 0; i < _disapear.Length; i++ ) {
             _disapear[ i ] = true;
         }
+
+        _evidenceNum = new int[ _evidenceTrigger.Length ];
+
+        _partDisapear = false;
+        _allDisapear = false;
+        //for( int i = 0; _evidenceIcom.Length; i++ ) {
+        //    if ( _evidenceIcom[i].name == "EvidenveIcon" + i )
+        //    GameObject a = GameObject.Find("Evidence");
+        //}
 	}
 	
 	// Update is called once per frame
 	void Update( ) {
-        EvidenceActive( );
-		AddEvidenceActive( );
+			EvidenceTimeActive( );
+			AddEvidenceTimeActive( );
+			EvidenceNotTimeDisapear( );
 
-        EvidenceDisapear( );
-       
+            //publicでこの処理をしても上手くいかなかったのでUpdateで処理することにした
+            //フラグが立っていたら処理する
+            if ( _partDisapear ) PartEvidenceDisapear( _evidenceNum );  
+            if ( _allDisapear ) AllEvidenceDisapear( );
+
+            //関数を呼ばなくなったら処理しないようにするため
+            _partDisapear = false;
+            _allDisapear = false;
 	}
 
     //再生時間によって証拠品を表示するかどうか処理-----------------
-    void EvidenceActive( ) {
+    void EvidenceTimeActive( ) {
 
         float movieTime = _moviePlaySystem.MovieTime( );        //再生時間
 
@@ -61,7 +82,7 @@ public class EvidenceTimeActiveManager : MonoBehaviour {
 	//---------------------------------------------------------------
 
 	//特定の証拠品に追加で表示する時間を設定する-----------------------
-	void AddEvidenceActive( ) {
+	void AddEvidenceTimeActive( ) {
 		float movieTime = _moviePlaySystem.MovieTime( );        //再生時間
 
 		for ( int i = 0; i < _index.Length; i++ ) {
@@ -78,7 +99,7 @@ public class EvidenceTimeActiveManager : MonoBehaviour {
     //--------------------------------------------------------------------
 
     //指定時間内ではなかった証拠品を非表示にする-------------------------------
-    void EvidenceDisapear( ) {
+    void EvidenceNotTimeDisapear( ) {
 
          for ( int i = 0; i < _evidenceTrigger.Length; i++ ) {
             if ( _disapear[ i ] ) {                             //消すフラグがtrueだったら
@@ -90,4 +111,50 @@ public class EvidenceTimeActiveManager : MonoBehaviour {
 
     }
     //--------------------------------------------------------------------------
+
+
+    //一部の証拠品だけ消す処理--------------------------------------------------------------
+    void PartEvidenceDisapear( int[ ] evidenceNum ) {
+        for ( int i = 0; i < evidenceNum.Length; i++ ) {
+            for ( int j = 0; j < _evidenceTrigger.Length; j++ ) {
+
+                if ( _evidenceTrigger[ j ].name == "EvidenceTrigger" + evidenceNum[ i ] ) {
+                    _evidenceTrigger[ j ].SetActive( false );
+                    _evidenceIcom[ j ].SetActive( false );
+                }
+
+            }
+        }
+    }
+    //--------------------------------------------------------------------------------------
+
+    //全ての証拠品を消す処理-------------------------------------------------------
+    void AllEvidenceDisapear( ) {
+
+        for ( int i = 0; i < _evidenceTrigger.Length; i++ ) {
+             _evidenceTrigger[ i ].SetActive( false );          //Triggerを消す
+             _evidenceIcom[ i ].SetActive( false );          //Triggerを消しただけだとバグるのでIcomも一緒に消す
+        }
+
+    }
+    //-------------------------------------------------------------------------------
+
+    //どの証拠品を消すか値を入れるのと一部の証拠品を消す処理をするフラグを立てる------
+    public void PartEvidenceDisapearFlag( int[ ] evidenceNum ) {
+        for ( int i = 0; i < evidenceNum.Length; i++ ) {
+            if ( _evidenceNum.Length < i ) return;
+
+            _evidenceNum[ i ] = evidenceNum[ i ] ;
+        }
+
+        _partDisapear = true;
+    }
+    //--------------------------------------------------------------------------------
+
+    //全ての証拠品を消す処理をするフラグを立てる-----------
+    public void AllEvidenceDisapearFlag( ) {
+	    _allDisapear = true;
+    }
+    //-----------------------------------------------------
+
 }

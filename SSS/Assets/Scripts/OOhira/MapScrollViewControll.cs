@@ -8,17 +8,6 @@ using UnityEngine;
 public class MapScrollViewControll : MonoBehaviour {
 	[SerializeField] GameObject _mapScrollView = null;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-
 	//===========================================
 	//public関数
 
@@ -36,6 +25,8 @@ public class MapScrollViewControll : MonoBehaviour {
 	public bool IsOpeningFile() {
 		return _mapScrollView.activeInHierarchy;
 	}
+
+
 	//===========================================
 	//===========================================
 }

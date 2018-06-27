@@ -9,11 +9,6 @@ public class GabegeShooter : MonoBehaviour {
 	[SerializeField] Rigidbody2D[] _gabeges = null;
 	[SerializeField] Vector3[] _velocities = null;
 	[SerializeField] float[] _shootTime = null;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
 	
 	// Update is called once per frame
 	void Update () {

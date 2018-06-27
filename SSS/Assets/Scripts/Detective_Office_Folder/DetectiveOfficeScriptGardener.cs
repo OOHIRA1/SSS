@@ -10,10 +10,6 @@ public class DetectiveOfficeScriptGardener : MonoBehaviour {
 		_animator = GetComponent<Animator>();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     public void GardenerTalkStarat() {
         _animator.SetBool( "GardenerTalk", true );

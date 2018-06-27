@@ -11,7 +11,7 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
     [SerializeField]GameObject[] _speechBalloon = new GameObject[4];    //各吹き出し
 	[SerializeField]GameObject[] _clockApper = new GameObject[4];       //各ClockUi
     [SerializeField]GameObject[] _sceneButton = new GameObject[12];     //各時間帯ごとのボタン
-	[SerializeField]GameObject _scrollButton = null;                   //事件現場へボタン
+	//[SerializeField]GameObject _scrollButton = null;                   //事件現場へボタン
 	[SerializeField]ScenesManager _scenesManager = null;
     [SerializeField]BGMManager _bgmManeger = null;
 	[SerializeField]Curtain _curtain = null;
@@ -24,7 +24,7 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 	bool _crimeSceneTransitionButtonPushed;	                          //事件現場シーンボタンを押したかどうかのフラグ
 
     int _num;			//ClocUiの数分見てる
-	int _buttonNum;
+	//int _buttonNum;
 	public AudioClip crimesceneButton2Appear;
 	public AudioClip crimesceneButton2Disappear2;
     AudioSource audioSource;
@@ -58,7 +58,7 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 		_bgmManeger = GameObject.FindWithTag ("BGMManager").GetComponent<BGMManager> ();
 		_crimeSceneTransitionButtonPushed = false;
 
-		_buttonNum = 0;
+		//_buttonNum = 0;
     }
 	
 	// Update is called once per frame
@@ -264,7 +264,7 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
     //-----------------------------------------------------------------------
 
 
-	//--事件現場ボタンを押したかどうか確認する関数
+	//--事件現場ボタンを押したかどうか確認する関数--------------------------------------
 	public bool CheckCrimeSceneButton( int num ) {
 		bool pushed = false;
 		if (num == _num) {
@@ -272,9 +272,10 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 		}
 		return pushed;
 	}
+    //----------------------------------------------------------------------------------
 
 
-	//--事件現場ボタンを押せなくする関数
+	//--事件現場ボタンを押せなくする関数-------------------------------------------------------
 	public void ChangeCrimeSceneButtonInteractive( bool x, int notChangeNum = -1 ) {
 		for (int i = 0; i < _crimeSceneButton.Length; i++) {
 			if (i != notChangeNum) {
@@ -282,6 +283,9 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 			}
 		}
 	}
+    //------------------------------------------------------------------------------------------
+
+
 	//事件現場へボタン押せなくする関数
 	//public void ChangeScrollButtonInteractive( bool x, int notChangeNum  ){
 		//if ( _buttonNum != notChangeNum ) {
@@ -290,7 +294,7 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 	//}
 
 
-	//--時計UIを押したかどうかを確認する関数
+	//--時計UIを押したかどうかを確認する関数---------------------------------------
 	public bool CheckClockUIPushed() {
 		bool x = false;
 		for (int i = 0; i < _checker.Length; i++) {
@@ -301,4 +305,5 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 		}
 		return x;
 	}
+    //------------------------------------------------------------------------------
 }

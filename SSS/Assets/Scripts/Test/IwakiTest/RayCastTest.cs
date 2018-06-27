@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class RayCastTest : MonoBehaviour {
 
-	// Use this for initialization
-	void Start( ) {
-		
-	}
 	
 	// Update is called once per frame
 	void Update( ) {

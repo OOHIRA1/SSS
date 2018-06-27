@@ -85,7 +85,7 @@ public class DetectiveTalk : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	//void Update () {
 		//1文字ずつ表示する処理---------------------------------------------------------
 //		_time += Time.deltaTime;
 //		if ( _time > _speed ) {
@@ -111,7 +111,7 @@ public class DetectiveTalk : MonoBehaviour {
 //			Talk ();
 //		}
 		//-------------------------------------
-	}
+	//}
 
 	//--テキストを表示する関数(コルーチン)
 	IEnumerator DisplayText() {

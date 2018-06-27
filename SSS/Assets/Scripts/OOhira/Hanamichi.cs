@@ -13,11 +13,6 @@ public class Hanamichi : MonoBehaviour {
 		_animator = GetComponent<Animator> ();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
 	//===========================================================================================
 	//public関数
 

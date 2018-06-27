@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MillioareDieMono : MonoBehaviour {
 
-    Vector3 _move_dir = Vector3.right;
+    //Vector3 _move_dir = Vector3.right;
     [SerializeField] float _time;
     [SerializeField] float _animatime;
     [SerializeField]GameObject _effectBlood = null;
@@ -58,7 +59,7 @@ public class MillioareDieMono : MonoBehaviour {
 
     //}
 
-   
+
     public void Effectblood( ) {
 
         bool value = true;

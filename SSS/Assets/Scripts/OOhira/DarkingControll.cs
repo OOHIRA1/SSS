@@ -12,11 +12,6 @@ public class DarkingControll : MonoBehaviour {
 	void Start () {
 		_animator = GetComponent<Animator> ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
 
 	//=============================================================================================

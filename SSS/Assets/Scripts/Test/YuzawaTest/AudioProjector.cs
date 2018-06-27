@@ -12,11 +12,6 @@ public class AudioProjector : MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
-        
-	}
 
     //映写機音の再生---------------
     public void ProjectorPlay(){

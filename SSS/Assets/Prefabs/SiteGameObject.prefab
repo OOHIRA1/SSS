@@ -5851,7 +5851,7 @@ GameObject:
   - component: {fileID: 4731233088796230}
   - component: {fileID: 114404262896179880}
   m_Layer: 0
-  m_Name: EvidenceTimeActiveManager
+  m_Name: EvidenceActiveManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18189,6 +18189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdbcb7608e9f0284b85e4f4020232283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _evidenceActiveManager: {fileID: 114404262896179880}
   _detective: {fileID: 0}
   _moviePlaySystem: {fileID: 0}
   _scenesManager: {fileID: 0}
@@ -30611,6 +30612,7 @@ MonoBehaviour:
   _scenesManager: {fileID: 0}
   _progressConditionManager: {fileID: 114289392966437614}
   _storyBoundManeger: {fileID: 114104051129677934}
+  _evidenceActiveManager: {fileID: 114404262896179880}
   _siteMove: {fileID: 114040537068500706}
   _cutain: {fileID: 0}
   _clockUI: {fileID: 114237233431375528}
