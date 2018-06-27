@@ -27,7 +27,14 @@ public class EvidenceIcon : MonoBehaviour {
 	Vector3 _firstPos;	//証拠品アイコンの初期位置
 	[SerializeField] ParabolicTrajectory _evidenceIconTrajectory = null;	//証拠品アイコンの軌跡　※uGUIで作っているため直に座標を指定
 	int _count;	//上下に動く時に使う変数(-50~50)
+	bool _putingAwayFlag;	//証拠品アイコンをしまっている最中(しまうアニメーション途中)かどうかのフラグ
 
+
+	//============================================================
+	//ゲッター
+	public bool GetPutingAwayFlag() { return _putingAwayFlag; }
+	//============================================================
+	//============================================================
 
 	// Use this for initialization
 	void Start () {
@@ -41,6 +48,7 @@ public class EvidenceIcon : MonoBehaviour {
 		_evidenceIconTrajectory._q = desPos.y - a * (desPos.x - p) * (desPos.x - p);								//q = y -a(x-p)^2 より算出される
 		_count = COUNT_INIT_VALUE;
 		this.gameObject.SetActive (false);//ResetPos()がStart()を入る前に呼ばれて_firstPosが証拠品アイコンの初期位置を上手く取れないバグ対策に先にStartを呼んで非アクティブ化
+		_putingAwayFlag = false;
 	}
 
 	// Update is called once per frame
@@ -71,6 +79,7 @@ public class EvidenceIcon : MonoBehaviour {
 
 	//--証拠品アイコンをしまう関数
 	public void PutAway() {
+		_putingAwayFlag = true;
 		StartCoroutine (PutAwayCoroutine());
 	}
 
@@ -135,6 +144,7 @@ public class EvidenceIcon : MonoBehaviour {
 			yield return new WaitForSeconds (/*Time.deltaTime*/1.5f);//音が長いので調整
 			_soundLibrary.StopSound();
 		}
+		_putingAwayFlag = false;
 		this.gameObject.SetActive (false);
 	}
 
