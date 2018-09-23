@@ -24,6 +24,7 @@ public class SiteManager : MonoBehaviour {
 	[ SerializeField ] Catcher _catcher = null;
 	[ SerializeField ] DetectiveTalk[ ] _detectiveTalk = null;
 	[ SerializeField ] RayShooter _camera = null;
+	[ SerializeField ] EvidenceIcon[ ] _evidenceIcon = new EvidenceIcon[2];
 
 	[ SerializeField ] Vector3[ ] _cursorPos = new Vector3[ 1 ];		//注目カーソルのpos
    
@@ -160,6 +161,13 @@ public class SiteManager : MonoBehaviour {
 		ClockUIScenesTransitionWithAnim( );
 		LaboTransitionUIScenesTransitionWithAnim( );
 		if ( !_moviePlaySystem.GetStop( ) ) RopeActionOrForcedMove( );					//ムービーが再生されていたら
+
+		for ( int i = 0; i < _evidenceIcon.Length; i++ ){
+			if (_evidenceIcon [i].GetPutingAwayFlag ()) {
+				_moviePlaySystem.SetOperation (false);
+				break;
+			}
+		}
 
 	}
 

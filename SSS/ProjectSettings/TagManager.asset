@@ -18,6 +18,7 @@ TagManager:
   - TouchEffect
   - MillioareMonoDie
   - CursorForAttention
+  - episode_sumuneil
   layers:
   - Default
   - TransparentFX

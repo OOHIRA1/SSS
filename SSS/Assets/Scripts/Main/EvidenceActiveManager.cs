@@ -23,6 +23,8 @@ public class EvidenceActiveManager : MonoBehaviour {
 	[ SerializeField ] int[ ] _index = new int[ 1 ];		//追加で表示する時間をつけるindex;
 	[ SerializeField ] AddActiveTimes[ ] _addActiveTimes = new AddActiveTimes[ 1 ];
 
+	EvidenceManager _evidenceManager;
+
     int[ ] _evidenceNum;
 
     bool[ ] _disapear;              //指定時間外の証拠品を非表示にする判断のための変数
@@ -32,6 +34,7 @@ public class EvidenceActiveManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start( ) {
+		_evidenceManager = GameObject.FindWithTag( "EvidenceManager" ).GetComponent<EvidenceManager>();
 		_disapear = new bool[ _evidenceTrigger.Length ];
 
         for ( int i = 0; i < _disapear.Length; i++ ) {
@@ -54,6 +57,8 @@ public class EvidenceActiveManager : MonoBehaviour {
             //フラグが立っていたら処理する
             if ( _partDisapear ) PartEvidenceDisapear( _evidenceNum );  
             if ( _allDisapear ) AllEvidenceDisapear( );
+
+			EvideneDisappearCheckingEvidenceManager( );	
 
             //関数を呼ばなくなったら処理しないようにするため
             _partDisapear = false;
@@ -134,6 +139,23 @@ public class EvidenceActiveManager : MonoBehaviour {
 
     }
     //-------------------------------------------------------------------------------
+
+	//証拠品の取得情報を確認してトリガーを消す処理-------------------------------------------
+	void EvideneDisappearCheckingEvidenceManager( ) {
+		for ( int i = 0; i < 6; i++ ) {//6は証拠品の数
+			EvidenceManager.Evidence evidenceEnum = EvidenceManager.Evidence.STORY1_EVIDENCE1;
+			evidenceEnum = (EvidenceManager.Evidence)((int)evidenceEnum << i);
+			if ( _evidenceManager.CheckEvidence( evidenceEnum ) ) {
+				for ( int j = 0; j < _evidenceTrigger.Length; j++ ) {
+					if ( _evidenceTrigger[ j ].name == "EvidenceTrigger" + ( i + 1 ) ) {
+						_evidenceTrigger[ j ].SetActive( false );
+						_evidenceIcom[ j ].SetActive( false );
+					}
+				}
+			}
+		}
+	}
+	//--------------------------------------------------------------------------------
 
     //どの証拠品を消すか値を入れるのと一部の証拠品を消す処理をするフラグを立てる------
     public void PartEvidenceDisapearFlag( int[ ] evidenceNum ) {

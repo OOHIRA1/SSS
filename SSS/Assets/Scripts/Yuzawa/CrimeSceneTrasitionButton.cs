@@ -29,6 +29,7 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 	public AudioClip crimesceneButton2Disappear2;
     AudioSource audioSource;
 	bool[] _checker = new bool[12];  //各時間帯ごとのボタン押されたかどうか見る
+	bool _checking;
 
 
 	//========================================================================
@@ -57,6 +58,8 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 		}
 		_bgmManeger = GameObject.FindWithTag ("BGMManager").GetComponent<BGMManager> ();
 		_crimeSceneTransitionButtonPushed = false;
+
+		_checking = false;
 
 		//_buttonNum = 0;
     }
@@ -115,9 +118,11 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 			audioSource.PlayOneShot(crimesceneButton2Appear, 0.2F);
 			value = true;
 			_crimeSceneTransitionButtonPushed = true;
+			_checking = true;
 		} else {
 			value = false;
 			_crimeSceneTransitionButtonPushed = false;
+			_checking = false;
 		}
 		audioSource.PlayOneShot(crimesceneButton2Disappear2, 0.2F);
 		_animator.SetBool ("scrollFlag", value);
@@ -126,16 +131,20 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 
     public void SpeechBalloon( int arrayNumber ) {              //吹き出しの表示　　他のボタン押したとき表示されてるものを非表示
         //ボタンを押したときに表示されていたら非表示にする-----------
-        if ( _speechBalloon[arrayNumber].activeInHierarchy ) {
-            _time[arrayNumber] = 0;
-                _speechBalloon[arrayNumber].SetActive(false);
-                return;
+		if( _checking ){
+			if (_speechBalloon [arrayNumber].activeInHierarchy) {
+				_time [arrayNumber] = 0;
+				_speechBalloon [arrayNumber].SetActive (false);
+				return;
+			}
         }
         //-----------------------------------------------------------
         //配列番号がarrayNumberの_speechBalloonのみ表示させる-----------------------------------
 		for (int i = 0; i < _speechBalloon.Length; i++){        
-			if (i == arrayNumber){                              //iとArrayNumberの変数が同じ時
-				_speechBalloon[i].SetActive(true);
+			if (i == arrayNumber) {                              //iとArrayNumberの変数が同じ時
+				if (_checking) {
+					_speechBalloon [i].SetActive (true);
+				}
 			} else {
 				_speechBalloon[i].SetActive(false);
 				_time[i] = 0;
@@ -149,8 +158,10 @@ public class CrimeSceneTrasitionButton : MonoBehaviour {
 	 void OnClickedClock( int arrayNumber ) {   //時計ＵＩの表示　　　他のボタン押したとき表示されてるものを非表示
 		for ( int i = 0; i < 4; i++ ) {
 			if ( i == arrayNumber && _speechBalloon[i].activeInHierarchy) {
-				if( _time[ i ] > _animTime ) {
-					_clockApper[ i ].SetActive( true );
+				if (_time [i] > _animTime) {
+					if (_checking) {
+						_clockApper [i].SetActive (true);
+						}
 					}
 				} else {
 					_clockApper[ i ].SetActive( false );

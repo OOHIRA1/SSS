@@ -7,6 +7,7 @@ public class FadControll : MonoBehaviour {
 
 	[SerializeField] Movie [] _movie = new Movie[ 1 ];
     [SerializeField] SiteMove _siteMove = null;
+	[SerializeField] MoviePlaySystem _movePlaySystem = null;
     [SerializeField] int _siteNum = 0;
 	
 	GameObject[] _gameObject;
@@ -37,7 +38,7 @@ public class FadControll : MonoBehaviour {
 			for( int i = 0; i < _gameObject.Length; i++ ) {
 
 			_gameObject[i].SetActive( true );
-	
+			_movePlaySystem.AnimationTime();
 			}
 
     }

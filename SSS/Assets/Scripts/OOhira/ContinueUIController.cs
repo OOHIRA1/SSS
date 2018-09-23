@@ -94,6 +94,7 @@ public class ContinueUIController : MonoBehaviour {
 		SiteManager._conditions2 = false;
 		SiteManager._endStory = false;
 		SiteMove._nowSiteNum = 0;
+		DetectiveOfficeManager._showCursorForCriminalChoiceButton = true;
 		//-----------------------------------
 		StartCoroutine (SceneTransitionCoroutine("StageSelect"));
 	}

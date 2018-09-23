@@ -1859,6 +1859,15 @@ Prefab:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4500145071027422, guid: 9b2640d3ce7ae00419d9faed77e5c9c0, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 212999333714521872, guid: 9b2640d3ce7ae00419d9faed77e5c9c0,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9b2640d3ce7ae00419d9faed77e5c9c0, type: 2}
   m_IsPrefabParent: 0
@@ -2604,6 +2613,11 @@ Prefab:
         type: 2}
       propertyPath: m_SizeDelta.y
       value: -17
+      objectReference: {fileID: 0}
+    - target: {fileID: 224947145400430490, guid: 8aaaa0a0539f64047946516670daffc3,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.00012207031
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8aaaa0a0539f64047946516670daffc3, type: 2}
@@ -5392,7 +5406,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7.65
+  orthographic size: 7.6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

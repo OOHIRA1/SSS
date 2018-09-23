@@ -43,10 +43,12 @@ public class DetectiveOfficeManager : MonoBehaviour {
 	[SerializeField] BoxCollider2D[] _dangerousWeaponCollider = null;			//凶器UIのコライダー
 	BGMManager _bgmManager;
 	[SerializeField] Cursor _cursorForNextAction = null;						//次の行動を示唆するカーソル
-	bool[] _showCursorForNextActionFlag = new bool[2];											//_cursorForNextActionを表示するかどうかのフラグ
+	bool[] _showCursorForNextActionFlag = new bool[3];											//_cursorForNextActionを表示するかどうかのフラグ
 	[SerializeField] Vector3[] _cursorForNextActionPos = null;					//次の行動を示唆するカーソルが移動する移動する座標
 	[SerializeField] EvidenceFileControll _evidenceFileControll = null;
 	[SerializeField] MapScrollViewControll _mapScrollViewControll = null;
+	[SerializeField] Spotlight _spotlight = null;
+	public static bool _showCursorForCriminalChoiceButton = true;	//犯人指摘ボタンを示唆するカーソル(急遽仕様変更のためstaticで対応)
 
 
 	//===================================================================================
@@ -115,6 +117,8 @@ public class DetectiveOfficeManager : MonoBehaviour {
 			_curtain.Close ();
 		}
 		//-----------------------------------------------
+
+		_spotlight.Check();//スポットライトの音を鳴らす処理
 
 		switch( _state ) {
 		case State.INVESTIGATE://調査
@@ -248,6 +252,9 @@ public class DetectiveOfficeManager : MonoBehaviour {
 			_detective.DesignationMove (_detective.GetInitialPos ());//探偵を初期位置に移動
 			_state = State.CRIMINAL_CHOISE;
 			_bgmManager.UpdateBGM ();//音を変える処理
+			if(_cursorForNextAction.gameObject.activeInHierarchy) {
+				_cursorForNextAction.gameObject.SetActive (false);//犯人指摘ボタンを示唆するカーソルを消す処理
+			}
 		}
 		//-----------------------------------------------------
 		//初めて昼か夕方の厨房に来るチェックポイントが立っていなかったら厨房の昼と夕方しか反応しなくする処理--------
@@ -271,8 +278,8 @@ public class DetectiveOfficeManager : MonoBehaviour {
 				_showCursorForNextActionFlag [1] = false;
 			}
 			//-----------------------------------------------------------------------------------------------
-			//事件現場ボタンを押さずに事件現場遷移ボタンを押したら前の地点を指す処理-----------------------------------------------------------------------------------
-			if (!_showCursorForNextActionFlag[0] && !_laboUIManager.GetCrimeSceneTransitionButtonPushed () && _cursorForNextAction.gameObject.activeInHierarchy) {
+			//事件現場ボタンを押さずに事件現場遷移ボタンを押したら前の地点を指す処理(犯人指摘ボタンカーソルが出る前)-----------------------------------------------------------------------------------
+			if (!_showCursorForNextActionFlag[0] && !_laboUIManager.GetCrimeSceneTransitionButtonPushed () && _cursorForNextAction.gameObject.activeInHierarchy && _showCursorForCriminalChoiceButton) {
 				_cursorForNextAction.gameObject.SetActive (false);
 				_cursorForNextAction.ChangeMovePos ( _cursorForNextActionPos[1] );
 				_cursorForNextAction.gameObject.SetActive (true);
@@ -299,6 +306,13 @@ public class DetectiveOfficeManager : MonoBehaviour {
 		//次の文を表示する処理------------------------------
 		if (Input.GetMouseButtonDown (0) ) {
 			_detectiveTalk [_detectiveTalkIndex].Talk ();
+			if (_showCursorForCriminalChoiceButton && _detectiveTalkIndex == 2 && _detectiveTalk [_detectiveTalkIndex].GetStateMentNumber () == 2) {
+				_cursorForNextAction.gameObject.SetActive (false);
+				_cursorForNextAction.ChangeMovePos ( _cursorForNextActionPos[2] );
+				_cursorForNextAction.gameObject.SetActive (true);//カーソルの表示
+				_laboUIManager.DisplayCriminalChoiseButton ();//犯人指摘ボタン表示
+				_showCursorForCriminalChoiceButton = false;
+			}
 		}
 		//-------------------------------------------------
 		//文章が読み終わっていたら次のStateへ--------------------------------------

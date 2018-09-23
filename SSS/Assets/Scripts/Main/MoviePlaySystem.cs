@@ -234,6 +234,11 @@ public class MoviePlaySystem : MonoBehaviour {
         return false;
 
     }
+	public void AnimationTime (){
+
+		MovieUpdate ();
+
+	}
     //---------------------------------------------------------------------------------
 
 	//=======================================================================

@@ -9,6 +9,9 @@ public class Spotlight : MonoBehaviour {
 	[SerializeField] Transform _cursorTransform = null;		//カーソルのTransform
 	[SerializeField] GameObject _spotLight = null;
 
+	bool _check;
+	bool _soundCheck;
+
 	public AudioClip Spotlight1;
     AudioSource audioSource;
 
@@ -17,7 +20,7 @@ public class Spotlight : MonoBehaviour {
 	void Start () {
 		
 		audioSource = GetComponent<AudioSource>();
-		SpotLight();
+		_check = true;
 
 	}
 
@@ -26,11 +29,22 @@ public class Spotlight : MonoBehaviour {
 		Vector3 pos = transform.position;
 		pos.x = _cursorTransform.position.x;
 		transform.position = pos;
-	}
 
+		if (_check ) {
+			SpotLight ();
+			_check = false;
+		}
+
+	}
 	public void SpotLight() {
 		if( _spotLight.activeInHierarchy ) {
 			audioSource.PlayOneShot (Spotlight1, 0.7f);
+		}
+	}
+
+	public void Check(){
+		if (!_spotLight.activeInHierarchy) {
+			_check = true;
 		}
 	}
 }

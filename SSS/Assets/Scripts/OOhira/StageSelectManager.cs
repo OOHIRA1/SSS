@@ -15,6 +15,9 @@ public class StageSelectManager : MonoBehaviour {
 	[SerializeField] AudioSource _openingBuzzer = null;
 	bool _buzzerSounded; //ブザー音が鳴ったかどうかのフラグ
 	[SerializeField] GameObject _clearStamp = null;	//クリアスタンプ
+	[SerializeField] StaffCreditPageControll _staffCreditPageControll = null;
+	[SerializeField] StageSelectUIManager _stageSelectUIManager = null;
+	bool _staffCreditButtonInteractableChanged;//スタッフクレジットを押せるようにするフラグ
 
 	// Use this for initialization
 	void Start () {
@@ -25,10 +28,25 @@ public class StageSelectManager : MonoBehaviour {
 		if (!_gameDataManager.CheckAdvancedData (GameDataManager.CheckPoint.CLEAR_EPISODE1)) {
 			_clearStamp.SetActive (false);//エピソード1をクリアしていないとスタンプが押されない
 		}
+		_bgmManager.UpdateBGM ();//BGMを鳴らす処理(ゲームリザルトシーンから遷移後に鳴らすため)
+		_staffCreditButtonInteractableChanged = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if (_staffCreditPageControll.IsOpeningFile ()) return;//スタッフクレジットを開いている時は処理しない
+
+		//カーテンが開ききるまでスタッフクレジットボタンを押せなくする処理-----------
+		if (!_staffCreditButtonInteractableChanged) {
+			if (_curtain.IsStateWait ()) {
+				_stageSelectUIManager.StaffCreditButtonIntaractive (false);
+			} else if (_curtain.ResearchStatePlayTime () >= 1f) {
+				_stageSelectUIManager.StaffCreditButtonIntaractive (true);
+				_staffCreditButtonInteractableChanged = true;
+			}
+		}
+		//------------------------------------------------------------------------
+
 		//ボタンの検出------------------------------------------------------------
 		if (Input.GetMouseButtonDown (0)) {
 			RaycastHit2D hit = _rayShooter.Shoot (Input.mousePosition);
@@ -36,6 +54,12 @@ public class StageSelectManager : MonoBehaviour {
 				if (hit.collider.name == "Stage1Button") {
 					_openingBuzzer.PlayOneShot (_openingBuzzer.clip);
 					_buzzerSounded = true;
+					SpriteRenderer sr = hit.collider.GetComponent<SpriteRenderer> ();
+					sr.color = new Color (200 / 255f, 200 / 255f, 200 / 255f, 1f);//色を変える処理
+					if (_staffCreditPageControll.IsOpeningFile ()) {
+						_staffCreditPageControll.DisappearStaffCreditPage ();//非表示にする　※パットでセレクトボタンとスタッフクレジットボタンのダブルタップ対策
+					}
+					_stageSelectUIManager.StaffCreditButtonIntaractive(false);//スタッフクレジットボタンを反応しなくする
 					hit.collider.enabled = false;//2回以上反応しないため
 					//_curtain.Close ();
 				}
@@ -65,6 +89,7 @@ public class StageSelectManager : MonoBehaviour {
 				SiteManager._conditions2 = false;
 				SiteManager._endStory = false;
 				SiteMove._nowSiteNum = 0;
+				DetectiveOfficeManager._showCursorForCriminalChoiceButton = true;
 				//----------------------------------
 				_scenesManager.ScenesTransition ("SiteNight_Bedroom");
 			}
