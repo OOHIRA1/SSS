@@ -15,6 +15,7 @@ public class TitleManager : MonoBehaviour {
 	[SerializeField] float _fadeInSpeed = 0;	//明転処理のスピード(alpha/second)
 	[SerializeField] Button _stratButton = null;
 	bool _fadeInFinishedFlag;					//フェードインを終わったかどうかのフラグ
+	[SerializeField] Animator _touchIconAnimator = null;	//タッチアイコンのAnimator
 
 	// Use this for initialization
 	void Start () {
@@ -34,6 +35,7 @@ public class TitleManager : MonoBehaviour {
 				if (hit.collider.name == "StartButton") {
 					_curtain.Close ();
 					_musicCreditAnimator.SetTrigger ("fadeOutTrigger");
+					_touchIconAnimator.SetTrigger ("fadeOutTrigger");
 					hit.collider.enabled = false;//2回以上反応しないため
 				}
 			}
