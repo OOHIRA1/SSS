@@ -69,7 +69,10 @@ public class SiteNameChange : MonoBehaviour {
     void TransparencyChange( ) {
 
         _transparency -= _speed * Time.deltaTime;
-        if ( _transparency < 0 ) _transparency = 0;
+        if ( _transparency < 0 )  {
+            _transparency = 0;
+            return;
+        }
 
         _textColor.a = _transparency;
         _textImage.color = _textColor;

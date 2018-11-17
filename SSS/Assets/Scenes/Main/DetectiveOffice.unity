@@ -3736,11 +3736,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72c72c0c8d1c49147a91f087cef05eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveTouchUp: -4
+  _moveTouchUp: 3.25
   _moveTouchDown: -6
   _speed: 6
   _forcedSpeed: 6
+  _notMoveTouchUp: -0.3
+  _notMoveTouchDown: -2.5
+  _notMoveTouchX: 7.5
   _effectLibrary: {fileID: 336559155}
+  _rayShooter: {fileID: 812775281}
 --- !u!1 &670131573
 GameObject:
   m_ObjectHideFlags: 0

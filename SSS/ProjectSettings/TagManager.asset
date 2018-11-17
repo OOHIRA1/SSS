@@ -19,6 +19,8 @@ TagManager:
   - MillioareMonoDie
   - CursorForAttention
   - episode_sumuneil
+  - ClockUIColor
+  - NoResponseArea
   layers:
   - Default
   - TransparentFX

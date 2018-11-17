@@ -13,6 +13,7 @@ public class StoryBoundManeger : MonoBehaviour {
 	[ SerializeField ] Button[] _button = new Button[ 1 ];
 	[ SerializeField ] GameObject _ui = null;
 	[ SerializeField ] SiteMove _siteMove = null;
+    [ SerializeField ] WarnigBannarChange _warnigBannarChange = null;
 
     
 
@@ -365,6 +366,7 @@ public class StoryBoundManeger : MonoBehaviour {
 					}
 
 					if ( sTimeZone == _scenesManager.GetNowScenes( ) && iSite == SiteMove._nowSiteNum ) {	//閉じたい場所と現在いる場所が同じだったら
+                         _warnigBannarChange.BannarChange( );    //注意書きバナー処理
 						if ( _cutain.IsStateOpen( ) && _cutain.ResearchStatePlayTime( ) >= 1f ) {			//カーテンが空いていたら		//この処理をしないと空いてもすぐに閉じるというバグが発生した(閉まっているのにフラグが立ってしまうためか？)
 							_cutain.Close( );
 						}
@@ -378,7 +380,7 @@ public class StoryBoundManeger : MonoBehaviour {
 
 		//最後まで終了しなかったら(閉じたい場所と現在いる場所が同じじゃなかったら)
 		if ( _cutain.IsStateWait( ) ) {	//カーテンが閉まっている状態だったら
-			_cutain.Open( );							
+			_cutain.Open( );
 		}
 
 	}

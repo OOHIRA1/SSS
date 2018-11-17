@@ -9,8 +9,10 @@ public class Detective : MonoBehaviour {
 
     [ SerializeField ] float _speed = 0.1f;             //歩くスピード
     [ SerializeField ] float _forcedSpeed = 0.1f;       //強制移動スピード
-
+    
     [ SerializeField ] EffectLibrary _effectLibrary = null;
+
+    [ SerializeField ] RayShooter _rayShooter = null;
 
     Animator _anim;
     SpriteRenderer _renderer;
@@ -103,18 +105,7 @@ public class Detective : MonoBehaviour {
     //探偵の動き処理--------------------------------------------------------------------------------------------
     void Move( ) {
 
-        Vector3 mouse = Vector3.zero;
-        if ( Input.GetMouseButtonDown( 0 ) ) {                                      //マウスが押されたら
-            mouse = Camera.main.ScreenToWorldPoint( Input.mousePosition );
-			
-			if ( mouse.y < _moveTouchUp && mouse.y > _moveTouchDown ) {             //押された場所が指定範囲内だったら
-				_destination.x = mouse.x;
-                mouse.z = 0;                                                        //エフェクトを表示するのに０にする必要がある
-                 _effectLibrary.EffectInstantiate( EffectLibrary.Effect.TOUCH, mouse );      //タッチエフェクト生成
-			}
-        }
-
-		float correction = _speed * Time.deltaTime / 2f + 0.1f;	//補正値(1flameの移動範囲より大きく設定するため)
+        float correction = _speed * Time.deltaTime / 2f + 0.1f;	//補正値(1flameの移動範囲より大きく設定するため)
 		if ( transform.position.x <= ( _destination.x + correction ) && transform.position.x >= ( _destination.x - correction ) ) {     //指定範囲内まで移動したら止まって歩くアニメーションをやめる
 			transform.position = _destination;										//目的地にピッタリ合うための処理
             _isAnimWalk = false;
@@ -132,8 +123,28 @@ public class Detective : MonoBehaviour {
 
             _isAnimWalk = true;
         }
-        
 
+        Vector3 mouse = Vector3.zero;
+        if ( Input.GetMouseButtonDown( 0 ) ) {                                      //マウスが押されたら
+            //押せない領域だったら処理しない
+            RaycastHit2D hit = _rayShooter.Shoot( Input.mousePosition );
+            if ( hit ) {
+			    if ( hit.collider.gameObject.tag == "NoResponseArea" ||
+                     hit.collider.gameObject.tag == "Noon" ||
+                     hit.collider.gameObject.tag == "Evening" ||
+                     hit.collider.gameObject.tag == "Night" ||
+                     hit.collider.gameObject.tag == "ClockUIColor" ||
+                     hit.collider.gameObject.tag == "EvidenceIcon" ) {
+                    return;
+                    }
+            }
+            mouse = Camera.main.ScreenToWorldPoint( Input.mousePosition );
+			if ( mouse.y < _moveTouchUp && mouse.y > _moveTouchDown ) {             //押された場所が指定範囲内だったら
+				_destination.x = mouse.x;
+                mouse.z = 0;                                                        //エフェクトを表示するのに０にする必要がある
+                 _effectLibrary.EffectInstantiate( EffectLibrary.Effect.TOUCH, mouse );      //タッチエフェクト生成
+			}
+        }
     }
     //---------------------------------------------------------------------------------------------------------------------
 

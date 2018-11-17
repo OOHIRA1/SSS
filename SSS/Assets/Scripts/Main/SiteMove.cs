@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SiteMove : MonoBehaviour {
     const float DOWN_ROOM_forcedPos = -30f;
-    [ SerializeField ] GameObject[ ] _site    = new GameObject[ 4 ];        //現場四つ	1:Bedroom 2:Graden 3:Kitchen 4:ServingRoom の順番で入れること 
+    [ SerializeField ] GameObject[ ] _site    = new GameObject[ 4 ];        //現場四つ	1:Bedroom 2:Kitchen 3:ServingRoom 4:Graden の順番で入れること 
 	[ SerializeField ] float _neighborRoom = 21f;							//左右の部屋のpos(-を付けると左の部屋のpos。そのままだと右の部屋のpos。)
     [ SerializeField ] float _moveSpeed = 1f; 
     bool _leftSitemove;                                                     //左に移動する場合

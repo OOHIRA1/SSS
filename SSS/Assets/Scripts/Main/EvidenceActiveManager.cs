@@ -162,7 +162,7 @@ public class EvidenceActiveManager : MonoBehaviour {
         for ( int i = 0; i < evidenceNum.Length; i++ ) {
             if ( _evidenceNum.Length < i ) return;
 
-            _evidenceNum[ i ] = evidenceNum[ i ] ;
+            _evidenceNum[ i ] = evidenceNum[ i ];
         }
 
         _partDisapear = true;

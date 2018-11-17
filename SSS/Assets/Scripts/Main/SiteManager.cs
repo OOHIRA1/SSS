@@ -25,6 +25,7 @@ public class SiteManager : MonoBehaviour {
 	[ SerializeField ] DetectiveTalk[ ] _detectiveTalk = null;
 	[ SerializeField ] RayShooter _camera = null;
 	[ SerializeField ] EvidenceIcon[ ] _evidenceIcon = new EvidenceIcon[2];
+    [ SerializeField ] WarnigBannarChange _warnigBannarChange = null;
 
 	[ SerializeField ] Vector3[ ] _cursorPos = new Vector3[ 1 ];		//注目カーソルのpos
    
@@ -577,7 +578,7 @@ public class SiteManager : MonoBehaviour {
 
 		if ( _clockUI.GetPushed( ) != "none"  ) {       //時計UIのいずれかの時間帯がタッチされたら       
 			Regulation( );
-
+            _warnigBannarChange.BannarReset( );                                     //注意書きバナーをリセット
 			//遷移する前に初期位置に戻す処理---------------------------------------------------------
 			RopeActionOrForcedMove( );
 
@@ -602,7 +603,7 @@ public class SiteManager : MonoBehaviour {
 	void LaboTransitionUIScenesTransitionWithAnim( ) {
 		if ( _pushLaboTransitionUI ) {
 			Regulation( );
-
+            _warnigBannarChange.BannarReset( );                                     //注意書きバナーをリセット
 			//遷移する前に初期位置に戻す処理---------------------------------------------------------
 			RopeActionOrForcedMove( );
 
@@ -625,6 +626,7 @@ public class SiteManager : MonoBehaviour {
     //現場が動いていたら処理---------------------
     void SiteMoveNow( ) {
         if ( _siteMove.GetMoveNow( ) ) {
+            _warnigBannarChange.BannarReset( );                                     //注意書きバナーをリセット
 			_evidenceActiveManager.AllEvidenceDisapearFlag( );
 			Regulation( );
             _detective.InitialMove( );
