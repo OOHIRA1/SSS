@@ -155,12 +155,12 @@ public class SiteManager : MonoBehaviour {
 		AllButtonInteractable( true );
 		RayShooterEnabled( true );
 
-		DetectiveRegurationWhenFileOpen ( );
         SiteMoveNow( );
 		RegurateByCurtainState( );
 		IsRopeActionAndForcedMove( );
 		ClockUIScenesTransitionWithAnim( );
 		LaboTransitionUIScenesTransitionWithAnim( );
+		DetectiveRegurationWhenFileOpen ( );
 		if ( !_moviePlaySystem.GetStop( ) ) RopeActionOrForcedMove( );					//ムービーが再生されていたら
 
 		for ( int i = 0; i < _evidenceIcon.Length; i++ ){
@@ -200,6 +200,7 @@ public class SiteManager : MonoBehaviour {
 		IsRopeActionAndForcedMove( );
 		ClockUIScenesTransitionWithAnim( );
 		LaboTransitionUIScenesTransitionWithAnim( );
+        DetectiveRegurationWhenFileOpen ( );
 		if ( !_moviePlaySystem.GetStop( ) ) RopeActionOrForcedMove( );
 	}
 
@@ -737,6 +738,7 @@ public class SiteManager : MonoBehaviour {
 	void DetectiveRegurationWhenFileOpen( ) {
 		if ( _evidenceFile.activeInHierarchy || _mapFile.activeInHierarchy ) {
 			_detective.SetIsMove ( false );
+            _moviePlaySystem.SetOperation( false );
 		}
 	}
 	//----------------------------------------------------------------------
